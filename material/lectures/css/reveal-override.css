@@ -1,0 +1,59 @@
+
+
+body:after {
+    content: "";
+    width: 10%;
+    height: 10%;
+    background: url("../images/logo.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+    top: 10px;
+    left: 10px;
+    position: absolute;
+    display: inline-block;
+}
+
+body {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: url("../images/back.png");
+	background-position: right 0% bottom 45%;
+	background-repeat: no-repeat;
+	background-size: contain;
+    top: 0px;
+    right: 0px;
+    position: absolute;
+    display: inline-block;
+}
+
+html.dimbg .slide-background {
+	opacity: 0.2 !important;
+}
+
+html.dimbg2 .slide-background  {
+  background-size: cover !important;
+}
+
+#namediv
+{
+  color:white;
+}
+
+#namediv2
+{
+	text-align: left;
+}
+
+ b, strong {
+     color: red;
+     }
+	 
+
+/*
+li {
+	font-size:20px;
+    height: 60px;
+    width: "100%";
+}
+*/

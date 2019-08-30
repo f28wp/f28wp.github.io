@@ -1,0 +1,61 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="./quiz.css">
+
+
+</head>
+<body>
+
+<h1>Quiz on Important Facts</h1>
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+
+<script>
+  const myQuestions = [
+    {
+      question: "How much is the coursework project worth?",
+      answers: {
+        a: "40%",
+        b: "50%",
+        c: "60%"
+      },
+      correctAnswer: "b"
+    },
+    {
+      question: "How much is the final exam worth?",
+      answers: {
+        a: "10%",
+        b: "100%",
+        c: "50%"
+      },
+      correctAnswer: "c"
+    },
+    {
+      question: "Is the coursework project:",
+      answers: {
+        a: "Group project",
+        b: "Individual project",
+      },
+      correctAnswer: "a"
+    },
+	{
+      question: "What is Git (i.e., as in GitHub)?",
+      answers: {
+        a: "Git is a web programming language",
+        b: "Git is a security system for online networks",
+		c: "Git is an open-source version control system",
+      },
+      correctAnswer: "c"
+    }
+  ];
+</script>
+<script src="./quiz.js"></script>
+
+</body>
+</html>

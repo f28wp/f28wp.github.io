@@ -1,0 +1,44 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="./quiz.css">
+
+
+</head>
+<body>
+
+<h1>Quiz on Important Facts</h1>
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+
+<script>
+  const myQuestions = [
+    {
+      question: "The Internet is",
+      answers: {
+        a: "international network of the world's telecommunications services",
+		b: "global scale internetwork of wide area computer networks using TCP/IP protocols",
+		c: "global scale, distributed hypermedia application with a client server architecture"
+      },
+      correctAnswer: "b"
+    },
+    {
+      question: "Which of the following expansions of Internet body acronyms are correct?",
+      answers: {
+        a: "ICANN - International Corporation for Assigned Names and Numbers",
+		b: "IETF - Internet Executive Trust Federation",
+		c: "W3C - World-Wide Web Consortium"
+      },
+      correctAnswer: "c"
+    }
+  ];
+</script>
+<script src="./quiz.js"></script>
+
+</body>
+</html>

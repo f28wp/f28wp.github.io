@@ -1,0 +1,87 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="./quiz.css">
+<script src="./prettyprint/run_prettify.js"></script>
+
+
+</head>
+<body>
+
+
+
+
+
+
+<h1>Quiz on Important Facts</h1>
+
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+
+
+<script>
+  const myQuestions = [
+    {
+      question: `
+			What's the output?
+<div id="code"><pre class="prettyprint">
+function sayHi() {
+  console.log(name);
+  console.log(age);
+  var name = "Lydia";
+  let age = 21;
+}
+
+sayHi();
+
+Lydia and undefined
+B: Lydia and ReferenceError
+C: ReferenceError and 21
+D: undefined and ReferenceError
+
+</pre></div>
+	  `,
+      answers: {
+        a: "Lydia and undefined",
+		b: "Lydia and ReferenceError",
+		c: "ReferenceError and 21",
+		d: "undefined and ReferenceError"
+      },
+      correctAnswer: "d"
+    }
+
+  ];
+</script>
+<script src="./quiz.js"></script>
+
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20; text-align: left;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+    </div>
+</div>
+
+
+<!--
+<div id="code"><pre class="prettyprint">
+class Voila {
+public:
+  // Voila
+  static const string VOILA = "Voila";
+
+  // will not interfere with embedded <a href="#voila2">tags</a>.
+}
+</pre></div>
+-->
+
+
+
+
+</body>
+</html>

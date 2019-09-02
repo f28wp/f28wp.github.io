@@ -1,0 +1,60 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="./quiz.css">
+<script src="./prettyprint/run_prettify.js"></script>
+
+</head>
+<body>
+
+<h1>Quiz on Important Facts</h1>
+
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+
+<script>
+  const myQuestions = [
+    {
+      question: 
+	  `
+	  What does HTML stand for?
+	  `,
+      answers: {
+        a: "Hyper Text Markup Language",
+		b: "Hyper Text Makeup Language",
+		c: "Hyper Tech Markup Language",
+		d: "None of these"
+      },
+      correctAnswer: "a"
+    },
+    {
+      question: 
+	  `
+	  Which of the following is valid colour code ?
+	  `,
+      answers: {
+        a: `#000000;`,
+		b: `#0000000;`,
+		c: `#000000000;`,
+		d: `#000;`
+      },
+      correctAnswer: "a"
+    }
+  ];
+</script>
+<script src="./quiz.js"></script>
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20; text-align: left;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+    </div>
+</div>
+
+</body>
+</html>

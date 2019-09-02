@@ -1,0 +1,114 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="./quiz.css">
+<script src="./prettyprint/run_prettify.js"></script>
+
+
+</head>
+<body>
+
+
+
+
+
+
+<h1>Quiz on Important Facts</h1>
+
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+
+
+<script>
+  const myQuestions = [
+    {
+      question: `
+			What is printed in the console?
+<div id="code"><pre class="prettyprint">
+var foo = function foo() {
+	console.log(foo === foo);  
+};
+foo();
+</pre></div>
+	  `,
+      answers: {
+        a: "true",
+		b: "false",
+		c: "error"
+      },
+      correctAnswer: "a"
+    },
+    {
+question: `
+What does the above alert?
+<div id="code"><pre class="prettyprint">
+function aaa() {
+    return
+    {
+        test: 1
+    };
+}
+alert(typeof aaa());
+</pre></div>
+`,
+      answers: {
+        a: "function",
+		b: "number",
+		c: "object",
+		d: "undefined",
+      },
+      correctAnswer: "d"
+    },
+	{
+question: `
+What is the result?
+<div id="code"><pre class="prettyprint">
+Number("1") - 1 == 0;
+</pre></div>
+`,
+      answers: {
+        a: "true",
+		b: "false",
+		c: "TypeError"
+      },
+      correctAnswer: "a"
+    }
+	
+	
+	
+	
+  ];
+</script>
+<script src="./quiz.js"></script>
+
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20; text-align: left;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+    </div>
+</div>
+
+
+<!--
+<div id="code"><pre class="prettyprint">
+class Voila {
+public:
+  // Voila
+  static const string VOILA = "Voila";
+
+  // will not interfere with embedded <a href="#voila2">tags</a>.
+}
+</pre></div>
+-->
+
+
+
+
+</body>
+</html>

@@ -52,11 +52,15 @@
 					</p>
 				</section>
 
-				<section>
-					<h2>Overview</h2>
-					<ul>
-						<li>What do we mean by JQuery?</li>
-					</ul>
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Overview
+
+						* What is JQuery?
+						* Examples
+						* Questions and Discussion
+						
+					</textarea>
 				</section>
 				
 
@@ -64,21 +68,57 @@
 			
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Web
+						## What is JQuery?
 
-						* Details
+						* jQuery is a JavaScript Library
+						* jQuery greatly simplifies JavaScript programming
+						* jQuery is easy to learn
+						
+						![](./images/jquery.jpg)
 						
 					</textarea>
 				</section>
 				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Simple JQuery Example
+						
+						```
+						<html><head>
+						<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+						<script>
+						$(document).ready(function(){
+						  $("p").click(function(){
+							$(this).hide();
+						  });
+						});
+						</script>
+						</head><body>
 
-
-				<section style="text-align: left;">
-					<h2>Summary</h2>
-					<p>
-						&bull; Understand Understand JQuery  <br>
-					</p>
+						<p>If you click on me, I will disappear.</p>
+						<p>Click anywhere</p>
+						</body></html>
+						```
+					</textarea>
 				</section>
+				
+				
+				
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Summary
+
+						* Understand JQuery and how to use it in web development
+						
+					</textarea>
+				</section>
+				
+				
+				
+				
 
 				<section style="text-align: left;">
 					<h2>To do this week ...</h2>

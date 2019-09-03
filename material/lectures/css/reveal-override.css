@@ -51,6 +51,7 @@ html.dimbg2 .slide-background  {
      }
 	 
 
+
 /*
 li {
 	font-size:20px;
@@ -58,6 +59,7 @@ li {
     width: "100%";
 }
 */
+
 
 #footer-left {
 	position: absolute;
@@ -103,6 +105,10 @@ li {
     background-color: white;
 }
 
+#bigcode pre code {
+    font-size: 30pt !important;
+	line-height: 33pt !important;
+	text-align: center;
+}
 
-
-		
+	

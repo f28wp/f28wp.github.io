@@ -57,6 +57,7 @@
 						## Overview
 
 						* Fundemental HTML and CSS concepts?
+						* Review HTML and CSS Syntax
 						* Examples
 						* Questions and Discussion
 						
@@ -65,13 +66,12 @@
 				</section>
 				
 
-			
+			<!--
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Questions
 
-						* What is HTML?
-						* What is CSS?
+						* What is HTML & CSS?
 						* What is the difference between HTML and CSS?
 						* How has HTML and CSS changed over the years?
 						* How would you use HTML and CSS in  your projects?
@@ -80,14 +80,387 @@
 						
 					</textarea>
 				</section>
+				-->
 				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## What is the difference between **Static** and **Dynamic** Web Pages?
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="padding:0px">
+					<textarea data-template>
+						## Static Web Pages
+						**Static** website pages are self-contained individual pages (or pages) sent to the browser from the server one-page-at-a-time
+						
+						![](./images/lec02-01.png)
+					</textarea>
+				</section>
+				
+				<section data-markdown style="padding:0px">
+					<textarea data-template>
+						## Dynamic Web Pages
+						**Dynamic** web content is built when the page is requested (by the user directly or programmatically while the user is on the page, e.g., Facebook updates)
+						
+						![](./images/lec02-02.png)
+					</textarea>
+				</section>
+				
+				<!--
+				<section data-background="images/lec02-01.png" data-background-size="contain">
+				</section>
+				-->
 
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## How do we structure content, presentation and behaviour?
+						
+						* What are the layers/structure of web design?
+						
+					</textarea>
+				</section>
+				
+				<section data-background="images/lec02-03.png" data-background-size="contain">
+				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## Fundementals of a Web Page
+
+						![](./images/js_css_html.png)
+						
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## HTML
+
+						![](./images/html01.png)
+						
+					</textarea>
+				</section>
+				
+		
+				
+				<section data-markdown style="text-align: center;" data-background="#4d7e65">
+					<textarea data-template>
+						## Hyper Text
+						## +
+						## Markup Language
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown id="bigcode" style="text-align: center;">
+					<textarea data-template>
+						## Markup Language
+						* Set of **tags**
+						* Purpose is to group and describe **content**
+						
+						```
+						<tag>Content</tag>
+						```
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## Can you list the essential HTML Tags?
+						
+					</textarea>
+				</section>
+				
+				<section data-background="images/lec02-04.png" data-background-size="contain">
+				</section>
+				
+				<section data-markdown id="bigcode" style="text-align:center;">
+					<textarea data-template>
+						## Tag **Attributes**
+						
+						* Additional information about the tag element
+						
+						```
+						<html lang="en"></html>
+						```
+						
+						* Tag element format
+						> name="value"
+					</textarea>
+				</section>
+				
+				
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## CSS		
+						
+						![](./images/cssa.jpg)
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: center;" data-background="#4d7e65">
+					<textarea data-template>
+						## Cascade
+						## +
+						## Style Sheet
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Stylesheet	
+						
+						* Rules defining **presentation**
+						* Targetted to specific **elements/tags** in the html
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;" data-background="#gg1122">
+					<textarea data-template>
+						## Cascade	
+						
+						* Manages priorties and conflicts
+						* Multiple CSS rules
+						* Importances and **inheritence**
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Inheritance	
+						
+						* Elements inherit style properties
+						
+						![](./images/css01.png)
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Inheritance	
+						
+			
+						![](./images/css02.png)
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## CSS Syntax
+						
+						* Great Control
+						* Override
+						* Specific
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## CSS Control
+						
+						* Three terms for describing style:
+						
+						>1. CSS Rules
+						2. CSS Selectors
+						3. CSS Declaration
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown id="bigcode" style="text-align: left;">
+					<textarea data-template>
+						## CSS Rule
+						
+						```
+						selector { property : value; }
+						```
+						
+						---
+						
+						* property:value is known as the **declaration**
+						* Every style has a **selector** and **declaration**
+						* property/value pair called a CSS Rule
+					</textarea>
+				</section>
+				
+				<section data-markdown id="bigcode" style="text-align: left;">
+					<textarea data-template>
+						## CSS Selector
+						
+						```
+						body { font-family: Arial; }
+						p {color: #112233; }
+						a {color: red; }
+						```
+						
+						---
+						
+						* **selector** associates **css rules** with html elements
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## CSS Syntax
+						
+						* CSS consists of a **selector** and a **declaration block**: The selector points to the **HTML element** you want to style
+
+						* **declaration block** contains one or **more** declarations separated by semicolons. 
+						
+						* Each declaration includes a CSS property **name and a value**, separated by a colon 
+					
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## CSS Selectors
+
+						* ``` Type (tag/element) ```
+						
+						* ``` #     ID ```
+						
+						* ``` .     Class ```
+						
+					
+					</textarea>
+				</section>
+				
+				<section data-markdown id="bigcode" style="text-align: left;">
+					<textarea data-template>
+						## Type (element) Selectors
+
+						```
+						body {declaration}
+						p {delcaration}
+						h1 {delcaration}
+						```
+						
+						* Simplest selector 
+						* Targets html elements by name
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown id="bigcode"  style="text-align: left;">
+					<textarea data-template>
+						## ID Selectors
+
+						CSS
+						```
+						#logo {declaration}
+						```
+						
+						HTML
+						```
+						<img id="logo" src="" alt="">
+						```
+						
+						* ID is an **attribute** added to the html
+						* Reference ID in the CSS with a **hash**
+						
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown id="bigcode" style="text-align: left;">
+					<textarea data-template>
+						## Class Selectors
+
+						CSS
+						```
+						.cat {declaration}
+						```
+						
+						HTML
+						```
+						<ul class="cat">
+						```
+						
+						* class is a html **attribute** added to the markup language
+						* referenced in the css with a **period**
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## Which is better?  ID or Class?
+						
+					</textarea>
+				</section>
+				
+				
+				<section style="text-align: left;">
+					
+					<h1>ID vs Class</h1>
+					<div id="left">
+						&bull; Can only be one ID <br>
+						&bull; Multipole classes <br>
+						&bull; ID is more specific <br>
+						&bull; Element can have both ID and multiple classes <br>
+	
+					</div>
+					<div id="right">
+						<img src="./images/css03.png">
+					</div>
+				</section>
+				
+				
+				
+				
+			    <section>
+	
+					<section data-background="images/how.jpg">
+						<div id="white">
+						<h1 style="color:black">How do you validate your HTML and CSS?</h1>
+						</div>
+					</section>
+				
+				
+					<section data-markdown style="text-align: left;">
+						<textarea data-template>
+							## How do you validate your HTML and CSS?
+
+							* https://validator.w3.org
+							
+							* http://jigsaw.w3.org/css-validator/
+							
+							* https://validator.w3.org/checklink
+							
+						</textarea>
+					</section>
+				
+				
+					<section data-background-iframe="https://w3c.github.io/developers/tools/" data-background-interactive>
+							<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+							<h2 style="color:white">
+								Online Validation Tools</h2>
+							<p>Validate your website/html</p>
+							
+						</div>
+					</section>
+
+				</section>
+				
+				
+				
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Summary
 
 						* Understand fundemental HTML and CSS concepts
+						* Essential syntax
+						* Layers/management (HTML, CSS and Javascript)
 						
 					</textarea>
 				</section>

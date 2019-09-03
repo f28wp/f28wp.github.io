@@ -58,15 +58,89 @@
 						## Overview
 
 						* History of the Internet
-						* How Web Programming has Evolved
+						* How the Internet and the Web has Evolved
+						* Standards and Protocol
 						* Questions and Discussion
 						
 					</textarea>
 				</section>
 				
+				
+				<section data-background="images/cable.jpg">
+					<div id="white">
+					<h1 style="color:black">How does the internet work?</h1>
+					</div>
+				</section>
+				
+				<section data-markdown style="text-align: left;" data-background="./images/back01.jpg">
+					<textarea data-template>
+						## How does the internet work?
+
+						* Worldwide set of agreed **common** standards (e.g., TCP/IP)
+						* Internet is able to **connect** computer networks across the world (worldweb)
+						* **Exchange data** and information
+
+						
+						
+						
+					</textarea>
+				</section>
+				
+
+				
+				<section data-background="images/lotscables.jpg">
+					<div id="white">
+					<h1 style="color:black">What is the World Wide Web?</h1>
+					</div>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## What is the World Wide Web?
+						
+						* World Wide Web (WWW) is **global scale**, distributed hyper media application
+						has Client Server architecture
+						refers to resources using Uniform Resource Identifiers
+						moves resources using **HyperText Transfer Protocol**
+						<!--
+						identifies resource types using MIME formats
+						links resources with hyper links in HTML or xlinks in XML -->
+						
+						* WWW clients and **browsers** (agreed/supported communication standards/software systems)
+						
+						
+						<!--
+						
+						* WWW clients or web browsers
+						fetch and render some media types including HTML natively
+						invoke handler programs to handle other MIME types
+						
+						* Sophisticated browsers support
+						plug ins - audio, multimedia presentations, video, VRML
+						scripting and programming languages - JavaScript and Java
+						security features - authentication, encrypted communications (https)
+						stylesheet languages - CSS, XSL
+						-->
+						
+					</textarea>
+				</section>
+				
+				
+				<section data-background-iframe="https://geotraceroute.com/" data-background-interactive>
+						<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+							<h2 style="color:white">
+								Shows Trace Route</h2>
+							<p>Visual Route Packets (source-destination)</p>
+							<p>Type 'hw.ac.uk'</p>
+							
+						</div>
+					</section>
 
 
-			
+
+
+			<!--
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Questions
@@ -75,6 +149,132 @@
 						* Why is the internet so important?
 						* What is the internet?
 						
+						![](./images/worldweb.jpg)
+						
+					</textarea>
+				</section>
+			-->
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Nature of the Internet
+
+						* Internet is an internetwork of **Wide Area Networks**
+							- with gateways between them
+							- based upon common use of **TCP/IP** protocols
+							- supporting standard application services (DNS, e-mail, web)
+						* Internet is organised by IETF, ICANN and ISOC
+						* Internet has **no central operations** room or global operations manager
+						* Each Internet host has an IP address e.g. 137.195.13.48
+						* Some Internet hosts have a domain name e.g. www.macs.hw.ac.uk
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## What is the IP for www.hw.ac.uk?
+
+					</textarea>
+				</section>
+				
+				     <section data-background-iframe="https://ipinfo.info/html/ip_checker.php" data-background-interactive>
+						<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+							<h2 style="color:white">
+								Lookup the IP</h2>
+							<p>Online IP Checker</p>
+							<p>Type 'hw.ac.uk'</p>
+							
+						</div>
+					</section>
+					
+					
+				<section data-background="images/chaos.jpg">
+					<div id="white">
+					<h1 style="color:black">Who regulates the internet?</h1>
+					</div>
+				</section>
+			
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						Who regulates the internet?
+
+						* IETF, ICANN and ISOC
+							- Internet Engineering Task Force (IETF) 
+							- Internet Corporation for Assigned Names and Numbers or ICANN
+							- Internet Society (ISOC)
+						
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## How are the TCP/IP Networks Structured?
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## TCP/IP Networks can be viewed as 4 layer structure
+
+						![](./images/layers.png)
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+					## Layer Functionality
+				
+					* Application interfaces directly with user applications or **users**
+					* Transport end to end (un)reliable delivery of **TCP** or UDP packets
+					* **Network** IP datagram delivery, addressing, routing
+					* Link delivers frames, handles errors, drives **physical transfers**
+	
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					## Examples of protocols (Internet layers)
+
+					* application SMTP, IMAP, **HTTP**, DNS, RTP, SNMP, TFTP
+					
+					> * transport **TCP**, UDP, SCTP
+					> * network **IP**, ICMP, IPsec, IGMP
+					> * link Ethernet, 802.11, DSL, ARP, L2TP, ISDN, GPRS, PPP
+					
+					* TCP carries reliable services - email (SMTP, IMAP), **web (HTTP)**
+					* UDP carries best efforts services - DNS, media streams (RTP)
+
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+					
+					## TCP or UDP?
+
+					* What are the differences?
+					* When would you use TCP or UDP?
+					
+					![](./images/tcpvsip.png)
+
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;" data-background="./images/reading.jpg">
+					<textarea data-template>
+					
+					## Reading
+
+					* **The day the Internet age began**, Vinton G. Cerf, Nature, vol 461, 1202-1203, 29 October 2009 [Link](https://www.nature.com/articles/4611202a)
+					
+
 					</textarea>
 				</section>
 				
@@ -83,10 +283,9 @@
 				<section style="text-align: left;">
 					<h2>Summary</h2>
 					<p>
-						&bull; Understand What this Course is About?  <br>
-						&bull; How it is Assessed?  <br>
-						&bull; Attendance is Important  <br>
-						&bull; Hands-on Course (Work through Examples/Exercises)  <br>
+						&bull; Understand Core Concepts (Web & Internet)  <br>
+						&bull; Structure and Terminology  <br>
+						&bull; High and Low Level View  <br>
 					</p>
 				</section>
 
@@ -96,7 +295,6 @@
 						&bull; Read over the lectures <br>
 						&bull; Review the revision questions <br>
 						&bull; Work through tutorial practicals <br>
-						&bull; Challenging – so start early <br>
 						&bull; Experiment (get into good habits) <br>
 					</p>
 				</section>

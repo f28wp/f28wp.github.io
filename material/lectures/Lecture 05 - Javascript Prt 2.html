@@ -230,6 +230,828 @@
 					</textarea>
 				</section>	
 				
+															
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Dynamic Objects
+						
+						* new Object() produces an empty container of name/value pairs
+						* name can be any string, value any value (except undefined)
+						* members accessed with dot notation or subscript
+						
+						
+					</textarea>
+				</section>	
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example
+						
+						Example also creates a new JavaScript object with four properties:
+						```
+						var person = new Object();
+						person.firstName = "John";
+						person.age = 50;
+						```
+						
+						```
+						var person = {firstName:"John", age:50};
+						```
+						
+					</textarea>
+				</section>	
+				
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Reserved Words
+						
+						abstract boolean break byte case catch char class const continue debugger default delete do double else enum export extends false final finally float for function goto if implements import in instanceof int interface long native new null package private protected public return short static super switch synchronized this throw throws transient true try typeof var volatile void while with
+						
+					</textarea>
+				</section>	
+				
+												
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## == !=
+						
+						* Equal and not equal 
+						* These operators can do *type coercion*
+						
+						---
+						
+						* Better to use === and !===
+						  - Do not do type coercion
+						
+					</textarea>
+				</section>	
+
+												
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Switch statement
+						
+						```
+						switch (expression) {
+							case ':':
+							case ',':
+							case '.':
+								punctuation();
+								break;
+							default:
+								nonOfTheAbove();
+						}
+						```
+					</textarea>
+				</section>	
+
+																		
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Throw statement
+						
+						```
+						throw new Error(reason);
+						
+						throw {
+							name: exceptionName;
+							message: reason
+						};
+						```
+					</textarea>
+				</section>
+						
+																						
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Try statement
+						
+						```
+						try {
+							...
+						}
+						catch (e) {
+							switch (e) {
+								case 'Error':
+									...
+									break;
+								default:
+									throw e;
+							}
+						}
+						```
+					</textarea>
+				</section>
+				
+		
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Try statement
+						
+						Javascript implementation can produce these exception names:
+						
+						* `Error'
+						* `EvalError`
+						* `RangeError`
+						* `SyntaxError`
+						* `TypeError`
+						* `URIError`
+					</textarea>
+				</section>				
+				
+						
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Var
+						
+						* Define variables within a function 
+						* Types are not specified 
+						* Initial values are optional 
+						
+						```
+						var name;
+						var nrErrors = 0;
+						var a, b, c;
+						```
+					</textarea>
+				</section>	
+				
+										
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Scope
+						* In Javascript, { blocks } do **not** have scope 
+						* Only functions have scope 
+						* Vars defined in a function are not visible outside of the function 
+					</textarea>
+				</section>	
+				
+														
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Return statement
+						``` 
+						return expression;
+						```
+						or 
+						```
+						return;
+						```
+						
+						* If there is **no expression**, then the return value is **undefined**
+						* Except for constructors, whose return value is **this**
+					</textarea>
+				</section>	
+				
+				
+																		
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Objects 
+						* Objects can contain data and methods 
+						* Objects can inherit from other objects 
+					</textarea>
+				</section>	
+				
+																					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Collections
+						* An object is an undordered collection of name/value pairs
+						* Names are strings 
+						* Values are any type, including other objects 
+						* Good for representing records and trees
+						* Every object is a little database
+					</textarea>
+				</section>		
+				
+				
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Object Literals
+						* Object literals are wrapped in { }
+						* Names can be names or strings 
+						* Values can be expressions
+						* : seperates names and values 
+						* , seperates paris
+						* Object literals can be used anywhere a value can appear
+					</textarea>
+				</section>		
+				
+									
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Object Literals
+						
+						```
+						var myob = {name:'bob', goto:'test' };
+						```
+						
+						```
+						var theName = myob.name;
+						var dest    = myob[ 'goto' ];
+						```
+						
+					</textarea>
+				</section>
+				
+				
+													
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Maker Function 
+						
+						```
+						function maker(name, where, grade)
+						{
+							var it = {};
+							it.name = name;
+							it['goto']=where;
+							it.grade=grade;
+							return it;
+						}
+						myobj = maker('abc', 'happy', 22);
+						```
+					</textarea>
+				</section>
+				
+													
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Object Literals
+						
+						```
+						var myob = {
+						   name: 'bob',
+						   'goto': `test',
+						   format: { 
+							  type: 'rect',
+							  inter: false 
+						   }
+						}
+						```
+						
+						* JSON  = Java Simple Object Notation 
+						* Simple organisation to pass data to client
+					</textarea>
+				</section>				
+				
+													
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Object Literals
+						
+						```
+						myfun( {
+							type: 'rect', 
+							height: 100} 
+						);
+						```
+					</textarea>
+				</section>				
+				
+																	
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Object Augmentation
+						
+						* New members can be added to an object by simple assignment
+						* No need to define a new class 
+						
+						```
+						myobj.format.col = 'rgb';
+						
+						myobj[ name ] = value;
+						```
+						
+					</textarea>
+				</section>	
+				
+																					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Object Methods
+						
+						* All objects are linked directly or indirectly to
+						```
+						Object.prototype
+						```
+						* All objects inherit some basic methods
+						* None of them are very useful
+						```
+						hasOwnProperty(name)
+						```
+						Is the name a true member of this object?
+						
+						* No copy method 
+						* No equals method
+						
+					</textarea>
+				</section>	
+				
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Object Construction
+						
+						* All three expressions below have exactly the same
+						result 
+						* Creation of a new empty object:
+						
+						1. new Object()
+						2. { }
+						3. object(Object.prototype)
+						
+						* { } is the preferred form
+						
+					</textarea>
+				</section>
+				
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Reference or Value
+						* Objects can be passed as arguments to functions
+						* Objects can be returned by functions
+						
+						* Objects are always passed by **reference**
+						
+						* The === operator compares object references **not values**
+						  - true only if both operands are the same object
+					</textarea>
+				</section>
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## delete 
+						
+						* Members can be removed from an object with the **delete** operator 
+						
+						```
+						delete myobj[ name ];
+						```
+						
+					</textarea>
+				</section>
+
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Arrays
+						
+						* Array inherits from Object 
+						* **Indexes** are converted to **strings** and used as names for retriving values 
+						* Very efficient for sparse arrays
+						* Advantage: No need to provide length or type when creating an array
+						* Unlike objects, arrays have `length' member 
+					</textarea>
+				</section>
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Array Literals 
+						
+						* An array uses []
+						* Expressions seperated by commas
+						```
+						mylist = ['a', 'b', 2, '33'];
+						```
+						* New items can be appended
+						```
+						mylist[mylist.length] = 'test';
+						```
+						* [] is preferred to `new Array'
+						
+					</textarea>
+				</section>
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Array Methods 
+						* concat 
+						* join 
+						* pop 
+						* push 
+						* slice 
+						* sort 
+						* splice
+						
+					</textarea>
+				</section>
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Deleting Elements 
+						```
+						delete array[ number ];
+						```
+						
+						Removes the element, but leaves a **hole** in the numbering
+						
+						```
+						array.splice( number, 1 );
+						```
+						
+						Removes the element and renumbers all the following elements
+						
+					</textarea>
+				</section>
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Deleting Elements 
+						```
+						myArray = ['a', 'b', 'c'];
+						delete myArray[1];
+						
+						// ['a', undefined, 'c']
+						
+						myArray.splice(1, 1);
+						
+						// ['a', 'c', 'd']
+						```
+						
+					</textarea>
+				</section>
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Arrays v Objects
+						
+						* Use objects when names are arbitrary strings
+						* Use arrays when the names are sequential integers
+
+						
+					</textarea>
+				</section>
+
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Functions
+						
+						* Functions can be passed, returned and stored just like any other value 
+						
+						* Functions inherit from Object and can store name/value pairs
+
+						
+					</textarea>
+				</section>
+
+
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Invocation
+						
+						```
+						function foo() { alert('hello'); }
+						foo();
+						```
+						
+						---
+						
+						## Self Invocation 
+						```
+						( function foo() { alert('hi'); }() );
+						```
+						
+						---
+						
+						## No Name
+						```
+						( function() { alert('yo'); } () );
+						```
+						
+					</textarea>
+				</section>
+				
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Function statement 
+						
+						Function statement is just a short-hand for the var statement with a function value 
+						
+						```
+						function foo(){ }
+						```
+						expands to
+						```
+						var foo = function foo() { };
+						```
+						
+					</textarea>
+				</section>
+
+
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Inner functions 
+						
+						* Functions can be defined inside other functions 
+						
+						* An inner function has access to the variables and parameters of functions within the scope 
+						
+						  - known as static scoping or lexical scoping
+						
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example 
+						
+						```
+						function fade(id) {
+							var dom = document.getElementById(id), level = 1;
+							function step() {
+								var h = level.toString(16);
+								dom.style.backgroundColor = 
+									'#FFFFFF' + h + h;
+									if ( level < 15 ) {
+										level += 1;
+										setTimeout(step, 100);
+									}
+							}
+							setTimeout(step, 100);
+						}
+						```
+						
+					</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Methods 
+						* Since functions are values, functions can be stored in objects
+						
+						* A function in an object is called a method
+						
+					</textarea>
+				</section>
+
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Invocation 
+						
+						* A function called with too many arguments - extra arguments are **ignored**
+						
+						* A function called with too few arguments - the missing values will be **undefined**
+						
+						* No implicit type checking on arguments
+						
+					</textarea>
+				</section>
+
+
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## 4 Ways to Call a Function 
+						
+						1. Function form 
+						```
+						functionObject( args )
+						```
+						2. Method form 
+						```
+						thisObject.methodName( args );
+						thisObject['methodName'](args);
+						```
+						3. Constructor form
+						```
+						new functionObject( args );
+						```
+						4. Apply form 
+						```
+						functionObject.apply(thisObject, [args])
+						```
+					</textarea>
+				</section>
+
+
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## arguments 
+						
+						* variable number of arguments 
+						* Find the number of arguments passed :
+						```
+						arguments.length
+						```
+						* Access the arguments by the variable name or :
+						```
+						arguments[ i ]; // i index of the argument 
+						```
+						
+					</textarea>
+				</section>
+
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## typeof 
+						* typeof prefix operator returns a string identifying the type of a value 
+						
+						![](./images/typeof.jpg)
+					</textarea>
+				</section>
+
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## typeof 
+						* typeof prefix operator returns a string identifying the type of a value 
+						
+						![](./images/typeof.jpg)
+					</textarea>
+				</section>
+				
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Prototypal Inheritance
+						
+						* Some languages have 
+						  - classes, methods, constructors and modules 
+						* Javascript's **functions** do all the work 
+						<!--
+						* Instead of **classical inheritance**, Javascript has **Prototypal Inheritance**
+						  - Offers greater expressive power 
+						 -->
+						
+					</textarea>
+				</section>
+
+<!--
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Prototypal Inheritance
+						
+						* Instead of rigid classes, new objects can be made that are similar to existing objects, then customized
+						
+						
+					</textarea>
+				</section>
+				-->
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## (global) Object
+						
+						* Container for all global variables and all built-in objects
+						
+						* On browser, `window' is the global object
+					</textarea>
+				</section>
+		
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Global variables are **bad**
+						
+						* Functions within an application can impact each other
+						* Cooperating applications can injure/impact each other 
+						* Use of the global namespace should be minimal
+					</textarea>
+				</section>
+
+
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Global Implied
+						
+						* Any var which is not properly declared is assume dto be global by default 
+						* Makes it easy for people who do not know or care about encapsulation to be productive (but makes applications less reliable)
+						
+						* JSLint is a tool which helps identify implied globals and other weaknesses 
+						
+						  - [Link JSLint](https://www.JSLint.com)
+						
+					</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Encapsulate
+						
+						* Function scope can create an encapsulation 
+						
+						* Use an anonymouse function to wrap your application
+						
+					</textarea>
+				</section>
+				
+		
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Coding Conventions and Javascript
+						
+						* Javascript coding conventions are critically important 
+						
+
+						
+					</textarea>
+				</section>
+						
+		
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Semicolons 
+						
+						* When the compiler sees an error, it attempts to replace a nearby linefeedb with a semicolon and try again 
+						
+						* This should alarm your
+						* It can mask errors 
+						
+						* Always use the full, correct forms,  including semicolons
+
+						
+					</textarea>
+				</section>
+				
+		
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Comma
+						
+						* Avoid tricky expressions uing the comma operators 
+						
+						* Do not use extra commas in array literals 
+						
+						Good:
+						```
+						[1,2,3]
+						```
+						Bad:
+						```
+						[1,2,3,]
+						```
+
+						
+					</textarea>
+				</section>
+
+		
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Blocks
+						
+						Good
+						```
+						if (a) {
+							b();
+						}
+						```
+						
+						Bad 
+						```
+						if (a) b;
+						```
+						
+					</textarea>
+				</section>
+				
+						
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Forbidden Blocks
+						
+						* Blocks do not have scope in Javascript 
+						
+						* Blocks should only be used with structured statements 
+						
+						e.g., function, if, switch, while, for, do , try 
+						
+					</textarea>
+				</section>
 				
 
 

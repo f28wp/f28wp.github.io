@@ -58,6 +58,7 @@
 						## Overview
 
 						* Managing complex Javascript programs
+						* Key features
 						* Debugging
 						* Examples
 						* Questions and Discussion
@@ -65,43 +66,11 @@
 					</textarea>
 				</section>
 
-				
-
-
 			
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Questions
-
-						* How do you manage a complex Javasript program?
-						* Javascript compared to other programming languages (e.g., C++)?
-						
-						
-					</textarea>
-				</section>
-				
-
-
-
-
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Revision Questions
-
-						* Large Database of Javascript Revision Questions 
-						[Link](https://github.com/lydiahallie/javascript-questions)
-						
-						* Practice and try out examples
-						
-						
-					</textarea>
-				</section>
-				
-				
 				<section>
 					<section data-markdown data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
 						<textarea data-template>
-						## Question
+						## Revision Question
 						What's the output?
 						
 						```
@@ -136,14 +105,144 @@
 					</section>
 				</section>
 				
+				
+			
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Javascript (Not a Toy)
+
+						* Small, but sophisticated
+						* It is not a subset of Java
+						* Able to accomplish complex tasks
+					
+					</textarea>
+				</section>	
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Values
+
+						* Number 
+						* Strings
+						* Booleans
+						* Objects
+						* null
+						* undefined					
+					</textarea>
+				</section>	
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Numbers
+
+						* Only one number type
+						  - No integers
+						* 64-bit floating point 
+						  - IEEE-754 (aka "Double")
+						* Does not map well to common understanding of arithmetic
+						
+						```
+						0.1 + 0.2 = 0.30000000000000000004
+						```
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## NaN
+
+						* Special number: **Not a Number**
+						* Erroneous or undefined operations
+						* **Toxic** - any arithmetic operation with NaN will result in a NaN
+						* NaN is **not** equal to anything (including NaN)
+					</textarea>
+				</section>
+				
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Number( value )
+
+						* **Convert** value to numbers
+						* Produces **NaN** if there is a problem
+						
+						---
+						
+						## parseInt( value, 10 )
+						* **Converts value into a number
+						* Stops at the first `non-digit' character
+						* If no radix is specified:
+						  - "0x" - Hexadecimal (16)
+						  - "0"  - Octal (8)
+						  - Any other value - Decimal (10)
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Examples
+						```
+						parseInt( "08" ) === 0
+						parseInt( "08" ) === 8
+						```
+						
+						**Safer** to specify the "radix" parameter
+						![Details](https://stackoverflow.com/questions/12318830/parseint08-returns-0)
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## null or undefined
+						
+						* null - value that isn't anything 
+						* undefined - value that isn't even that
+						  - default value for a variable or parameter 
+						  - value of missing member of an object
+					</textarea>
+				</section>
+				
+							
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Falsy and Truthy
+						
+						* False, null, undefined 
+						* "" (empty string), 0, 
+						* NaN
+						
+						---
+						
+						* All other values (including all objects) are truthy
+						* "0", "false"
+					</textarea>
+				</section>	
+				
+											
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Boolean ( value )
+						
+						* return true if value is **truthy**
+						* return false if value is **falsy**
+					</textarea>
+				</section>	
+				
+				
 
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Summary
 
-						* Solid understanding of Javascript
-
+						* Understanding of Javascript
+						* Language
+						* Features
+						* Standards
+						* Styles
+					
 					</textarea>
 				</section>
 
@@ -153,7 +252,6 @@
 						&bull; Read over the lectures <br>
 						&bull; Review the revision questions <br>
 						&bull; Work through tutorial practicals <br>
-						&bull; Challenging – so start early <br>
 						&bull; Experiment (get into good habits) <br>
 					</p>
 				</section>

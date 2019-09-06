@@ -65,15 +65,122 @@
 					<textarea data-template>
 						## Node.js
 
-						* Node.js is an open source server environment.
-						
-						* Node.js allows you to run **JavaScript** on the server.
+						* Node.js is an open source server environment
+						* Node.js allows you to run **JavaScript** on the server
 						
 						<img src="./images/nodejs.png" style="border: 0px">
 					</textarea>
 				</section>
 				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Node.js
 
+						* Node.js is open source, high performance JavaScript server
+						  - executing on top of Google’s V8 engine
+						* Node.js supports high throughput, real-time, scalable use
+						  - via asynchronous and event driven API calls
+						  - running as a single non-blocking thread
+						  - without buffering data - it is output in chunks
+						* However, Node.js is **not** suitable for CPU intensive applications
+
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Node.js
+						
+						* Node is free and open source
+						* http://nodejs.org 
+						
+						* Available for download and testing
+						
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Command Prompt
+						
+						* Note you can download and install Node.js
+						* Run Node.js from the command promot to test out examples/exercises
+						
+						```
+						\>node
+						> console.log("Hello Node")
+						Hello Node 
+						>
+						>var a = 2;
+						>a + 3
+						5
+						```
+						
+						* Also run via online Node simulators
+						  - e.g., https://repl.it/languages/nodejs
+						
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Command Prompt
+
+						```
+						\>node
+						> console.log("Hello Node")
+						Hello Node 
+						```
+						
+						* Expressions with no value get **undefined** reply/return 
+						* Exit the command prompt 
+							- Two Control C's are required to stop the interpreter
+						
+					</textarea>
+				</section>
+				
+				
+
+		<!--
+				<section>
+				<h2>Example</h2>
+
+				<iframe data-src="www.repl.it/languages/nodejs"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				
+				<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+							<h2 style="color:white">
+								Example</h2>
+							<p>Type: console.log('test');</p>
+							<p>Select: Run</p>
+							
+				</div>
+						
+				</section>
+				-->
+				
+				
+							
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Node.js HTTP Module
+						
+						* HTTP handler index.js serves single web page on port 8080
+						* createServer() registers callback that’s run by request event
+
+						```
+						var http = require("http");
+						var svr = http.createServer(function (request, response) {
+						res.writeHead(200, { "Content-Type": "text/plain" });
+						response.end("Hello Web World");
+						})
+						.listen(8080); //the server object listens on port 8080
+						```
+					</textarea>
+				</section>
+				
+				
 				<section>
 				<h2>Example</h2>
 
@@ -87,7 +194,20 @@
 				</section>
 				
 
-
+			
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Node Packages
+						
+						* Node modules are managed by the Node Package Manager **npm**
+						
+						```
+						var express = require("http");
+						```
+					</textarea>
+				</section>
+				
+				
 			
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -102,10 +222,119 @@
 						4. Everything is asynchronous 
 						5. It yields great concurrency
 
+					</textarea>
+				</section>
+				
+							
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Why use Node.js?
+						
+						* Provides an easy way to build scalable network programs
+
+					</textarea>
+				</section>
+				
+				
+											
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Synchronous vs Asynchronous
+						
+						* Synchronous 
+						  - Wait for each operation to finish 
+						  - Step by step execution 
+						  
+						* Asynchronous 
+						  - Never wait for the operation to finish.
+						  - Results handled as available
+						  - Callbacks used to handle results 
+					</textarea>
+				</section>
+
+
+											
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Synchronous Example
+						
+						```
+						var result = database.query("SELECT * FROM bigtable");
+						console.log("db operation is done");
+						console.log("Hello World");
+						```
+						Output
+						
+						```
+						   db operation is done
+						   Hello World
+						```
+					</textarea>
+				</section>
+
+											
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Synchronous Example
+						
+						```
+						database.query("SELECT * FROM bigtable", function(rows) {
+						     var result = rows;
+							 console.log("After db operation");
+						});
+						console.log("Hello World");
+						```
+						Output
+						
+						```
+						   Hello World
+						   db operation is done
+						```
+					</textarea>
+				</section>
+				
+															
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Non - Blocking I/O
+						
+						* Use events 
+						* Neer wait for I/O
+						* I/O is expensive
+						
+						```
+						file.read('file.txt', function(data){
+						   process(data);
+						   return success;
+						});
+						
+						DoWhatYouWantWhileWaiting();
+						```
 						
 						
 					</textarea>
 				</section>
+				
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Who uses Node.js?
+							
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Who uses Node.js?
+
+						![](./images/whousesnode.png)
+					</textarea>
+				</section>
+				
+				
+				
+				
 				
 
 				<section data-markdown style="text-align: left;">
@@ -113,6 +342,8 @@
 						## Summary
 
 						* Understand Node.js
+						* Basic principles
+						* Who and What of Node.js
 						
 
 					</textarea>
@@ -125,8 +356,13 @@
 						&bull; Read over the lectures <br>
 						&bull; Review the revision questions <br>
 						&bull; Work through tutorial practicals <br>
-						&bull; Challenging – so start early <br>
 						&bull; Experiment (get into good habits) <br>
+						
+						&bull; Read Node.js Tutorial
+						http://www.tutorialspoint.com/nodejs/
+						&bull; Browse Node.js Website
+						https://nodejs.org/
+
 					</p>
 				</section>
 				

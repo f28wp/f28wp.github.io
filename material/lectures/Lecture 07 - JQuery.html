@@ -57,6 +57,8 @@
 						## Overview
 
 						* What is JQuery?
+						* Why learn JQuery?
+						* JQuery features/syntax
 						* Examples
 						* Questions and Discussion
 						
@@ -72,12 +74,303 @@
 
 						* jQuery is a JavaScript Library
 						* jQuery greatly simplifies JavaScript programming
-						* jQuery is easy to learn
+						* jQuery is easy to learn (uses CSS syntax for selection)
+						* It's the most used Javascript library on the web today
+						  - 30% of all sites with Javascript use jQuery [*](https://www.infoq.com/news/2010/05/jquery_framework/)
+						* Cross browser compatibility (IE6+, FF2+, ..)
 						
 						![](./images/jquery.jpg)
 						
 					</textarea>
 				</section>
+				
+				
+			
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Features of JQuery
+
+						* **DOM** element selection 
+						* DOM traversal and modification (including support for CSS 1-3)
+						* DOM manipulation based on CSS selectors that uses node element names and node element attributes (id and class)
+						* Events
+						* **Effects and animations**
+						* Ajax
+						* Extensibility (through plugins)
+						* Cross browser support
+						
+					</textarea>
+				</section>
+				
+							
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						### Who uses JQuery?
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Who uses JQuery?
+						
+						Google, Amazon, IBM, Twitter, NBC, BBC, Digg, Intel 
+						Oracle, Slashdot, Technoratis, Sourceforge, GitHub, 
+						New York Post, Feedburner, ...
+						
+						Mozilla, Wordpress, Drupal, Joomla, Symfony, Zend, 
+						Framework, PEAR, ...
+					</textarea>
+				</section>
+				
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Pros and Cons of JQuery
+						Pros:
+						* JQuery is easy to use and understand
+						* The core library is compact and small (<15kb)
+						* Their statement/strategy is: **Write Less, Do More, Javascript Library**
+						
+						Cons:
+						* Hard to use with OOP
+						* JQuery supports plugins (but all these plugins are not verified)
+						* JQuery is a library 
+					</textarea>
+				</section>
+				
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## JQuery - Not the only tool in the bag
+						
+						* Dojo Tookit
+						* YUI (Yahoo User Interface Library)
+						* MooTools
+						* ExtJS
+						
+						However, JQuery is the most popular
+						
+					</textarea>
+				</section>
+				
+												
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## JQuery (Motto)
+						
+						Taken from the JQuery website:
+						
+						> jQuery is a fast and concise JavaScript Library that simplifies HTML document traversing, event handling, animating, and Ajax interactions for rapid web development. jQuery is designed to change the way that you write JavaScript
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## DOM and JQuery 
+						
+						* Browser needs to load jQuery 
+						* Uses the DOM
+						
+						Question
+						
+						How can you be sure your code is ready to run?
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+						Answer:
+						Wrap all your jQuery code within the document ready function
+						
+						```
+						$(document).ready(function()){
+							// insert juicy jQuery code here ...
+						});
+						```
+					</textarea>
+				</section>
+			
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+						## What happens if we don't check if things are reay?
+					</textarea>
+				</section>			
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+						## What happens if we don't check if things are reay?
+						
+						1. Code doesn't work (90% of time might throw an error)
+						2. Code works .. the page loads, next page load, then fail (unreliable)
+
+					</textarea>
+				</section>			
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+						## jQuery Concepts
+
+					</textarea>
+				</section>	
+				
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+						## Magic **$()** function 
+						
+						```
+						var el = $("<div/>");
+						```
+						
+						* Create HTML elements on the fly
+
+					</textarea>
+				</section>
+				
+												
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+						## Magic **$()** function 
+						
+						```
+						$(window).width();
+						```
+						
+						* Manipulate existing DOM elements
+
+					</textarea>
+				</section>
+				
+														
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+						## Magic **$()** function 
+						
+						```
+						$("div").hide();
+						$("div",$("p")).hide();
+						```
+						
+						* Select document elements 
+
+					</textarea>
+				</section>		
+				
+														
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+						## Magic **$()** function 
+						
+						```
+						$(document).ready(function(){..});
+						```
+						
+						* Called when the document is **ready** for programming 
+
+					</textarea>
+				</section>		
+				
+																						
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+						## Loading jQuery 
+						
+						* To use jQuery you need to load it
+						* You can include it locally on your own server 
+						```
+						<script src="/js/jquery.js">
+						```
+						* Or use one of the available resource links:
+						```
+						ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js 
+						
+						ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js 
+						```
+					</textarea>
+				</section>		
+				
+						
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+						## Load Scripts at the Bottom 
+						
+						Problem 
+						* When scsripts are downloading they block everything else in most browsers 
+						
+						* Good practice to load your scripts at the bottom of your page so they don't interupt the page content downloads
+					</textarea>
+				</section>	
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+						## jQuery Syntax 
+						
+						* jQuery syntax is tailer made for selecting HTML elements and performing actions on the element(s)
+						* Basic syntax is 
+						```
+						$(selector).action()
+						```
+						  - A dollar sign to define jQuery 
+						  - A (selector) to "query (or find)"  HTML elements 
+						  - A jQuery action() to be performed on the element(s)
+					</textarea>
+				</section>	
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+						## All Selector 
+						
+						```
+						$("*") // find everything 
+						```
+						
+						* Selectros return pseudo-array of jQuery elements 
+					</textarea>
+				</section>	
+				
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+						## Basic Selectors 
+						
+						* by Tag 
+						```
+						$("div") // <div>Hello jQuery</div>
+						```
+						
+						* by ID
+						```
+						$("#usr") // <span id="usr">John</span>
+						```
+						
+						* by Class 
+						```
+						$(.menu) // <ul class="menu">Home</ul>
+						```
+						
+					</textarea>
+				</section>	
 				
 				
 				<section data-markdown style="text-align: left;">
@@ -104,7 +397,208 @@
 				</section>
 				
 				
+	
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Review
+
+						* HTML: 
+						```
+						<p>Hello</p>
+						```
+						
+						* Script 
+						```
+						$(function(){ 
+							$("p").addClass("powerful");
+						});
+						```
+						
+						* Result:
+						```
+						<p class="powerful">Hellow</p>
+						```
+						
+					</textarea>
+				</section>			
+
+
+	
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Review
+
+						Note
+						
+						```
+						$(function(){ .... } );
+						```
+						
+						is shorthand for 
+						
+						```
+						$(document).ready(functino(){ ... } );
+						```
+						
+						
+					</textarea>
+				</section>	
 				
+	
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Selectors 
+						
+						Basic Selectors 
+						
+						* $("p")
+						```
+						<p>
+						```
+						
+						* $("div")
+						```
+						<div>
+						```
+						
+						* $("#foo")
+						```
+						<id="foo">
+						```
+						
+						* $(".foo")
+						```
+						<class="foo">
+						```
+						
+						Further details see (api.jquery.com)[api.jquery.com/category/selectors/]
+					</textarea>
+				</section>	
+				
+
+	
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example 
+						
+						* jQuery 
+						```
+						$("p").removeClass("cats");
+						```
+						
+						* Before: 
+						```
+						<p class="cats">
+						```
+						
+						* After
+						```
+						<p class="">
+						```
+					</textarea>
+				</section>	
+				
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example "<div>" Hide/Show
+						
+						* jQuery 
+						```
+						$("div").show();
+						```
+						
+						* Before: 
+						```
+						<div style="display:none;">
+						```
+						
+						* After
+						```
+						<div style="display:block;">
+						```
+					</textarea>
+				</section>	
+
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example IDs
+						
+						* jQuery 
+						```
+						$("#bob").text("Blue");
+						```
+						
+						* Before: 
+						```
+						<p id="bob">What colour?</p>
+						```
+						
+						* After
+						```
+						<p id="bob">Blue</p>
+						```
+					</textarea>
+				</section>
+
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Chaining
+						
+						Chain most methods together:
+						
+						```
+						$("p")
+							.addClass("cat")
+							.text("Hello")
+							.show();
+						```
+					</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Common Methods
+						
+						* **.show()** - show hidden element 
+						* **.wrap("<a></a>")** - wrap an element with <a>
+						* **.parent("p")** - select parent <p>
+						* **.html() - get/set innerHTML
+						* **.val()** - get/set value 
+					</textarea>
+				</section>
+
+
+				<section data-background-iframe="https://htmlcheatsheet.com/jquery/" data-background-interactive>
+						<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+							<h2 style="color:white">
+								Cheat Sheet</h2>
+							<p>Easily lookup jQuery features</p>
+							<p>Online resources</p>
+							<p>https://htmlcheatsheet.com/jquery/</p>
+							
+						</div>
+					</section>
+				</section>
+
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Plugins
+						
+						* plugins.jquery.com 
+						
+						* Plugins offer powerful features to add animations, effects or UI components
+					</textarea>
+				</section>
+				
+
 
 
 				<section data-markdown style="text-align: left;">
@@ -162,5 +656,16 @@
 
 		</script>
 
+
+		
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="images/webhome.png" width="8%"></a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </div>
+</div>
+
+		
+		
 	</body>
 </html>

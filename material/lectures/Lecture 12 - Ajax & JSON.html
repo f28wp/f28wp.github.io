@@ -57,25 +57,62 @@
 					<textarea data-template>
 						## Overview
 
-						* What do we mean by Ajax and JSON?
+						* What is Ajax and JSON?
+						* How do we use Ajax?
+						* Syntax and formatting
+						* Ajax methods and properties
 						* Examples
 						* Questions and Discussion
 						
 					</textarea>
 				</section>
 
-				
-
-			
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Question
+						## JSON
 
-						* What is Ajax?
-						* What is JSON?
-						* How do you use Ajax?
-						* Syntax and formatting?
+						* JSON = Javascript Object Notation
+						* JSON is a subsect of Javascript (EMCMA-262)
+						* Language independent
+						* Text-base (human readable)
+						* Light-weight
+						* Easy to use and parse 
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## JSON is Not
+
+						* JSON is not a document format 
+						* JSON is not a markup language 
+						  - JSON is not XML 
+						* JSON is not a general serilzation format 
+						  - No recrusive /recurring structures 
+						  - No invisible structures 
+						  - No function 
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## What do we use JSON objects for?
+
+						* JSON objects are used to transfer data between the server and the client 
+						* JSON is a simple, common representation of data
 						
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Versions and Encoding
+						
+						* JSON has no version and no revision 
+						* JSON is very stable 
+						* Character Encoding is **Strictly** UNICODE
 						
 					</textarea>
 				</section>
@@ -83,15 +120,393 @@
 								
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## AJAX
-
-						* AJAX is not a programming language
-						* AJAX is a technique for accessing web servers from a web page
-						* AJAX stands for Asynchronous JavaScript And XML
+						## JSON Data Types and Values
+						
+						* Strings 
+						* Numbers 
+						* Booleans 
+						* Objects 
+						* Ararys
+						* null
 						
 					</textarea>
 				</section>
 				
+												
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## JSON Objects 
+						
+						* Objects are unordered containers of key/value pairs 
+						* Objects are wrapped in **{ }**
+						* Comma **,** seperates key/value pairs 
+						* Colon **:** seperates keys and values 
+						* Keys are strings 
+						* Values are JSON values - struct, record, hashtable, object 
+						
+						
+					</textarea>
+				</section>
+			
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Object 
+
+						```
+						{
+							"name": "Jack",
+							"at"  : true,
+							"grade": "A",
+							"format": {
+							      "type": "rect",
+								  "width": 2220,
+								  "framerate": 24
+						}
+						```
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## JSON Array 
+						
+						* Arrays are ordered sequences of values 
+						* Arrays are wrapped in **[]**
+						* Comma **,** seperate values 
+						* Implementation can start at index 0 or 1
+						
+						
+					</textarea>
+				</section>
+
+
+
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Examples
+						
+						Key-value pairs
+						```
+						var test = {
+						  "fname": "Bob",
+						  "lname": "Tom",
+						  "age":   22
+						  };
+						```
+						
+						Accessing the JSON objects:
+						```
+						document.writelin("FName: " + test.fname);
+						document.writelin("LName: " + test.lname);
+						document.writelin("Age  : " + test.age  );
+						```
+					</textarea>
+				</section>
+
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Examples
+						Object with one member
+						```
+						{
+						   "course": "6.69"
+						}
+						```
+						
+						Object with two member
+						```
+						{
+						   "course": "6.69",
+						   "cname" : "aaa",
+						}
+						```
+						
+						Array with 3 elements 
+						```
+						['aa', 'bbb', 'cccc']
+						```
+						
+						Object with an array as a value 
+						```
+						{
+						"course": "abc",
+						"times":  ["2", "3", "4"]
+						}
+						```
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Examples
+						Objects with objects and array 
+						
+						```
+						var a = {
+						   "john":
+						    {
+							  "label": "jjj",
+							  "data": [[ 22, 233], [22,33]]
+							},
+							james:
+							{
+							  "label": "bbbb",
+							  "data": [[ 12, 33], [99,33]]
+							}
+						}
+						```
+						
+						To acces the data, we could do:
+						```
+						a.john.data[0][0]
+						```
+						Value 22
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+					JSON.stringify()
+					* Takes a Javascript object and produces a JSON string from it 
+					
+					JSON.parse() 
+					* Takes a JSON string and parses it to a Javascript object
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+					## Example 
+					JSON String 
+					```
+					var json = '{"person" : {"age":20, "name": "bob"}}';
+					```
+					
+					Convert to a Javascript object 
+					```
+					var parsed = JSON.parse(json);
+					```
+					
+					Test
+					```
+					console.log( parsed.person );
+					console.log( parsed.person["age"]);
+					```
+					
+					</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						
+					## Example 
+					
+					Convert Javscript object into a string 
+					```
+					var json = { 
+					   person: {
+					       name: "bob",
+						   age: 20
+					   }
+					};
+					console.log( JSON.stringify( json ) );
+					```
+					
+					Outputs:
+					```
+					{"person":{"name":"bob","age":20}}
+					```
+					</textarea>
+				</section>
+
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## AJAX
+						
+						![](.images/ajaxpic.jpg)
+					</textarea>
+				</section>
+
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## AJAX
+
+						* AJAX is not a programming language
+						* AJAX is a technique for accessing web servers from a web page
+						* AJAX stands for Asynchronous JavaScript And XML	
+					</textarea>
+				</section>
+				
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## AJAX
+
+						* Technique for creating **interactive web pages**
+						* Javascript and XMLHttpRequest to interchange and manipulate data with web server 
+						* Asynchronous communication (i.e., no freezing up)
+					</textarea>
+				</section>
+				
+				
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## POST and GET in Ajax
+
+						* GET places arguments in query string (POST doesn't)
+						* GET call in Ajax has size limitation on the amount of data that can be passed 
+						
+					</textarea>
+				</section>
+				
+							
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## POST and GET in Ajax
+
+						General Principle
+						
+						* GET method: it is used to retrieve data to display in the page and data is not expected to be changed on the server 
+						
+						* POST method: to update information on the server
+						
+					</textarea>
+				</section>	
+				
+				
+							
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Ajax Methods 
+						
+						* Abort() : Aborts request 
+						* getAllResponseHeaders(): Returns string with all header information 
+						* getResponseHeader("headerLabel"): Returns the text of a specified header 
+						* setRequestHeader("label", "value"): Sets the value of the HTTP request header 
+						
+					</textarea>
+				</section>	
+								
+							
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Ajax Methods 
+						
+						* open("method", "URL"[,asynchFlat[, "userName"[, "password"]]]): Initializes a request.
+						  - Method to be sued from Javascript code
+						  - Initialize request from native code, use openRequest() instead 
+						  
+						* send(content): Sends the request.
+						  - If the request is asynchronous(which is default), this method return as soon as the request is sent 
+					      - If the () request is synchronous, this method doesn't return unilt hte response has arrived
+						
+					</textarea>
+				</section>	
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example 
+						```
+						<!DOCTYPE html> 
+						<head><title>Ajax Test</title> 
+						<script type="text/javascript"> 
+							var xmlHttp = new XMLHttpRequest();
+							xmlHttp.open("GET", "hello.txt", true);
+							xmlHttp.addEventListener("load",
+	  						     ajaxCallback, false); 
+							xmlHttp.send(null); 
+							function ajaxCallback(event){ alert( "Your file contains the text: " + event.target.responseText );
+							} 
+						</script>
+						</head> 
+						<body></body> 
+						</html>
+						```
+						
+					</textarea>
+				</section>	
+
+
+				
+				
+
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## JSON in Ajax 
+			
+						* XMLHttpRequest
+						  - Obtain responseText
+						  - Parse the responseText 
+						  
+						  ```
+						  responseData = eval( 
+						    '(' + responseText + ')' );
+						  ```
+
+						  ```
+						  responseData = responseText.parseJSON();
+						  ```
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Security 
+						
+						Is safer to use eval with XMLHttpRequest?
+						
+						* JSON data comes from the same server that vended the page
+						* An eval of the data is no less secure than the original html 
+						* If in double, use **string.parseJSON** instead of eval 
+						
+					</textarea>
+				</section>
+				
+	
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## JSON Server-Side (PHP)
+						
+						```
+						<?php $emailaddresses = getDataFromDataSource( "SELECT COUNT(*) AS emailaddressCount from adresboek where emailaddress = '" . $_REQUEST["emailaddress"] ."'");
+
+						$emailaddressesForJSON = array(); 
+						while( $row = mysql_fetch_array($emailaddresses)) {
+							array_push($emailaddressesForJSON, $row); 
+						} 
+						$jsonText = json_encode( $emailaddressesForJSON ); 
+						echo $jsonText; 
+						
+						function getDataFromDataSource($query) { 
+							mysql_connect("127.0.0.1", "root", "root") or die("Connection Failure to Database"); 
+							mysql_select_db("criademo") or die ("Database criademo not found."); 
+							$result = mysql_query($query); return $result; } ?>
+						```
+					</textarea>
+				</section>
+
+
+
+
 
 
 
@@ -100,6 +515,9 @@
 						## Summary
 
 						* Understand Ajax and JSON
+						* Formatting and Syntax 
+						* Read/write JSon Structures
+						* Benefits of Ajax
 						
 						
 					</textarea>

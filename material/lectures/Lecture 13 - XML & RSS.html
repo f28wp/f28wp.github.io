@@ -58,6 +58,10 @@
 						## Overview
 
 						* What do we mean by XML and RSS?
+						* What is RSS used for?
+						* XML vs JSON 
+						* Examples 
+						* Questions and Discussion
 						
 					</textarea>
 				</section>
@@ -72,7 +76,123 @@
 					</textarea>
 				</section>
 
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Family
+					
+					* RSS is a family of XML 
+					* Typically used for news websites and weblogs 
+					* Abbreviation is used to refer to the following
+					  - Rich Site Summary (RSS 0.91)
+					  - Really Simple Syndication (RSS 2.0)
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Subscription
+					
+					* RSS allows internet uses to subscribe to RSS feeds ([details])(https://en.wikipedia.org/wiki/RSS)
+					</textarea>
+				</section>
+				
 
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## RSS Essentials
+					
+					* Essential elements of an RSS file are:
+					  - Title 
+					  - Link (hyperlink)
+					  - Description
+					* RSS enables use to create information sources
+					* Users **subscribe** to an RSS **feed**
+					</textarea>
+				</section>
+				
+				
+				<section data-background-iframe="https://archive.nytimes.com/www.nytimes.com/services/xml/rss/index.html" data-background-interactive>
+						<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+							<h2 style="color:white">
+								Example RSS Feed</h2>
+							<p>Click on RSS Feed to see the XML</p>
+							<p>Foratting when viewed in browser - why?</p>
+							
+						</div>
+					</section>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## RSS Contents (XML)
+					```
+					<rss version="2.0">
+					<title> NYT > Home Page </title>
+					<link> http://www.nytimes.com/index.html </link>
+					<description>
+					New York Times > Breaking News, World News & Multimedia
+					</description>
+					<lastBuildDate> Mon, 12 Dec 2005 05:05:00 EST </lastBuildDate>
+					<copyright> Copyright 2005 The New York Times Company </copyright>
+					<language> en-us </language>
+					…
+					```
+					</textarea>
+				</section>
+				
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Distribution via RSS
+					
+					Information distributed by RSS, include:
+					
+					* Web logs (blogs)
+					* Digital photo collections, such as Flickr
+					* Audio blogs (podcasts)
+					* Social bookmarking sites, such as Del.icio.us
+					</textarea>
+				</section>
+								
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Things you can do with RSS
+					
+					News syndication 
+					Search for information via RSS 
+					Aggregate your feeds 
+					Display news on your website 
+					Display news on your mobile device 
+					Collect all your email in RSS 
+					Get RSS content through your email 
+					Track Fedex packages 
+					discount air fares 
+					Bargains at Ebay 
+					Get stock updates 
+					Get the weather reports 
+					What people are saying about you, your company, your products 
+					Music, radio shows, TV clips 
+					Stay updated on someone's schedule 
+					Get cinema schedule updates 
+					Read your favourite comics 
+					What other people are surfing 
+					Automatically backup your weblog posts 
+					Get software updates 
+					Get the latest bittorrent files and p*** 
+					Shopping deals at Amazon.com and others 
+					...
+
+					</textarea>
+				</section>
+
+
+
+				
+				
 				
 			
 			
@@ -101,17 +221,75 @@
 				
 
 
-			
+				<!--
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Questions
 
 						* What does XML stand for?
 						* Give an example of an RSS feed?
+						* Does you subscribe to any RSS feeds?
+						
+					</textarea>
+				</section>
+				-->
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Parsing the Feed
+
+						* With jQuery's jFeed
+						  - XML Compliant
 						
 					</textarea>
 				</section>
 				
+				
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## With jQuery's Built-in XML Support
+
+						```
+						$.get(FEED_URL, function (data) {
+							$(data).find("entry").each(function () { // or "item" or whatever suits your feed
+								var el = $(this);
+
+								console.log("------------------------");
+								console.log("title      : " + el.find("title").text());
+								console.log("author     : " + el.find("author").text());
+								console.log("description: " + el.find("description").text());
+							});
+						});
+						```
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## With jQuery and the Google AJAX Feed API
+
+						```
+						$.ajax({
+						  url      : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(FEED_URL),
+						  dataType : 'json',
+						  success  : function (data) {
+							if (data.responseData.feed && data.responseData.feed.entries) {
+							  $.each(data.responseData.feed.entries, function (i, e) {
+								console.log("------------------------");
+								console.log("title      : " + e.title);
+								console.log("author     : " + e.author);
+								console.log("description: " + e.description);
+							  });
+							}
+						  }
+						});
+						```
+						
+					</textarea>
+				</section>	
 
 
 
@@ -120,6 +298,8 @@
 						## Summary
 
 						* Understand XML and RSS
+						* Whats, Whys and Hows of RSS
+						* Basic syntax and structure
 						
 					</textarea>
 				</section>
@@ -131,6 +311,7 @@
 						&bull; Review the revision questions <br>
 						&bull; Work through tutorial practicals <br>
 						&bull; Experiment (get into good habits) <br>
+						&bull; Read RSS [link](https://www.w3schools.com/xml/xml_rss.asp)
 					</p>
 				</section>
 				

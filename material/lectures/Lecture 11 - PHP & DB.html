@@ -58,29 +58,186 @@
 						## Overview
 
 						* How to use PHP with a DB?
+						* Embedded SQL Database (SQLite)
+						* Examples
+						* Questions and Discussion
 						
 					</textarea>
 				</section>
 				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## PHP Databases 
+						
+						* PHP supports a wide range of databases 
+						* PHP compatable with almost all servers
+						
+					</textarea>
+				</section>
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## PHP SQLite
 
-						* What is Sqlite?
-						* How do I connect to an SQLite database with PHP?
-
-						
+						* Embedded SQL Database Engine
+						* **Serverless** - accesses disk directly
+						* Single file
+						* Cross platform / architecture
+						* Small footprint
+						* Manifest typing
 					</textarea>
 				</section>
 				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Why SQLite
+						
+						* Zero configuration
+						* Portable
+						* Public domain
+						  - Adobe, Apple, Google, McAfee, Firefox, Skype
+					</textarea>
+				</section>
 
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Where can SQLite be used?
+						
+						* Replacement for a custom file format
+						* Temporary storage 
+						* Alternative to enterpise DB
+						* Local node storage
+						* **Communication between apps**
+						* Embedded devices
+					</textarea>
+				</section>
+
+
+				
+
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Supported? 
+						
+						```
+						<?php
+					    if (function_exists('sqlite_open')) {
+					      echo 'Sqlite PHP extension loaded';
+					    }
+					    else {
+						  echo 'sqlite not loaded';
+					    }
+						?>
+						```
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example 
+						
+						```
+						<?php
+						$ver = SQLite3::version();
+
+						echo $ver['versionString'] . "\n";
+						echo $ver['versionNumber'] . "\n";
+
+						var_dump($ver);
+						?>
+						```
+						
+						Output
+						```
+						3.20.1
+						3020001
+						array(2) {
+							["versionString"]=>
+							string(6) "3.20.1"
+							["versionNumber"]=>
+							int(3020001) }
+						```
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example 
+						
+						```
+						<?php
+						$ver = SQLite3::version();
+
+						echo $ver['versionString'] . "\n";
+						echo $ver['versionNumber'] . "\n";
+
+						var_dump($ver);
+						?>
+						```
+						
+						Output
+						```
+						3.20.1
+						3020001
+						array(2) {
+							["versionString"]=>
+							string(6) "3.20.1"
+							["versionNumber"]=>
+							int(3020001) }
+						```
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example 
+						
+						```
+						<?php
+						$db = new SQLite3('/test.db', SQLITE3_OPEN_CREATE );
+						
+						$version = $db->querySingle('SELECT SQLITE_VERSION()');
+
+						echo $version . "\n";
+						?>
+						```
+						
+						Output:
+						```
+						$ php version2.php
+						3.20.1
+						```
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Database Queries
+
+						Supports standard database queries
+						* CREATE TABLE
+						* INSERT INTO 
+						* SELECT * FROM
+						* ..
+						
+						Futher Reading [Link](http://zetcode.com/php/sqlite3/)
+					</textarea>
+				</section>
+				
+				
 			
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Summary
 
-						* Understand PHP and Databases
+						* Understand PHP and Database
+						* SQLite 
+						* Database system with PHP
 						
 					</textarea>
 				</section>

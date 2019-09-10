@@ -63,12 +63,27 @@
 						
 					</textarea>
 				</section>
+		
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## What is PHP?
+						
+						* PHP Server Scripting Language
+						* Powerful tool for making **dynamic** and **interactive** web pages
+						* PHP free and widely used 
+						* PHP is acronym for **PHP: Hypertext Preprocessor**
+						* PHP runs on the server
+						
+					</textarea>
+				</section>
 				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## PHP
-
+						
+						* Is PHP old?  Outdated?
 						* Is PHP still able to do its job?
 						* Who uses PHP?
 						* When would you use PHP vs Node.js?
@@ -77,7 +92,548 @@
 					</textarea>
 				</section>
 				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Basic PHP Syntax
+						
+						* PHP script can be placed anywhere in a document 
+						* PHP script starts with **<?** ends with **?>**
+						
+						```
+						<!DOCTYPE html><html><body>
+						<h1>PHP Basics</h1>
+						
+						<?php
+						  echo 'hello php';
+						?>
+						</body></html>
+						```
+					</textarea>
+				</section>
 
+				<section>
+				<iframe data-src="https://phpsandbox.html5css.ru"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				
+				<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+							<h2 style="color:white">
+								Online PHP Sandbox/Editors</h2>
+							<p>Easily test out your PHP syntax/understanding</p>
+							<p>Examples/snippets</p>
+
+						</div>
+				</section>				
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## PHP Variables
+						
+						* Variable identifiest start with $ sign 
+						* Variable names must start with a letter 
+						  - cannot start with a number 
+						  - only contain alpha-numeric characters and underscores
+						* Variable names are **case-sensitive**
+						
+						```
+						$age = 2;
+						$AGE = 3;
+						```
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					```
+					<!DOCTYPE html> <html> <body> 
+					<?php // This is a single-line comment 
+					
+					# This is also a single-line comment 
+					
+					/* This is a multiple-lines comment block that spans over multiple lines */ 
+					
+					// You can also use comments to leave out parts of a code line 
+					$x = 5 /* + 15 */ + 5; 
+					echo $x; 
+					?> 
+					</body> </html>
+					```
+				</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Debug/Show PHP Features/Settings
+					
+					```
+					<?php
+					ini_set('display_errors', 1);
+					ini_set('display_startup_errors', 1);
+					error_reporting(E_ALL);
+					?>
+					```
+				</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP Loosely Typed Language 
+					
+					* Don't need to tell PHP the data type for variables
+					* PHP **automatically** converts variables to the data type
+					  - i.e., compared to Java, C, C++
+				</textarea>
+				</section>
+				
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Scope
+					
+					PHP has three different variable scopes 
+					* local 
+					* global 
+					* static 
+				</textarea>
+				</section>
+				
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## **global** keyword 
+					
+					global keyword is used to access global variables 
+					
+					```
+					<?php 
+					  $x=2;
+					  function myFun() {
+					    global $x;
+						$x = $x + 1;
+					  }
+					  myFun();
+					  echo $x;
+					?>
+					```
+				</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## **static** keyword 
+					
+					global keyword is used to access global variables 
+					
+					```
+					<?php 
+					  function fun() {
+					    static $x = 0;
+						echo $x;
+						$x++;
+					  }
+					  
+					  fun();
+					  fun();
+					  fun();
+					?>
+					```
+				</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP echo
+					
+					```
+					<?php
+					  echo "<h2>PHP is fun</h2>";
+					  echo "hello php";
+					  echo "This ", "string", "is", "multi", "params";
+					?>
+					```
+				</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP print
+			
+					```
+					<?php
+					  $txt1 = "PHP";
+					  $txt2 = "hello";
+					  $x = 2;
+					  $y = 4;
+					  
+					  print "<h2>$txt1</h2>";
+					  print $x + $y;
+					?>
+					```
+				</textarea>
+				</section>
+				
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP Data Types
+			
+					PHP data types:
+					* String 
+					* Integer
+					* Float (also called double)
+					* Boolean
+					* Array 
+					* Object
+					* NULL
+					* Resource
+				</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP Object
+					
+					* Object is a data type which stores data and information
+					* PHP an object must be declared **explicitly**
+					
+					```
+					<?php
+					  class car {
+					    function car() {
+						  $this->model = "Ford";
+						}
+				      }
+					  
+					// create an object 
+					$mycar = new car();
+					
+					// show object properties
+					echo $mycar->model;
+					?>
+					```
+				</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## NULL
+
+					* Special data type
+					* Variable of type NULL has no value assigned to it
+					* **Note** If a variable is created without a value, it's automatically assigned a value of NULL
+					
+					```
+					<?php 
+					  $x = "Hello";
+					  $x = null;
+					  var_dump($x);
+					?>
+					```
+					
+				</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP String
+
+					* strlen() returns length of a string 
+					* strrev() reverse a string 
+					* str_word_count() counds the number of words
+					* strpos returns the position of the first match of a word
+					* str_replace() replaces text with a string
+					* **.** concatenate strings $t1 . $t2
+					
+					```
+					<?php 
+					  echo strlen('hello'); // what will be the output?
+					?>
+					```
+					
+				</textarea>
+				</section>
+				
+
+			
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP Constants
+
+					* Identifier that cannot be changed during the script 
+					* Constant names start with an identifier
+					  - no $ sign before the constant name 
+					* **Note** Unlike variables, constants are automatically **global** 
+				
+					```
+					<?php
+					  define("ABC", "Welcome");
+					  echo ABC;
+					?>
+					```
+					
+				</textarea>
+				</section>	
+
+
+
+			
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP Operators
+					
+					* Arithmetic operators
+					* Assignment operators 
+					* Comparison operators 
+					* Increment/decrement operators 
+					* Logical operators 
+					* String operators 
+					* Array operators
+					
+				</textarea>
+				</section>	
+
+			
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP Conditionals
+					
+					* if/else
+					* switch
+					
+					```
+					if (condition)
+					{
+					  ...
+					}
+					```
+					
+				</textarea>
+				</section>	
+
+			
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP Loops
+					
+					* while
+					* do..while
+					* for 
+					* foreach
+					
+					Example
+					```
+					while ( condition is true )
+					{
+					   ..
+					}
+					```
+				</textarea>
+				</section>	
+
+			
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP Functions 
+					
+					* Function is a block statement (called as needed)
+					Syntax 
+					* Declarations start with the word **function**
+					
+					```
+					function funcName()
+					{
+					  // code to be executed;
+					}
+					```
+				</textarea>
+				</section>	
+
+			
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Function Example
+					
+					```
+					<?php 
+					  function height($a = 10) {
+					    echo "height: $a";
+					  }
+					  height( 200 );
+					  height(); // use default of 10
+					?>
+					```
+				</textarea>
+				</section>	
+
+			
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP Arrays
+					
+					* **array()** function to create an array 
+					* count() function to return length of the array
+					
+					
+					```
+					<?php 
+					  $cars = array('aa', 22, 'bb');
+					  echo 'Val: ' . $cars[0];
+					  echo 'Length: ' . count($cars);
+					?>
+					```
+				</textarea>
+				</section>	
+
+			
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Associative Arrays
+					
+					* arrays with **named** keys
+					* two ways to create an associative array:
+					
+					```
+					$age = array( "aa"=>22, "bb"=>44, "gg"=>1 );
+					```
+					or
+					
+					```
+					$age['aa'] = 2;
+					$age['bb'] = 44;
+					```
+				</textarea>
+				</section>
+
+			
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Array Functions
+					
+					* sort() - sorts array in ascending order
+					* resort - sorts array in decending order
+					* asort() - sorts associative arrays in ascending order (according to value)
+					* ksort() - sort associative arrays in ascending order (according to key)
+					* arsort() - sort associative arrays in descending order (according to value)
+					* krsort() - sort associative array sin descending order (according to key)
+				</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP Globals (Superglobals)
+					
+					**Superglobals** are always accessible reglardless of sope
+					
+					PHP Superglobals are:
+					* $GLOBALS
+					* $_SERVER 
+					* $_REQUEST
+					* $_POST 
+					* $_GET
+					* $_FILES
+					* $_ENV
+					* $_COOKIE
+					* $_SESSION
+					
+				</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Example
+					
+					$_SERVER holds information about headers, paths and script locations
+					
+					```
+					<?php 
+					  echo $_SERVER['PHP_SELF'];
+					  echo '<br>'
+					  echo $_SERVER['SERVER_NAME'];
+					?>
+					```
+					
+				</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Date and Time
+					
+					PHP Date() Function 
+					
+					* Syntax 
+					```
+					date(format, timestamp)
+					```
+						
+					* Example 
+					
+					```
+					echo 'Today is ' . date("Y/m/d") . '<br>';
+					```
+				</textarea>
+				</section>
+
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					## PHP Include Files
+					
+					* Insert contents of one php file into another php file 
+					* Before the server executs the script
+					
+					Syntax 
+					
+					```
+					include 'filename'
+					```
+					or
+					```
+					require 'filename'
+					```
+				</textarea>
+				</section>
+
+
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					## PHP Exceptions
+					
+					```
+					<?php 
+					  // create function with exception 
+					  function checkNum($number){ 
+					     if ($number>1) {
+						   throw new Exception("Value must be 1 or below");
+						 }
+					  }
+					  
+					  // trigger exception in a 'try' block 
+					  try {
+					     checkNum(2);
+						 // if exception is thrown, this text will not be shown
+						 echo 'the number is 1 or below';
+					  }
+					  catch (Exception $e) {
+					    echo 'Message: ' . $e->getMessage();
+					  }
+					?>
+					```
+				</textarea>
+				</section>
+
+
+
+
+				
 
 			
 				<section data-markdown style="text-align: left;">
@@ -85,6 +641,8 @@
 						## Summary
 
 						* Understand PHP Concepts
+						* Syntax and structure
+						* Server side language
 						
 					</textarea>
 				</section>

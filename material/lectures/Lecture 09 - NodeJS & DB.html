@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>Web Programming: PHP and DB </title>
+		<title>Web Programming: Node.js and DB </title>
 
-		<meta name="description" content="Web Programming creating beautiful interactive and engaging web pages - using client server side technologies - PHP and DB ">
+		<meta name="description" content="Web Programming creating beautiful interactive and engaging web pages - using client server side technologies - Node.js and DB ">
 		<meta name="author" content="Ben Kenwright">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -45,210 +45,173 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h2>PHP and DB</h2>
+					<h2>Node.js and DB</h2>
 					<h4>F28WP Web Programming</h4>
 					<p>
 						<small>2019-2020</small>
 					</p>
 				</section>
 
-
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Overview
 
-						* How to use PHP with a DB?
-						* Embedded SQL Database (SQLite)
+						* How to use Node.js with DB?
+						* Working with popular database 
 						* Examples
 						* Questions and Discussion
-						
 					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## PHP Databases 
-						
-						* PHP supports a wide range of databases 
-						* PHP compatable with almost all servers
-						
+						## NodeJS
+
+						* Node.js can be used in **database** applications
+						* Node supports the majority of popular databases
+						  - MongoDB, MySQL, NoSQL, ..
 					</textarea>
 				</section>
+				
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## MySQL with NodeJS
+
+						* One of the most popular databases is **MySQL**
+						* Install "mysql" module
+						
+						Node.js can use this module to manipulate the MySQL database
+						
+						```
+						var mysql = require('mysql');
+						```
+					</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Create **Connection**
+
+						```
+						var mysql = require('mysql');
+
+						var con = mysql.createConnection({
+						  host: "localhost",
+						  user: "yourusername",
+						  password: "yourpassword"
+						});
+
+						con.connect(function(err) {
+						  if (err) throw err;
+						  console.log("Connected!");
+						});
+						```
+					</textarea>
+				</section>
+
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## PHP SQLite
+						## **Query** Database
 
-						* Embedded SQL Database Engine
-						* **Serverless** - accesses disk directly
-						* Single file
-						* Cross platform / architecture
-						* Small footprint
-						* Manifest typing
+						```
+						con.connect(function(err) {
+						  if (err) throw err;
+						  console.log("Connected!");
+						  con.query(sql, function (err, result) {
+							if (err) throw err;
+							console.log("Result: " + result);
+						  });
+						});
+						```
 					</textarea>
 				</section>
-				
-				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Why SQLite
-						
-						* Zero configuration
-						* Portable
-						* Public domain
-						  - Adobe, Apple, Google, McAfee, Firefox, Skype
-					</textarea>
-				</section>
+
 
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Where can SQLite be used?
-						
-						* Replacement for a custom file format
-						* Temporary storage 
-						* Alternative to enterpise DB
-						* Local node storage
-						* **Communication between apps**
-						* Embedded devices
+						## **Create** Database
+
+						```
+						var mysql = require('mysql');
+
+						var con = mysql.createConnection({
+						  host: "localhost",
+						  user: "yourusername",
+						  password: "yourpassword"
+						});
+
+						con.connect(function(err) {
+						  if (err) throw err;
+						  console.log("Connected!");
+						  con.query("CREATE DATABASE mydb", function (err, result) {
+							if (err) throw err;
+							console.log("Database created");
+						  });
+						});
+						```
 					</textarea>
 				</section>
-
-
 				
-
-				
-				
+								
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Supported? 
-						
+						## **Create** Table
+
 						```
-						<?php
-					    if (function_exists('sqlite_open')) {
-					      echo 'Sqlite PHP extension loaded';
-					    }
-					    else {
-						  echo 'sqlite not loaded';
-					    }
-						?>
+						var mysql = require('mysql');
+
+						var con = mysql.createConnection({
+						  host: "localhost",
+						  user: "yourusername",
+						  password: "yourpassword",
+						  database: "mydb"
+						});
+
+						con.connect(function(err) {
+						  if (err) throw err;
+						  console.log("Connected!");
+						  var sql = "CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))";
+						  con.query(sql, function (err, result) {
+							if (err) throw err;
+							console.log("Table created");
+						  });
+						});
 						```
 					</textarea>
 				</section>
 				
-				
+										
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Example 
+						## Various Query Statements
 						
-						```
-						<?php
-						$ver = SQLite3::version();
-
-						echo $ver['versionString'] . "\n";
-						echo $ver['versionNumber'] . "\n";
-
-						var_dump($ver);
-						?>
-						```
+						* Create Database 
+						* Create Table 
+						* Insert Into 
+						* Select From 
+						* Where
+						* Ordered By
+						* Delete 
+						* Drop Table 
+						* Update 
+						* Limit
+						* Joint 
 						
-						Output
-						```
-						3.20.1
-						3020001
-						array(2) {
-							["versionString"]=>
-							string(6) "3.20.1"
-							["versionNumber"]=>
-							int(3020001) }
-						```
+						[w3schools details]{https://www.w3schools.com/nodejs/nodejs_mysql.asp}
 					</textarea>
-				</section>
-				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Example 
-						
-						```
-						<?php
-						$ver = SQLite3::version();
+				</section>		
+			
 
-						echo $ver['versionString'] . "\n";
-						echo $ver['versionNumber'] . "\n";
-
-						var_dump($ver);
-						?>
-						```
-						
-						Output
-						```
-						3.20.1
-						3020001
-						array(2) {
-							["versionString"]=>
-							string(6) "3.20.1"
-							["versionNumber"]=>
-							int(3020001) }
-						```
-					</textarea>
-				</section>
-				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Example 
-						
-						```
-						<?php
-						$db = new SQLite3('/test.db', SQLITE3_OPEN_CREATE );
-						
-						$version = $db->querySingle('SELECT SQLITE_VERSION()');
-
-						echo $version . "\n";
-						?>
-						```
-						
-						Output:
-						```
-						$ php version2.php
-						3.20.1
-						```
-					</textarea>
-				</section>
-				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Database Queries
-
-						Supports standard database queries
-						* CREATE TABLE
-						* INSERT INTO 
-						* SELECT * FROM
-						* ..
-						
-						Futher Reading [Link](http://zetcode.com/php/sqlite3/)
-					</textarea>
-				</section>
-				
-				<!--
-				<section>
-				<iframe data-src="https://www.jdoodle.com/execute-sql-online/"  width="80%" height="650px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
-				
-				<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
-							<h2 style="color:white">
-								Online PHP Sandbox/SQLite</h2>
-							<p>Easily test out your database commands</p>
-							<p>Examples/snippets</p>
-
-						</div>
-				</section>	
-				-->
-				
 				<section>
 				<iframe data-src="https://www.jdoodle.com/embed/v0/1v79"  width="80%" height="570px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 				
 				<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
 							<h2 style="color:white">
-								Online PHP Sandbox/SQLite</h2>
+								Online SQL Sandbox</h2>
 							<p>Easily test out your database commands</p>
 							<p>Examples/snippets</p>
 
@@ -257,30 +220,34 @@
 				
 				
 				
-			
+
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Summary
 
-						* Understand PHP and Database
-						* SQLite 
-						* Database system with PHP
+						* Understand Node.js and how to work with a DB
+						* Create, insert and access data using Node.js and DB	
+						* Syntax and process
 						
 					</textarea>
 				</section>
-
-
-				<section style="text-align: left;">
-					<h2>To do this week ...</h2>
-					<p>
-						&bull; Read over the lectures <br>
-						&bull; Review the revision questions <br>
-						&bull; Work through tutorial practicals <br>
-						&bull; Experiment (get into good habits) <br>
-					</p>
-				</section>
 				
 
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## To do this week ...
+
+						* Read over the lectures <br>
+						* Review the revision questions <br>
+						* Work through tutorial practicals <br>
+						* Experiment (get into good habits) <br>
+						* Read w3schools
+						  - [Node&MySQL](https://www.w3schools.com/nodejs/nodejs_mysql.asp)
+						
+					</textarea>
+				</section>
+			
 			</div>
 
 		</div>
@@ -310,6 +277,17 @@
 			});
 
 		</script>
+
+
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="images/webhome.png" width="8%"></a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </div>
+</div>
+
+
 
 	</body>
 </html>

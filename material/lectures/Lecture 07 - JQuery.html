@@ -109,12 +109,15 @@
 				</section>
 				
 							
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						### Who uses JQuery?
-						
-					</textarea>
+				<section>
+				<div id="left">
+				<h1>Who uses jQuery?</h1>
+				</div>
+				<div id="right">
+				<img src="./images/confused1.jpg" style="border:0;">
+				</div>
 				</section>
+				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -155,7 +158,7 @@
 						* MooTools
 						* ExtJS
 						
-						However, JQuery is the most popular
+						However, JQuery is the most **popular**
 						
 					</textarea>
 				</section>
@@ -167,7 +170,7 @@
 						
 						Taken from the JQuery website:
 						
-						> jQuery is a fast and concise JavaScript Library that simplifies HTML document traversing, event handling, animating, and Ajax interactions for rapid web development. jQuery is designed to change the way that you write JavaScript
+						> jQuery is a **fast** and concise JavaScript Library that **simplifies** HTML document traversing, event handling, animating, and Ajax interactions for **rapid web development**. jQuery is designed to change the way that you write JavaScript
 						
 					</textarea>
 				</section>
@@ -176,21 +179,27 @@
 					<textarea data-template>
 						## DOM and JQuery 
 						
-						* Browser needs to load jQuery 
+						* Browser needs to load jQuery (**library**) 
 						* Uses the DOM
-						
-						Question
-						
-						How can you be sure your code is ready to run?
 						
 					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
+						## Question
+						
+						How can you be sure your (Javascript/jQuery) code/library is **ready** to run?
+						
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
 						
 						Answer:
-						Wrap all your jQuery code within the document ready function
+						Wrap all your jQuery code within the document **ready function**
 						
 						```
 						$(document).ready(function()){
@@ -204,7 +213,7 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						
-						## What happens if we don't check if things are reay?
+						## What happens if we **don't** check if things are ready?
 					</textarea>
 				</section>			
 				
@@ -215,7 +224,7 @@
 						## What happens if we don't check if things are reay?
 						
 						1. Code doesn't work (90% of time might throw an error)
-						2. Code works .. the page loads, next page load, then fail (unreliable)
+						2. Code works .. the page loads, next page load, then fail (**unreliable**)
 
 					</textarea>
 				</section>			
@@ -244,6 +253,12 @@
 					</textarea>
 				</section>
 				
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/eja1ms24/15/embedded/result,js,html/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+				
+				
 												
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -259,6 +274,12 @@
 					</textarea>
 				</section>
 				
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/gk9hxzrn/35/embedded/result,js,html/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+				
+				
 														
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -273,7 +294,12 @@
 						* Select document elements 
 
 					</textarea>
-				</section>		
+				</section>
+				
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/0uL7jpmf/1/embedded/result,js,html/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
 				
 														
 				<section data-markdown style="text-align: left;">
@@ -296,27 +322,38 @@
 						
 						## Loading jQuery 
 						
-						* To use jQuery you need to load it
+						* To use jQuery you need to load it [*](https://jquery.com/download/)
 						* You can include it locally on your own server 
 						```
 						<script src="/js/jquery.js">
 						```
 						* Or use one of the available resource links:
-						```
-						ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js 
 						
-						ajax.microsoft.com/ajax/jquery/jquery-1.4.2.js 
+						```
+						<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+						
+						<script src="ajax.microsoft.com/ajax/jquery/jquery-3.4.1.js"></script>
 						```
 					</textarea>
 				</section>		
 				
+				<section data-background-iframe="https://jquery.com/download/" data-background-interactive>
+						<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+							<h2 style="color:white">Examples jQuery</h2>
+							<p>Download/API details/tutorials/examples.</p>
+							<p>jQuery.com</p>
+							
+						</div>
+					</section>
+					
 						
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						
 						## Load Scripts at the Bottom 
 						
-						Problem 
+						Why? 
+						
 						* When scsripts are downloading they block everything else in most browsers 
 						
 						* Good practice to load your scripts at the bottom of your page so they don't interupt the page content downloads
@@ -327,16 +364,17 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						
-						## jQuery Syntax 
+						## jQuery **Syntax** 
 						
-						* jQuery syntax is tailer made for selecting HTML elements and performing actions on the element(s)
+						* jQuery syntax is **tailer** made for **selecting** HTML elements and performing actions on the element(s)
+						* **Friendly** easy to use syntax 
 						* Basic syntax is 
 						```
 						$(selector).action()
 						```
-						  - A dollar sign to define jQuery 
-						  - A (selector) to "query (or find)"  HTML elements 
-						  - A jQuery action() to be performed on the element(s)
+						  - A **$** dollar sign to define jQuery 
+						  - A **(selector)** to "query (or find)"  HTML elements 
+						  - A jQuery **action()** to be performed on the element(s)
 					</textarea>
 				</section>	
 				
@@ -360,11 +398,12 @@
 						
 						## Basic Selectors 
 						
+						<div style="width:600pt !important;"></div>
+						
 						* by Tag 
 						```
 						$("div") // <div>Hello jQuery</div>
 						```
-						
 						* by ID
 						```
 						$("#usr") // <span id="usr">John</span>
@@ -383,9 +422,12 @@
 					<textarea data-template>
 						## Simple JQuery Example
 						
+						<div style="width:600pt !important;"></div>
+						
 						```
 						<html><head>
-						<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+						<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+						</script>
 						<script>
 						$(document).ready(function(){
 						  $("p").click(function(){
@@ -402,16 +444,23 @@
 					</textarea>
 				</section>
 				
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/n6ymps2c/5/embedded/result,js,html/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+				
 				
 	
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Review
 
+						
 						* HTML: 
 						```
 						<p>Hello</p>
 						```
+						<div style="width:600pt !important;"></div>
 						
 						* Script 
 						```
@@ -419,12 +468,12 @@
 							$("p").addClass("powerful");
 						});
 						```
-						
+						<div style="width:600pt !important;"></div>
 						* Result:
 						```
-						<p class="powerful">Hellow</p>
+						<p class="powerful">Hello</p>
 						```
-						
+						<div style="width:600pt !important;"></div>
 					</textarea>
 				</section>			
 
@@ -461,23 +510,27 @@
 						```
 						<p>
 						```
+						<div style="width:600pt !important;"></div>
 						
 						* $("div")
 						```
 						<div>
 						```
+						<div style="width:600pt !important;"></div>
 						
 						* $("#foo")
 						```
 						<id="foo">
 						```
+						<div style="width:600pt !important;"></div>
 						
 						* $(".foo")
 						```
 						<class="foo">
 						```
+						<div style="width:600pt !important;"></div>
 						
-						Further details see (api.jquery.com)[api.jquery.com/category/selectors/]
+						Further details ses [api.jquery.com](api.jquery.com/category/selectors/)
 					</textarea>
 				</section>	
 				
@@ -491,38 +544,46 @@
 						```
 						$("p").removeClass("cats");
 						```
+						<div style="width:600pt !important;"></div>
 						
 						* Before: 
 						```
 						<p class="cats">
 						```
+						<div style="width:600pt !important;"></div>
 						
 						* After
 						```
 						<p class="">
 						```
+						<div style="width:600pt !important;"></div>
+						
 					</textarea>
 				</section>	
 				
 					
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Example "<div>" Hide/Show
+						## Example "```<div>```" Hide/Show
 						
 						* jQuery 
 						```
 						$("div").show();
 						```
+						<div style="width:600pt !important;"></div>
 						
 						* Before: 
 						```
 						<div style="display:none;">
 						```
+						<div style="width:600pt !important;"></div>
 						
 						* After
 						```
 						<div style="display:block;">
 						```
+						<div style="width:600pt !important;"></div>
+						
 					</textarea>
 				</section>	
 
@@ -536,16 +597,20 @@
 						```
 						$("#bob").text("Blue");
 						```
+						<div style="width:600pt !important;"></div>
 						
 						* Before: 
 						```
 						<p id="bob">What colour?</p>
 						```
+						<div style="width:600pt !important;"></div>
 						
 						* After
 						```
 						<p id="bob">Blue</p>
 						```
+						<div style="width:600pt !important;"></div>
+						
 					</textarea>
 				</section>
 
@@ -572,9 +637,9 @@
 						## Common Methods
 						
 						* **.show()** - show hidden element 
-						* **.wrap("<a></a>")** - wrap an element with <a>
-						* **.parent("p")** - select parent <p>
-						* **.html() - get/set innerHTML
+						* **.wrap("```<a></a>```")** - wrap an element with ```<a>```
+						* **.parent("p")** - select parent ```<p>```
+						* **.html()** - get/set innerHTML
 						* **.val()** - get/set value 
 					</textarea>
 				</section>
@@ -612,6 +677,8 @@
 						## Summary
 
 						* Understand JQuery and how to use it in web development
+						* Essential syntax and methods
+						* Basic examples
 						
 					</textarea>
 				</section>

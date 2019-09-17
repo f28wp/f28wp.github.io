@@ -31,6 +31,33 @@
     }
   ];
 */
+
+	function htmlEncode( html )
+	{
+		html = html.trim();
+		html = html.replace(/[&"'\<\>]/g, function(c) 
+		{
+			  switch (c) 
+			  {
+				  case "&":
+					return "&amp;";
+				  case "'":
+					return "&#39;";
+				  case '"':
+					return "&quot;";
+				  case "<":
+					return "&lt;";
+				  default:
+					return "&gt;";
+			  }
+		});
+		html = html.split('\n').join('<br>');
+		html = html.split('*code*').join('<pre style="display: inline;">');
+		html = html.split('*code*').join('</pre>');
+		return html;
+	};
+
+
   function buildQuiz() {
     // we'll need a place to store the HTML output
     const output = [];
@@ -42,12 +69,15 @@
 
       // and for each available answer...
       for (letter in currentQuestion.answers) {
+		  
+		var ansHtmlSafe = htmlEncode(currentQuestion.answers[letter]);
+		var queHtmlSafe = htmlEncode(currentQuestion.question);
         // ...add an HTML radio button
         answers.push(
           `<label>
              <input type="radio" name="question${questionNumber}" value="${letter}">
               ${letter} :
-              ${currentQuestion.answers[letter]}
+              ${ansHtmlSafe}
            </label>`
         );
       }
@@ -55,7 +85,8 @@
       // add this question and its answers to the output
       output.push(
         `<div class="slide">
-           <div class="question"> ${currentQuestion.question} </div>
+           <div class="question"> ${queHtmlSafe} </div>
+		   <br>
            <div class="answers"> ${answers.join("")} </div>
          </div>`
       );
@@ -118,10 +149,12 @@
   }
 
   function showNextSlide() {
+	resultsContainer.innerHTML = "";
     showSlide(currentSlide + 1);
   }
 
   function showPreviousSlide() {
+	resultsContainer.innerHTML = "";
     showSlide(currentSlide - 1);
   }
 
@@ -144,3 +177,5 @@
   previousButton.addEventListener("click", showPreviousSlide);
   nextButton.addEventListener("click", showNextSlide);
 })();
+
+

@@ -13,7 +13,7 @@
 
 
 
-<h1>Quiz on Important Facts</h1>
+<h1>Revision Quiz</h1>
 
 <button id="previous">Previous Question</button>
 <button id="next">Next Question</button>
@@ -29,13 +29,13 @@
   const myQuestions = [
     {
       question: `
-			What is printed in the console?
-<div id="code"><pre class="prettyprint">
+        What is printed in the console?
+*code*
 var foo = function foo() {
-	console.log(foo === foo);  
+  console.log(foo === foo);
 };
-foo();
-</pre></div>
+foo(); 
+*code*
 	  `,
       answers: {
         a: "true",
@@ -46,8 +46,8 @@ foo();
     },
     {
 question: `
-What does the above alert?
-<div id="code"><pre class="prettyprint">
+What does the alert display?
+*code*
 function aaa() {
     return
     {
@@ -55,7 +55,7 @@ function aaa() {
     };
 }
 alert(typeof aaa());
-</pre></div>
+*code*
 `,
       answers: {
         a: "function",
@@ -68,9 +68,9 @@ alert(typeof aaa());
 	{
 question: `
 What is the result?
-<div id="code"><pre class="prettyprint">
+*code*
 Number("1") - 1 == 0;
-</pre></div>
+*code*
 `,
       answers: {
         a: "true",
@@ -80,9 +80,7 @@ Number("1") - 1 == 0;
       correctAnswer: "a"
     }
 	
-	
-	
-	
+
   ];
 </script>
 <script src="./quiz.js"></script>
@@ -94,6 +92,13 @@ Number("1") - 1 == 0;
     </div>
 </div>
 
+<!--
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 3px; left: 50px; margin-left: 0px; z-index: 20; text-align: left;">
+		<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="../lectures/images/webprint.png" width="7.5%"></a>
+    </div>
+</div>
+-->
 
 <!--
 <div id="code"><pre class="prettyprint">

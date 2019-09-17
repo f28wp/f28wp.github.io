@@ -8,7 +8,7 @@ body{
 	font-family: 'Work Sans', sans-serif;
 	color: #333;
   font-weight: 300;
-  text-align: center;
+  //text-align: left;
    // background-color: #f8f6f0;
   background: url("../lectures/images/back.png");
 	background-position: right 0% bottom 25%;
@@ -24,24 +24,30 @@ h1{
   font-size: 20px;
   background-color: #444;
   color: #fff;
+  text-align: center;
 }
 .question{
   font-size: 30px;
   margin-bottom: 10px;
+  text-align: left;
+  display: inline-block;
 }
 .answers {
   margin-bottom: 20px;
-  text-align: left;
+  text-align: left !important;
   display: inline-block;
+  
+  
 }
 .answers label{
   display: block;
   margin-bottom: 10px;
+  text-align: left !important;
 }
 
 
 button{
-  font-family: 'Work Sans', sans-serif;
+    font-family: 'Work Sans', sans-serif;
 	font-size: 22px;
 	background-color: #279;
 	color: #fff;
@@ -56,6 +62,19 @@ button:hover{
 	background-color: #38a;
 }
 
+#previous{
+	position: absolute;
+    right: 51%;
+}
+#next{
+	position: absolute;
+    left: 51%;
+}
+#submit{
+	background-color: #155;
+	position: absolute;
+    left: 51%;
+}
 
 #code{
 	font-size: 18px;
@@ -66,10 +85,17 @@ button:hover{
 
 
 .slide{
+	//display: table;
+	//width: fit-content; 
+ //display: inline;
   position: absolute;
-  left: 0px;
-  top: 0px;
+ //position: relative;
+  top: 10px;
   width: 100%;
+  //left: 50%;
+  //  margin-left: auto;
+  //  margin-right: auto;
+  text-align: center;
   z-index: 1;
   opacity: 0;
   transition: opacity 0.5s;
@@ -85,5 +111,23 @@ button:hover{
   position: relative;
   //height: 50px;
   margin-top: 20px;
+  text-align: center;
 }
+
+#results{
+	//position: absolute;
+	//margin-top: 120px;
+	margin-top:    130px;
+	//text-align: center;
+	//position: relative;
+	//margin-left: auto;
+    //margin-right: auto;
+	font-size: 28px;
+	font-weight: 900;
+	display: flex;
+	justify-content:center;
+	text-align:left;
+}
+
+
 

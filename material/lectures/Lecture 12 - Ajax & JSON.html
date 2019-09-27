@@ -58,11 +58,11 @@
 					<textarea data-template>
 						## Overview
 
-						* What is Ajax and JSON?
+						* What is **Ajax** and **JSON?**
 						* How do we use Ajax?
-						* Syntax and formatting
+						* **Syntax** and formatting
 						* Ajax methods and properties
-						* Examples
+						* **Examples**
 						* Questions and Discussion
 						
 					</textarea>
@@ -261,27 +261,29 @@
 						```
 						
 						To acces the data, we could do:
+						
 						```
 						a.john.data[0][0]
 						```
-						Value 22
+						
+						Value:  22
+						
 					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						
-					JSON.stringify()
+					
+					```JSON.stringify()```
 					* Takes a Javascript object and produces a JSON string from it 
 					
-					JSON.parse() 
+					```JSON.parse() ```
 					* Takes a JSON string and parses it to a Javascript object
 					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						
 					## Example 
 					JSON String 
 					```
@@ -305,7 +307,6 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						
 					## Example 
 					
 					Convert Javscript object into a string 
@@ -328,11 +329,11 @@
 
 
 					
-				<section data-markdown style="text-align: left;">
+				<section data-markdown>
 					<textarea data-template>
 						## AJAX
 						
-						![](.images/ajaxpic.jpg)
+						![](./images/ajaxpic.jpg)
 					</textarea>
 				</section>
 
@@ -409,12 +410,13 @@
 						## Ajax Methods 
 						
 						* open("method", "URL"[,asynchFlat[, "userName"[, "password"]]]): Initializes a request.
-						  - Method to be sued from Javascript code
-						  - Initialize request from native code, use openRequest() instead 
+						   - Method to be sued from Javascript code
+						   - Initialize request from native code, use openRequest() instead 
 						  
 						* send(content): Sends the request.
-						  - If the request is asynchronous(which is default), this method return as soon as the request is sent 
-					      - If the () request is synchronous, this method doesn't return unilt hte response has arrived
+							- If the request is asynchronous(which is default), this method return as soon as the request is sent
+						   
+							- If the () request is synchronous, this method doesn't return unilt hte response has arrived
 						
 					</textarea>
 				</section>	
@@ -430,14 +432,14 @@
 							var xmlHttp = new XMLHttpRequest();
 							xmlHttp.open("GET", "hello.txt", true);
 							xmlHttp.addEventListener("load",
-	  						     ajaxCallback, false); 
+							    ajaxCallback, false); 
 							xmlHttp.send(null); 
-							function ajaxCallback(event){ alert( "Your file contains the text: " + event.target.responseText );
+							function ajaxCallback(event){ 
+							  alert( "Your file contains the text: " + event.target.responseText );
 							} 
 						</script>
 						</head> 
-						<body></body> 
-						</html>
+						<body></body></html>
 						```
 						
 					</textarea>
@@ -456,11 +458,12 @@
 						  - Obtain responseText
 						  - Parse the responseText 
 						  
+						  
 						  ```
-						  responseData = eval( 
-						    '(' + responseText + ')' );
+						  responseData = eval( '(' + responseText + ')' );
 						  ```
-
+						or 
+						
 						  ```
 						  responseData = responseText.parseJSON();
 						  ```
@@ -488,7 +491,9 @@
 						## JSON Server-Side (PHP)
 						
 						```
-						<?php $emailaddresses = getDataFromDataSource( "SELECT COUNT(*) AS emailaddressCount from adresboek where emailaddress = '" . $_REQUEST["emailaddress"] ."'");
+						<?php $emailaddresses = getDataFromDataSource(
+						"SELECT COUNT(*) AS emailaddressCount from adresboek
+						where emailaddress = '" . $_REQUEST["emailaddress"] ."'");
 
 						$emailaddressesForJSON = array(); 
 						while( $row = mysql_fetch_array($emailaddresses)) {
@@ -498,7 +503,8 @@
 						echo $jsonText; 
 						
 						function getDataFromDataSource($query) { 
-							mysql_connect("127.0.0.1", "root", "root") or die("Connection Failure to Database"); 
+							mysql_connect("127.0.0.1", "root", "root") or 
+							   die("Connection Failure to Database"); 
 							mysql_select_db("criademo") or die ("Database criademo not found."); 
 							$result = mysql_query($query); return $result; } ?>
 						```

@@ -649,24 +649,24 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					Function in url.js shows some of their use to normalise a URL: 
+					Example function in url.js shows how to normalise a URL: 
 
 					```
 					function normaliseURL(url) {
-					url = url.trim();
-					if ( url.length == 0 ) return "";
-					var i = url.indexOf("://");
-					var j = url.indexOf("/", i + 3);
-					var access_method = "";
-					var hostname = "";
-					if ( i != -1 ) {
+					  url = url.trim();
+					  if ( url.length == 0 ) return "";
+					  var i = url.indexOf("://");
+					  var j = url.indexOf("/", i + 3);
+					  var access_method = "";
+					  var hostname = "";
+					  if ( i != -1 ) {
 						access_method = url.substring(0, i).toLowerCase() + "://";
 						if ( j != -1 )
 							hostname = url.substring(i + 3, j).toLowerCase();
-					} else {
+					  } else {
 						j=0;
-					}
-					return access_method + hostname + url.substring(j);
+					  }
+					  return access_method + hostname + url.substring(j);
 					}
 
 					```

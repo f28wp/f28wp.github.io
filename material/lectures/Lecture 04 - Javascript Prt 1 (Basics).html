@@ -184,10 +184,39 @@
 						* **Boolean** type having value of true or false
 						* **Number** type of double precision 64 bit IEEE for mat number
 						* **String** sequence of 16 bit UTF-16 characters
-						* Symbol ES 6+ - symbols have unique values and no literal syntax
+						* Symbol ES 6+/- symbols have unique values and no literal syntax
 
 					</textarea>
 				</section>
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#11533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						Which primitive type represents integers in Javascript?
+						
+						* a) int
+						* b) Integer
+						* c) Number
+						* d) double
+						* e) var
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#11533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: **c) Number**
+						
+						JavaScript supports 6 **primitive** types 
+						* undefined, null, Boolean, Number, String and Symbol
+
+						</textarea>
+					</section>
+				</section>
+				
 				
 
 			
@@ -215,7 +244,7 @@
 					<textarea data-template>
 						## JavaScript Syntax
 
-						* Keyword **var** declares var iables with scope of function they’re in.
+						* Keyword **var** declares variables with scope of function they’re in.
 						* In ES 6+ let and const declare block-scoped variables.
 						* **let** variables can’t be redeclared in scope. var variables can.
 						* **const** variables can index loops but can’t be reassigned values.
@@ -229,6 +258,35 @@
 
 					</textarea>
 				</section>
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#11533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Question
+						Javascript variable identifiers are case-sensitive?
+						
+						* a) true
+						* b) false;
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#11533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: **a) true**
+						
+						```
+						var Cat;
+						var cat;
+						```
+
+						</textarea>
+					</section>
+				</section>
+				
+				
 				
 				
 				<section data-markdown style="text-align: left;">
@@ -276,7 +334,7 @@
 						  - **NaN** Not a Number - special IEEE for mat value
 						  - **Infinity** positive infinity number value
 						* JavaScript has **built-in objects** incl. Array, Date, Math, Regexp, String
-						* Engines may have built-ins for GUI, IO, OS - Navigator, Window
+						* Engines may have built-ins for **GUI, IO, OS** - Navigator, Window
 					</textarea>
 				</section>
 				
@@ -301,6 +359,7 @@
 						} else {
 							s=s.trim();
 						}
+						
 						switch ( Math.floor(Math.random()*3) ) {
 							case 1: col = "red";
 							break;
@@ -317,6 +376,8 @@
 					<textarea data-template>
 						### Examples of loops 
 
+						* for 
+
 						```
 						let sum = 0;
 						let arr = [1, 2, 3, 5, 7, 11, 13];
@@ -324,10 +385,11 @@
 							sum += arr[i];
 						}
 						
+						
 						for (let item of arr) { sum += item; } // loop over collection
 						
-						var car = { make: "Ford", model: "Focus", year: 2017 };
 						
+						var car = { make: "Ford", model: "Focus", year: 2017 };
 						for (var p in car) { // enumerable properties loop
 							if ( isNaN(car[p]) ) car[p] = car[p].toUpperCase();
 						}
@@ -339,7 +401,10 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						### Examples of loops 
-
+						
+						* do while 
+						* while
+						
 						```
 						do {
 							var j = page.indexOf("=", j);
@@ -347,15 +412,52 @@
 								s += page.substring(j, j + 2);
 						} while ( j != -1 && j < len );
 						
+						
 						var count = 0;
 						while ( (i = page.indexOf("href=", i)) != -1 ) {
 							count++;
 						}
-
 						```
 					</textarea>
 				</section>
 				
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#11533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Question
+						What does the following Javascript code output?
+						
+						```
+						let sum = 0;
+						let arr = [1, 2, 3];
+						for (let i=1; i<arr.length; i++) { // classic loop
+							sum += arr[i];
+						}
+						alert( sum );
+						```
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#11533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: **5**
+						
+						```
+						Loop starts at `1' and sums the array values
+						```
+
+						</textarea>
+					</section>
+				</section>
+				
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/sb9g718p/2/embedded/js,result/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
 				
 
 				<section data-markdown style="text-align: left;">
@@ -363,7 +465,7 @@
 						## Standalone JavaScript 
 
 						* JavaScript can be run by standalone engines or within browsers.
-						* Nashorn is standalone JavaScript engine (ES5) released in Java 1.8
+						* **Nashorn** is standalone JavaScript engine (ES5) released in Java 1.8
 							- based on the Da Vinci Machine
 						    - implementing JSR-223 using new code base
 						* Nashorn engine is launched with **"jjs"** or "jrunscript" command.
@@ -382,11 +484,15 @@
 						## JavaScript Functions 
 
 						* JavaScript functions are first class objects where
-						  - function keyword has **optional name**
-						  - **arguments** are enclosed in ( ... ) and body in { ... }
-						  - arguments are passed by value
-						  - arguments may pass objects (e.g. functions) by reference
+						  - **function keyword** has **optional name**
+						  - **arguments** are enclosed in ( ... )
+							- arguments are passed by value
+							- arguments may pass objects (e.g. functions) by reference
+						  - body in **{ ... }**
 
+						```
+						function fn ( optionalParams ) { ... }
+						```
 					</textarea>
 				</section>
 				
@@ -415,12 +521,14 @@
 					<textarea data-template>
 						## JavaScript Functions 
 
-						* Anonymous functions are defined inline and may be assigned to a name
+						* **Anonymous** functions are defined inline and may be assigned to a name
 						  - passed as argument in a function call
-						  - self-invoked i.e. applied inline to arguments
-						  - Examples would be
+						  - **self-invoked** i.e. applied inline to arguments
+						
+						* Examples would be
+						
 						```
-							anon = function() { print(’I am anonymous’); }
+							anon = function() { print('I am anonymous'); }
 							anon();
 						```
 						
@@ -438,16 +546,27 @@
 						## JavaScript Functions 
 
 						```
-							(function(s) { print(’Say ’, s); })("Hello")
+							(function(s) { print('Say ', s); })("Hello")
 						```
 						
-						* Builtin objects like Math support standard functions like
+						* Builtin functions 
+						  - Example, builtin objects like Math support standard functions like
 
 						```
 							Math.random()
 						```
 					</textarea>
 				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## JavaScript String Handling
+						
+						Why is string handling important?
+
+					</textarea>
+				</section>
+				
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -455,16 +574,16 @@
 						
 						Methods and properties for handling strings include
 
-					* charAt(N) 		 returns character at index N
-					* indexOf(S) 	 	 returns index of S in string
+					* charAt(N) 	   returns character at index N
+					* indexOf(S) 	   returns index of S in string
 					* lastIndexOf(S)   returns last index of S in string
-					* length 			 property stor ing length of string
-					* split(S) 		 returns array of substr ings separated by S
-					* substr ing(M) 	 returns substr ing from index to end
+					* length 		   property stor ing length of string
+					* split(S) 		   returns array of substr ings separated by S
+					* substr ing(M)    returns substr ing from index to end
 					* substr ing(M, N) returns substr ing between given indices
-					* toLowerCase() 	 maps all letters to lower case
-					* toUpperCase() 	 maps all letters to upper case
-					* trim() 			 removes whitespace from both ends of string
+					* toLowerCase()    maps all letters to lower case
+					* toUpperCase()    maps all letters to upper case
+					* trim() 		   removes whitespace from both ends of string
 
 					</textarea>
 				</section>
@@ -510,13 +629,16 @@
 					## JavaScript Arrays 
 					
 					* JavaScript Array is created using Array builtin
+					
 					```
 					* cars = new Array();
 					cars[0] = "Honda Civic";
 					cars[1] = "Ford Focus";
 					cars[2] = "Fiat Punto";
 					```
+					
 					* Same array can also be created by either of
+					
 					```
 					cars = new Array("Honda Civic", "Ford Focus", "Fiat Punto"); 
 					cars = ["Honda Civic", "Ford Focus", "Fiat Punto"];
@@ -548,15 +670,45 @@
 				</section>
 
 
+				<section>
+					<section data-markdown data-transition="slide" data-background="#88533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Question
+						What does the following Javascript code output?
+						
+						```
+						let arr = ['a', 2, 'c'];
+						alert( arr[9] );
+						```
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#88533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: **undefined**
+						
+						```
+						array is out of bounds 0 to 2
+						```
+
+						</textarea>
+					</section>
+				</section>
+				
+				
+
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					## JavaScript Arrays 
 					
-					Useful functions for an Array include
-					* indexOf(element) index of element
-					* push(element) add element to end and return new length
-					* splice(i, n, a, ..., k) replace n elements from index i with a ... k
+					**Useful** functions for an Array include
+					* **indexOf**(element) index of element
+					* **push**(element) add element to end and return new length
+					* **splice**(i, n, a, ..., k) replace n elements from index i with a ... k
 
 					
 					</textarea>
@@ -575,13 +727,13 @@
 					> 3
 					
 					cars.push("Fiat Tipo")
-					4
+					> 4
 					
 					cars.splice(1, 2, "Rolls Royce")
 					> Ford Focus,Fiat Punto
 					
 					cars
-					Honda Civic,Rolls Royce,Fiat Tipo
+					> Honda Civic,Rolls Royce,Fiat Tipo
 					```
 					</textarea>
 				</section>
@@ -590,24 +742,29 @@
 					<textarea data-template>
 					## JavaScript Arrays 
 					
-					* In 2011 3 builtin functions were added to simplify array handling.
+					* In 2011 3 builtin functions were added to **simplify array** handling.
 					* Each applies a function to array elements to implement their effect.
 					 - **filter()** selects out array elements meeting a condition
 					 - **map()** applies function to each array element
 					 - **reduce()** applies accumulator/concatenator across array elements
-					* General for m of filter()
-					 - array.filter(function(elem, index, array) { ... }, thisArg);
-					 - elem is element in array with current index.
-					 - thisArg is optional object nameable by this in callback.
-
+					 
+					
 					</textarea>
 				</section>
 
+				<!--
+					General for m of filter()
+					 - array.filter(function(elem, index, array) { ... }, thisArg);
+					 - elem is element in array with current index.
+					 - thisArg is optional object nameable by this in callback.
+					-->
+					
+					
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					## JavaScript Arrays 
 					
-					* Duplicate elements in array can be removed by filter() thus:
+					* **Duplicate** elements in array can be removed by filter() thus:
 					
 					```
 					var bag = [4, 1, 4, 7, 1, 2]
@@ -622,11 +779,12 @@
 					</textarea>
 				</section>
 
+				<!--
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					## JavaScript Arrays 
 					
-					Centigrade temperatures can be converted to Fahrenheit by
+					* Example, Centigrade temperatures can be converted to Fahrenheit by
 					```
 					var cent = [-40, 0, 35, 100];
 					cent.map(function(c) { return Math.round(9 * c / 5) + 32; });
@@ -646,17 +804,17 @@
 					```
 					</textarea>
 				</section>
-				
+				-->
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## JavaScript Objects 
+					## JavaScript **Objects**
 					
-					* JavaScript objects are property collections that
-					 - are non-primitive values
+					* JavaScript objects are property **collections** that
+					 - are **non-primitive** values
 					 - have prototypes that are also objects
 					 - inherit their properties and methods from their prototype
-					* All objects inherit from prototype called Object.prototype.
+					* **All** objects **inherit from prototype** called Object.prototype.
 
 					</textarea>
 				</section>
@@ -664,7 +822,7 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## JavaScript Object Examples
+					## JavaScript Object **Examples**
 					
 					* Create an object with new keyword and assign properties to it:
 					```
@@ -674,7 +832,7 @@
 					vehicle.year = 2012;
 					```
 					
-					* vehicle can also be declared and initialised directly
+					* Vehicle can also be declared and initialised **directly**
 					```
 					vehicle = { make: "Ford", model: "Focus", year: 2012 };
 					```
@@ -684,9 +842,9 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## JavaScript Object Examples
+					## JavaScript Object **Examples**
 					
-					* Associative array syntax in JavaScript can also create vehicle
+					* **Associative array syntax** in JavaScript can also create vehicle
 					```
 					vehicle["make"] = "Ford";
 					vehicle["model"] = "Focus";
@@ -715,7 +873,7 @@
 					<textarea data-template>
 					## JavaScript Object 
 					
-					* Object’s properties can be listed by getProps.js
+					* Object’s properties can be listed by (e.g., getProps.js)
 
 					```
 					function getProps(obj) {
@@ -725,7 +883,7 @@
 					}
 					```
 					
-					* car prototype can be dynamically changed to set default values
+					* Car prototype can be **dynamically** changed to set default values
 
 
 					</textarea>
@@ -734,7 +892,7 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## JavaScript Object Example
+					## JavaScript Object **Example**
 					
 					```
 					load("car.js")
@@ -767,11 +925,11 @@
 					<textarea data-template>
 					## JavaScript Object 
 					
-					* Functions can be added to object prototype as follows
+					* **Functions** can be **added** to object prototype as follows
 					```
 					car.prototype.name = function() { return this.make + " " +
 					this.model;}
-					wheels.name()
+					wheels.name() // invoke
 					> Jaguar E-type
 					```
 
@@ -780,7 +938,7 @@
 					  - in object this refers to object itself
 					* Global object has some useful meta-programming functions
 					  - eval() evaluates string argument and executes it as code
-					  - isNaN() deter mines whether argument is not a number
+					  - isNaN() determines whether argument is not a number
 
 					</textarea>
 				</section>
@@ -790,11 +948,11 @@
 					<textarea data-template>
 					## JavaScript Object 
 					
-					ES 6 introduced class notation to JavaScr ipt where
-					* classes are syntactic sugar over prototype-based objects
-					* no new object-or iented model is introduced
+					ES 6 introduced class notation to JavaScript where
+					* classes are syntactic sugar over **prototype-based objects**
+					* no new object-oriented model is introduced
 					
-					Class declaration circle.js can define a class function
+					Example class declaration **circle.js** can define a class function
 					```
 					class Circle {
 					constructor(radius, x, y) { this.radius = radius;
@@ -813,36 +971,9 @@
 				</section>
 
 
-
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## JavaScript Object 
-					
-					ES 6 introduced class notation to JavaScr ipt where
-					* classes are syntactic sugar over prototype-based objects
-					* no new object-or iented model is introduced
-					
-					Class declaration circle.js can define a class function
-					```
-					class Circle {
-					constructor(radius, x, y) { this.radius = radius;
-					this.x = x; this.y = y; }
-					area() { return Math.PI * Math.pow(this.radius, 2); }
-					static info() { console.log("I know about circles"); }
-					}
-					```
-					
-					* A class expression (with/without a name) can also define it
-					```
-					var ring = class Circle { ... }
-					```
-
-					</textarea>
-				</section>
-
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-					## JavaScript Object 
+					## JavaScript Object **Example**
 					
 					* First version of class
 					```
@@ -853,8 +984,8 @@
 					> 314.1592653589793
 					```
 					
-					* nicecircle.js shows how ES 6+ classes can be subclassed
-					``
+					* **nicecircle.js** shows how ES 6+ classes can be **subclassed**
+					```
 					class NiceCircle extends Circle {
 						constructor(radius, colour) {
 						super(radius, 0, 0);
@@ -867,7 +998,7 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## JavaScript Object 
+					## JavaScript Object **Example**
 					
 					* Extended version of class
 					  - nicecircle.js shows how ES 6+ classes can be subclassed

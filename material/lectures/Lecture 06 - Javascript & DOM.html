@@ -57,9 +57,10 @@
 					<textarea data-template>
 						## Overview
 
-						* What is the Document Object Model (DOM)?
-						* What are the different version of DOM?
+						* What is the **Document Object Model (DOM)**?
+						* What are the different **version** of DOM?
 						* Advantages of using JS and DOM?
+						* Key **Methods** and **Properties** of DOM
 						* Examples
 						* Questions and Discussion
 						
@@ -71,10 +72,10 @@
 			
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## JavaScript in Browser
+						## JavaScript in **Browser**
 
-						JavaScript in browser supports document object i.e. page’s root node.
-						Its writeln() function in simple.js overwrites contents of loaded page.
+						* JavaScript in browser supports document object i.e. page’s **root** node.
+						* **writeln()** function **overwrites contents** of loaded page.
 						
 						```
 						document.writeln("Hello World!");
@@ -87,7 +88,7 @@
 					<textarea data-template>
 						## JavaScript in Browser
 
-						* Code in simple.js can be imported and run with simple.html
+						* Code in simple.js can be **imported** and run with simple.html
 						```
 						<!DOCTYPE html>
 						<html>
@@ -96,7 +97,7 @@
 						</body>
 						</html>
 						```
-						* Script can also be declared inline in head or body of HTML with
+						* Script can also be declared **inline** in head or body of HTML with
 						```
 						<!DOCTYPE html>
 						<html>
@@ -112,7 +113,7 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## JavaScript in Browser
+						## JavaScript in **Browser**
 
 						* Example is functionally equivalent to
 
@@ -123,10 +124,12 @@
 						</html>
 						```
 						* Inline JavaScript can be invalid XML - space after "<" is illegal!
+						
 						```
 						function negative(x) { if ( x < 0 ) return true; return false; }
 						```
-						* Similarly "&" not in entity declaration like "&#160;" is invalid XML
+						
+						* Similarly "&" not in entity declaration like "&&##160;" is invalid XML
 					</textarea>
 				</section>
 
@@ -135,7 +138,7 @@
 					<textarea data-template>
 						## JavaScript in Browser
 
-						* Putting offending code in CDATA section hides it from XML parser
+						* Putting offending code in **CDATA section** hides it from XML parser
 						```
 						<script>
 						/* <![CDATA[ */
@@ -144,7 +147,7 @@
 						</script>
 						'''
 						
-						* Commenting out CDATA section hides it from JavaScr ipt engine.
+						* Commenting out CDATA section hides it from JavaScript engine
 						* Only XHTML markup with inline JavaScript may need this
 
 					</textarea>
@@ -153,32 +156,38 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Generating Variety in Pages
+						## **Generating** Variety in Pages
 
-						* One use of JavaScr ipt is to create var iety in web pages. colours.js uses 3 functions to make table of random colours
+						* One use of **JavaScript** is to create variety in web pages. 
 						
-						* getHue() uses anonymous function in constructing its reply. Code uses 2 functions of builtin object Math floor(n) retur ns nearest integer below n random() generates random number between 0 and 1
+						* Example
+						  - colours.js uses 3 functions to make table of random colours
+						
+						  - getHue() uses anonymous function in constructing its reply. 
+						  - Code uses 2 functions of builtin object Math floor(n) returns nearest integer below n random() generates random number between 0 and 1
 					</textarea>
 				</section>
 
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
+						## Example 
+						
 						```
 						function getHue(range) {
-						var c = function () { return Math.floor(Math.random()*range); }
-						return "rgb(" + c() + "," + c() + "," + c() + ")";
+						  var c = function () { return Math.floor(Math.random()*range); }
+						  return "rgb(" + c() + "," + c() + "," + c() + ")";
 						}
 						function getTable(size, range) {
-						var s = "<table>";
-						for (var i=0; i<size; i++) {
-						s += "<tr>";
-						for (var j=0; j<size; j++)
-						s += "<td style=\"background-color:" + getHue(range) +
-						"\">" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
-						s += "</tr>";
-						}
-						s += "</table>";
+						  var s = "<table>";
+						  for (var i=0; i<size; i++) {
+						    s += "<tr>";
+						    for (var j=0; j<size; j++)
+						    s += "<td style=\"background-color:" + getHue(range) +
+						    "\">" + "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>";
+						    s += "</tr>";
+						  }
+						  s += "</table>";
 						return s;
 						}
 						var s = getTable(Math.floor(Math.random()*40 + 1), 256);
@@ -190,6 +199,7 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
+						## Example 
 						* colours.html invokes colours.js
 						* Patchwork is defined as table with up to 40 rows and columns. 
 
@@ -207,13 +217,13 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Document Object Model
+						## Document Object Model (DOM)
 						* Document Object Model
 						  - applies to parsed HTML and XML content in DOM systems
 						  - defines objects and interfaces to access and manipulate it
-						* has versions - levels 0, 1, 2, 3, 4 (and alleged living standard)
-						* DOM 0 is informal, only applies to HTML and doesn’t consider XML.
-						* DOM 0 views HTML components rendered in window as a hierarchy.
+						* Has versions - levels 0, 1, 2, 3, 4 (and alleged living standard)
+						* DOM 0 is informal, only applies to HTML and doesn’t consider XML
+						* DOM 0 views HTML components rendered in window as a hierarchy
 					</textarea>
 				</section>
 
@@ -292,7 +302,8 @@
 					<textarea data-template>
 						## Example 
 						* Put cursor over one of Edinburgh * Heriot-Watt * Edinburgh Napier
-						* Mouse Over event triggers function call which triggers hyper **link**. **Changing** value of window.location.href loads its new URL. 
+						* Mouse Over event triggers function call which triggers hyper **link**. 
+						* **Changing** value of window.location.href loads its new URL. 
 
 						```
 						<script>
@@ -302,9 +313,9 @@
 						</script>
 						<p>
 							Put cursor over one of
-							<em onmouseover=’go("ed")’>Edinburgh</em> *
-							<em onmouseover=’go("hw")’>Heriot-Watt</em> *
-							<em onmouseover=’go("napier")’>Edinburgh Napier</em>
+							<em onmouseover='go("ed")'>Edinburgh</em> *
+							<em onmouseover='go("hw")'>Heriot-Watt</em> *
+							<em onmouseover='go("napier")'>Edinburgh Napier</em>
 						</p>
 						```
 					</textarea>
@@ -347,8 +358,8 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Form Validation and DOM 
-						* Validation code can use DOM addresses to access for m elements to
+						## Form **Validation** and DOM 
+						* Validation code can use DOM addresses to access form elements to
 						  - ensure user has supplied all essential form details
 						  - check datatypes entered in for m are valid values
 						* User can be war ned by a popup alert if errors are found.
@@ -364,14 +375,15 @@
 						
 						```
 						<form onsubmit="return checkData()"
-							action="http://www2.macs.hw.ac.uk/˜bk/echo.php">
-						Name <input name="Name" id="user" size="40"> <p>
-						Sex <select name="Sex">
+							action="echo.php">
+						    Name <input name="Name" id="user" size="40"> <p>
+						    Sex <select name="Sex">
 							<option> male <option selected> female </select>
-						Age <input name="Age" id="age" size="3"> <input type="submit">
+						    Age <input name="Age" id="age" size="3"> <input type="submit">
 						</form>
-
 						```
+						
+						* Notice the ```checkData()``` call
 					</textarea>
 				</section>	
 
@@ -383,18 +395,18 @@
 						
 						```
 						function checkData() {
-						var name = document.getElementById("user").value;
-						if ( name.length < 2 || (/[ˆA-Za-z\s\-]/).test(name) ) {
+						  var name = document.getElementById("user").value;
+						  if ( name.length < 2 || (/[ˆA-Za-z\s\-]/).test(name) ) {
 							alert("Name should have 2 or more letters, hyphens, spaces");
 							return false;
-						}
-						var age = document.getElementById("age").value;
-						if ( age.length == 0 || (/[ˆ0-9]/).test(age) ||
+						  }
+						  var age = document.getElementById("age").value;
+						  if ( age.length == 0 || (/[ˆ0-9]/).test(age) ||
 							age < 0 || age > 120 ) {
 							alert("Please give age between 0 and 120");
 							return false;
-						}
-						return true;
+						  }
+						  return true;
 						}
 						```
 						
@@ -413,13 +425,13 @@
 						## HTML 5 form attributes can sometimes be used for same checks
 
 						```
-						<form action="http://www2.macs.hw.ac.uk/˜hamish/echo.php">
-						Name <input name="Name" pattern="[A-Za-z\s\-]{2,}" size="40"
-						title="2+ letters, hyphens, spaces" required> <p>
-						Sex <select name="sex">
-						<option> male <option selected> female </select>
-						Age <input name="Age" type="number" min="0" max="120" required>
-						<input type="submit">
+						<form action="echo.php">
+						  Name <input name="Name" pattern="[A-Za-z\s\-]{2,}" size="40"
+						  title="2+ letters, hyphens, spaces" required> <p>
+						  Sex <select name="sex">
+						  <option> male <option selected> female </select>
+						  Age <input name="Age" type="number" min="0" max="120" required>
+						  <input type="submit">
 						</form>
 						```
 					</textarea>
@@ -452,7 +464,7 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 
-						## DOM 3/4
+						## DOM 3
 
 						DOM 3 recommended in 2004 supports 3 specifications
 						* DOM 3 Core extends functionality of DOM 2 Core - adds and extends methods relating to XML
@@ -461,6 +473,17 @@
 						Other useful DOM 3 related specifications include
 						* DOM 3 Events builds on functionality of DOM 2 Events - event flow, handler registration, contextual data
 						* DOM 3 XPath functions to access DOM via XPath expressions
+
+					</textarea>
+				</section>
+				
+								
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+
+						## DOM 4
+
 						* DOM 4 was recommended in 2015
 						consolidates DOM level 3, Selectors API level 2, UIEvents etc.
 						offers mutation observers to replace mutation events
@@ -517,8 +540,8 @@
 						
 						```
 						function makeSad() {
-						var e = document.getElementsByTagName("img")[1].parentNode;
-						e.innerHTML = "<img src=’minion.jpg’ alt=’Despicable Me’/>"; 
+						  var e = document.getElementsByTagName("img")[1].parentNode;
+						  e.innerHTML = "<img src='minion.jpg' alt='Despicable Me'/>"; 
 						}
 						```
 
@@ -532,7 +555,7 @@
 
 						* It parses HTML to DOM subtree to replace a node’s children.
 						* DOM 2 also added event listeners to attach callbacks to events.
-						* Hover sensitive war ning can be set over an image
+						* Hover sensitive warning can be set over an image
 						```
 							function setWarning() {
 							handler = function(e) { alert("Hands Off!"); }
@@ -541,7 +564,9 @@
 						```
 						* Event listener callback can be removed with same arguments
 						```
-							function unsetWarning() { var el = 	document.getElementById("treasurechest"); 	el.removeEventListener("mouseover", handler); } 
+							function unsetWarning() { 
+							var el = 	document.getElementById("treasurechest");
+							el.removeEventListener("mouseover", handler); } 
 						```
 
 
@@ -572,18 +597,19 @@
 						* DOM 2 CSS
 						  - adds style proper ty interface to get/set CSS 2 properties
 						  - renames CSS properties in JavaScript without use of "-"
-						* CSS property "font-size" in JavaScript becomes "fontSize“
+						* CSS property "font-size" in JavaScript becomes "fontSize"
 						* Emphasized text in page can be made larger and smaller with 
+						
 						```
 						function changeFontSize(size) {
-							var a = document.querySelectorAll(’em’);
+							var a = document.querySelectorAll('em');
 							for ( var i in a ) {
 								if ( i != undefined )
 									a[i].style.fontSize = size + ’pt’;
 							}
 						}
-
 						```
+						
 					</textarea>
 				</section>				
 				
@@ -615,7 +641,7 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 
-						## Debugging Page Scripts
+						## **Debugging** Page Scripts
 
 						* JavaScript errors
 						  - cause all of that segment of code to be ignored
@@ -640,11 +666,11 @@
 
 						```
 						<html>
-						<body>
-						<script>
-						banana
-						</script>
-						</body>
+						  <body>
+						    <script>
+						      banana
+						    </script>
+						  </body>
 						</html>
 						```
 					</textarea>
@@ -677,21 +703,28 @@
 				</section>		
 				
 				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					* The Document Object Model from version 1 onwards **standardises** the objects and interfaces for accessing and updating the content, structure and style of loaded HTML (and XML) documents.
 
+					* Key **DOM methods** for **accessing** parts of loaded web pages are getAttribute(), getElementById(), getElementsByTagName(), querySelector(), querySelectorAll().
+
+					* Key **DOM methods** for **updating** loaded web pages are setAttribute(), appendChild(), removeChild(), createElement(), addEventListener(), removeEventListener().
+
+					* Key **DOM** node **properties** in loaded web pages are childNodes, nodeType, nodeValue, parentNode, innerHTML, style.
+					
+				</textarea>
+				</section>	
+				
+					
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					## Summary
-					* Understand Javascript and DOM
+					* Understand **Javascript and DOM**
+					* **Structure** and style of HTML documents
+					* Key **methods** for accessing/updating web page elements
+					* Key **properties**
 					
-					* The Document Object Model from version 1 onwards standardises the objects and interfaces for accessing and updating the content, structure and style of loaded HTML (and XML) documents.
-
-					* Key DOM methods for accessing parts of loaded web pages are getAttr ibute(), getElementById(), getElementsByTagName(), quer ySelector(), quer ySelectorAll().
-
-					* Key DOM methods for updating loaded web pages are setAttr ibute(), appendChild(), removeChild(), createElement(), addEventListener(), removeEventListener().
-
-					* Key DOM node properties in loaded web pages are childNodes, nodeType, nodeValue, parentNode, innerHTML, style.
-
-
 					</textarea>
 				</section>	
 

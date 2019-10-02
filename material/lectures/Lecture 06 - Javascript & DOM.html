@@ -113,8 +113,17 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## JavaScript in **Browser**
-
+						## JavaScript in **Browser** Example
+						
+						```
+						<!DOCTYPE html>
+						<html>
+						<body>
+						<script> document.writeln("Hello World!"); </script>
+						</body>
+						</html>
+						```
+						
 						* Example is functionally equivalent to
 
 						```
@@ -123,21 +132,30 @@
 						<body> Hello World! </body>
 						</html>
 						```
-						* Inline JavaScript can be invalid XML - space after "<" is illegal!
 						
-						```
-						function negative(x) { if ( x < 0 ) return true; return false; }
-						```
-						
-						* Similarly "&" not in entity declaration like "&&##160;" is invalid XML
 					</textarea>
 				</section>
-
+				
+				<!--
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					* Inline JavaScript can be invalid XML - space after "<" is illegal!
+						
+					```
+					function negative(x) { if ( x < 0 ) return true; return false; }
+					```
+						
+					* Similarly "&" not in entity declaration like "&&##160;" is invalid XML
+				</textarea>
+				</section>
+				-->
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## JavaScript in Browser
 
+						* **Inline** JavaScript can be **invalid XML** - space after "<" is illegal!
 						* Putting offending code in **CDATA section** hides it from XML parser
 						```
 						<script>
@@ -145,28 +163,39 @@
 						function negative(x) { if ( x < 0 ) return true; return false; }
 						/* ]]> */
 						</script>
-						'''
+						```
 						
 						* Commenting out CDATA section hides it from JavaScript engine
-						* Only XHTML markup with inline JavaScript may need this
+						* **Only XHTML** markup with inline JavaScript may need this
 
 					</textarea>
 				</section>
-
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## **Generating** Variety in Pages
 
-						* One use of **JavaScript** is to create variety in web pages. 
+						* One use of **JavaScript** is to create variety in web pages
+						* Generate new webpage **content** 
+						* Manipulate and update content (dynamically in real-time)
 						
-						* Example
-						  - colours.js uses 3 functions to make table of random colours
-						
-						  - getHue() uses anonymous function in constructing its reply. 
-						  - Code uses 2 functions of builtin object Math floor(n) returns nearest integer below n random() generates random number between 0 and 1
 					</textarea>
 				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example **Generating** Variety in Pages
+
+						* Colours.js script 
+						* Add 3 functions to make table of random colours
+						
+						  - getHue() uses anonymous function in constructing its reply. 
+						  - Use 2 builtin functions: 
+						    1. **Math.floor(n)** returns nearest integer below n 
+							2. **Math.random()** create random number between 0 and 1
+					</textarea>
+				</section>
+				
 
 
 				<section data-markdown style="text-align: left;">
@@ -190,13 +219,22 @@
 						  s += "</table>";
 						return s;
 						}
+						```
+						
+						```
 						var s = getTable(Math.floor(Math.random()*40 + 1), 256);
 						document.writeln(s);
 						```
 					</textarea>
 				</section>
+				
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/h0umy36p/2/embedded/js,result/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+				
 
-
+				<!--
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Example 
@@ -212,36 +250,32 @@
 						```
 					</textarea>
 				</section>
-
+				-->
 
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Document Object Model (DOM)
+						## Document Object Model (**DOM**)
 						* Document Object Model
 						  - applies to parsed HTML and XML content in DOM systems
-						  - defines objects and interfaces to access and manipulate it
-						* Has versions - levels 0, 1, 2, 3, 4 (and alleged living standard)
+						  - defines objects and interfaces to **access** and manipulate it
+						* Has **versions** - levels 0, 1, 2, 3, 4 (and alleged living standard)
 						* DOM 0 is informal, only applies to HTML and doesn’t consider XML
-						* DOM 0 views HTML components rendered in window as a hierarchy
+						* DOM 0 views HTML components rendered in window as a **hierarchy**
 					</textarea>
 				</section>
 
-
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Document Object Model
+				
+				<section style="text-align: center;">
+						<h2> Document Object Model </h2>
 						
-						![](./images/dommodel.png)
-					</textarea>
+						<img src="./images/dommodel.png" style="border:0;" width="50%">
 				</section>
 				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Document Object Model
+				<section style="text-align: center;">
+						<h2> Document Object Model </h2>
 						
-						![](./images/dom2.jpg)
-					</textarea>
+						<img src="./images/dom2.jpg" width="200%">
 				</section>
 
 				
@@ -250,17 +284,17 @@
 						## Document Object Model
 						
 						* DOM 0 supports designations such as
-						  - window.location.href URL of currently loaded page
-						  - document.for ms array of for ms in document
-						  - document.for ms[0] array of objects in 1st for m in document
-						  - document.for ms[1].elements[3]4th element in 2nd for m in document
-						* DOM 0 can address for m controls using name attr ibutes:
+						  - **window.location.href** URL of currently loaded page
+						  - **document.forms** array of for ms in document
+						    - **document.forms[0]** array of objects in 1st for m in document
+						    - **document.forms[1].elements[3]** 4th element in 2nd form in document
+						* DOM 0 can address form controls using name **attributes**:
 						```
 						<form name="form2" ... >
 						<input type="text" name="txt3" ... >
 						</form>
 						```
-						* document.for m2.txt3.value refers to contents of this text entry box
+						* **document.form2.txt3.value** refers to contents of this text entry box
 
 					</textarea>
 				</section>
@@ -270,13 +304,13 @@
 					<textarea data-template>
 						## Page Element Scripting
 						
-						* HTML 4 let page elements register event handlers via attributes.
-						* Value of attribute is script that’s run when event occurs with element.
+						* HTML4 let page elements register **event handlers** via **attributes**
+						* Value of attribute is script that’s run when event occurs with element
 						* Simple calculator can be realised this way:
 						```
 							<input size="15" onchange="this.value = eval(this.value)">
 						```
-						* eval() computes expression’s value and result replaces it.
+						* eval() computes expression’s value and result replaces it
 					</textarea>
 				</section>				
 
@@ -284,13 +318,13 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						* Keyword this reidentifies page element in question.
-						* Event handler attributes for elements include
-						  - onchange form control loses focus after changing during focus
-						  - onclick pointing device is clicked over element
-						  - onkeypress key is pressed and released over element
-						  - onmouseoverpointing device is moved onto element
-						  - onselect user selects some text in text field
+						* Keyword this reidentifies page element in question
+						* **Event handler** attributes for elements include
+						  - **onchange** form control loses focus after changing during focus
+						  - **onclick** pointing device is clicked over element
+						  - **onkeypress** key is pressed and released over element
+						  - **onmouseoverpointing** device is moved onto element
+						  - **onselect** user selects some text in text field
 						* Hyper links can be activated by a mouse over event
 
 					</textarea>
@@ -325,15 +359,15 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Document Object Model 1  
-						* DOM 0 doesn’t allow all parts of loaded HTML to be addressed.
-						* DOM 1 introduced a systematic, comprehensive scheme
+						## Document Object Model **1**  
+						* **DOM 0** doesn’t allow all parts of loaded HTML to be addressed
+						* **DOM 1** introduced a systematic, **comprehensive** scheme
 						  - Core interface applicable to any document
 						  - HTML interface for accessing and manipulating parsed HTML
-						* Nodes in DOM 1 hierarchy include the following types
-						  - document whole HTML or XML document
-						  - element such as a table or tr
-						  - attribute attribute of element such as class or id
+						* Nodes in DOM 1 **hierarchy** include the following types
+						  - **document** whole HTML or XML document
+						  - **element** such as a table or tr
+						  - **attribute** attribute of element such as class or id
 						  - text or CDATA
 						  - entity escape sequence like &#x2645; for symbol for uranus
 						  - comment
@@ -418,7 +452,7 @@
 				</section>
 				
 			
-				
+				<!--
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 
@@ -436,24 +470,25 @@
 						```
 					</textarea>
 				</section>
+				-->
 				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 
-						## DOM 2+ Specifications 
+						## **DOM 2+** Specifications 
 
 						DOM 2 recommended in 2000 supports 6 specifications
 
-						* DOM 2 Core extends functionality of DOM 1 Core
-						* offers key ECMAScr ipt Bindings
+						* DOM 2 Core **extends functionality** of DOM 1 Core
+						  - offers key ECMAScript Bindings
 						* DOM 2 Views extension of DOM 2 Core obsoleted by HTML 5
-						* DOM 2 Events gener ic ev ent system for scripts
-						* methods to add event listeners and handlers
+						* DOM 2 Events generic event system for scripts
+						  - methods to add **event listeners and handlers**
 						* DOM 2 CSS interfaces for dynamic access/update of style sheets
-						* enables script control of any style property
+						  - enables script control of any style property
 						* DOM 2 HTML enhances script access/update of (X)HTML documents
-						* DOM 2 Traversal lets scripts traverse range of content in document
+						* DOM 2 **Traversal** lets scripts traverse range of content in document
 
 
 					</textarea>
@@ -464,14 +499,18 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 
-						## DOM 3
+						## **DOM 3**
 
 						DOM 3 recommended in 2004 supports 3 specifications
-						* DOM 3 Core extends functionality of DOM 2 Core - adds and extends methods relating to XML
-						* DOM 3 Load and Savelets scripts load and save XML documents - covers serializing DOM document into XML
-						* DOM 3 Validation guides scripts updating pages validly
+						* DOM 3 Core **extends** functionality of DOM 2 Core 
+						  - adds and extends methods relating to **XML**
+						* DOM 3 Load and Savelets scripts load and save XML documents 
+						  - covers **serializing DOM document into XML**
+						* DOM 3 **Validation** guides scripts updating pages validly
+						
 						Other useful DOM 3 related specifications include
-						* DOM 3 Events builds on functionality of DOM 2 Events - event flow, handler registration, contextual data
+						* DOM 3 Events builds on functionality of DOM 2 Events 
+						  - **event flow, handler registration, contextual data**
 						* DOM 3 XPath functions to access DOM via XPath expressions
 
 					</textarea>
@@ -484,10 +523,11 @@
 
 						## DOM 4
 
-						* DOM 4 was recommended in 2015
-						consolidates DOM level 3, Selectors API level 2, UIEvents etc.
-						offers mutation observers to replace mutation events
-						* DOM Living Standard adds WhatNG wish list for DOM.
+						* **DOM 4** was recommended in 2015
+						
+						* Consolidates DOM level 3, Selectors API level 2, UIEvents
+						* Offers mutation observers to replace mutation events
+						* DOM Living Standard adds WhatNG wish list for DOM
 					</textarea>
 				</section>
 				
@@ -499,11 +539,11 @@
 						## DOM API Examples
 
 						DOM 2 Core created JavaScript function and property API for nodes:
-						  - appendChild(el) add el as child of invoking element
-						  - createElement(tagname) create element of tagname
-						  - getAttr ibute(name) get value of attribute name of element
-						  - removeChild(el) remove child el of element
-						  - setAttr ibute(name, value) set name attribute of element to value
+						  - **appendChild(el)** add el as child of invoking element
+						  - **createElement(tagname)** create element of tagname
+						  - **getAttribute(name)** get value of attribute name of element
+						  - **removeChild(el)** remove child el of element
+						  - **setAttribute(name, value)** set name attribute of element to value
 						Node properties - childNodes, nodeType, nodeValue, parentNode
 
 					</textarea>
@@ -513,7 +553,9 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 
-						## For example to replace "Up" image in page with a new one
+						## Example
+						
+						Replace "Up" image in page with a new one
 
 
 						```
@@ -536,7 +578,9 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 
-						## innerHTML interface provides shortcut for making DOM changes
+						## Example
+						
+						InnerHTML interface provides shortcut for making DOM changes
 						
 						```
 						function makeSad() {
@@ -553,8 +597,8 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 
-						* It parses HTML to DOM subtree to replace a node’s children.
-						* DOM 2 also added event listeners to attach callbacks to events.
+						* Parse HTML to DOM subtree to replace node’s children
+						* DOM 2 also added event listeners to attach callbacks to events
 						* Hover sensitive warning can be set over an image
 						```
 							function setWarning() {
@@ -582,10 +626,10 @@
 						* CSS Selectors use patterns to match nodes in DOM tree structure.
 						* Selectors API level1from 2013 is current W3C recommendation.
 						* API enables use of CSS selectors to match DOM nodes
-						  - querySelector() first node matching CSS selector argument
-						  - querySelectorAll()all nodes matching CSS selector argument
-						* CSS selectors provide powerful way to specify bits of DOM to change.
-						* Alter native approach would be to use DOM 3 XPath expressions.
+						  - **querySelector()** first node matching CSS selector argument
+						  - **querySelectorAll()** all nodes matching CSS selector argument
+						* CSS selectors provide powerful way to specify bits of DOM to change
+						* Alter native approach would be to use DOM 3 XPath expressions
 
 					</textarea>
 				</section>
@@ -597,7 +641,7 @@
 						* DOM 2 CSS
 						  - adds style proper ty interface to get/set CSS 2 properties
 						  - renames CSS properties in JavaScript without use of "-"
-						* CSS property "font-size" in JavaScript becomes "fontSize"
+						* CSS property **"font-size"** in JavaScript becomes **"fontSize"**
 						* Emphasized text in page can be made larger and smaller with 
 						
 						```
@@ -617,7 +661,7 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 
-						* DOM 2 API can also be used to add style directives to page
+						* DOM 2 API can also be used to **add style** directives to page
 
 						```
 						function addStyle() {
@@ -630,7 +674,7 @@
 						}
 						```
 						
-						* DOM 2 function createTextNode() adds text to loaded page
+						* DOM 2 function **createTextNode()** adds text to loaded page
 						
 					</textarea>
 				</section>				
@@ -645,12 +689,12 @@
 
 						* JavaScript errors
 						  - cause all of that segment of code to be ignored
-						  - are notified to JavaScr ipt console if it is running
+						  - are notified to **JavaScript console** if it is running
 						* JavaScript console or debugging alerts can be found
-						  - Internet Explorer under Tools, Inter net Options, Advanced
+						  - Internet Explorer under Tools, Internet Options, Advanced
 						  - enable "Disable script debugging (Internet Explorer)"
 						  - Mozilla Firefox under Developer, Browser Console
-						  - Chrome under More tools, Developer tools
+						  - **Chrome** under More tools, Developer tools
 
 						
 					</textarea>
@@ -662,7 +706,9 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 
-						## Illegal JavaScript such as the script 
+						## Example
+						
+						Illegal Javaxcript such as the script below
 
 						```
 						<html>
@@ -679,7 +725,7 @@
 										
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					* produces error message alert in IE if that facility is enabled
+					* Produces error message alert in IE if that facility is enabled
 					```
 					  Line: 4
 					  Error: ’banana’ is undefined
@@ -691,11 +737,11 @@
 					at script.html:4
 					```
 					
-					* JavaScipt errors are very common in web pages.
+					* JavaScipt errors are very common in web pages
 
-					* It is good practice to check for errors when developing JavaScript.
+					* It is **good practice** to check for errors when developing JavaScript
 
-					* Loading JavaScript from separate script can also ease debugging.
+					* Loading JavaScript from separate script can also ease debugging
 					```
 						<script src="myscript.js"></script>
 					```

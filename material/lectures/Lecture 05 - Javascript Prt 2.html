@@ -706,7 +706,7 @@
 						## Collections
 						* An object is an undordered collection of **name/value pairs** 
 						* Names are strings 
-						* Values are any type, including other objects 
+						* Values are **any type**, including other objects 
 						* Good for representing records and trees
 						* Every object is a little database
 					</textarea>
@@ -717,11 +717,11 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Object Literals
-						* Object literals are wrapped in { }
-						* Names can be names or strings 
+						* Object literals are wrapped in **{ }**
+						* Names can be names or strings (.cat or ['cat'])
 						* Values can be expressions
-						* : seperates names and values 
-						* , seperates paris
+						* **:** seperates names and values 
+						* **,** seperates paris
 						* Object literals can be used anywhere a value can appear
 					</textarea>
 				</section>		
@@ -760,6 +760,10 @@
 						}
 						myobj = maker('abc', 'happy', 22);
 						```
+						
+						* Help make your code cleaner
+						* More reliable/readable
+						* Easier to debug/customize
 					</textarea>
 				</section>
 				
@@ -780,7 +784,7 @@
 						```
 						
 						* **JSON**  = Java Simple Object Notation 
-						* Simple organisation to pass data to client
+						* Simple organisation to **pass data to client**
 					</textarea>
 				</section>				
 				
@@ -807,6 +811,7 @@
 						
 						* New members can be added to an object by simple assignment
 						* No need to define a new class 
+						* On the fly/dynamically
 						
 						```
 						myobj.format.col = 'rgb';
@@ -827,14 +832,9 @@
 						Object.prototype
 						```
 						* All objects inherit some basic methods
-						* None of them are very useful
-						```
-						hasOwnProperty(name)
-						```
-						Is the name a true member of this object?
-						
-						* No copy method 
-						* No equals method
+						* Still limitations
+						  * No copy method 
+						  * No equals method
 						
 					</textarea>
 				</section>	
@@ -847,6 +847,8 @@
 						* All **three** expressions below have exactly the **same
 						result** 
 						* Creation of a new empty object:
+						
+						---
 						
 						1. new Object()
 						2. { }
@@ -977,8 +979,8 @@
 					<textarea data-template>
 						## Arrays v Objects
 						
-						* Use objects when names are arbitrary strings
-						* Use arrays when the names are sequential integers
+						* Use **objects** when **names are arbitrary** strings
+						* Use **arrays** when the names are **sequential** integers
 
 						
 					</textarea>
@@ -990,7 +992,7 @@
 					<textarea data-template>
 						## Functions
 						
-						* Functions can be passed, returned and stored just like any other value 
+						* **Functions** can be passed, returned and stored just like **any other value** 
 						
 						* Functions inherit from Object and can store name/value pairs
 
@@ -1053,7 +1055,8 @@
 					<textarea data-template>
 						## Inner functions 
 						
-						* Functions can be defined inside other functions 
+						* Functions can be **defined inside other functions**
+						  - functions in functions
 						
 						* An inner function has access to the variables and parameters of functions within the scope 
 						
@@ -1082,6 +1085,8 @@
 						}
 						```
 						
+						Functions **step()** is inside the function **fade()**
+						
 					</textarea>
 				</section>
 
@@ -1091,7 +1096,7 @@
 						## Methods 
 						* Since functions are values, functions can be stored in objects
 						
-						* A function in an object is called a method
+						* A **function in an object** is called a **method**
 						
 					</textarea>
 				</section>
@@ -1143,9 +1148,9 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## arguments 
+						## Arguments 
 						
-						* variable number of arguments 
+						* Variable number of arguments 
 						* Find the number of arguments passed :
 						```
 						arguments.length
@@ -1163,7 +1168,7 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## typeof 
-						* typeof prefix operator returns a string identifying the type of a value 
+						* **typeof** prefix operator returns a string identifying the type of a value 
 						
 						![](./images/typeof.jpg)
 					</textarea>
@@ -1177,14 +1182,16 @@
 						* Some languages have 
 						  - classes, methods, constructors and modules 
 						* Javascript's **functions** do all the work 
-						<!--
-						* Instead of **classical inheritance**, Javascript has **Prototypal Inheritance**
-						  - Offers greater expressive power 
-						 -->
+
 						
 					</textarea>
 				</section>
 
+						<!--
+						* Instead of **classical inheritance**, Javascript has **Prototypal Inheritance**
+						  - Offers greater expressive power 
+						 -->
+						 
 <!--
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -1203,7 +1210,7 @@
 						
 						* Container for all global variables and all built-in objects
 						
-						* On browser, `window' is the global object
+						* On browser, **window** is the global object
 					</textarea>
 				</section>
 		
@@ -1213,9 +1220,9 @@
 					<textarea data-template>
 						## Global variables are **bad**
 						
-						* Functions within an application can impact each other
+						* Functions within an application can **impact each other**
 						* Cooperating applications can injure/impact each other 
-						* Use of the global namespace should be minimal
+						* Use of the **global** namespace should be **minimal**
 					</textarea>
 				</section>
 
@@ -1226,8 +1233,8 @@
 					<textarea data-template>
 						## Global Implied
 						
-						* Any var which is not properly declared is assume dto be global by default 
-						* Makes it easy for people who do not know or care about encapsulation to be productive (but makes applications less reliable)
+						* Any var which is not properly declared is assumed to be **global by default**
+						* Makes it easy for people who do not know or care about encapsulation to be productive (but makes applications **less reliable**)
 						
 						* JSLint is a tool which helps identify implied globals and other weaknesses 
 						
@@ -1241,9 +1248,9 @@
 					<textarea data-template>
 						## Encapsulate
 						
-						* Function scope can create an encapsulation 
+						* Function **scope** can create an **encapsulation** 
 						
-						* Use an anonymouse function to wrap your application
+						* Use an anonymouse **function** to **wrap** your application
 						
 					</textarea>
 				</section>
@@ -1253,7 +1260,7 @@
 					<textarea data-template>
 						## Coding Conventions and Javascript
 						
-						* Javascript coding conventions are critically important 
+						Javascript coding conventions are **critically important**
 						
 
 						
@@ -1265,12 +1272,12 @@
 					<textarea data-template>
 						## Semicolons 
 						
-						* When the compiler sees an error, it attempts to replace a nearby linefeedb with a semicolon and try again 
+						* When the compiler sees an **error**, it attempts to replace a nearby linefeed with a semicolon and **try again** 
 						
-						* This should alarm your
+						* This should alarm you (**don't ignore**)
 						* It can mask errors 
 						
-						* Always use the full, correct forms,  including semicolons
+						* Always use the full, correct forms, including semicolons
 
 						
 					</textarea>
@@ -1283,13 +1290,13 @@
 						
 						* Avoid tricky expressions uing the comma operators 
 						
-						* Do not use extra commas in array literals 
+						* **Do not** use extra commas in array literals 
 						
-						Good:
+						**Good**:
 						```
 						[1,2,3]
 						```
-						Bad:
+						**Bad**:
 						```
 						[1,2,3,]
 						```
@@ -1323,7 +1330,7 @@
 					<textarea data-template>
 						## Forbidden Blocks
 						
-						* Blocks do not have scope in Javascript 
+						* Blocks **do not** have **scope** in Javascript 
 						
 						* Blocks should only be used with structured statements 
 						
@@ -1346,17 +1353,21 @@
 					
 					</textarea>
 				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## To do this week ...
 
-				<section style="text-align: left;">
-					<h2>To do this week ...</h2>
-					<p>
-						&bull; Read over the lectures <br>
-						&bull; Review the revision questions <br>
-						&bull; Work through tutorial practicals <br>
-						&bull; Experiment (get into good habits) <br>
-					</p>
+						* Read over the lectures 
+						* Review the revision questions 
+						* Work through tutorial practicals 
+						* **Experiment** (get into good habits)
+						* Store your work/tests on **GitHub**
+					
+					</textarea>
 				</section>
 				
+			
 
 			</div>
 

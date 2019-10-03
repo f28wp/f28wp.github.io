@@ -70,7 +70,7 @@
 
 			
 				<section>
-					<section data-markdown data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
 						<textarea data-template>
 						## Revision Question
 						What's the output?
@@ -90,7 +90,7 @@
 						</textarea>
 					</section>
 					
-					<section data-markdown data-transition="slide" data-background="#b5533c" data-background-transition="zoom">
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
 						<textarea data-template>
 						## Answer
 						
@@ -99,7 +99,7 @@
 						---
 						
 						* JavaScript is a dynamically typed language
-						* Implicit type coercion
+						* Implicit type **coercion**
 						* JavaScript converts the number 1 into a string
 						* So what's happens is "1" + "2" which returns "12".
 
@@ -108,7 +108,7 @@
 				</section>
 				
 				<section>
-					<section data-markdown data-transition="slide" data-background="#11533c" data-background-transition="zoom">
+					<section data-markdown data-transition="slide" data-background="#91533c" data-background-transition="zoom">
 						<textarea data-template>
 						## Revision Question
 						What will the following Javascript code output?
@@ -123,7 +123,7 @@
 						</textarea>
 					</section>
 					
-					<section data-markdown data-transition="slide" data-background="#11533c" data-background-transition="zoom">
+					<section data-markdown data-transition="slide" data-background="#91533c" data-background-transition="zoom">
 						<textarea data-template>
 						## Answer
 						
@@ -213,10 +213,10 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Values
+						## JavaScript Value Types
 
-						* undefined
-						* null
+						* Undefined
+						* Null
 						* Booleans
 						* Number
 						* Strings
@@ -228,7 +228,7 @@
 					<textarea data-template>
 						## Numbers
 
-						* Only one number type
+						* Only **one number type**
 						  - No integers
 						* 64-bit floating point 
 						  - IEEE-754 (aka "Double")
@@ -239,6 +239,46 @@
 						```
 					</textarea>
 				</section>
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#11533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What does the following Javascript output?
+						
+						```
+						var myvalue;
+						alert( myvalue );
+						```
+						
+						* a. Infinity
+						* b. NaN
+						* c. Error 
+						* d. Undefined
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#11533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: **d. Undefined**
+						
+						---
+						
+						**undefined** value possessed by unassigned variables
+						
+						</textarea>
+					</section>
+				</section>
+				
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/qmphtrxj/2/embedded/js,result/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+				
+				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -368,7 +408,7 @@
 							
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Falsy and Truthy
+						## **Falsy** and **Truthy**
 						
 						* False, null, undefined 
 						* "" (empty string), 0, 
@@ -377,7 +417,8 @@
 						---
 						
 						* All other values (including all objects) are truthy
-						* "0", "false"
+						* "0", "false" 
+						  - Valid **strings** are truthy
 					</textarea>
 				</section>	
 				
@@ -396,7 +437,7 @@
 					<textarea data-template>
 						## Dynamic Objects
 						
-						* **new Object()** produces an empty container of name/value pairs
+						* **new Object()** produces an **empty container** of name/value pairs
 						* name can be any string, or any value (except undefined)
 						* members **accessed with dot notation or subscript**
 						
@@ -407,13 +448,13 @@
 					<textarea data-template>
 						## Example
 						
-						Example also creates a new JavaScript object with four properties:
+						Create a new JavaScript object with four properties:
 						```
 						var person = new Object();
 						person.firstName = "John";
 						person.age = 50;
 						```
-						
+						Same as:
 						```
 						var person = {firstName:"John", age:50};
 						```
@@ -461,28 +502,61 @@
 					<textarea data-template>
 						## Reserved Words
 						
-						* List of reserved words in Javascript: 
+						Full list of **reserved words** in Javascript: 
 						
 						abstract boolean break byte case catch char class const continue debugger default delete do double else enum export extends false final finally float for function goto if implements import in instanceof int interface long native new null package private protected public return short static super switch synchronized this throw throws transient true try typeof var volatile void while with
 						
 					</textarea>
 				</section>	
 				
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#77573c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						Is **synchronized** a reserved word in Javascript?
+						
+						
+						
+						* a. Yes
+						* b. No
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#77573c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: **a. Yes**
+						
+						</textarea>
+					</section>
+				</section>
+				
+				
+				
 												
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## == !=
 						
-						* Equal and not equal 
+						* **Equal** and **not equal**
 						* These operators can do *type coercion*
 						
 						---
 						
 						* Better to use === and !===
-						  - Avoid type coercion
+						  - Avoid type **coercion**
 						
 					</textarea>
 				</section>	
+				
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/8zcu5hkL/1/embedded/js,result/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+				
 
 												
 				<section data-markdown style="text-align: left;">
@@ -500,26 +574,13 @@
 								nonOfTheAbove();
 						}
 						```
+						
+						* Compact form of decision logic
+						  - Compared to lots of if/else sections
+						* Express does strings and numbers 
 					</textarea>
 				</section>	
 
-																		
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Throw statement
-						
-						```
-						throw new Error(reason);
-						
-						throw {
-							name: exceptionName;
-							message: reason
-						};
-						```
-					</textarea>
-				</section>
-						
-																						
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Try statement
@@ -538,15 +599,37 @@
 							}
 						}
 						```
+						
+						Make your code more robust (catch errors)
 					</textarea>
 				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Throw statement
+						
+						```
+						throw new Error(reason);
+						
+						throw {
+							name: exceptionName;
+							message: reason
+						};
+						```
+						
+						Trigger exception if you are using try/catch
+					</textarea>
+				</section>
+						
+																						
+
 				
 		
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Try statement
 						
-						Javascript implementation can produce these exception names:
+						Javascript implementation can produce these **exception names**:
 						
 						* `Error'
 						* `EvalError`
@@ -582,7 +665,13 @@
 						* **Only functions have scope**
 						* Vars defined in a function are not visible outside of the function 
 					</textarea>
-				</section>	
+				</section>
+
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/ho1c6ymk/2/embedded/js,result/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+				
 				
 														
 				<section data-markdown style="text-align: left;">

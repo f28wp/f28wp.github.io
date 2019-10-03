@@ -1029,18 +1029,55 @@
 					</textarea>
 				</section>
 				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#91533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What does the following Javascript do?
+						
+						```
+						function() { alert('yo'); } ()
+						```
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#91533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: **Nothing**
+						
+						Only creates/declares the function 
+						
+						For a no name self invocation, you'd use:
+						
+						```
+						( function() { alert('yo'); } () );
+						```
+
+						</textarea>
+					</section>
+				</section>
+				
+				
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/k308su67/2/embedded/js,result/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+				
 
 					
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Function statement 
 						
-						Function statement is just a short-hand for the var statement with a function value 
+						**Function statement** is just a **short-hand** for the var statement with a function value 
 						
 						```
 						function foo(){ }
 						```
-						expands to
+						**expands** to
 						```
 						var foo = function foo() { };
 						```
@@ -1058,7 +1095,7 @@
 						* Functions can be **defined inside other functions**
 						  - functions in functions
 						
-						* An inner function has access to the variables and parameters of functions within the scope 
+						* An **inner function** has access to the variables and parameters of functions within the **scope**
 						
 						  - known as static scoping or lexical scoping
 						
@@ -1173,6 +1210,45 @@
 						![](./images/typeof.jpg)
 					</textarea>
 				</section>
+				
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What's the output?
+						
+						```
+							var ab = "2";
+							alert( ab );
+						```
+						* A: Number
+						* B: TypeError
+						* C: Undefined
+						* D: String 
+						* E: "2"
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* Answer **D: String**
+						
+						</textarea>
+					</section>
+				</section>
+				
+				
+				
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/8zgt57pv/1/embedded/js,result/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+			
+			
 				
 
 				<section data-markdown style="text-align: left;">

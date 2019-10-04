@@ -1103,8 +1103,8 @@
 					<textarea data-template>
 						## Inner functions 
 						
-						* Functions can be **defined inside other functions**
-						  - functions in functions
+						* Functions can be defined **inside** other functions (nested)
+						  - **functions in functions**
 						
 						* An **inner function** has access to the variables and parameters of functions within the **scope**
 						
@@ -1141,7 +1141,7 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Methods 
+						## Methods or Functions
 						* Since functions are values, functions can be stored in objects
 						
 						* A **function in an object** is called a **method**
@@ -1155,7 +1155,7 @@
 					<textarea data-template>
 						## Invocation 
 						
-						* A function called with too many arguments - extra arguments are **ignored**
+						* A function called with **too many** arguments - extra arguments are **ignored**
 						
 						* A function called with too few arguments - the missing values will be **undefined**
 						
@@ -1169,22 +1169,26 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## 4 Ways to Call a Function 
+						## 4 Ways to **Call** a Function 
 						
 						1. Function form 
+
 						```
 						functionObject( args )
 						```
 						2. Method form 
+						
 						```
 						thisObject.methodName( args );
 						thisObject['methodName'](args);
 						```
 						3. Constructor form
+						
 						```
 						new functionObject( args );
 						```
 						4. Apply form 
+
 						```
 						functionObject.apply(thisObject, [args])
 						```
@@ -1198,7 +1202,7 @@
 					<textarea data-template>
 						## Arguments 
 						
-						* Variable number of arguments 
+						* **Variable** number of **arguments**
 						* Find the number of arguments passed :
 						```
 						arguments.length
@@ -1210,6 +1214,12 @@
 						
 					</textarea>
 				</section>
+				
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/Lvt9hygr/2/embedded/js,result/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+				
 
 
 
@@ -1339,6 +1349,14 @@
 						
 						* Use an anonymouse **function** to **wrap** your application
 						
+						Example 
+						```
+						(function() {
+							... 
+							code
+							...
+						})();
+						```
 					</textarea>
 				</section>
 				
@@ -1434,9 +1452,9 @@
 
 						* Understanding of Javascript
 						* **Language and Syntax**
-						* Features
-						* Standards
-						* Styles
+						* Features and Standards
+						* Styles and Good Practices
+						* Functions and Properties
 					
 					</textarea>
 				</section>
@@ -1445,7 +1463,7 @@
 					<textarea data-template>
 						## To do this week ...
 
-						* Read over the lectures 
+						* **Read over the lectures**
 						* Review the revision questions 
 						* Work through tutorial practicals 
 						* **Experiment** (get into good habits)

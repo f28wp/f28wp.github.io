@@ -126,14 +126,18 @@
 						
 						```
 						<?php
-					    if (function_exists('sqlite_open')) {
-					      echo 'Sqlite PHP extension loaded';
-					    }
-					    else {
-						  echo 'sqlite not loaded';
-					    }
+						if (extension_loaded('sqlite3')) 
+						{
+							echo("**extension sqlite3 available**");
+						}
+						else 
+						{
+							echo 'sqlite3 not loaded';
+						}
 						?>
 						```
+						
+						You can see the names of various extensions by using ```phpinfo()```
 					</textarea>
 				</section>
 				
@@ -166,33 +170,6 @@
 					</textarea>
 				</section>
 				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Example 
-						
-						```
-						<?php
-						$ver = SQLite3::version();
-
-						echo $ver['versionString'] . "\n";
-						echo $ver['versionNumber'] . "\n";
-
-						var_dump($ver);
-						?>
-						```
-						
-						Output
-						```
-						3.20.1
-						3020001
-						array(2) {
-							["versionString"]=>
-							string(6) "3.20.1"
-							["versionNumber"]=>
-							int(3020001) }
-						```
-					</textarea>
-				</section>
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -218,6 +195,35 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
+						## Database Type
+
+						In memory database 
+						```
+						$db = new SQLite3(':memory:');
+						```
+						
+						Temporary database (no file name)
+						```
+						$db = new SQLite3('');
+						```
+   
+						Standard file database 
+						```
+						$db = new SQLite3('mydb/mydb.db');
+						```
+   
+						Shared cache database 
+						```
+						define( 'SQLITE3_OPEN_SHAREDCACHE' , 0x00020000 );
+						$db = new SQLite3( 'sqlite.db3' , 
+						SQLITE3_OPEN_READWRITE  | SQLITE3_OPEN_CREATE |     SQLITE3_OPEN_SHAREDCACHE );
+						```
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
 						## Database Queries
 
 						Supports standard database queries
@@ -229,6 +235,32 @@
 						Futher Reading [Link](http://zetcode.com/php/sqlite3/)
 					</textarea>
 				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example Database Queries
+
+						* Create table if one doesn't exist
+						* Insert id/name into the table 
+						* Select and display the id/names from the table
+						
+						```
+						$db->exec("CREATE TABLE IF NOT EXISTS friends(id INTEGER PRIMARY KEY, name TEXT)");
+
+						$db->exec("INSERT INTO friends(name) VALUES ('Tom')");
+						$db->exec("INSERT INTO friends(name) VALUES ('Rebecca')");
+						$db->exec("INSERT INTO friends(name) VALUES ('Jim')");
+
+						$res = $db->query('SELECT * FROM friends');
+
+						while ($row = $res->fetchArray()) {
+							echo "{$row[0]} {$row[1]}\n";
+						}
+						```
+						
+					</textarea>
+				</section>
+				
 				
 				<!--
 				<section>

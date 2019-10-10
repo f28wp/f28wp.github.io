@@ -53,14 +53,54 @@
 					</p>
 				</section>
 
-				<section>
-					<h2>Overview</h2>
-					<ul>
-						<li>What is Node.js?</li>
-						<li>What is so good/bad about Node.js</li>
-						<li>How do we get started with Node.js</li>
-					</ul>
+				<section data-markdown>
+					<textarea data-template>
+						## Overview
+						
+						* **What** is Node.js?
+						* What is so good/bad about Node.js
+						* How do we get **started** with Node.js
+						* Libraries and examples
+						* Questions and discussion
+					</textarea>
 				</section>
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						Fix the bug
+
+						```
+						function getMessageText() {
+						  return $('message').text;
+						}
+
+						document.body.innerHTML = '<div id="message">The message</div>';
+						console.log(getMessageText());
+						```
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						```
+						function getMessageText() {
+						  return $('#message').text();
+						}
+
+						document.body.innerHTML = '<div id="message">The message</div>';
+						console.log(getMessageText());
+						```
+
+						</textarea>
+					</section>
+				</section>
+				
+				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>

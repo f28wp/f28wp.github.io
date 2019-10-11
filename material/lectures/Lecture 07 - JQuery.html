@@ -102,7 +102,7 @@
 						* DOM manipulation based on CSS selectors that uses node element names and node element attributes (id and class)
 						* Events
 						* **Effects and animations**
-						* Ajax
+						* jQuery provides several methods for AJAX functionality
 						* Extensibility (through plugins)
 						* Cross browser support
 						
@@ -225,7 +225,7 @@
 						
 						1. Code doesn't work (90% of time might throw an error) <br>
 						
-						2. Code works .. the page loads, next page load, then fail (**unreliable**)
+						2. Code works .. the page loads, next page loads, then fails (**unreliable**)
 					</div>
 				</section>			
 				
@@ -234,6 +234,8 @@
 					<textarea data-template>
 						
 						## jQuery Concepts
+						
+						MAGIC **$()** FUNCTION
 
 					</textarea>
 				</section>	
@@ -322,9 +324,10 @@
 						
 						## Loading jQuery 
 						
-						* To use jQuery you need to load it 
+						* To use jQuery you need to load jQuery **library**
 						  - [(jQuery Homepage)](https://jquery.com/download/)
 						* You can include it locally on your own server 
+						
 						```
 						<script src="/js/jquery.js">
 						```
@@ -358,6 +361,8 @@
 						* When scsripts are downloading they block everything else in most browsers 
 						
 						* Good practice to load your scripts at the bottom of your page so they don't interupt the page content downloads
+						
+						* **Order** scripts are loaded and used matters
 					</textarea>
 				</section>	
 				
@@ -367,7 +372,7 @@
 						
 						## jQuery **Syntax** 
 						
-						* jQuery syntax is **tailer** made for **selecting** HTML elements and performing actions on the element(s)
+						* jQuery syntax is tailer **made** for **selecting** HTML elements and performing actions on the element(s)
 						* **Friendly** easy to use syntax 
 						* Basic syntax is 
 						```

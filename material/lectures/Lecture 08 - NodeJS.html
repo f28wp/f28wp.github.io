@@ -101,6 +101,87 @@
 				</section>
 				
 				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#80533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What's the output for the following?
+
+						```
+						function abc(){
+						  return 1;
+						}
+						function abc(){
+						  return 2;
+						}
+						alert( abc() );
+						```
+						
+						* A. 1
+						* B. 2
+						* C. Error redefinition of function 
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#80533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* Answer: **B. 2**
+
+						</textarea>
+					</section>
+				</section>
+				
+				
+								
+				<section>
+					<section data-markdown data-transition="slide" data-background="#10533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What's the output for the following?
+
+						```
+						function foo(a, b, a)
+						{
+							b = a + b;
+							return b;
+						}
+						alert( foo(1,2,3) );
+						```
+						
+						* A. 1
+						* B. 6
+						* C. 3
+						* D. 5
+						* E. Error undefined
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#10533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* Answer: **D. 5**
+						
+						---
+						
+						Note you can enable `strict mode' to catch this issue.
+						
+						**"use strict";** at the top of the script.
+						
+						* Uncaught SyntaxError: Duplicate parameter name not allowed in this context
+
+						[Link for Details](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
+						</textarea>
+					</section>
+				</section>
+				
+				
+				
+				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>

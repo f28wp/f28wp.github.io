@@ -71,7 +71,7 @@
 
 						* Node.js can be used in **database** applications
 						* Node supports the majority of popular databases
-						  - MongoDB, MySQL, NoSQL, ..
+						  - MongoDB, **MySQL**, NoSQL, ..
 					</textarea>
 				</section>
 				
@@ -81,7 +81,7 @@
 						## MySQL with NodeJS
 
 						* One of the most popular databases is **MySQL**
-						* Install "mysql" module
+						* Install **"mysql"** module
 						
 						Node.js can use this module to manipulate the MySQL database
 						
@@ -90,6 +90,20 @@
 						```
 					</textarea>
 				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## MySQL with NodeJS
+
+						* 1. Connection 
+						* 2. Query Database (Check Status)
+						* 3. Create Database (In Code)
+						* 4. Update Database
+						  - Create Table 
+						  - Access Database Data
+					</textarea>
+				</section>
+				
 
 
 				<section data-markdown style="text-align: left;">
@@ -221,6 +235,7 @@
 				</section>	
 				
 				
+				<!--
 				<section>
 				<iframe data-src="http://www.sqlfiddle.com"  width="110%" height="570px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 				
@@ -232,6 +247,46 @@
 
 						</div>
 				</section>	
+				-->
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## SQLFiddle - Online SQL Sandbox
+
+						
+						* Easily test out your database commands
+						* Examples and snippets
+						* [www.sqlfiddle.com](http://www.sqlfiddle.com)
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Where to start?
+
+						
+						* CodeSandbox
+						  - Setup Basic NodeJS Server/Client
+						* Setup MySQL Database on FreeSQLDatabase
+						  - [www.freesqldatabase.com](www.freesqldatabase.com)
+						* Example snippet 
+						
+						```
+						const mysql = require("mysql");
+						
+						var connection = mysql.createPool({
+						  connectionLimit: 50,
+						  host: "sql12.freesqldatabase.com",
+						  user: "sql12304235",
+						  password: "1Hj5jAY7Bv",
+						  database: "sql12304235"
+						});
+						```
+						
+					</textarea>
+				</section>
+				
 				
 				
 				
@@ -242,7 +297,8 @@
 						## Summary
 
 						* Understand Node.js and how to work with a **Database**
-						* Create, insert and access data using Node.js and DB
+						* **Manage** a Database (using Node.js)
+						* Create, insert and access data using Node.js and **MySQL**
 						* **Syntax** and libraries
 						
 					</textarea>

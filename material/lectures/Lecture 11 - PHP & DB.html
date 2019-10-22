@@ -58,8 +58,8 @@
 					<textarea data-template>
 						## Overview
 
-						* How to use PHP with a DB?
-						* Embedded SQL Database (SQLite)
+						* **How** to use **PHP** with a **Database**?
+						* Embedded SQL Database (**SQLite**)
 						* Examples
 						* Questions and Discussion
 						
@@ -96,7 +96,7 @@
 						## Why SQLite?
 						
 						* Zero configuration
-						* Portable
+						* **Portable**
 						* Public domain
 						  - Adobe, Apple, Google, McAfee, Firefox, Skype
 					</textarea>
@@ -206,7 +206,7 @@
 						
 						Output:
 						```
-						$ php version2.php
+						$ php version.php
 						3.20.1
 						```
 					</textarea>
@@ -315,8 +315,7 @@
 					
 					```
 					echo 'Creating SQLite DB<br>';
-					// In memory database 
-					$db = new SQLite3(':memory:');
+					$db = new SQLite3(':memory:'); // In memory database 
 
 					$version = $db->querySingle('SELECT SQLITE_VERSION()');
 					echo $version . "<br>";
@@ -329,7 +328,6 @@
 					$db->exec("INSERT INTO friends(name) VALUES ('Jim')");
 
 					$res = $db->query('SELECT * FROM friends');
-
 
 					while ($row = $res->fetchArray()) {
 						echo "Reading:" . "{$row[0]} {$row[1]} <br>";

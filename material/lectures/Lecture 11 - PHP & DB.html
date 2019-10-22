@@ -144,6 +144,48 @@
 				</section>
 				
 				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20538c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						
+						What would be in each line of the following PHP?
+						
+						```
+						$foo = "0";                  // $foo is ??
+						$foo += 2;                   // $foo is ??
+						$foo = $foo + 1.3;           // $foo is ??
+						$foo = 5 + "10 little bits"; // $foo is ??
+						$foo = 5 + "20 little bits"; // $foo is ??
+						```
+				
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20538c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						```
+						<?php
+						$foo = "0";                  // $foo is a string("0")
+						$foo += 2;                   // $foo is an integer(2)
+						$foo = $foo + 1.3;           // $foo is now a float(3.3)
+						$foo = 5 + "10 little bits"; // $foo is integer(15)
+						$foo = 5 + "20 little bits"; // $foo is integer(25)
+						?>
+						```
+						
+						Try out on [PHP Sandbox](https://phpsandbox.html5css.ru/)
+
+						</textarea>
+					</section>
+				</section>
+				
+				
+				
+				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>

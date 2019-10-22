@@ -57,14 +57,55 @@
 					<textarea data-template>
 						## Overview
 
-						* What is PHP?
+						* **What** is PHP?
 						* PHP vs Node.js
-						* Examples of using PHP
+						* **Syntax** and Formatting 
+						* **Examples**
 						* Questions and Discussion
 						
 					</textarea>
 				</section>
 		
+		
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						Fix the bug
+
+						```
+						function getMessageText() {
+						  return $('message').text();
+						}
+
+						document.body.innerHTML = '<div id="mesage">The message</div>';
+						console.log(getMessageText());
+						```
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* id name 'mesage' - 'message'
+						* id identify # missing 
+						
+						```
+						function getMessageText() {
+						  return $('#message').text();
+						}
+
+						document.body.innerHTML = '<div id="message">The message</div>';
+						console.log(getMessageText());
+						```
+
+						</textarea>
+					</section>
+				</section>
+				
+				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -74,7 +115,7 @@
 						* Powerful tool for making **dynamic** and **interactive** web pages
 						* PHP free and widely used 
 						* PHP is acronym for **PHP: Hypertext Preprocessor**
-						* PHP runs on the server
+						* PHP runs on the **server**
 						
 					</textarea>
 				</section>
@@ -86,12 +127,39 @@
 						
 						* Is PHP old?  Outdated?
 						* Is PHP still able to do its job?
-						* Who uses PHP?
-						* When would you use PHP vs Node.js?
+						* **Who** uses PHP?
+						* When would you use **PHP vs Node.js?**
+
+					</textarea>
+				</section>
+				
+								
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## PHP Dead/Outdated?
 						
+						* Around for a long time (mature API/language) 
+						* Large number of projects are written in PHP 
+						* **Free and open source** (community of developers)
+						* **Optimized** for building web development
+						* Easy to deploy and learn 
+	
+						* **Right tool for the right job**
+						  - Data processing/performance
+						  - e.g., Node.js is comparatively new
 						
 					</textarea>
 				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## Who uses PHP?
+						
+						<img src="./images/whophp.jpg" width="80%" style="border:0;">
+						
+					</textarea>
+				</section>
+
 				
 				
 				<section data-markdown style="text-align: left;">
@@ -112,6 +180,18 @@
 						```
 					</textarea>
 				</section>
+				
+				<section style="text-align: center;">
+
+						<h2> Important </h2>
+						
+						<p style="color:red; font-size:250pt;">
+						&lt;? ?&gt;
+						</p>
+						
+				</section>
+				
+				
 
 				<section>
 				<iframe data-src="https://phpsandbox.html5css.ru"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
@@ -127,9 +207,9 @@
 								
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## PHP Variables
+						## PHP **Variables**
 						
-						* Variable identifiest start with $ sign 
+						* Variable identifiest **start** with **$ sign** 
 						* Variable names must start with a letter 
 						  - cannot start with a number 
 						  - only contain alpha-numeric characters and underscores
@@ -160,6 +240,11 @@
 					?> 
 					</body> </html>
 					```
+					
+					* Comment types 
+					* Variable declaration 
+					* Simple calculation (+)
+					* Output (echo)
 				</textarea>
 				</section>
 				
@@ -179,12 +264,36 @@
 				</textarea>
 				</section>
 				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What will happen if you **don't** enable `debugging' in PHP?
+						
+						(For example, what will output if an error occurs?)
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: No output 
+						
+						(**Difficult** to debug)
+
+						</textarea>
+					</section>
+				</section>
+				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					## PHP Loosely Typed Language 
 					
-					* Don't need to tell PHP the data type for variables
+					* Don't need to tell PHP the **data type** for variables
+					  - i.e., similar to Javascript
 					* PHP **automatically** converts variables to the data type
 					  - i.e., compared to Java, C, C++
 				</textarea>
@@ -195,7 +304,7 @@
 					<textarea data-template>
 					## Scope
 					
-					PHP has three different variable scopes 
+					PHP has **three** different variable scopes 
 					* local 
 					* global 
 					* static 
@@ -220,8 +329,27 @@
 					  echo $x;
 					?>
 					```
+					
+					* Test out on [CodePad](http://codepad.org/)
 				</textarea>
 				</section>
+				
+				
+				<section>
+				<h2>Example</h2>
+
+				<iframe data-src="http://codepad.org/k2MHkM4G"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				
+				<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+							<h2 style="color:white">
+								Example</h2>
+							<p>Global Variables in PHP</p>
+							
+				</div>
+						
+				</section>
+				
+				
 				
 				
 				<section data-markdown style="text-align: left;">
@@ -243,8 +371,27 @@
 					  fun();
 					?>
 					```
+					
+					* Test out on [CodePad](http://codepad.org/)
 				</textarea>
 				</section>
+				
+				
+				<section>
+				<h2>Example</h2>
+
+				<iframe data-src="http://codepad.org/uxHEooTB"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				
+				<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+							<h2 style="color:white">
+								Example</h2>
+							<p>Static Variables in PHP</p>
+							
+				</div>
+						
+				</section>
+				
+				
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -298,14 +445,14 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## PHP Object
+					## PHP **Object**
 					
 					* Object is a data type which stores data and information
 					* PHP an object must be declared **explicitly**
 					
 					```
 					<?php
-					  class car {
+					class car {
 					    function car() {
 						  $this->model = "Ford";
 						}
@@ -327,7 +474,7 @@
 					## NULL
 
 					* Special data type
-					* Variable of type NULL has no value assigned to it
+					* Variable of type NULL has **no value** assigned to it
 					* **Note** If a variable is created without a value, it's automatically assigned a value of NULL
 					
 					```
@@ -351,7 +498,8 @@
 					* str_word_count() counds the number of words
 					* strpos returns the position of the first match of a word
 					* str_replace() replaces text with a string
-					* **.** concatenate strings $t1 . $t2
+					* **"."** concatenate strings $t1 . $t2
+					  - (i.e., not a + sign)
 					
 					```
 					<?php 
@@ -370,7 +518,7 @@
 
 					* Identifier that cannot be changed during the script 
 					* Constant names start with an identifier
-					  - no $ sign before the constant name 
+					  - **no $ sign** before the **constant** name 
 					* **Note** Unlike variables, constants are automatically **global** 
 				
 					```
@@ -388,7 +536,7 @@
 			
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## PHP Operators
+					## PHP **Operators**
 					
 					* Arithmetic operators
 					* Assignment operators 
@@ -646,9 +794,10 @@
 					<textarea data-template>
 						## Summary
 
-						* Understand PHP Concepts
+						* Understand **PHP** concepts
 						* Syntax and structure
-						* Server side language
+						* **Server** side language
+						* Examples 
 						
 					</textarea>
 				</section>

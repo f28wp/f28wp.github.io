@@ -431,8 +431,7 @@
 						<script type="text/javascript"> 
 							var xmlHttp = new XMLHttpRequest();
 							xmlHttp.open("GET", "hello.txt", true);
-							xmlHttp.addEventListener("load",
-							    ajaxCallback, false); 
+							xmlHttp.addEventListener("load", ajaxCallback, false); 
 							xmlHttp.send(null); 
 							function ajaxCallback(event){ 
 							  alert( "Your file contains the text: " + event.target.responseText );
@@ -442,6 +441,7 @@
 						<body></body></html>
 						```
 						
+						Note hello.txt could be a .php file that produces dynamic content/information
 					</textarea>
 				</section>	
 
@@ -491,7 +491,17 @@
 						## JSON Server-Side (PHP)
 						
 						```
-						<?php $emailaddresses = getDataFromDataSource(
+						<?php 
+						function getDataFromDataSource($query) { 
+							mysql_connect("127.0.0.1", "root", "root");
+							mysql_select_db("criademo");
+							$result = mysql_query($query); 
+							return $result; 
+						} 
+						```
+
+						```
+						$emailaddresses = getDataFromDataSource(
 						"SELECT COUNT(*) AS emailaddressCount from adresboek
 						where emailaddress = '" . $_REQUEST["emailaddress"] ."'");
 
@@ -499,14 +509,12 @@
 						while( $row = mysql_fetch_array($emailaddresses)) {
 							array_push($emailaddressesForJSON, $row); 
 						} 
+						```
+						
+						```
 						$jsonText = json_encode( $emailaddressesForJSON ); 
 						echo $jsonText; 
-						
-						function getDataFromDataSource($query) { 
-							mysql_connect("127.0.0.1", "root", "root") or 
-							   die("Connection Failure to Database"); 
-							mysql_select_db("criademo") or die ("Database criademo not found."); 
-							$result = mysql_query($query); return $result; } ?>
+						?>
 						```
 					</textarea>
 				</section>

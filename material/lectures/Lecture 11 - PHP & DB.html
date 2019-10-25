@@ -444,19 +444,21 @@
 					```
 					echo 'Creating SQLite DB<br>';
 					$db = new SQLite3(':memory:'); // In memory database 
-
+					```
+					
+					```
 					$version = $db->querySingle('SELECT SQLITE_VERSION()');
 					echo $version . "<br>";
 
-					$v = $db->exec("CREATE TABLE IF NOT EXISTS friends(id INTEGER PRIMARY KEY, name TEXT)");
+					$v = $db->exec("CREATE TABLE IF NOT EXISTS tbl(id INTEGER, name TEXT)");
 					echo "v: " . $v . "<br>";
 
-					$db->exec("INSERT INTO friends(name) VALUES ('Tom')");
-					$db->exec("INSERT INTO friends(name) VALUES ('Rebecca')");
-					$db->exec("INSERT INTO friends(name) VALUES ('Jim')");
-
-					$res = $db->query('SELECT * FROM friends');
-
+					$db->exec("INSERT INTO tbl(name) VALUES ('Tom')");
+					$db->exec("INSERT INTO tbl(name) VALUES ('Rebecca')");
+					```
+					
+					```
+					$res = $db->query('SELECT * FROM tbl');
 					while ($row = $res->fetchArray()) {
 						echo "Reading:" . "{$row[0]} {$row[1]} <br>";
 					}
@@ -465,6 +467,27 @@
 					[Test in PHP Sandbox](https://phpsandbox.html5css.ru/)
 					</textarea>
 				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Command Prompt
+
+						```
+						:\>sqlite3
+						SQLite version 3.30.0 
+						Enter ".help" for usage hints
+						sqlite>CREATE table tb1 (one varchar(10), two smallint);
+						sqlite>INSERT into tb1 values('hello', 10);
+						sqlite>INSERT into tb1 values('goodbye', 40);
+						sqlite>SELECT * from tb1;
+						hello|10
+						goodbye|40
+						sqlite>
+						```
+						
+					</textarea>
+				</section>
+				
 				
 				
 			

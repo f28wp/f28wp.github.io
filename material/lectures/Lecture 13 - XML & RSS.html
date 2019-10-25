@@ -140,6 +140,8 @@
 					<language> en-us </language>
 					…
 					```
+					
+					* Examine an RSS feed and identify XML tags
 					</textarea>
 				</section>
 				
@@ -163,29 +165,39 @@
 					<textarea data-template>
 					## Things you can do with RSS
 					
-					News syndication 
-					Search for information via RSS 
-					Aggregate your feeds 
-					Display news on your website 
-					Display news on your mobile device 
-					Collect all your email in RSS 
-					Get RSS content through your email 
-					Track Fedex packages 
-					discount air fares 
-					Bargains at Ebay 
-					Get stock updates 
-					Get the weather reports 
-					What people are saying about you, your company, your products 
-					Music, radio shows, TV clips 
-					Stay updated on someone's schedule 
-					Get cinema schedule updates 
-					Read your favourite comics 
-					What other people are surfing 
-					Automatically backup your weblog posts 
-					Get software updates 
-					Get the latest bittorrent files and p*** 
-					Shopping deals at Amazon.com and others 
+					* News syndication 
+					* Search for information via RSS 
+					* Aggregate your feeds 
+					* Display news on your website 
+					* Display news on your mobile device 
+					* Collect all your email in RSS 
+					* Get RSS content through your email 
+					* Track Fedex packages 
+					* discount air fares 
+					* Bargains at Ebay 
+					* Get stock updates 
 					...
+
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Things you can do with RSS (more)
+					
+					
+					* Get the weather reports 
+					* What people are saying about you, your company, your products 
+					* Music, radio shows, TV clips 
+					* Stay updated on someone's schedule 
+					* Get cinema schedule updates 
+					* Read your favourite comics 
+					* What other people are surfing 
+					* Automatically backup your weblog posts 
+					* Get software updates 
+					* Get the latest bittorrent files
+					* Shopping deals at Amazon.com and others 
+					* ...
 
 					</textarea>
 				</section>
@@ -220,14 +232,53 @@
 					</textarea>
 				</section>
 				
-				<section data-background="images/wsb-11.png" data-background-size="contain">
+				<section>
+					<h1>XML or JSON?</h1>
 				</section>
-				<section data-background="images/wsb-12.png" data-background-size="contain">
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## XML over JSON
+						
+						<img src="images/wsb-11.png" style="border:0pt;">
+					</textarea>
 				</section>
-				<section data-background="images/wsb-13.png" data-background-size="contain">
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					## **XML over JSON**
+					
+					* Easy to take XML and apply XSLT to make XHTML.
+					* XML is **supported** by many more desktop applications than JSON
+					* JSON can be put in the XML on the way back to the client – the benefit of both! It’s called XJAX (stands for X-domain JavaScript And XML).
+					* Simply, AJAX includes XML in it and not JSON.
+				</textarea>
 				</section>
-				<section data-background="images/wsb-14.png" data-background-size="contain">
+				
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## JSON over XML
+						
+						<img src="images/wsb-12.png" style="border:0pt;">
+					</textarea>
 				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## JSON over XML
+
+						* JSON requires less tags than XML
+						* JSON is transportation-independent, you can just bypass the XMLHttpRequest object for getting your data
+						* **JavaScript** is not just data – put **methods** and all sorts of goodies in JSON format
+						* You can get JSON data from anywhere, not just your own domain (standard)
+						* JSON is easier to read than XML						
+
+					</textarea>
+				</section>
+				
+				
 
 				<!--
 				<section data-markdown style="text-align: left;">
@@ -244,10 +295,10 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Parsing the Feed
+						## Parsing RSS Feeds
 
-						* With jQuery's jFeed
-						  - XML Compliant
+						* With **jQuery's** jFeed
+						* **XML** Compliant
 						
 					</textarea>
 				</section>
@@ -257,11 +308,11 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## With jQuery's Built-in XML Support
+						## With jQuery's **Built-in** XML Support
 
 						```
 						$.get(FEED_URL, function (data) {
-							$(data).find("entry").each(function () { // or "item" or whatever suits your feed
+							$(data).find("entry").each(function () { // or "item" or what suits your feed
 								var el = $(this);
 
 								console.log("------------------------");
@@ -272,12 +323,13 @@
 						});
 						```
 						
+						* 'FEED_URL' RSS Source
 					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## With jQuery and the Google AJAX Feed API
+						## With jQuery and the Google **AJAX** Feed API
 
 						```
 						$.ajax({

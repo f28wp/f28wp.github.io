@@ -58,21 +58,23 @@
 					<textarea data-template>
 						## Overview
 
-						* How to store data locally on client?
-						* How web browser cookies work?
+						* How to store **data** locally on client?
+						* How web browser **cookies** work?
 						* How to manage files and data locally?
+						* **Examples**
+						* Questions and discussion
 						
 					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Data
+						## Whats and Whys of Client Data
 
-						* Why would you want the client to store information?
-						* What type of information is stored by the client?
-						* What are the legal aspects?
-						* What limitations would there be (e.g., size)?
+						* **Why** would you want the **client** to store information?
+						* What **type** of information is stored by the client?
+						* What are the **legal** aspects?
+						* What **limitations** would there be (e.g., size)?
 						
 					</textarea>
 				</section>
@@ -84,7 +86,16 @@
 						* Web storage is a means by which web applications can store data **locally** within the user's browser
 						
 						* Before HTML5 and **Web Storage** application data had to be stored in **cookies**
+						  - Not just cookies
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## Web Storage
 
+						<img src="./images/webstorage.jpg" style="border:0pt;">
 						
 					</textarea>
 				</section>
@@ -93,10 +104,12 @@
 					<textarea data-template>
 						## Web Storage
 
-						* Web storage is key/value JavaScript API on web browsers
+						* **JavaScript** API
+						* Web storage is **key/value** on **web browsers**
 						  - stores user data locally on host running browser put it in silos correlated with web server domain or igins
 						* Only web pages from domain D can access D’s silo via web storage
-						  - localStorage stores data persistently for each web server sessionStoragestores data sessionally per server per browser instance
+						  - localStorage stores **data persistently** for each web server 
+						  - sessionStorage stores data **sessionally** per server per browser instance
 
 						
 					</textarea>
@@ -104,11 +117,11 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Why Web Storage?
+						## **Why** Web Storage?
 
-						* Web storage is more secure
+						* Web storage is more **secure**
 						* Large amounts of data stored locally
-						* Doesn't hinder website performance
+						* Doesn't hinder website **performance**
 
 						
 					</textarea>
@@ -117,14 +130,14 @@
 					
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Web Storage Functions
+						## Web Storage **Functions**
 
 						Support the following functions
-						* clear() remove all key/value pairs
-						* getItem(key) get value of key
-						* key(i) get ith element of array of keys
-						* removeItem(key) delete key and its value
-						* setItem(key, value) set key to value
+						* **clear()** remove all key/value pairs
+						* **getItem(key)** get value of key
+						* **key(i)** get ith element of array of keys
+						* **removeItem(key)** delete key and its value
+						* **setItem(key, value)** set key to value
 					</textarea>
 				</section>				
 	
@@ -143,9 +156,7 @@
 							Value <input id="val" value=""/>
 							
 							<input type="button" value="update" onclick="updateWebStore()"> <br>
-							
 							<input type="button" value="clear store" onclick="clearWebStore()"> <br>
-							
 							<input type="reset" value="reset form"> <br>
 						</form>
 						
@@ -161,76 +172,143 @@
 					<textarea data-template>
 						## Web Storage
 
-						* Web storage stores data sessionally or persistently
+						* Web storage stores data **sessionally** or **persistently**
 						* Session data in browser’s **volatile memory** is lost when it dies
 
 					</textarea>
 				</section>
 
-
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Example storage.js
-						
-						* Let's implement another example
-						* Call the Javascript file storage.js 
-						* Sessional in the example if "?session" in URL otherwise it’s not.
-
-						
-
+					# Is Web Storage Supported?
+					
+					```
+					if (window.localStorage) {
+					  // Browser supports localStorage
+					  // Good to go
+					} else {
+					  // No localStorage support
+					}
+					```
 					</textarea>
 				</section>
 				
-					
+				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Example storage.js
-						```
-						function displayWebStore() {
-							db = localStorage;
-							if ( window.location.href.indexOf("?session") != -1 )
-							db = sessionStorage;
-							if ( typeof(db) == "undefined" ) {
-								alert("no web storage available");
-								return;
-							}
-							var s = "";
-							for (var i=0; i<db.length; i++) {
-								var key = db.key(i);
-								s += key + " = " + db.getItem(key) + "<br/>";
-							}
-							document.getElementById("WSData").innerHTML = s;
-						}
-						function updateWebStore() {
-							var key = document.getElementById("key").value;
-							if ( key != "" )
-							db[key] = document.getElementById("val").value;
-							displayWebStore();
-						}
-						function clearWebStore() {
-							db.clear();
-							displayWebStore();
-						}
-						```
+					## Example 
+					
+					```
+					<form>
+					<label>Name: <input type="text" id="sName"></label>
+					<button type="button" onclick="savewb()">Save Name</button>
+					<button type="button" onclick="accesswb()">Get Name</button>
+					</form>
+					```
+					
+					```
+					<script>
+					if (localStorage) { // Check if the localStorage object exists
+					  function savewb() { // Store data
+						localStorage.setItem("name", sName);
+						alert("Your first name is saved.");
+					  }
 
-					</textarea>
+					  function accesswb() { // Retrieve data
+						alert("Hi, " + localStorage.getItem("name"));
+					  }  
+					} else {
+					  alert("Sorry, your browser do not support local storage.");
+					}
+					</script>
+					```
+				</textarea>
 				</section>
 
-					
+				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Example 
+						
+						* Sessional option using the URL "?session"
 
-						* Example defines 3 functions for origin web server of web page
-						  - displayWebStore() display keys and values in web storage
-						  - updateWebStore() updates web storage with key/value from for m
-						  - clearWebStore() removes key/value pairs from web storage
+						* Example defines **3 functions** for origin web server of web page
+						  - **savewb()** updates web storage with key/value 
+						  - **acesswb()** display keys and values in web storage
+						  - **clearwb()** removes key/value pairs from web storage
 						* Web storage avoids
 						  - size limits of cookies
 						  - security issues of cookie traffic with web server
 					</textarea>
 				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example 
+						
+						```
+						<form>
+						<label>String Key:   <input type="text" id="sKey"></label>
+						<label>String Value: <input type="text" id="sValue"></label>
+						<button type="button" onclick="savewb()"  >Save  </button>
+						<button type="button" onclick="accesswb()">Get   </button>
+						<button type="button" onclick="clearwb()" >Clear </button>
+						</form>
+						```
 
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example 
+					
+						
+						```
+						function savewb() {
+							var db = localStorage;
+							if ( window.location.href.indexOf("?session") != -1 )
+							    db = sessionStorage;
+							if ( typeof(db) == "undefined" ) {
+								alert("no web storage available");
+								return;
+							}
+							var key = document.getElementById("sKey").value;
+							if ( key != "" )
+							    db[key] = document.getElementById("sValue").value;
+						}
+						```
+						
+						```
+						function accesswb() {
+							var s = "";
+							for (var i=0; i<db.length; i++) {
+								var key = db.key(i);
+								s += key + " = " + db.getItem(key) + "\n";
+							}
+							alert( s );
+						}
+						```
+						
+						```
+						function clearwb() {
+							db.clear();
+						}
+						```
+
+					</textarea>
+				</section>
+				
+
+
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## Cookies 
+
+						<img src="./images/webcookies.png" style="border:0pt;">
+
+					</textarea>
+				</section>
 
 
 
@@ -239,7 +317,7 @@
 					<textarea data-template>
 						## Cookies 
 
-						* Cookies are small packets of data stored in file space of web users
+						* Cookies are **small** packets of data stored in file space of web users
 						* Cookies contain
 						  - name
 						  - value
@@ -259,7 +337,7 @@
 						## Cookies 
 
 						* Cookies
-						  - beat HTTP’s statelessness by storing data on client
+						  - avoid HTTP’s statelessness by storing data on client
 						  - are passed in Set-Cookie reply and Cookie request headers
 						  - are stored in user’s filespace or in browser’s volatile memory
 						* Cookies can be **manipulated** by 
@@ -275,8 +353,13 @@
 						## Cookie Standards  
 
 						* There used to be 2 cookie standards - Netscape’s and RFC 2965.
-						* Combined reformed standard RFC 6265 now governs cookie usage
-						* Form of major fields to set a cookie with Max-age is:
+						* Combined reformed standard **RFC 6265** now governing cookie form
+						
+					</textarea>
+				</section>
+				
+				<!--
+				* Form of major fields to set a cookie with Max-age is:
 
 						```
 						
@@ -284,72 +367,73 @@
 						[; Max-age=seconds] [; Secure] [; HttpOnly]
 
 						```
-					</textarea>
-				</section>
+				-->
 
 					
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					Optional attributes, which may occur once in any order, are:
+					Optional **attributes**, which may occur once in any order, are:
 					
-					* Domain 		domain of validity - defaults to server’s hostname
-					* Expires 		RFC 1123 date time when cookie expires
-					* HttpOnly 	cookie is only to be sent over HTTP
-					* Max-age 		how many seconds from now onwards to keep cookie
-					* Path 		defaults to path of document creating cookie
-					* Secure 		cookie is only to be sent on secure channel (HTTPS)
+					* **Domain** 		domain of validity - defaults to server’s hostname
+					* **Expires** 		RFC 1123 date time when cookie expires
+					* **HttpOnly** 	    cookie is only to be sent over HTTP
+					* **Max-age** 		how many seconds from now onwards to keep cookie
+					* **Path** 		    defaults to path of document creating cookie
+					* **Secure** 		cookie is only to be sent on secure channel (HTTPS)
 
-					Max-age trumps Expires header if both are present
+					Max-age higher priority than Expires header if both are present
 					</textarea>
 				</section>
 
+
+					<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Example Cookie Syntax
+
+					```
+					Set-Cookie: name=value [; Expires=date] 
+									[; Domain=domain]
+									[; Path=path] 
+									[; Secure] 
+									[; HttpOnly]
+
+					```
+
+					* Date time must use 4 digit year required by RFC 1123 section 5.2.14.
+					
+					</textarea>
+				</section>
+				
+				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					## Example 
 					
-					RFC 6265 example request with Max-age would be
+					
 					```
-					Set-Cookie: Customer="BOB"; Path=/acme;
-					Max-age=31536000; Domain=dod.gov
+					Set-Cookie: Customer="BOB"; 
+					            Path=/acme;
+					            Max-age=31536000; Domain=dod.gov
 
 					```
-					* It specifies cookie should last for **one year in seconds**.
 					
-					* Form of request to set cookie with Expires date-time is	
+					* RFC 6265 example request with Max-age set
+					* It specifies cookie should last for **one year in seconds**.					
+				
 				</textarea>
 				</section>
 
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## Example 
+					## Cookie **Properties**
 					
-					Example **request** would be: 
-					
-					Date time must use 4 digit year required by RFC 1123 section 5.2.14.
-
-					```
-					Set-Cookie: name=value [; Expires=date] [; Domain=domain]
-					[; Path=path] [; Secure] [; HttpOnly]
-
-					```
-					
-					* Date time must use 4 digit year required by RFC 1123 section 5.2.14.
-					
-					</textarea>
-				</section>
-
-
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-					## Cookie Properties 
-					
-					* Session cookies last only as long as client’s session
-					  - have no Max-age or Expires setting
-					  - are usually stored in browser’s volatile memory
+					* Session cookies last **only** as long as client’s **session**
+					  - have **no Max-age** or Expires setting
+					  - usually stored in browser’s volatile memory
 					  - aren’t stored in cookie file(s) on client
 					* Saving cookie with exactly same Path, Domain and Name values
-					  - overwrites existing one
+					  - **overwrites existing** one
 					  - deletes it if expiry date is past
 
 					
@@ -359,11 +443,13 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					* Path matching is done by str ing compar ison
+					## Cookie Control
+					
+					* **Path matching** is done by string comparison
 					  - path "/ban" matches "/ban/bomb.html" and "/banana.html"
 					  - most general path is "/"
 					  - default path is URL path of associated document
-					* Browsers often allow users to control whether to
+					* **Browsers** often allow users to **control** whether to
 					  - accept all cookies
 					  - accept only cookies from web server’s domain
 					  - do not accept or send cookies
@@ -372,13 +458,14 @@
 					</textarea>
 				</section>
 
-
+			
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## Cookie controls
+					## Cookie **controls**
 	
+					* Browser preferences
 					* Mozilla Edit, Preferences, Privacy and Security, Cookies
-					* Explorer Tools, Internet Options, Privacy, Advanced...
+					* Explorer Tools, **Internet Options, Privacy, Advanced**, ...
 					</textarea>
 				</section>
 				
@@ -410,12 +497,14 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 
-					* Cookies are set in JavaScr ipt in following manner:
+					* Cookies are set in JavaScript in following manner:
+					
 					```
 					document.cookie = "name=value; Expires=...; Path=...; Domain=...";
 					```
 
 					Consider the Javascript function
+					
 					```
 					function Cookie(name, value, days) {
 						d=new Date();
@@ -438,26 +527,26 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					
-					* It can be invoked to set a cookie for a year by
+					* **Set** a cookie for a year using
 					```
 					<body onload="go()">
 					<script>
 					function go() {
-					c=Cookie("Skill", "basic", 365) + "; Domain=hw.ac.uk; Path=/";
-					document.cookie = c;
-					document.writeln("Cookie set: " + c); }
+					  c=Cookie("Skill", "basic", 365) + "; Domain=hw.ac.uk; Path=/";
+					  document.cookie = c;
+					  document.writeln("Cookie set: " + c); }
 					</script>
 					</body>
 					```
 					
-					* Same cookie can be deleted by giving it a date in the past:
+					* Same cookie can be **deleted** by giving it a date in the **past**:
 					```
 					<body onload="go()">
 					<script>
 					function go() {
-					c=Cookie("Skill", "anything", -1) + "; Domain=hw.ac.uk; Path=/";
-					document.cookie = c;
-					document.writeln("Cookie set: " + c); }
+					  c=Cookie("Skill", "anything", -1) + "; Domain=hw.ac.uk; Path=/";
+					  document.cookie = c;
+					  document.writeln("Cookie set: " + c); }
 					</script>
 					</body>
 					```
@@ -495,6 +584,9 @@
 						names[i] = c[i].substr(0, c[i].indexOf("="));
 						return names;
 					}
+					```
+					
+					```
 					function getCookieValue(name) {
 						var cs = document.cookie.split(";");
 						for (var k=0; k<cs.length; k++) {
@@ -510,22 +602,13 @@
 				</section>	
 
 
+
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					## Example
 					
-					* All cookies delivered with a page listed
-
-					* Example will use  2 functions to list cookie names and values given with page
-
-
-					</textarea>
-				</section>
-
-
-
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
+					List all cookies
+					
 					```
 					<html>
 					<body>
@@ -551,10 +634,11 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					
-					## Handling Cookies with Node.js
+					## Handling Cookies with **Node.js**
 					
-					* Module cookie-parser uses req.cookies to get cookie details.
-					* Module set-cookie lets setCookie() set a cookie’s name, value etc.
+					* **Module** cookie-parser uses req.cookies to get cookie details
+					  - ```require('set-cookie')```
+					* Module set-cookie lets setCookie() set a cookie’s name, value etc
 					* Install both modules in addition to the Express module
 
 
@@ -564,7 +648,7 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## Example
+					## Example Node.js
 					
 					* Script updates and reports on stored data				
 
@@ -577,38 +661,46 @@
 					<textarea data-template>
 					
 					```
-					var express = require(’express’);
-					var cookieParser = require(’cookie-parser’);
-					var setCookie = require(’set-cookie’);
-					var http = require(’http’);
+					var express = require('express');
+					var cookieParser = require('cookie-parser');
+					var setCookie = require('set-cookie');
+					var http = require('http');
 					var app = express();
 					app.use(cookieParser());
+					```
+					
+					```
 					var head = ["<!DOCTYPE html>", "<html>", "<head>",
-					"<title>Cookies</title>", "</head>", "<body>"];
-					var url = "http://linux11.macs.hw.ac.uk:8080/cookie";
+					             "<title>Cookies</title>", "</head>", "<body>"];
+					var url = "http://localhost:8080/";
 					var tail = ["<form action=’" + url + "’>",
-					"<p>", "Key <input name=’name’ value=’’>", "</p>",
-					"<p>", "Value <input name=’value’ value=’’>", "</p>",
-					"<p>", "Age <input name=’age’ value=’’>", "</p>",
-					"<p>", "<input type=’submit’/>", "</p>",
-					"</form>", "</body>", "</html>"];
+								"<p>", "Key <input name=’name’ value=’’>", "</p>",
+								"<p>", "Value <input name=’value’ value=’’>", "</p>",
+								"<p>", "Age <input name=’age’ value=’’>", "</p>",
+								"<p>", "<input type=’submit’/>", "</p>",
+								"</form>", "</body>", "</html>"];
 					var eol = "\n";
+					``
+					
 					app.get("/cookie", function (req, res) {
-					var s = "";
-					for (var i in head) s += head[i] + eol;
-					if ( req.query.name != undefined && req.query.name != "" &&
-					req.query.value != undefined ) {
-					if ( isNaN(req.query.age) ) req.query.age = 0;
-					setCookie(req.query.name, req.query.value,
-					{maxAge: req.query.age, res: res});
+					   var s = "";
+					   for (var i in head) s += head[i] + eol;
+					   if ( req.query.name != undefined && req.query.name != "" &&
+					   req.query.value != undefined ) {
+					   if ( isNaN(req.query.age) ) req.query.age = 0;
+					   setCookie(req.query.name, req.query.value,
+					   {maxAge: req.query.age, res: res});
 					}
 					s += "<p>" + eol;
+					
 					for (var i in req.cookies)
-					s +=i+"="+ req.cookies[i] + "<br>" + eol;
+					   s +=i+"="+ req.cookies[i] + "<br>" + eol;
 					s += "</p>" + eol;
+					
 					for (var i in tail) s += tail[i] + eol;
-					res.send(s); // send web page
+					  res.send(s); // send web page
 					});
+					
 					var svr = http.createServer(app);
 					svr.on(’error’, function(err) { console.log(’Server: ’ + err); });
 					svr.listen(8080, function() {console.log("Node: port 8080");});
@@ -621,15 +713,15 @@
 								
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## Cookies, Web Storage and EU Law 
+					## Cookies, Web Storage and EU **Law**
 					
-					* In 2012 UK implemented clause 66 of EU directive 			2009/136/EC to
-					  - require apt consent for storage or access to information
-					  - where it is stored on a user’s ter minal equipment
+					* In 2012 UK implemented clause 66 of EU directive 2009/136/EC
+					  - requires consent for storage or access to information
+					  - where it is stored on a user’s equipment
 					* Change was motivated by concerns about
-					  - online tracking of individuals and use of spyware
-					  - on their devices without their knowledge and agreement
-					* Directive applies to use of cookies and use of HTML 5 Web Storage
+					  - **online tracking** of individuals and use of spyware
+					  - on their devices **without their knowledge** and agreement
+					* Directive **applies** to use of **cookies and use of **HTML5 Web Storage**
 			
 					</textarea>
 				</section>
@@ -637,13 +729,15 @@
 												
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					* Apt consent should be explicit and prior if possible and be
-					  - a freely given specific and informed indication of a data subject’s wishes by which he signifies his agreement to personal data relating to him being processed 
-					* i.e. it must be specific, informed and express user’s wishes.
+					## Explit Consent 
+					
+					* Consent should be **explicit** and **prior** if possible
+					  - **freely given** specific and informed indication of a data subject’s wishes by which he signifies his agreement to personal data relating to him being processed 
+					* i.e. it must be specific, informed and express user’s wishes
 
 					* Consent isn’t needed where personal data storage on user computer
 					  - (a) is solely to enable communication over electronic network
-					  - (b) is strictly necessary to provide an information society service requested by user.
+					  - (b) is strictly necessary to provide an information society service requested by user
 			
 					</textarea>
 				</section>
@@ -652,10 +746,12 @@
 												
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					* So informed specific consent isn’t (supposed to be) needed for
+					## Limitations
+					
+					* Informed specific consent isn’t (supposed to be) needed for
 					  - a shopping cart
 					  - security requirement like authentication to protect user’s privacy
-					* It is needed for advertising, analysing page usage, customisation.
+					* Needed for **advertising**, analysing page usage, **customisation**
 					* UK Information Commissioner supplies guidance on compliance
 
 			
@@ -669,10 +765,12 @@
 					<textarea data-template>
 						## Summary
 
-						* Understand Web Storage, Cookies and Client Data Management
+						* Understand Client **Data Management**
+						* **Web Storage** and **Cookies**
 						* Web storage key/value Javascript API 
 						* Cookies name and value 
-						* UK law and regulations
+						* Syntax and examples
+						* UK **law** and **regulations**
 						
 					</textarea>
 				</section>

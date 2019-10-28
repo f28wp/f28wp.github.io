@@ -72,10 +72,10 @@
 					<textarea data-template>
 						## JSON
 
-						* JSON = Javascript Object Notation
+						* **JSON = Javascript Object Notation**
 						* JSON is a subsect of Javascript (EMCMA-262)
-						* Language independent
-						* Text-base (human readable)
+						* Language **independent**
+						* Text-base (**human** readable)
 						* Light-weight
 						* Easy to use and parse 
 					</textarea>
@@ -84,11 +84,11 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## JSON is Not
+						## JSON is **Not**
 
 						* JSON is not a document format 
 						* JSON is not a markup language 
-						  - JSON is not XML 
+						  - **JSON is not XML**
 						* JSON is not a general serilzation format 
 						  - No recrusive /recurring structures 
 						  - No invisible structures 
@@ -99,9 +99,16 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## What do we use JSON objects for?
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## What do we use JSON objects for?
 
-						* JSON objects are used to transfer data between the server and the client 
-						* JSON is a simple, common representation of data
+						* JSON objects are used to **transfer data** between the server and the client 
+						* JSON is a **simple**, common representation of data
 						
 					</textarea>
 				</section>
@@ -111,8 +118,8 @@
 					<textarea data-template>
 						## Versions and Encoding
 						
-						* JSON has no version and no revision 
-						* JSON is very stable 
+						* JSON has **no version** and no revision 
+						* JSON is very **stable** 
 						* Character Encoding is **Strictly** UNICODE
 						
 					</textarea>
@@ -133,10 +140,12 @@
 					</textarea>
 				</section>
 				
+				
+				
 												
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## JSON Objects 
+						## JSON **Objects**
 						
 						* Objects are unordered containers of key/value pairs 
 						* Objects are wrapped in **{ }**
@@ -162,7 +171,7 @@
 							"format": {
 							      "type": "rect",
 								  "width": 2220,
-								  "framerate": 24
+								  "framerate": 24 }
 						}
 						```
 					</textarea>
@@ -170,14 +179,11 @@
 				
 				
 				
-				<section data-background="images/wsb-13.png" data-background-size="contain">
-				</section>
-				<section data-background="images/wsb-14.png" data-background-size="contain">
-				</section>
+
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## JSON Array 
+						## JSON **Array**
 						
 						* Arrays are ordered sequences of values 
 						* Arrays are wrapped in **[]**
@@ -189,6 +195,19 @@
 				</section>
 
 
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## JSON Array Example
+						
+						
+						```
+						var test = {
+						  "vals": [ "Bob", "Tom", 22 ]
+						  };
+						```
+						
+					</textarea>
+				</section>
 
 				
 				<section data-markdown style="text-align: left;">
@@ -250,7 +269,7 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Examples
-						Objects with objects and array 
+						Objects with **objects** and **array**
 						
 						```
 						var a = {
@@ -278,16 +297,48 @@
 					</textarea>
 				</section>
 				
+				<section data-background="images/wsb-13.png" data-background-size="contain">
+				</section>
+				<section data-background="images/wsb-14.png" data-background-size="contain">
+				</section>
+				
+				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					
+					## Javascript and JSON
+					
 					```JSON.stringify()```
-					* Takes a Javascript object and produces a JSON string from it 
+					* Takes a Javascript object and produces a **JSON string** from it 
 					
 					```JSON.parse() ```
-					* Takes a JSON string and parses it to a Javascript object
+					* Takes a **JSON string** and parses it to a Javascript object
 					</textarea>
 				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Example 
+					
+					Convert Javscript object into a string 
+					```
+					var json = { 
+					   person: {
+					       name: "bob",
+						   age: 20
+					   }
+					};
+					console.log( JSON.stringify( json ) );
+					```
+					
+					Outputs:
+					```
+					{"person":{"name":"bob","age":20}}
+					```
+					</textarea>
+				</section>
+				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -312,27 +363,6 @@
 				</section>
 
 
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-					## Example 
-					
-					Convert Javscript object into a string 
-					```
-					var json = { 
-					   person: {
-					       name: "bob",
-						   age: 20
-					   }
-					};
-					console.log( JSON.stringify( json ) );
-					```
-					
-					Outputs:
-					```
-					{"person":{"name":"bob","age":20}}
-					```
-					</textarea>
-				</section>
 
 
 					
@@ -348,11 +378,11 @@
 					
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## AJAX
+						## **AJAX**
 
-						* AJAX is not a programming language
+						* AJAX is **not** a programming language
 						* AJAX is a technique for accessing web servers from a web page
-						* AJAX stands for Asynchronous JavaScript And XML	
+						* AJAX stands for **Asynchronous JavaScript And XML**	
 					</textarea>
 				</section>
 				
@@ -363,8 +393,8 @@
 						## AJAX
 
 						* Technique for creating **interactive web pages**
-						* Javascript and XMLHttpRequest to interchange and manipulate data with web server 
-						* Asynchronous communication (i.e., no freezing up)
+						* Javascript and **XMLHttpRequest** to interchange and manipulate data with web server 
+						* **Asynchronous** communication (i.e., no freezing up)
 					</textarea>
 				</section>
 				
@@ -374,8 +404,8 @@
 					<textarea data-template>
 						## POST and GET in Ajax
 
-						* GET places arguments in query string (POST doesn't)
-						* GET call in Ajax has size limitation on the amount of data that can be passed 
+						* GET places arguments in **query string** (POST doesn't)
+						* GET call in Ajax has **size limitation** on the amount of data that can be passed 
 						
 					</textarea>
 				</section>
@@ -388,9 +418,9 @@
 
 						General Principle
 						
-						* GET method: it is used to retrieve data to display in the page and data is not expected to be changed on the server 
+						* GET method: it is used to **retrieve data** to display in the page and data is not expected to be changed on the server 
 						
-						* POST method: to update information on the server
+						* POST method: to update information on the server (**send**)
 						
 					</textarea>
 				</section>	
@@ -400,12 +430,12 @@
 								
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Ajax Methods 
+						## Ajax Methods (1)
 						
-						* Abort() : Aborts request 
-						* getAllResponseHeaders(): Returns string with all header information 
-						* getResponseHeader("headerLabel"): Returns the text of a specified header 
-						* setRequestHeader("label", "value"): Sets the value of the HTTP request header 
+						* abort() : Aborts request 
+						* **getAllResponseHeaders()**: Returns string with all header information 
+						* **getResponseHeader("headerLabel")**: Returns the text of a specified header 
+						* **setRequestHeader("label", "value")**: Sets the value of the HTTP request header 
 						
 					</textarea>
 				</section>	
@@ -414,13 +444,13 @@
 								
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Ajax Methods 
+						## Ajax Methods (2)
 						
-						* open("method", "URL"[,asynchFlat[, "userName"[, "password"]]]): Initializes a request.
+						* **open**("method", "URL"[,asynchFlat[, "userName"[, "password"]]]): Initializes a request.
 						   - Method to be sued from Javascript code
 						   - Initialize request from native code, use openRequest() instead 
 						  
-						* send(content): Sends the request.
+						* **send**(content): Sends the request.
 							- If the request is asynchronous(which is default), this method return as soon as the request is sent
 						   
 							- If the () request is synchronous, this method doesn't return unilt hte response has arrived
@@ -482,7 +512,7 @@
 					<textarea data-template>
 						## Security 
 						
-						Is safer to use eval with XMLHttpRequest?
+						Is safer to use **eval** with XMLHttpRequest?
 						
 						* JSON data comes from the same server that vended the page
 						* An eval of the data is no less secure than the original html 
@@ -495,7 +525,7 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## JSON Server-Side (PHP)
+						## Example JSON Server-Side (PHP)
 						
 						```
 						<?php 
@@ -536,24 +566,26 @@
 					<textarea data-template>
 						## Summary
 
-						* Understand Ajax and JSON
+						* Understand **Ajax** and **JSON**
 						* Formatting and Syntax 
-						* Read/write JSon Structures
+						* Read/write JSON **structure**
 						* Benefits of Ajax
+						* Examples
 						
 						
 					</textarea>
 				</section>
 				
 
-				<section style="text-align: left;">
-					<h2>To do this week ...</h2>
-					<p>
-						&bull; Read over the lectures <br>
-						&bull; Review the revision questions <br>
-						&bull; Work through tutorial practicals <br>
-						&bull; Experiment (get into good habits) <br>
-					</p>
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## To do this week ...
+					
+					* **Read** over the lectures 
+					* Review the revision questions 
+					* Work through tutorial practicals 
+					* **Experiment** (get into good habits) 
+					</textarea>
 				</section>
 				
 

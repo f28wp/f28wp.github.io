@@ -58,7 +58,9 @@
 					<textarea data-template>
 						## Overview
 
-						* What do we mean by Web Services (SOAP, REST)?
+						* Web Services 
+						* What do we mean by Web Services?
+						* What is SOAP and REST?
 						* Limitations and comparison
 						* Questions and discussion
 						
@@ -67,23 +69,288 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Web Services
+						## What are Web Services?
 
-						* Service Orientated Architecture (SOA)
-
-						* Simple Object Access Protocol (SOAP)
-						
 					</textarea>
 				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## What are Web Services?
+
+						* Web services are applications that allow for communication over the internet
+						
+						* Number of communication protocols for web services to communicate
+						
+						  - Simple Object Access Protocol(SOAP)
+						  - Representational State Transfer (REST)
+					</textarea>
+				</section>
+				
+				<section data-background="images/wsb-5.png" data-background-size="contain">
+				</section>
+				
+				<!--
+				<section data-background="images/wsb-1.png" data-background-size="contain">
+				</section>
+				-->
+				
+				<!--
+				<section data-background="images/wsb-2.png" data-background-size="contain">
+				</section>
+				-->
+
+
+				<section data-background="images/wsb-4.png" data-background-size="contain">
+				</section>
+				
+				<section data-background="images/wsb-3.png" data-background-size="contain">
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Web services 
+						
+						* Many types of users 
+						* Many types of devices 
+						
+						* Challenges of data syncing 
+						* More users == more business 
+						
+						  
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Web services design solutions
+						
+						* A non-standard hacky way and implications
+						* SOAP 
+						  - Simple Object Access Protocol
+						* REST 
+						  - REpresentational State Transfer 
+						  
+					</textarea>
+				</section>
+
+
+			
 			
 				
 				
+				<section data-background="images/wsb-6.png" data-background-size="contain">
+				</section>
+				<section data-background="images/wsb-7.png" data-background-size="contain">
+				</section>
+				<section data-background="images/wsb-8.png" data-background-size="contain">
+				</section>
+				<section data-background="images/wsb-9.png" data-background-size="contain">
+				</section>
+
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+					# What is SOAP?
+						
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## SOAP
+						
+						* SOAP stands for **Simple Object Access Protocol**
+						* SOAP is a standard for web-services access protocol 
+						
+						
+						
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## SOAP : How it Works
+						
+						
+						<img src="./images/soap1.png" style="border:0pt">
+						
+						**Simple Object Access Protocol (SOAP)**
+					</textarea>
+				</section>
+				
+				
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## SOAP Details
+						
+						* SOAP is a **protocol**
+						* Only support **XML** format 
+						* Versatile 
+						* Powerful/complex 
+						* Automated tools exist 
+						* Often seen as Verbose
+						  
+					</textarea>
+				</section>
+				
+				<!--
+				* Versatile, can use different protocols (SMTP)
+				-->
+								
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+					# What is REST?
+						
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## REST 
+						
+						
+						* REST is **not** a protocol, it's an **architectural approach**
+						* Can be used with legacy XML or modern JSON transfer formats 
+						* Guidlines: HTTP methods (URI design)
+						  - Developed in parallel with HTTP/1.1
+						  - Each unique URL represents an object
+						  
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## REST : How it Works
+						
+						
+						<img src="./images/rest1.png" style="border:0pt">
+						  
+						**REpresentational State Transfer (REST)**
+					</textarea>
+				</section>
+				
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Why REST?
+				
+						* Uses HTTP methods 
+						* Directory like structure 
+						* Uses proper MIME types 
+						* Human readable result 
+						* Lightweight
+						* Easy to build (no toolkits required)
+						
+						
+					</textarea>
+				</section>
+				
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## REST Details
+						
+						
+						* Easy to develop and maintain 
+						* Use JSON or XML 
+						* Offers open guidelines 
+						* Confined to HTTP only 
+						* Depends on other security approaches (e.g., oAuth)
+						
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## REST or SOAP 
+						
+						* REST exposes resources that represent data, while 
+						SOAP exposes operations that represent logic 
+						* REST emphasises simple p2p communication over HTTP,
+						while SOAP emphasises loosly coupled distributed message 
+						* REST supports multiple data formates, while SOAP encodes 
+						everything in XML with data attachments 
+						* REST emphasises stateless communication while SOAP 
+						supports stateless and stateful operations 
+						
+					</textarea>
+				</section>
+				
+				
+				
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						# What is a **REST**ful Web Service?
+						
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## What is a **REST**ful Web Service?
+						
+						* RESTful web service (i.e., web service that is created and
+						accessed using REST principles)
+						* use HTTP protocol methods for operations 
+						* For example, HTTP methods (post,get,put,delete) to manage operations
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Principles 
+						
+						* REST isn't protocol specific 
+						* Technologies like SOAP use HTTP as a transport 
+						* HTTP is a rich application protocol 
+						* RESTful web services try to leverage the full power of HTTP 
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Key REST Principles 
+						
+						* Everything is a resource
+						* Every resource is identified by a unique identifier 
+						* Uses a simple and uniform interface 
+						* Stateless
+					</textarea>
+				</section>
+				
+				
+				
+				<!--
+				<section>
+					here
+				</section>
+				-->
+				
+				<!--
 				<section data-background="images/ws-2.png" data-background-size="contain">
 				</section>
+				-->
+				
 				<!--
 				<section data-background="images/ws-1.png" data-background-size="contain">
 				</section>
 				-->
+				
+				
+				<!--
 				<section data-background="images/ws-3.png" data-background-size="contain">
 				</section>
 				<section data-background="images/ws-4.png" data-background-size="contain">
@@ -112,40 +379,8 @@
 				</section>
 				<section data-background="images/ws-16.png" data-background-size="contain">
 				</section>
+				-->
 				
-				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Web Services
-						
-					</textarea>
-				</section>
-				
-				
-				<section data-background="images/wsb-1.png" data-background-size="contain">
-				</section>
-				
-				<section data-background="images/wsb-2.png" data-background-size="contain">
-				</section>
-				
-				<section data-background="images/wsb-3.png" data-background-size="contain">
-				</section>
-				
-				<section data-background="images/wsb-4.png" data-background-size="contain">
-				</section>
-				
-				<section data-background="images/wsb-5.png" data-background-size="contain">
-				</section>
-				
-				<section data-background="images/wsb-6.png" data-background-size="contain">
-				</section>
-				<section data-background="images/wsb-7.png" data-background-size="contain">
-				</section>
-				<section data-background="images/wsb-8.png" data-background-size="contain">
-				</section>
-				<section data-background="images/wsb-9.png" data-background-size="contain">
-				</section>
-
 
 
 				
@@ -155,7 +390,8 @@
 						## Summary
 
 						* Understand basic Web Service concepts
-						* Pros and cons of SOAP and REST
+						* Communication protocols 
+						* Whats and Whys of SOAP and REST
 						
 						
 					</textarea>

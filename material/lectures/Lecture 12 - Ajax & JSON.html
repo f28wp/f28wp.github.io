@@ -534,30 +534,32 @@
 						
 						```
 						<?php 
-						function getDataFromDataSource($query) { 
+						  function getDataFromDataSource($query) { 
 							mysql_connect("127.0.0.1", "root", "root");
 							mysql_select_db("criademo");
 							$result = mysql_query($query); 
 							return $result; 
-						} 
+						  } 
 						```
 
 						```
-						$emailaddresses = getDataFromDataSource(
-						"SELECT COUNT(*) AS emailaddressCount from adresboek
-						where emailaddress = '" . $_REQUEST["emailaddress"] ."'");
+						  $emailaddresses = getDataFromDataSource(
+						  "SELECT COUNT(*) AS emailaddressCount from adresboek
+						  where emailaddress = '" . $_REQUEST["emailaddress"] ."'");
 
-						$emailaddressesForJSON = array(); 
-						while( $row = mysql_fetch_array($emailaddresses)) {
+						  $emailaddressesForJSON = array(); 
+						  while( $row = mysql_fetch_array($emailaddresses)) {
 							array_push($emailaddressesForJSON, $row); 
-						} 
+						  } 
 						```
 						
 						```
-						$jsonText = json_encode( $emailaddressesForJSON ); 
-						echo $jsonText; 
+						  $jsonText = json_encode( $emailaddressesForJSON ); 
+						  echo $jsonText; 
 						?>
 						```
+						
+						* Notice **json_encode** (data is retrieved and returned in JSON format)
 					</textarea>
 				</section>
 

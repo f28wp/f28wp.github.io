@@ -191,18 +191,6 @@
 					</textarea>
 				</section>
 
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## What is HTML Web Storage?
-						
-						* Web storage is a means by which web applications can store data **locally** within the user's browser
-						
-						* Before HTML5 and **Web Storage** application data had to be stored in **cookies**
-						  - Not just cookies
-						
-					</textarea>
-				</section>
-				
 				<section data-markdown style="text-align: center;">
 					<textarea data-template>
 						## Web Storage
@@ -212,6 +200,28 @@
 					</textarea>
 				</section>
 				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## What is Web Storage?
+
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## What is Web Storage?
+						
+						* Web storage is a means by which web applications can store data **locally** within the user's **browser**
+						
+						* Before HTML5 and **Web Storage** application data had to be stored in **cookies**
+						  - Not just cookies
+						
+					</textarea>
+				</section>
+				
+				
+				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Web Storage
@@ -220,12 +230,19 @@
 						* Web storage is **key/value** on **web browsers**
 						  - stores user data locally on host running browser put it in silos correlated with web server domain or igins
 						* Only web pages from domain D can access D’s silo via web storage
-						  - localStorage stores **data persistently** for each web server 
-						  - sessionStorage stores data **sessionally** per server per browser instance
+						  - **localStorage** stores **data persistently** for each web server 
+						  - **sessionStorage** stores data **sessionally** per server per browser instance
 
 						
 					</textarea>
 				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## **Why** Web Storage?
+						
+					</textarea>
+				</section>	
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -234,7 +251,10 @@
 						* Web storage is more **secure**
 						* Large amounts of data stored locally
 						* Doesn't hinder website **performance**
-
+						
+						* Web storage avoids
+						  - size limits of cookies
+						  - security issues of cookie traffic with web server
 						
 					</textarea>
 				</section>		
@@ -254,6 +274,7 @@
 				</section>				
 	
 	
+				<!--
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Example Web Storage Form
@@ -277,7 +298,7 @@
 						```
 					</textarea>
 				</section>
-
+				-->
 
 					
 				<section data-markdown style="text-align: left;">
@@ -290,9 +311,16 @@
 					</textarea>
 				</section>
 
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+					## How do we know if Web Storage is supported?
+					
+					</textarea>
+				</section>
+				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					# Is Web Storage Supported?
+					## Is Web Storage Supported?
 					
 					```
 					if (window.localStorage) {
@@ -308,7 +336,7 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## Example 
+					## Example (local Storage)
 					
 					```
 					<form>
@@ -322,8 +350,9 @@
 					<script>
 					if (localStorage) { // Check if the localStorage object exists
 					  function savewb() { // Store data
-						localStorage.setItem("name", sName);
-						alert("Your first name is saved.");
+						var txt = document.getElementById('sName').value;
+						localStorage.setItem("name", txt);
+						alert("Your name is saved.");
 					  }
 
 					  function accesswb() { // Retrieve data
@@ -337,26 +366,29 @@
 				</textarea>
 				</section>
 
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/6j8wyhkL/5/embedded/html,js,result/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Example 
+						## Example (session Storage)
 						
-						* Sessional option using the URL "?session"
+						* **Sessional**
 
 						* Example defines **3 functions** for origin web server of web page
 						  - **savewb()** updates web storage with key/value 
 						  - **acesswb()** display keys and values in web storage
 						  - **clearwb()** removes key/value pairs from web storage
-						* Web storage avoids
-						  - size limits of cookies
-						  - security issues of cookie traffic with web server
+						
 					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Example 
+						## Example (session Storage)
 						
 						```
 						<form>
@@ -373,16 +405,14 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Example 
+						## Example (session Storage)
 					
 						
 						```
 						function savewb() {
-							var db = localStorage;
-							if ( window.location.href.indexOf("?session") != -1 )
-							    db = sessionStorage;
+							var db = sessionStorage;
 							if ( typeof(db) == "undefined" ) {
-								alert("no web storage available");
+								alert("no session web storage available");
 								return;
 							}
 							var key = document.getElementById("sKey").value;
@@ -411,6 +441,11 @@
 					</textarea>
 				</section>
 				
+				
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/t4cz5wbm/8/embedded/html,js,result/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
 
 
 				<section data-markdown style="text-align: center;">
@@ -423,11 +458,16 @@
 				</section>
 
 
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## What are Browser Cookies?
 
+					</textarea>
+				</section>
 					
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Cookies 
+						## Browser Cookies 
 
 						* Cookies are **small** packets of data stored in file space of web users
 						* Cookies contain
@@ -449,7 +489,7 @@
 						## Cookies 
 
 						* Cookies
-						  - avoid HTTP’s statelessness by storing data on client
+						  - avoid HTTP’s statelessness by storing **data on client**
 						  - are passed in Set-Cookie reply and Cookie request headers
 						  - are stored in user’s filespace or in browser’s volatile memory
 						* Cookies can be **manipulated** by 
@@ -464,8 +504,9 @@
 					<textarea data-template>
 						## Cookie Standards  
 
-						* There used to be 2 cookie standards - Netscape’s and RFC 2965.
+						* There used to be **2 cookie standards** - Netscape’s and RFC 2965.
 						* Combined reformed standard **RFC 6265** now governing cookie form
+						  - Cookie standards [(Details)](https://en.wikipedia.org/wiki/HTTP_cookie)
 						
 					</textarea>
 				</section>
@@ -585,9 +626,9 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## Handling Cookies in Web Pages
+					## Handling Cookies in Web Pages (**Header**)
 					
-					* Cookie can be set by adding directive to header of HTML page
+					* Cookie can be set by adding directive to **header of HTML page**
 					```
 					<meta http-equiv="Set-Cookie" content="name=Harry; Max-age=86400">
 					```
@@ -608,6 +649,8 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
+					
+					## Handling Cookies in Web Pages (**Javascript**)
 
 					* Cookies are set in JavaScript in following manner:
 					
@@ -615,7 +658,7 @@
 					document.cookie = "name=value; Expires=...; Path=...; Domain=...";
 					```
 
-					Consider the Javascript function
+					Consider the Javascript (**helper**) function
 					
 					```
 					function Cookie(name, value, days) {
@@ -749,7 +792,7 @@
 					## Handling Cookies with **Node.js**
 					
 					* **Module** cookie-parser uses req.cookies to get cookie details
-					  - ```require('set-cookie')```
+					  - **require('set-cookie')**
 					* Module set-cookie lets setCookie() set a cookie’s name, value etc
 					* Install both modules in addition to the Express module
 
@@ -841,7 +884,7 @@
 												
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## Explit Consent 
+					## **Explit** Consent 
 					
 					* Consent should be **explicit** and **prior** if possible
 					  - **freely given** specific and informed indication of a data subject’s wishes by which he signifies his agreement to personal data relating to him being processed 
@@ -860,7 +903,7 @@
 					<textarea data-template>
 					## Limitations
 					
-					* Informed specific consent isn’t (supposed to be) needed for
+					* Informed **consent** is **not** (supposed to be) needed for
 					  - a shopping cart
 					  - security requirement like authentication to protect user’s privacy
 					* Needed for **advertising**, analysing page usage, **customisation**

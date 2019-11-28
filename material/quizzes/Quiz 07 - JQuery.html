@@ -1,0 +1,103 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="./quiz.css">
+<script src="./prettyprint/run_prettify.js"></script>
+
+
+
+</head>
+<body>
+
+<h1>Revision Quiz</h1>
+
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+
+<script>
+  const myQuestions = [
+    {
+      question: 
+	  `
+	  Which of the following is correct about jQuery?
+	  `,
+      answers: {
+		a: `jQuery is a fast and concise JavaScript Library created by John Resig in 2006 with a nice motto - Write less, do more`,
+		b: `jQuery simplifies HTML document traversing, event handling, animating, and Ajax interactions for rapid web development`,
+		c: `jQuery is a JavaScript toolkit designed to simplify various tasks by writing less code`,
+		d: `All of the above`,
+      },
+      correctAnswer: "d"
+    }
+	,
+    {
+      question: 
+	  `
+	  Which of the following jQuery selector selects element with the given element id some-id?
+	  `,
+      answers: {
+		a: `$('some-id')`,
+		b: `$('#some-id')`,
+		c: `$('.some-id')`,	
+		d: `None of the above`,
+      },
+      correctAnswer: "b"
+    }
+	,
+    {
+      question: 
+	  `
+	  Which of the following jQuery method sets the html contents of an element?
+	  `,
+      answers: {
+		a: `html( val )`,
+		b: `setHtml( val )`,
+		c: `setInnerHtml( val )`,	
+		d: `None of the above`,
+      },
+      correctAnswer: "a"
+    }
+	,
+    {
+      question: 
+	  `
+	  Which of the following jQuery method sets the height property of an element?
+	  `,
+      answers: {
+		a: `setCSSHeight( value )`,
+		b: `setHeight( value)`,
+		c: `height( value )`,	
+		d: `None of the above`,
+      },
+      correctAnswer: "c"
+    }
+
+	
+  ];
+</script>
+<script src="./quiz.js"></script>
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20; text-align: left;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+    </div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148326645-1');
+</script>
+
+</body>
+</html>

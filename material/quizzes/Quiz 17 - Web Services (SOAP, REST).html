@@ -1,0 +1,89 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="./quiz.css">
+<script src="./prettyprint/run_prettify.js"></script>
+
+
+
+</head>
+<body>
+
+<h1>Revision Quiz</h1>
+
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+
+<script>
+  const myQuestions = [
+    {
+      question: 
+	  `
+	  Which of the following is correct about resource representation in REST?
+	  `,
+      answers: {
+		a: "REST uses various representations to represent a resource where text, JSON, XML",
+		b: "XML and JSON are the most popular representations of resources",
+		c: "Both of the above",
+		d: "None of the above",
+      },
+      correctAnswer: "c"
+    }
+	,
+    {
+      question: 
+	  `
+	  Which of the following protocol is used by RESTful web services as a medium of communication between client and server?
+	  `,
+      answers: {
+		a: `HTTP`,
+		b: `FTP`,
+		c: `Gopher`,	
+		d: `None of the above`,
+      },
+      correctAnswer: "a"
+    }
+	,
+    {
+      question: 
+	  `
+	  Which of the following HTTP Status code means BAD REQUEST, states that invalid input is provided e.g. validation error, missing data?
+	  `,
+      answers: {
+		a: `400`,
+		b: `401`,
+		c: `404`,	
+		d: `409`,
+      },
+      correctAnswer: "a"
+    }
+
+	
+  ];
+</script>
+<script src="./quiz.js"></script>
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20; text-align: left;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+    </div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148326645-1');
+</script>
+
+</body>
+</html>

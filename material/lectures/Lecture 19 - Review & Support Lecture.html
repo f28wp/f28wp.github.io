@@ -61,21 +61,521 @@
 
 						* Questions
 						* Revisit Topics 
-						* Coursework Exam
+						* Revision Exam
 						
 					</textarea>
 				</section>
 				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What will be the output of variable x,y,z ?
+						
+						```
+							var x=10;
+							var y=x++;
+							var z=++x;
+							console.log(x,y,z);
+						```
+						* A: x:12, y:10, z:12
+						* B: x:12, y:11, z:12
+						* C: x:12, y:10, z:11
+						* D: x:11, y:11, z:10
 
-				<section style="text-align: left;">
-					<h2>To do this week ...</h2>
-					<p>
-						&bull; Read over the lectures <br>
-						&bull; Review the revision questions <br>
-						&bull; Work through tutorial practicals <br>
-						&bull; Experiment (get into good habits) <br>
-					</p>
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* Answer **A**: x:12, y:10, z:12
+						
+
+						</textarea>
+					</section>
 				</section>
+				
+								
+				<section>
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What will the output be?
+						
+						```
+							if(0) console.log(‘I am 0’);
+							else if(10) console.log(‘I am 10’);
+							else if(100) console.log(‘I am 100’);
+							else console.log(‘Nothing’);
+						```
+						* A: I am 0
+						* B: I am 10
+						* C: I am 100
+						* D: Nothing
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* Answer **B**: I am 10
+						
+						 The output of this code is I am 10
+						
+						</textarea>
+					</section>
+				</section>
+				
+
+								
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What will the output be?
+						
+						```
+							alert( 0==-0 );
+						```
+						* A: Undefined
+						* B: Nan
+						* C: True
+						* D: False
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **C**: True
+						
+						</textarea>
+					</section>
+				</section>
+
+								
+				<section>
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What will the output be ('===')?
+						
+						```
+							alert( 0===-0 );
+						```
+						* A: Undefined
+						* B: Nan
+						* C: True
+						* D: False
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **C**: True
+						
+						</textarea>
+					</section>
+				</section>
+
+								
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What will the output be?
+						
+						```
+							var a = "42";
+							var b = 42;
+
+							console.log( a == b  );  
+							console.log( a === b );      
+						```
+						* A: true, false
+						* B: false true 
+						* C: true  true 
+						* D: false false 
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **A**: true false
+						
+						```
+						alert( a == b  );        // true - "42" implicitly coerced to 42 here
+						alert( a === b );        // false
+						```
+						
+						</textarea>
+					</section>
+				</section>
+
+								
+				<section>
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What will the output be?
+						
+						```
+							var x; // Declaration
+							alert(typeof x === 'undefined')    
+						```
+						* A: false
+						* B: true
+						* C: undefined
+						* D: NaN 
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **B:** true
+						
+						</textarea>
+					</section>
+				</section>
+
+
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What will the output be?
+						
+						```
+							function func() {
+							  var cc = "hello";
+							}
+
+							alert(cc);  
+						```
+						* A: "hello"
+						* B: udefined
+						* C: throws error
+						* D: NaN
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **C:** throws error
+						
+						```
+						alert(cc); // throws error  
+						```
+						
+						</textarea>
+					</section>
+				</section>
+				
+
+				<section>
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What will the output be?
+						
+						```
+							const clothes = ['jacket', 't-shirt'];
+							clothes.length = 0;
+
+							alert( clothes[0] ); // => ??? 
+						```
+						* A: 'jacket'
+						* B: undefined
+						* C: throws error
+						* D: 0
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **B**: undefined
+
+						------
+						
+						JavaScript executes clothes.length = 0, all clothes items are deleted.
+						 
+						 
+						
+						</textarea>
+					</section>
+				</section>				
+				
+				
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What will the output be?
+						
+						```
+							const length = 4;
+							const numbers = [];
+							for (var i = 0; i < length; i++);{
+							  numbers.push(i + 1);
+							}
+
+							alert( numbers ); // => ???
+						```
+						* A: 1,2,3,4
+						* B: 5
+						* C: undefined
+						* D: -1
+						* E: 1,2,3
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **B**: 5
+
+						------
+						
+						```
+						const length = 4;
+						const numbers = [];
+						for (var i = 0; i < length; i++);{ <--- (notice semi-colon)
+						  numbers.push(i + 1);
+						}
+
+						alert( numbers );
+						```
+						 
+						
+						</textarea>
+					</section>
+				</section>	
+				
+
+
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What will the output be?
+						
+						```
+							alert( myVar );   // => ???
+							alert( myConst ); // => ???
+
+							var myVar = 'value';
+							const myConst = 3.14;
+						```
+						* A: undefined, undefined
+						* B: 'value', 3.14
+						* C: undefined, ReferenceError
+						* D: myVar, myConst
+						* E: 'value', undefined
+						* f: ReferenceError, ReferenceError
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **C**: undefined, 3.14
+						 
+						
+						</textarea>
+					</section>
+				</section>	
+				
+				
+
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						Which is NOT true with respect to cross-site scripting (XSS) vulnerabilities?
+						
+						* A: The attacker may be able to run arbitrary code on the user's machine
+						* B: The attacker can exploit a XSS vulnerability in order to impersonate a user
+						* C: Reflected XSS vulnerabilities can only be triggered if the user performs a certain action
+						* D: The user cannot do anything to protect himself against reflected XSS on a page that he normally trusts
+						* E: An XSS payload may use AJAX requests to persistently infect multiple pages on the host
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **D**: The user cannot do anything to protect himself against reflected XSS on a page that he normally trusts
+						 
+						
+						</textarea>
+					</section>
+				</section>	
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						Which of the following is correct about resource representation in REST?
+						
+						* A: REST uses various representations to represent a resource where text, JSON, XML
+						* B: XML and JSON are the most popular representations of resources
+						* C: Both of the above
+						* D: None of the above
+
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **C**: Both of the above
+						 
+						
+						</textarea>
+					</section>
+				</section>	
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						Which of the following protocol is used by RESTful web services as a medium of communication between client and server?
+						
+						* A: HTTP
+						* B: FTP
+						* C: Gopher
+						* D: None of the above
+
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **A**: HTTP
+
+						</textarea>
+					</section>
+				</section>	
+
+				<section>
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What is REST?
+
+						* A: Representational State Transfer
+						* B: Representational Service Transfer
+						* C: Realy State Transfer
+						* D: Representational Server Transfer
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **A**: Representational State Transfer
+
+						</textarea>
+					</section>
+				</section>	
+
+
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What is the attack technique used to exploit web sites by altering backend database queries through inputting manipulated queries?
+
+						* A: Blind XML Injection
+						* B: LDAP Injection
+						* C: XML Injection
+						* D: SQL Injection
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **D**: SQL Injection
+
+						</textarea>
+					</section>
+				</section>	
+				
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What is phishing?
+
+						* A: Data transfer protocol
+						* B: Email Scam
+						* C: Network scandal
+						* D: Cross domain scandal
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* **B**: Email Scam
+
+						</textarea>
+					</section>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## To do this week ...
+
+						* Read over the lectures
+						* Review the revision questions 						
+						
+					</textarea>
+				</section>
+				
 				
 
 			</div>

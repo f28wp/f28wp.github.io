@@ -3,18 +3,65 @@ html{
 }
 
 
-body{
-	font-size: 20px;
-	font-family: 'Work Sans', sans-serif;
-	color: #333;
-  font-weight: 300;
+gethome333{
+	//float: left;
+	//font-size: 20px;
+	//font-family: 'Work Sans', sans-serif;
+//	color: #333;
+  //font-weight: 300;
   //text-align: left;
    // background-color: #f8f6f0;
-  background: url("../lectures/images/back.png");
-	background-position: right 0% bottom 25%;
+    background: url("../lectures/images/back.png");
+	background-position: right 0% bottom 5px;
 	background-repeat: no-repeat;
-	background-size: contain;	
+	//background-size: contain;	
+	//overflow-y: scroll;
+	//position: absolute;
 }
+
+
+.containera{
+  height:100%;
+  border:1px solid red;
+  margin-top:5px;
+  margin-left:5px;
+  display:block;
+}
+.footera{
+  height:10px;
+  position:relative;
+  float:left;
+  border:1px solid blue;
+  bottom: -webkit-calc(-100% + 40px);
+  bottom:calc(-100% + 40px);
+}
+
+
+.gethome
+{
+	top: 100%;
+transform: translateY(-100%);
+
+	position: absolute; 
+	bottom: 5px; 
+	left: 5px; 
+	margin-left: 0px; 
+	z-index: 20; 
+	background-color: red;
+}
+
+
+.gethome22
+{
+	position: relative; 
+	bottom: 5px; 
+	left: 5px; 
+	margin-left: 0px; 
+	z-index: 20; 
+	text-align: left;
+	background-color: red;
+}
+
 
 
 body{
@@ -38,6 +85,10 @@ body{
 .center{
   margin: 0 auto;
 }
+.center2{
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
 
 .btn{
   margin: 8px 4px 0;  
@@ -57,10 +108,12 @@ body{
 }
 .word{
   text-align: right;  
-  width: 100px;
+  /*width: 100px;*/
 }
 .clue{
-  width: 500px;
+   width: 700px; 
+   background-color: rgb(250,250,250) !important; 
+   word-wrap: break-word;
 }
 
 

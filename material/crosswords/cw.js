@@ -133,8 +133,10 @@ function GetWordsFromInput(){
   wordArr = [];  
   for(var i=0,val,w=document.getElementsByClassName("word");i<w.length;i++){
     val = w[i].value.toUpperCase();
+	val = val.trim();
     if (val !== null && val.length > 1){wordArr.push(val);}
   }
+  wordArr.sort();
 }
 
 
@@ -313,6 +315,9 @@ function AddWordToBoard(){
   wordsActive[pushIndex].x = matchData.x;
   wordsActive[pushIndex].y = matchData.y;
   wordsActive[pushIndex].dir = matchData.dir;
+  
+  //console.log( wordsActive[pushIndex].char );
+  
   
   for(i = 0, len = wordsActive[pushIndex].char.length; i < len; i++){
     var xIndex = matchData.x,

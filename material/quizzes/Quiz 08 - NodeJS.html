@@ -1,0 +1,183 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="./quiz.css">
+<script src="./prettyprint/run_prettify.js"></script>
+
+
+
+</head>
+<body>
+
+<h1>Revision Quiz</h1>
+
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+
+<script>
+  const myQuestions = [
+    {
+      question: 
+	  `
+	  What is Node.JS?
+	  `,
+      answers: {
+		a: `Node.js is a web server`,
+		b: `Node.js is a JavaScript based framework/platform built on Google Chrome's JavaScript V8 Engine`,
+		c: `Node.js is a java based framework`,
+		d: `None of the above`
+      },
+      correctAnswer: "b"
+    }
+	,
+    {
+      question: 
+	  `
+	  What is Callback?
+	  `,
+      answers: {
+		a: `Callback is an asynchronous equivalent for a function`,
+		b: `Callback is a technique in which a method call back the caller method`,
+		c: `Both of the above`,	
+		d: `None of the above`
+      },
+      correctAnswer: "a"
+    }
+	,
+    {
+      question: 
+	  `
+	  Which of the following code gets length of a buffer buf?
+	  `,
+      answers: {
+		a: `buf.length`,
+		b: `buf.size`,
+		c: `buf.length()`,	
+		d: `buf.size()`
+      },
+      correctAnswer: "a"
+    }
+	,
+    {
+      question: 
+	  `
+	  What is Express?
+	  `,
+      answers: {
+		a: `Express is a application framework that provides a robust set of features to develop desktop based applications`,
+		b: `Express is a minimal and flexible Node.js web application framework that provides a robust set of features to develop web and mobile applications`,
+		c: `Both of the above`,	
+		d: `None of the above`
+      },
+      correctAnswer: "b"
+    }
+	,
+    {
+      question: 
+	  `
+	  Node.js is ___________ Language.
+	  `,
+      answers: {
+		a: `Server Side`,
+		b: `Client Side`,
+		c: `Both`,	
+		d: `None`
+      },
+      correctAnswer: "a"
+    }
+	,
+    {
+      question: 
+	  `
+	  Is node js multithreaded?
+	  `,
+      answers: {
+		a: `Yes`,
+		b: `No`
+      },
+      correctAnswer: "b"
+    }
+	,
+    {
+      question: 
+	  `
+	  Node Js is _________
+	  `,
+      answers: {
+		a: `Asynchronous`,
+		b: `Synchronous`
+      },
+      correctAnswer: "a"
+    }
+	,
+    {
+      question: 
+	  `
+	  Which function is used to include modules in Node Js
+	  `,
+      answers: {
+		a: `include();`,
+		b: `require();`,
+		c: `attach();`,
+		d: `import();`
+      },
+      correctAnswer: "b"
+    }
+	,
+    {
+      question: 
+	  `
+	  For What npm stands?
+	  `,
+      answers: {
+		a: `Node Project Manager`,
+		b: `Node Package Manager`,
+		c: `New Project Manager`,
+		d: `New Package Manager`
+      },
+      correctAnswer: "b"
+    }
+	,
+    {
+      question: 
+	  `
+	  Node.js uses an event-driven, non-blocking I/O model ?
+	  `,
+      answers: {
+		a: `True`,
+		b: `False`
+      },
+      correctAnswer: "a"
+    }
+	
+
+
+
+  ];
+</script>
+<script src="./quiz.js"></script>
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20; text-align: left;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+    </div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148326645-1');
+</script>
+
+</body>
+</html>

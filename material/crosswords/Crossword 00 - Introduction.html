@@ -12,10 +12,14 @@
   <button class="btn" id="btnCreate" hidden="hidden">Create</button>
   <button class="btn" id="btnPlay" hidden="hidden">Play</button>
   
-  <button class="btn" id="btnCheck">Check</button>
-  <br/><br/>  
+  
+  <br/> 
 
-  <div class="center crossword" id="crossword"></div><br/>
+  <div class="center crossword" id="crossword"></div>
+
+  <button class="btn" id="btnCheck">Check Answer</button>
+  <br>
+  <br>
 
   <div class="center">
 
@@ -41,7 +45,7 @@
 
     <div class="line">
       <input class="word" type="text" value="browser"/>
-      <input class="clue" value="A web browser is a program which enables you to see web pages on the Internet" />
+      <input class="clue" value="A web _______ is a program which enables you to see web pages on the Internet" />
     </div>
 	
 	<div class="line">
@@ -57,6 +61,7 @@
 
 
   </div>
+
 </div>
 
 
@@ -64,5 +69,12 @@
 
 
 <script src="cw.js"></script>
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20; text-align: left;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+    </div>
+</div>
+
 
 </html>

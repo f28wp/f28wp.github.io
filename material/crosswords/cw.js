@@ -61,6 +61,7 @@ function Play(){
 		//console.log( letterArr[i].childNodes.length );
 		var aa = document.createElement("input");
 		aa.className = 'char';
+		aa.maxLength = 1;
 		letterArr[i].appendChild(aa);
 	}
 	

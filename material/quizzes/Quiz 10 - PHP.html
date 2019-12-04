@@ -1,0 +1,120 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="./quiz.css">
+<script src="./prettyprint/run_prettify.js"></script>
+
+
+
+</head>
+<body>
+
+<h1>Revision Quiz</h1>
+
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+
+<script>
+  const myQuestions = [
+    {
+      question: 
+	  `
+	  In PHP which of the following keyword terminates the for loop or switch statement and transfers execution to the statement immediately following the for loop or switch?
+	  `,
+      answers: {
+		a: `break`,
+		b: `continue`,
+		c: `end`,
+		d: `stop`
+      },
+      correctAnswer: "a"
+    }
+	,
+    {
+      question: 
+	  `
+	 What will be printed?
+*code*
+if ('2' == '02') {  
+ echo 'true';
+} else {
+ echo 'false';
+}
+*code*
+	  `,
+      answers: {
+		a: `true`,
+		b: `false`
+      },
+      correctAnswer: "a"
+    }
+	,
+    {
+      question: 
+	  `
+	  What will be printed?
+*code*
+$a = array(
+ null => 'a',
+ true => 'b',
+ false => 'c',
+ 0 => 'd',
+ 1 => 'e',
+ '' => 'f'
+);
+
+echo count($a);
+*code*
+	  `,
+      answers: {
+		a: `2`,
+		b: `3`,
+		c: `4`,	
+		d: `5`,
+      },
+      correctAnswer: "b"
+    }
+	,
+    {
+      question: 
+	  `
+	  What is a correct way of defining constants in PHP?
+	  `,
+      answers: {
+		a: `constant $var`,
+		b: `const $var`,
+		c: `constant ($var)`,	
+		d: `define("constant");`,
+      },
+      correctAnswer: "d"
+    }
+
+	
+  ];
+</script>
+<script src="./quiz.js"></script>
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20; text-align: left;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+    </div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148326645-1');
+</script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="./quiz.css">
+<script src="./prettyprint/run_prettify.js"></script>
+
+
+
+</head>
+<body>
+
+<h1>Revision Quiz</h1>
+
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+
+<script>
+  const myQuestions = [
+    {
+      question: 
+	  `
+	  What does SQL stand for?
+	  `,
+      answers: {
+		a: `Structured Question Language`,
+		b: `Strong Question Language`,
+		c: `Storage Query Language`,
+		d: `Structured Query Language`
+      },
+      correctAnswer: "c"
+    }
+	,
+    {
+      question: 
+	  `
+	  Which SQL statement is used to extract data from a database?
+	  `,
+      answers: {
+		a: `EXTRACT`,
+		b: `GET`,
+		c: `SELECT`,	
+		d: `OPEN`,
+      },
+      correctAnswer: "c"
+    }
+	,
+    {
+      question: 
+	  `
+	  Consider the following schema, which of the following query would display names of all the students whose email ids are not provided?
+	  
+*code*
+STUDENTS(student_code, first_name, last_name, email, 
+         phone_no, date_of_birth, honours_subject, percentage_of_marks);
+*code*
+	  `,
+      answers: {
+		a: `select first_name, last name from students where email = 0;`,
+		b: `select first_name, last name from students where email = ‘ ‘;`,
+		c: `select first_name, last name from students where email is null;`,	
+		d: `select first_name, last name from students where email = ‘null’;`,
+      },
+      correctAnswer: "c"
+    }
+	
+  ];
+</script>
+<script src="./quiz.js"></script>
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20; text-align: left;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+    </div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148326645-1');
+</script>
+
+</body>
+</html>

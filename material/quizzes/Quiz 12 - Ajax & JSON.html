@@ -1,0 +1,156 @@
+<html>
+<head>
+
+<link rel="stylesheet" href="./quiz.css">
+<script src="./prettyprint/run_prettify.js"></script>
+
+
+
+</head>
+<body>
+
+<h1>Revision Quiz</h1>
+
+<button id="previous">Previous Question</button>
+<button id="next">Next Question</button>
+<button id="submit">Submit Quiz</button>
+<div id="results"></div>
+
+<div class="quiz-container">
+  <div id="quiz"></div>
+</div>
+
+<script>
+  const myQuestions = [
+    {
+      question: 
+	  `
+	  JSON stands for ________________
+	  `,
+      answers: {
+		a: `Java Standard Output Network`,
+		b: `JavaScript Output Name`,
+		c: `Java Source Open Network`,
+		d: `JavaScript Object Notation`
+      },
+      correctAnswer: "d"
+    }
+	,
+    {
+      question: 
+	  `
+	  Which is correct format of writting JSON name/value pair?
+	  `,
+      answers: {
+		a: `"name" : "value"`,
+		b: `name = "value"`,
+		c: `name = 'value'`,
+		d: `'name : value'`
+      },
+      correctAnswer: "a"
+    }
+	,
+    {
+      question: 
+	  `
+	  Which of the following is not a type in JSON?
+	  `,
+      answers: {
+		a: `date`,
+		b: `Object`,
+		c: `Array`,	
+		d: `string`
+      },
+      correctAnswer: "a"
+    }
+	,
+    {
+      question: 
+	  `
+	  What extension in used to save a JSON file?
+	  `,
+      answers: {
+		a: `.js`,
+		b: `.json`,
+		c: `.javaN`,	
+		d: `.on`
+      },
+      correctAnswer: "b"
+    }
+	,
+    {
+      question: 
+	  `
+	  Can you use a double quote inside a JSON string?
+	  `,
+      answers: {
+		a: `No, you should use single quotes`,
+		b: `Yes, if you use the ascii code`,
+		c: `Yes, if it is escaped like ( \\" )`,	
+		d: `Yes, you can use it without any special treatment`
+      },
+      correctAnswer: "c"
+    }
+	,
+    {
+      question: 
+	  `
+	  Is JSON Case sensitive ?
+	  `,
+      answers: {
+		a: `Yes`,
+		b: `No`
+      },
+      correctAnswer: "a"
+    }
+	,
+    {
+      question: 
+	  `
+	  What two main structures compose JSON?
+	  `,
+      answers: {
+		a: `Arrays and Objects`,
+		b: `Key and value`,
+		c: `Class and Object`,
+      },
+      correctAnswer: "a"
+    }
+    ,
+    {
+      question: 
+	  `
+	  How do JSON provide Internationalization?
+	  `,
+      answers: {
+		a: `Using keys`,
+		b: `Using Unicode`,
+		c: `Using datatype`,
+		d: `Using lang`,
+      },
+      correctAnswer: "b"
+    }
+
+	
+  ];
+</script>
+<script src="./quiz.js"></script>
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20; text-align: left;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+    </div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148326645-1');
+</script>
+
+</body>
+</html>

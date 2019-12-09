@@ -97,6 +97,22 @@ padding: 0;
       to {background-position-x: -600px;}
     }
 </style>
+
+
+<style>
+.cursor-keys img {
+    position: absolute;
+    left: 10;
+    bottom: 0;
+	width: 100pt;
+}
+</style>
+
+<div class="cursor-keys">
+    <img src="./imgs/cursor.png"/>
+</div>
+
+
 	
 <div id="bomb"></div>
 
@@ -188,7 +204,9 @@ padding: 0;
 
 
 
-<div id="tank"></div>
+<div id="playertank" class="tank"></div>
+
+<div id="enemytank" class="tank"></div>
 
 <div id="snackbar">Some text some message..</div>
 
@@ -244,7 +262,7 @@ padding: 0;
 
 <style>
 
-#tank {
+.tank {
   position: absolute;
   left: 100px;
   top:  100px;
@@ -293,12 +311,22 @@ border-style: dotted !important;
 <script>
 
 
-var prev = {x:300, y:100};
+//var prev = {x:300, y:100};
 
 var player = {
+	id: "playertank",
+	prev:{x:300, y:500}, 
 	pos: {x:300, y:100},
 	dir: {x:0, y:0}
 }
+
+var enemy = {
+    id: "enemytank",
+	prev:{x:300, y:500}, 
+	pos: {x:300, y:500},
+	dir: {x:0, y:0},
+	target: {x:600, y:200}
+};
 
 document.onkeypress = function()
 {
@@ -332,27 +360,27 @@ document.onkeydown = keyDown;
 
 
 
-function addTrack(ang)
+function addTrack(obj, ang)
 {
-	var dist = Math.abs( prev.x - player.pos.x ) +
-			   Math.abs( prev.y - player.pos.y );
+	var dist = Math.abs( obj.prev.x - obj.pos.x ) +
+			   Math.abs( obj.prev.y - obj.pos.y );
 			   
 	if ( dist < 71.0 )
 	{
 		return;
 	}
 	
-	console.log( ang );
+	//console.log( ang );
 	
-	prev.x = player.pos.x;
-	prev.y = player.pos.y;
+	obj.prev.x = obj.pos.x;
+	obj.prev.y = obj.pos.y;
 	
 	var track = document.createElement("div");
 	//track.id = "track"; 
 	track.style.backgroundPosition = "-589px -80px";
 	track.style.position = "absolute";
-	track.style.top      = (player.pos.y - 8)+ 'px'; // "100px";
-	track.style.left     = (player.pos.x - 1) + "px"; //"200px";
+	track.style.top      = (obj.pos.y - 8)+ 'px'; // "100px";
+	track.style.left     = (obj.pos.x - 1) + "px"; //"200px";
 	track.style.width     = "82";
 	track.style.height    = "102";
 	track.style.margin   = '0px';
@@ -417,53 +445,57 @@ function shoot()
 	//alert( 'aa' );
 }
 
-function calcAngleFromDir()
+function calcAngleFromDir( obj, dx, dy )
 {
 	
 	//obj.style.transform="rotate(7deg)"
 	
-	if ( Math.abs( player.dir.x ) < 0.01 &&
-	     Math.abs( player.dir.y ) < 0.01 )
+	if ( Math.abs( dx ) < 0.01 &&
+	     Math.abs( dy ) < 0.01 )
 		 {
 			return;
 		 }
 	
 
 	
-	var len = Math.abs( player.dir.x + player.dir.y );
+	var len = Math.abs( dx ) + Math.abs( dy );
 	
-	var v1 = {x:0,                y:-1               };
-	var v2 = {x:player.dir.x/len, y:player.dir.y/len };
+	var v1 = {x:0, y:-1 };
+	var v2 = {x:dx/len, y:dy/len };
 	
-
+	obj.dir.x = v2.x;
+	obj.dir.y = v2.y;
 	
 	var cx = cross( v1, v2 );
 	sn = sign( cx );
 	
 	var dot = v1.x*v2.x + v1.y*v2.y;
 	var ang = Math.acos( dot );
-	ang = toDegrees( ang ) * sn ;
+	ang = toDegrees( ang ) * sn;
+	
+	var div = document.getElementById( obj.id );
+	div.style.transform="rotate(" + ang + "deg)"
+	//console.log( "dot: " + dot + ", ang:" +  ang + ", cross:" + cx );
+
 
 	
-	var obj = document.getElementById( "tank" );
-	obj.style.transform="rotate(" + ang + "deg)"
-	//console.log( "dot: " + dot + ", ang:" +  ang + ", cross:" + cx );
-	
+	if ( obj.id == "player" )
+	{
 	shot.dir.x = v2.x;
 	shot.dir.y = v2.y;
 	shot.ang   = ang;
-	
+	}
 	//console.log( ang );
 	
 	//document.getElementById( "track" ).style.transform = "rotate(" + ang + "deg) scale( 0.7, 0.7 )";
-	addTrack( ang );
+	addTrack( obj, ang );
 }
 
 
 
 function keyUp(e)
 {
-	var obj = document.getElementById( "tank" );	
+	var obj = document.getElementById( "playertank" );	
 	obj.classList.add( "paused" );
 }
 
@@ -474,13 +506,15 @@ function keyDown(e) {
 
     e = e || window.event;
 
-	player.dir = {x:0, y:0};
+	//player.dir = {x:0, y:0};
+	
+	var delta = {x:0, y:0};
 	
 	var s = 10;
-    if (e && e.keyCode == '38') { player.dir.y -= s; } // up arrow
-    if (e && e.keyCode == '40') { player.dir.y += s; } // down arrow
-    if (e && e.keyCode == '37') { player.dir.x -= s; } // left arrow
-    if (e && e.keyCode == '39') { player.dir.x += s; } // right arrow
+    if (e && e.keyCode == '38') { delta.y -= s; } // up arrow
+    if (e && e.keyCode == '40') { delta.y += s; } // down arrow
+    if (e && e.keyCode == '37') { delta.x -= s; } // left arrow
+    if (e && e.keyCode == '39') { delta.x += s; } // right arrow
 	if (e && e.keyCode == '27') { 
 		if ( dialogStack.length <= 0 )
 		{
@@ -488,14 +522,18 @@ function keyDown(e) {
 		}
 	}
 	if (e && e.keyCode == '32') { shoot(); } // space
-	player.pos.x += player.dir.x;
-	player.pos.y += player.dir.y;
 	
-	calcAngleFromDir();
 	
-	var obj = document.getElementById( "tank" );
+	player.pos.x += delta.x;
+	player.pos.y += delta.y;
+	
+	calcAngleFromDir(player, delta.x, delta.y);
+	
+	var obj = document.getElementById( player.id );
 	obj.style.left = player.pos.x + "px";
 	obj.style.top  = player.pos.y + "px";
+	
+	//console.log( player.pos.x );
 	
 	obj.classList.remove( "paused" );
 	//document.getElementById( "track" ).style.left = player.pos.x + "px";
@@ -620,6 +658,44 @@ snackBarMessage("Welcome to web tanks...");
 keyDown(null);
 keyUp(null);
 
+
+var cursorX;
+var cursorY;
+document.onmousemove = function(e){
+    cursorX = e.pageX;
+    cursorY = e.pageY;
+}
+
+function enemyAI()
+{
+	//bullet.style.top       = (player.pos.y + 6) + "px";
+	//bullet.style.left      = (player.pos.x + 24) + "px";
+	
+	enemy.target.x = cursorX;
+	enemy.target.y = cursorY;
+
+	var dx = (enemy.target.x - (enemy.pos.x - 24) );
+	var dy = (enemy.target.y - (enemy.pos.y - 160) );
+
+	//console.log( cursorX, cursorY );
+
+	calcAngleFromDir( enemy, dx, dy );
+	
+	enemy.pos.x = -100;
+	
+	//enemy.pos.x = enemy.pos.x + dx * 0.05;
+	//enemy.pos.y = enemy.pos.y + dy * 0.05;
+	
+	var div = document.getElementById( "enemytank" );
+	div.style.left = enemy.pos.x;
+	div.style.top  = enemy.pos.y;
+	
+	//console.log( enemy.pos.x );
+	
+	
+	
+}
+
 function animationLoop()
 {
 	for (var kk=0; kk<bullets.length; ++kk)
@@ -631,8 +707,9 @@ function animationLoop()
 		
 		bb.style.left = bullets[kk].pos.x + 'px';
 		bb.style.top  = bullets[kk].pos.y + 'px';
-		
 	}
+	
+	enemyAI();
 }
 
 setInterval(animationLoop, 100);

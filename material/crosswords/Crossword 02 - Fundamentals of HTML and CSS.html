@@ -12,104 +12,45 @@
 <script type="text/javascript">
 window.onload = function(){
 
-	const myQuestions = [
+    const myQuestions = [
     {
-      clue: "Title: Web ______________",
-      answer: "programming"
+      clue: `HTML for adding a background color: <_______ style="background-color:yellow;"> `,
+      answer: "body"
     }
-	,
+    ,
     {
-      clue: "Git is an open-source _________ control system",
-      answer: "version"
+      clue: `<h1> HTML element for the largest __________`,
+      answer: "heading"
     }
-	,
-	{
-	  clue: "HTML stands for Hyper _____ Markup Language",
-	  answer: "text"
-	}
-	,
-	{
-	  clue: "_________ Wide Web",
-	  answer: "world"
-	}
-	,
-	{
-	  clue: "A web _______ is a program which enables you to see web pages on the Internet",
-	  answer: "browser"
-	}
-	,
-	{
-	  clue: "URL stands for _________ Resource Locator",
-	  answer: "universal"
-	}
-	,
-	{
-	  clue: "ISP stands for _________ Service Provider",
-	  answer: "internet"
-	}
-	,
-	{
-	  clue: "A programming language used for creating web pages",
-	  answer: "html"
-	}
-	,
-	{
-	  clue: "A computer on a network that runs specialized software and stores information in order to 'serve' it to the other networked computers",
-	  answer: "server"
-	}
-	,
-	{
-	  clue: "Graphics interchange format, image file format commonly used for images on the web (allow animation)",
-	  answer: "gif"
-	}
-	,
-	{
-	  clue: "A collection of webpages",
-	  answer: "website"
-	}
-	,
-	{
-	  clue: "HTML object that allows you to jump to a new location when click or tap it",
-	  answer: "link"
-	}
+    ,
+    {
+      clue: `Open a link in a new tab/browser window: <a href="url" ________="_blank">`,
+      answer: "target"
+    }
+    ,
+    {
+      clue: `HTML for making a checkbox: <_________ type="checkbox">`,
+      answer: "input"
+    }
+    ,
+    {
+      clue: `HTML element that defines the title of a document`,
+      answer: "title"
+    }
 	];
 	
-	/*
-	const myQuestions = [
-    {
-      clue: "Man's best friend",
-      answer: "dog"
-    }
-	,
-    {
-      clue: "Likes to chase mice",
-      answer: "cat"
-    }
-	,
-	{
-	  clue: "Flying mammal",
-	  answer: "bat"
-	}
-	,
-	{
-	  clue: "Has a trunk",
-	  answer: "elephant"
-	}
-	,
-	{
-	  clue: "Large marsupial",
-	  answer: "kangaroo"
-	}
-	];
-	*/
 	
 	var words = [];
 	var clues = [];
 	
 	for (var aa=0; aa<myQuestions.length; aa++)
 	{
+		var wrd = myQuestions[aa].clue
+		wrd = wrd.replace(`<`, `&lt;`);
+		wrd = wrd.replace(`>`, `&gt;`);
+		
 		words.push( myQuestions[aa].answer.toLowerCase() );
-		clues.push( myQuestions[aa].clue );
+		clues.push( wrd );
 	}
 	
 	/*

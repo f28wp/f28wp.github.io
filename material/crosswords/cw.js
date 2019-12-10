@@ -1,525 +1,432 @@
-//---------------------------------//
-//   GLOBAL VARIABLES              //
-//---------------------------------//
-
-var board, wordArr, wordBank, wordsActive, mode;
-var letterArrCheck = [];
-
-var Bounds = {  
-  top:0, right:0, bottom:0, left:0,
-
-  Update:function(x,y){
-    this.top = Math.min(y,this.top);
-    this.right = Math.max(x,this.right);
-    this.bottom = Math.max(y,this.bottom);
-    this.left = Math.min(x,this.left);
-  },
-  
-  Clean:function(){
-    this.top = 999;
-    this.right = 0;
-    this.bottom = 0;    
-    this.left = 999;
-  }
-};
-
-
-//---------------------------------//
-//   MAIN                          //
-//---------------------------------//
-
-function Play(){
-  var letterArr = document.getElementsByClassName('letter');
-  
-  /*
-  for(var i = 0; i < letterArr.length; i++)
-	{
-		while (letterArr[i].firstChild) {
-			letterArr[i].removeChild(letterArr[i].firstChild);
-		}
-	}
-*/
-	
-  
-  letterArrCheck = []; 
-  
-  for(var i = 0; i < letterArr.length; i++){
-	letterArrCheck[i] = letterArr[i].innerHTML;
-	//console.log( ':' + letterArrCheck[i] );
-   // letterArr[i].innerHTML = "<input class='char' type='text' maxlength='1'></input>";
-   
-    //if ( letterArr[i].innerHTML.length > 0 )
-	{
-      //console.log( letterArr[i].innerHTML );
-	}
-    letterArr[i].value = letterArr[i].innerHTML;
-	letterArr[i].innerHTML = "";
-	letterArr[i].id = i;
-
-	if ( letterArr[i].childNodes.length <= 0 )
-	{
-		//console.log( letterArr[i].childNodes.length );
-		var aa = document.createElement("input");
-		aa.className = 'char';
-		aa.maxLength = 1;
-		letterArr[i].appendChild(aa);
-	}
-	
-	
-	//letterArr[i].value = letterArrCheck[i];
-  }
-  
-  var numshow = letterArr.length / 10;
-  
-  function getRandomInt(min, max) {
-	  min = Math.ceil(min);
-	  max = Math.floor(max);
-	  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-  }
-
-  // Show the first 3 to help
-  for(var i = 0; i < numshow; i++){
-	  
-	  var kk = getRandomInt( 0, letterArr.length );
-	  letterArr[kk].childNodes[0].value = letterArr[kk].value;
-  }
-  
-  
-  mode = 0;
-  ToggleInputBoxes(false);
+// Each cell on the crossword grid is null or one of these
+function CrosswordCell(letter){
+    this.char = letter; // the actual letter for the cell on the crossword
+    // If a word hits this cell going in the "across" direction, this will be a CrosswordCellNode
+    this.across = null; 
+    // If a word hits this cell going in the "down" direction, this will be a CrosswordCellNode
+    this.down = null;
 }
 
-
-function Create(){
-  if (mode === 0){
-    ToggleInputBoxes(true);
-    document.getElementById("crossword").innerHTML = BoardToHtml(" ")
-    mode = 1;
-  }
-  else{  
-    GetWordsFromInput();
-
-    for(var i = 0, isSuccess=false; i < 10 && !isSuccess; i++){
-      CleanVars();
-      isSuccess = PopulateBoard();
-    }
-
-    document.getElementById("crossword").innerHTML = 
-      (isSuccess) ? BoardToHtml(" ") : "Failed to find crossword." ;
-  }
+// You can tell if the Node is the start of a word (which is needed if you want to number the cells)
+// and what word and clue it corresponds to (using the index)
+function CrosswordCellNode(is_start_of_word, index){
+    this.is_start_of_word = is_start_of_word;
+    this.index = index; // use to map this node to its word or clue
 }
 
-
-function ToggleInputBoxes(active){
-  var w=document.getElementsByClassName('word'),
-      d=document.getElementsByClassName('clue');
-  
-  for(var i=0;i<w.length; i++){
-    if(active===true){
-      RemoveClass(w[i], 'hide');
-      RemoveClass(d[i], 'clueReadOnly');
-      d[i].disabled = '';
-    }
-    else{
-      AddClass(w[i], 'hide');
-      AddClass(d[i], 'clueReadOnly');
-      d[i].disabled = 'readonly';
-    }
-  }
+function WordElement(word, index){
+    this.word = word; // the actual word
+    this.index = index; // use to map this node to its word or clue
 }
 
+function Crossword(words_in, clues_in){
+    var GRID_ROWS = 50;
+    var GRID_COLS = 50;
+    // This is an index of the positions of the char in the crossword (so we know where we can potentially place words)
+    // example {"a" : [{'row' : 10, 'col' : 5}, {'row' : 62, 'col' :17}], {'row' : 54, 'col' : 12}], "b" : [{'row' : 3, 'col' : 13}]} 
+    // where the two item arrays are the row and column of where the letter occurs
+    var char_index = {};	
 
-function GetWordsFromInput(){
-  wordArr = [];  
-  for(var i=0,val,w=document.getElementsByClassName("word");i<w.length;i++){
-    val = w[i].value.toUpperCase();
-	val = val.trim();
-    if (val !== null && val.length > 1){wordArr.push(val);}
-  }
-  wordArr.sort();
-}
+    // these words are the words that can't be placed on the crossword
+    var bad_words;
 
-
-function CleanVars(){
-  Bounds.Clean();
-  wordBank = [];
-  wordsActive = [];
-  board = [];
-  
-  for(var i = 0; i < 32; i++){
-    board.push([]);
-    for(var j = 0; j < 32; j++){
-      board[i].push(null);
-    }
-  }
-}
-
-
-function PopulateBoard(){
-  PrepareBoard();
-  
-  for(var i=0,isOk=true,len=wordBank.length; i<len && isOk; i++){
-    isOk = AddWordToBoard();
-  }  
-  return isOk;
-}
-
-
-function PrepareBoard(){
-  wordBank=[];
-  
-  for(var i = 0, len = wordArr.length; i < len; i++){
-    wordBank.push(new WordObj(wordArr[i]));
-  }
-  
-  for(i = 0; i < wordBank.length; i++){
-    for(var j = 0, wA=wordBank[i]; j<wA.char.length; j++){
-      for(var k = 0, cA=wA.char[j]; k<wordBank.length; k++){
-        for(var l = 0,wB=wordBank[k]; k!==i && l<wB.char.length; l++){
-          wA.totalMatches += (cA === wB.char[l])?1:0;
-        }
-      }
-    }
-  }  
-}
-
-
-// TODO: Clean this guy up
-function AddWordToBoard(){
-  var i, len, curIndex, curWord, curChar, curMatch, testWord, testChar, 
-      minMatchDiff = 9999, curMatchDiff;  
-
-  if(wordsActive.length < 1){
-    curIndex = 0;
-    for(i = 0, len = wordBank.length; i < len; i++){
-      if (wordBank[i].totalMatches < wordBank[curIndex].totalMatches){
-        curIndex = i;
-      }
-    }
-    wordBank[curIndex].successfulMatches = [{x:12,y:12,dir:0}];
-  }
-  else{  
-    curIndex = -1;
-    
-    for(i = 0, len = wordBank.length; i < len; i++){
-      curWord = wordBank[i];
-      curWord.effectiveMatches = 0;
-      curWord.successfulMatches = [];
-      for(var j = 0, lenJ = curWord.char.length; j < lenJ; j++){
-        curChar = curWord.char[j];
-        for (var k = 0, lenK = wordsActive.length; k < lenK; k++){
-          testWord = wordsActive[k];
-          for (var l = 0, lenL = testWord.char.length; l < lenL; l++){
-            testChar = testWord.char[l];            
-            if (curChar === testChar){
-              curWord.effectiveMatches++;
-              
-              var curCross = {x:testWord.x,y:testWord.y,dir:0};              
-              if(testWord.dir === 0){                
-                curCross.dir = 1;
-                curCross.x += l;
-                curCross.y -= j;
-              } 
-              else{
-                curCross.dir = 0;
-                curCross.y += l;
-                curCross.x -= j;
-              }
-              
-              var isMatch = true;
-              
-              for(var m = -1, lenM = curWord.char.length + 1; m < lenM; m++){
-                var crossVal = [];
-                if (m !== j){
-                  if (curCross.dir === 0){
-                    var xIndex = curCross.x + m;
-                    
-                    if (xIndex < 0 || xIndex > board.length){
-                      isMatch = false;
-                      break;
-                    }
-                    
-                    crossVal.push(board[xIndex][curCross.y]);
-                    crossVal.push(board[xIndex][curCross.y + 1]);
-                    crossVal.push(board[xIndex][curCross.y - 1]);
-                  }
-                  else{
-                    var yIndex = curCross.y + m;
-                    
-                    if (yIndex < 0 || yIndex > board[curCross.x].length){
-                      isMatch = false;
-                      break;
-                    }
-                    
-                    crossVal.push(board[curCross.x][yIndex]);
-                    crossVal.push(board[curCross.x + 1][yIndex]);
-                    crossVal.push(board[curCross.x - 1][yIndex]);
-                  }
-
-                  if(m > -1 && m < lenM-1){
-                    if (crossVal[0] !== curWord.char[m]){
-                      if (crossVal[0] !== null){
-                        isMatch = false;                  
-                        break;
-                      }
-                      else if (crossVal[1] !== null){
-                        isMatch = false;
-                        break;
-                      }
-                      else if (crossVal[2] !== null){
-                        isMatch = false;                  
-                        break;
-                      }
-                    }
-                  }
-                  else if (crossVal[0] !== null){
-                    isMatch = false;                  
-                    break;
-                  }
-                }
-              }
-              
-              if (isMatch === true){                
-                curWord.successfulMatches.push(curCross);
-              }
+    // returns the crossword grid that has the ratio closest to 1 or null if it can't build one
+    this.getSquareGrid = function(max_tries){
+        var best_grid = null;
+        var best_ratio = 0;
+        for(var i = 0; i < max_tries; i++){
+            var a_grid = this.getGrid(1);
+            if(a_grid == null) continue;
+            var ratio = Math.min(a_grid.length, a_grid[0].length) * 1.0 / Math.max(a_grid.length, a_grid[0].length);
+            if(ratio > best_ratio){
+                best_grid = a_grid;
+                best_ratio = ratio;
             }
-          }
+
+            if(best_ratio == 1) break;
         }
-      }
-      
-      curMatchDiff = curWord.totalMatches - curWord.effectiveMatches;
-      
-      if (curMatchDiff<minMatchDiff && curWord.successfulMatches.length>0){
-        curMatchDiff = minMatchDiff;
-        curIndex = i;
-      }
-      else if (curMatchDiff <= 0){
+        return best_grid;
+    }
+
+    // returns an abitrary grid, or null if it can't build one
+    this.getGrid = function(max_tries){
+        for(var tries = 0; tries < max_tries; tries++){
+            clear(); // always start with a fresh grid and char_index
+            // place the first word in the middle of the grid
+            var start_dir = randomDirection();
+            var r = Math.floor(grid.length / 2);
+            var c = Math.floor(grid[0].length / 2);
+            var word_element = word_elements[0];
+            if(start_dir == "across"){
+                c -= Math.floor(word_element.word.length/2);
+            } else {
+                r -= Math.floor(word_element.word.length/2);
+            }
+
+            if(canPlaceWordAt(word_element.word, r, c, start_dir) !== false){
+                placeWordAt(word_element.word, word_element.index, r, c, start_dir);
+            } else {
+                bad_words = [word_element];
+                return null;
+            }
+
+            // start with a group containing all the words (except the first)
+            // as we go, we try to place each word in the group onto the grid
+            // if the word can't go on the grid, we add that word to the next group 
+            var groups = [];
+            groups.push(word_elements.slice(1));
+            for(var g = 0; g < groups.length; g++){
+                word_has_been_added_to_grid = false;
+                // try to add all the words in this group to the grid
+                for(var i = 0; i < groups[g].length; i++){
+                    var word_element = groups[g][i]; 
+                    var best_position = findPositionForWord(word_element.word);
+                    if(!best_position){ 
+                        // make the new group (if needed)
+                        if(groups.length - 1 == g) groups.push([]);
+                        // place the word in the next group
+                        groups[g+1].push(word_element);
+                    } else {
+                        var r = best_position["row"], c = best_position["col"], dir = best_position['direction'];
+                        placeWordAt(word_element.word, word_element.index, r, c, dir);
+                        word_has_been_added_to_grid = true;						
+                    }
+                }
+                // if we haven't made any progress, there is no point in going on to the next group
+                if(!word_has_been_added_to_grid) break;
+            }
+            // no need to try again
+            if(word_has_been_added_to_grid) return minimizeGrid();  
+        }
+
+        bad_words = groups[groups.length - 1];
+        return null;
+    }
+
+    // returns the list of WordElements that can't fit on the crossword
+    this.getBadWords = function(){
+        return bad_words;
+    }
+
+    // get two arrays ("across" and "down") that contain objects describing the
+    // topological position of the word (e.g. 1 is the first word starting from
+    // the top left, going to the bottom right), the index of the word (in the
+    // original input list), the clue, and the word itself
+    this.getLegend = function(grid){
+        var groups = {"across" : [], "down" : []};
+        var position = 1;
+        for(var r = 0; r < grid.length; r++){	
+            for(var c = 0; c < grid[r].length; c++){
+                var cell = grid[r][c];
+                var increment_position = false;
+                // check across and down
+                for(var k in groups){
+                    // does a word start here? (make sure the cell isn't null, first)
+                    if(cell && cell[k] && cell[k]['is_start_of_word']){
+                        var index = cell[k]['index'];
+                        groups[k].push({"position" : position, "index" : index, "clue" : clues_in[index], "word" : words_in[index]});
+                        increment_position = true;
+                    }
+                }
+
+                if(increment_position) position++;
+            }
+        }
+        return groups;
+    }	
+
+    // move the grid onto the smallest grid that will fit it
+    var minimizeGrid = function(){
+        // find bounds
+        var r_min = GRID_ROWS-1, r_max = 0, c_min = GRID_COLS-1, c_max = 0;
+        for(var r = 0; r < GRID_ROWS; r++){
+            for(var c = 0; c < GRID_COLS; c++){
+                var cell = grid[r][c];
+                if(cell != null){
+                    if(r < r_min) r_min = r;
+                    if(r > r_max) r_max = r;
+                    if(c < c_min) c_min = c;
+                    if(c > c_max) c_max = c;
+                }
+            }
+        }
+        // initialize new grid
+        var rows = r_max - r_min + 1; 
+        var cols = c_max - c_min + 1; 
+        var new_grid = new Array(rows);
+        for(var r = 0; r < rows; r++){
+            for(var c = 0; c < cols; c++){
+                new_grid[r] = new Array(cols);
+            }
+        }
+
+        // copy the grid onto the smaller grid
+        for(var r = r_min, r2 = 0; r2 < rows; r++, r2++){
+            for(var c = c_min, c2 = 0; c2 < cols; c++, c2++){
+                new_grid[r2][c2] = grid[r][c];
+            }
+        }
+
+        return new_grid;
+    }
+
+    // helper for placeWordAt();
+    var addCellToGrid = function(word, index_of_word_in_input_list, index_of_char, r, c, direction){
+        var char = word.charAt(index_of_char);
+        if(grid[r][c] == null){
+            grid[r][c] = new CrosswordCell(char);
+
+            // init the char_index for that character if needed
+            if(!char_index[char]) char_index[char] = [];
+
+            // add to index
+            char_index[char].push({"row" : r, "col" : c});
+        }
+
+        var is_start_of_word = index_of_char == 0;
+        grid[r][c][direction] = new CrosswordCellNode(is_start_of_word, index_of_word_in_input_list);
+
+    }	
+
+    // place the word at the row and col indicated (the first char goes there)
+    // the next chars go to the right (across) or below (down), depending on the direction
+    var placeWordAt = function(word, index_of_word_in_input_list, row, col, direction){
+        if(direction == "across"){
+            for(var c = col, i = 0; c < col + word.length; c++, i++){
+                addCellToGrid(word, index_of_word_in_input_list, i, row, c, direction);
+            }
+        } else if(direction == "down"){
+            for(var r = row, i = 0; r < row + word.length; r++, i++){
+                addCellToGrid(word, index_of_word_in_input_list, i, r, col, direction);
+            }			
+        } else {
+            throw "Invalid Direction";	
+        }
+    }
+
+    // you can only place a char where the space is blank, or when the same
+    // character exists there already
+    // returns false, if you can't place the char
+    // 0 if you can place the char, but there is no intersection
+    // 1 if you can place the char, and there is an intersection
+    var canPlaceCharAt = function(char, row, col){
+        // no intersection
+        if(grid[row][col] == null) return 0;
+        // intersection!
+        if(grid[row][col]['char'] == char) return 1;
+
         return false;
-      }
     }
-  }
-  
-  if (curIndex === -1){
-    return false;
-  }
-    
-  var spliced = wordBank.splice(curIndex, 1);
-  wordsActive.push(spliced[0]);
-  
-  var pushIndex = wordsActive.length - 1,
-      rand = Math.random(),
-      matchArr = wordsActive[pushIndex].successfulMatches,
-      matchIndex = Math.floor(rand * matchArr.length),  
-      matchData = matchArr[matchIndex];
-  
-  wordsActive[pushIndex].x = matchData.x;
-  wordsActive[pushIndex].y = matchData.y;
-  wordsActive[pushIndex].dir = matchData.dir;
-  
-  //console.log( wordsActive[pushIndex].char );
-  
-  
-  for(i = 0, len = wordsActive[pushIndex].char.length; i < len; i++){
-    var xIndex = matchData.x,
-        yIndex = matchData.y;
-    
-    if (matchData.dir === 0){
-      xIndex += i;    
-      board[xIndex][yIndex] = wordsActive[pushIndex].char[i];
+
+    // determines if you can place a word at the row, column in the direction
+    var canPlaceWordAt = function(word, row, col, direction){
+        // out of bounds
+        if(row < 0 || row >= grid.length || col < 0 || col >= grid[row].length) return false;
+
+        if(direction == "across"){
+            // out of bounds (word too long)
+            if(col + word.length > grid[row].length) return false;
+            // can't have a word directly to the left
+            if(col - 1 >= 0 && grid[row][col - 1] != null) return false;
+            // can't have word directly to the right
+            if(col + word.length < grid[row].length && grid[row][col+word.length] != null) return false;
+
+            // check the row above to make sure there isn't another word
+            // running parallel. It is ok if there is a character above, only if
+            // the character below it intersects with the current word
+            for(var r = row - 1, c = col, i = 0; r >= 0 && c < col + word.length; c++, i++){
+                var is_empty = grid[r][c] == null;
+                var is_intersection = grid[row][c] != null && grid[row][c]['char'] == word.charAt(i);
+                var can_place_here = is_empty || is_intersection;
+                if(!can_place_here) return false;
+            }
+
+            // same deal as above, we just search in the row below the word
+            for(var r = row + 1, c = col, i = 0; r < grid.length && c < col + word.length; c++, i++){
+                var is_empty = grid[r][c] == null;
+                var is_intersection = grid[row][c] != null && grid[row][c]['char'] == word.charAt(i);
+                var can_place_here = is_empty || is_intersection;
+                if(!can_place_here) return false;
+            }
+
+            // check to make sure we aren't overlapping a char (that doesn't match)
+            // and get the count of intersections
+            var intersections = 0;
+            for(var c = col, i = 0; c < col + word.length; c++, i++){
+                var result = canPlaceCharAt(word.charAt(i), row, c);
+                if(result === false) return false;
+                intersections += result;
+            }
+        } else if(direction == "down"){
+            // out of bounds
+            if(row + word.length > grid.length) return false;
+            // can't have a word directly above
+            if(row - 1 >= 0 && grid[row - 1][col] != null) return false;
+            // can't have a word directly below
+            if(row + word.length < grid.length && grid[row+word.length][col] != null) return false;
+
+            // check the column to the left to make sure there isn't another
+            // word running parallel. It is ok if there is a character to the
+            // left, only if the character to the right intersects with the
+            // current word
+            for(var c = col - 1, r = row, i = 0; c >= 0 && r < row + word.length; r++, i++){
+                var is_empty = grid[r][c] == null;
+                var is_intersection = grid[r][col] != null && grid[r][col]['char'] == word.charAt(i);
+                var can_place_here = is_empty || is_intersection;
+                if(!can_place_here) return false;
+            }
+
+            // same deal, but look at the column to the right
+            for(var c = col + 1, r = row, i = 0; r < row + word.length && c < grid[r].length; r++, i++){
+                var is_empty = grid[r][c] == null;
+                var is_intersection = grid[r][col] != null && grid[r][col]['char'] == word.charAt(i);
+                var can_place_here = is_empty || is_intersection;
+                if(!can_place_here) return false;
+            }
+
+            // check to make sure we aren't overlapping a char (that doesn't match)
+            // and get the count of intersections
+            var intersections = 0;
+            for(var r = row, i = 0; r < row + word.length; r++, i++){
+                var result = canPlaceCharAt(word.charAt(i, 1), r, col);
+                if(result === false) return false;
+                intersections += result;
+            }
+        } else {
+            throw "Invalid Direction";	
+        }
+        return intersections;
     }
-    else{
-      yIndex += i;  
-      board[xIndex][yIndex] = wordsActive[pushIndex].char[i];
+
+    var randomDirection = function(){
+        return Math.floor(Math.random()*2) ? "across" : "down";
     }
-    
-    Bounds.Update(xIndex,yIndex);
-  }
-    
-  return true;
-}
 
+    var findPositionForWord = function(word){
+        // check the char_index for every letter, and see if we can put it there in a direction
+        var bests = [];
+        for(var i = 0; i < word.length; i++){
+            var possible_locations_on_grid = char_index[word.charAt(i)];
+            if(!possible_locations_on_grid) continue;
+            for(var j = 0; j < possible_locations_on_grid.length; j++){
+                var point = possible_locations_on_grid[j];
+                var r = point['row'];
+                var c = point['col'];
+                // the c - i, and r - i here compensate for the offset of character in the word
+                var intersections_across = canPlaceWordAt(word, r, c - i, "across");
+                var intersections_down = canPlaceWordAt(word, r - i, c, "down");
 
-function BoardToHtml(blank){
-  for(var i=Bounds.top-1, str=""; i<Bounds.bottom+2; i++){
-    str+="<div class='row'>";
-    for(var j=Bounds.left-1; j<Bounds.right+2; j++){
-      str += BoardCharToElement(board[j][i]);
+                if(intersections_across !== false)
+                    bests.push({"intersections" : intersections_across, "row" : r, "col" : c - i, "direction" : "across"});
+                if(intersections_down !== false)
+                    bests.push({"intersections" : intersections_down, "row" : r - i, "col" : c, "direction" : "down"});
+            }
+        }
+
+        if(bests.length == 0) return false;
+
+        // find a good random position
+        var best = bests[Math.floor(Math.random()*bests.length)];
+
+        return best;
     }
-    str += "</div>";
-  }
-  return str;
+
+    var clear = function(){
+        for(var r = 0; r < grid.length; r++){
+            for(var c = 0; c < grid[r].length; c++){
+                grid[r][c] = null;
+            }
+        }
+        char_index = {};
+    }
+
+    // constructor
+    if(words_in.length < 2) throw "A crossword must have at least 2 words";
+    if(words_in.length != clues_in.length) throw "The number of words must equal the number of clues";	
+
+    // build the grid;
+    var grid = new Array(GRID_ROWS);
+    for(var i = 0; i < GRID_ROWS; i++){
+        grid[i] = new Array(GRID_COLS);	
+    }
+
+    // build the element list (need to keep track of indexes in the originial input arrays)
+    var word_elements = [];	
+    for(var i = 0; i < words_in.length; i++){
+        word_elements.push(new WordElement(words_in[i], i));
+    }
+
+    // I got this sorting idea from http://stackoverflow.com/questions/943113/algorithm-to-generate-a-crossword/1021800#1021800
+    // seems to work well
+    word_elements.sort(function(a, b){ return b.word.length - a.word.length; });
 }
 
-
-function BoardCharToElement(c){
-  var arr=(c)?['square','letter']:['square'];
-  return EleStr('div',[{a:'class',v:arr}],c);
-}
-
-
-
-//---------------------------------//
-//   OBJECT DEFINITIONS            //
-//---------------------------------//
-
-function WordObj(stringValue){
-  this.string = stringValue;
-  this.char = stringValue.split("");
-  this.totalMatches = 0;
-  this.effectiveMatches = 0;
-  this.successfulMatches = [];  
-}
-
-
-//---------------------------------//
-//   EVENTS                        //
-//---------------------------------//
-
-function RegisterEvents(){
-  document.getElementById("crossword").onfocus = function (){ 
-    return false; }
-  document.getElementById("btnCreate").addEventListener('click',Create,false);
-  document.getElementById("btnPlay").addEventListener('click',Play,false);
-  document.getElementById("btnCheck").addEventListener('click',Check,false);
-}
-RegisterEvents();
-
-
-//---------------------------------//
-//   HELPER FUNCTIONS              //
-//---------------------------------//
-
-function EleStr(e,c,h){
-  h = (h)?h:"";
-  for(var i=0,s="<"+e+" "; i<c.length; i++){
-    s+=c[i].a+ "='"+ArrayToString(c[i].v," ")+"' ";    
-  }
-  return (s+">"+h+"</"+e+">");
-}
-
-function ArrayToString(a,s){
-  if(a===null||a.length<1)return "";
-  if(s===null)s=",";
-  for(var r=a[0],i=1;i<a.length;i++){r+=s+a[i];}
-  return r;
-}
-
-function AddClass(ele,classStr){
-  ele.className = ele.className.replaceAll(' '+classStr,'')+' '+classStr;
-}
-
-function RemoveClass(ele,classStr){
-  ele.className = ele.className.replaceAll(' '+classStr,'');
-}
-
-function ToggleClass(ele,classStr){
-  var str = ele.className.replaceAll(' '+classStr,'');
-  ele.className = (str.length===ele.className.length)?str+' '+classStr:str;
-}
-
-String.prototype.replaceAll = function (replaceThis, withThis) {
-   var re = new RegExp(replaceThis,"g"); 
-   return this.replace(re, withThis);
-};
-
-
-function Check()
+var ans = [];
+function mykey(val)
 {
-	/*
-  var w=document.getElementsByClassName('word'),
-      d=document.getElementsByClassName('clue');
-  
-  for(var i=0;i<w.length; i++)
-  {
-	  AddClass(w[i], 'show');
-      AddClass(d[i], 'clueReadOnly');
-      d[i].disabled = ''//readonly';
-	  
-	  w[i].style.display = 'block';
-	  d[i].style.display = 'block';
-  }
-  */
-  
-	//mode = 0;
-	//ToggleInputBoxes(true);
-  var letterArr = document.getElementsByClassName('letter');
-  
-  
-  //letterArrCheck = []; 
-  
-  for(var i = 0; i < letterArr.length; i++){
-	//letterArrCheck[i] = letterArr[i].innerHTML;
+	//var x = document.getElementById(val.id).value;
+	//alert('aaa:' + val.id + ', ans: ' + ans[val.id] );
 	
-	//if ( letterArr[i].innerHTML === letterArrCheck[i] )
-	//{
-	//	letterArr[i].style.background = 'red';
-	 //letterArr[i].innerHTML = letterArrCheck[i];
-	//}
+	//alert('id: ' + val.id + ', ans: ' + val.value + ', savedans: ' + ans[val.id] );
 	
-	if ( typeof letterArr[i].childNodes[0].value != 'undefined' )
+	if ( val.value.toLowerCase() == ans[val.id].toLowerCase() )
 	{
-		//console.log( letterArr[i].childNodes[0].value );
-		//console.log( letterArrCheck[i] );
-		if ( letterArr[i].childNodes[0].value.toLowerCase() == letterArr[i].value.toLowerCase() )
-		{
-			//console.log( letterArr[i].value );
-			letterArr[i].style.background = 'red';
-		 //letterArr[i].innerHTML = letterArrCheck[i];
-		}
+		var div = document.getElementById( val.id );
+		div.style.backgroundColor='rgba(255, 255, 0, 0.5)';
+		
+		//alert('correct');
 	}
 	
-	//console.log( ':' + letterArrCheck[i] );
-    //letterArr[i].innerHTML = "<input class='char' type='text' maxlength='1'></input>";
-	//letterArr[i].cssStyle
-	
-	//letterArr[i].innerHTML = "<input class='char' type='text' maxlength='1'>d</input>";
-	
-	//var idd = letterArr[i].id;
-	
-	//var aaa = document.getElementById(idd);
-	//var ss = aaa.value;
-
-	//var ss = letterArr[i].childNodes[0].value;
-	//console.log( ss );
-	
-	//var ss = letterArr[i].innerHTML;
-	
-	//letterArr[i].display = "none";
-	//letterArr[i].style.visibility = "hidden";
-	//var ss = letterArr[i].value;
-	
-	//ss = ss.split(`'`).join('');
-	//ss = ss.replace(`<input class=char type=text maxlength=1>`, '');
-	
-	// letterArr[i].innerHTML = "22";
-	//console.log( ss )
-	
-	//letterArr[i].style.background = 'red';
-  }
-  
 }
 
-//---------------------------------//
-//   INITIAL LOAD                  //
-//---------------------------------//
+var CrosswordUtils = {
+    PATH_TO_PNGS_OF_NUMBERS : "numbers/",
 
-Create();
-Play();
+    toHtml : function(grid, show_answers){
+        if(grid == null) return;
+        var html = [];
+        html.push("<table class='crossword'>");
+        var label = 1;
+        for(var r = 0; r < grid.length; r++){
+            html.push("<tr>");
+            for(var c = 0; c < grid[r].length; c++){
+                var cell = grid[r][c];
+                var is_start_of_word = false;
+                if(cell == null){
+                    var char = "&nbsp;";
+                    var css_class = "no-border";
+                } else {
+                    var char = cell['char'];
+                    var css_class = "";
+                    var is_start_of_word = (cell['across'] && cell['across']['is_start_of_word']) || (cell['down'] && cell['down']['is_start_of_word']);
+                }
 
-(function () 
-{
-  var body = document.body;
-  var html = document.documentElement;
+                if(is_start_of_word) {
+                    var img_url = CrosswordUtils.PATH_TO_PNGS_OF_NUMBERS + label + ".png";
+                    html.push("<td class='" + css_class + "' title='" + r + ", " + c + "' style=\"background-image:url('" + img_url + "')\">");
+                    label++;			
+                } else {
+                    html.push("<td class='" + css_class + "' title='" + r + ", " + c + "'>");					
+                }
 
-  
-  var height = Math.max( body.scrollHeight, body.offsetHeight, 
-                       html.clientHeight, html.scrollHeight, html.offsetHeight );
-					   
-  var homediv = document.getElementById('myhome');
-  
-  homediv.style.position = "absolute";
-  homediv.style.top = height - 50;
-})();
-
-  
+				if ( char != '&nbsp;' )
+				{
+					
+					var gg = ans.length;
+					ans.push( char );
+					
+					char = '<textarea onkeyup="mykey(this);" id="'+gg+'"; style="overflow:auto;resize:none;background:transparent;border:0;" rows="1" cols="1" maxlength="1"></textarea>';
+				}
+                if(show_answers) {
+                    html.push(char);
+                } else {
+                    html.push("&nbsp;");								
+                }
+            }
+            html.push("</tr>");
+        }
+        html.push("</table>");
+        return html.join("\n");
+    }
+}
 

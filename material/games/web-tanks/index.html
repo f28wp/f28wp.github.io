@@ -299,11 +299,13 @@ padding: 0;
 /*
 Debug option - comment in to see all the div dimensions/details
 */
-/* 
+
+/*
 * {
 border-style: dotted !important;
 }
 */
+
 
 
 </style>
@@ -362,10 +364,11 @@ document.onkeydown = keyDown;
 
 function addTrack(obj, ang)
 {
-	var dist = Math.abs( obj.prev.x - obj.pos.x ) +
-			   Math.abs( obj.prev.y - obj.pos.y );
-			   
-	if ( dist < 71.0 )
+	var dxx = Math.abs( obj.prev.x - obj.pos.x );
+	var dyy = Math.abs( obj.prev.y - obj.pos.y );
+	var dist = Math.sqrt( dxx*dxx + dyy*dyy );
+	
+	if ( dist < 75.0 )
 	{
 		return;
 	}
@@ -450,15 +453,22 @@ function calcAngleFromDir( obj, dx, dy )
 	
 	//obj.style.transform="rotate(7deg)"
 	
+	var len = Math.sqrt( dx*dx + dy*dy );
+	
+	/*
 	if ( Math.abs( dx ) < 0.01 &&
 	     Math.abs( dy ) < 0.01 )
 		 {
 			return;
 		 }
-	
+	*/
+	if ( len < 0.01 )
+	{
+		return;
+	}
 
 	
-	var len = Math.abs( dx ) + Math.abs( dy );
+	
 	
 	var v1 = {x:0, y:-1 };
 	var v2 = {x:dx/len, y:dy/len };
@@ -668,23 +678,28 @@ document.onmousemove = function(e){
 
 function enemyAI()
 {
-	//bullet.style.top       = (player.pos.y + 6) + "px";
-	//bullet.style.left      = (player.pos.x + 24) + "px";
-	
-	enemy.target.x = cursorX;
-	enemy.target.y = cursorY;
+	//enemy.target.x = cursorX;
+	//enemy.target.y = cursorY;
 
-	var dx = (enemy.target.x - (enemy.pos.x - 24) );
-	var dy = (enemy.target.y - (enemy.pos.y - 160) );
+	var dx = (enemy.target.x - (enemy.pos.x + 6) );
+	var dy = (enemy.target.y - (enemy.pos.y + 40) );
 
 	//console.log( cursorX, cursorY );
 
 	calcAngleFromDir( enemy, dx, dy );
 	
-	enemy.pos.x = -100;
+	//enemy.pos.x = -100;
 	
-	//enemy.pos.x = enemy.pos.x + dx * 0.05;
-	//enemy.pos.y = enemy.pos.y + dy * 0.05;
+	if ( (dx*dx + dy*dy) > 5000 )
+	{
+		enemy.pos.x = enemy.pos.x + dx * 0.01;
+		enemy.pos.y = enemy.pos.y + dy * 0.01;
+	}
+	else 
+	{
+		var obj = document.getElementById( "enemytank" );	
+		obj.classList.add( "paused" );
+	}
 	
 	var div = document.getElementById( "enemytank" );
 	div.style.left = enemy.pos.x;
@@ -692,6 +707,7 @@ function enemyAI()
 	
 	//console.log( enemy.pos.x );
 	
+	//console.log( (dx*dx + dy*dy) );
 	
 	
 }

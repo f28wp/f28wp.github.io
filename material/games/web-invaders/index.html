@@ -97,6 +97,150 @@ menu.Create();
 menu.SetText("<p style='font-size:65px;'>Space Invaders</p><br><br><p class='flashing'>Press Space to Play</p>");
 
 
+
+const myQuestions = [
+    {
+      question: "The Internet is",
+      answers: {
+        a: "international network of the world's telecommunications services",
+		b: "global scale internetwork of wide area computer networks using TCP/IP protocols",
+		c: "global scale, distributed hypermedia application with a client server architecture"
+      },
+      correctAnswer: "b"
+    },
+    {
+      question: "Which of the following expansions of Internet body acronyms are correct?",
+      answers: {
+        a: "ICANN - International Corporation for Assigned Names and Numbers",
+		b: "IETF - Internet Executive Trust Federation",
+		c: "W3C - World-Wide Web Consortium"
+      },
+      correctAnswer: "c"
+    }
+];
+	
+	
+function Quiz () 
+{
+	this.container   = null;
+	this.dialog      = null;
+	this.showing     = false;
+	this.curQuestion = 0;
+	
+	this.Show = function()
+	{
+		
+		//this.container.style.display = "block";
+		this.container.className = "fadeIn";
+		this.showing = true;
+		
+		this.UpdateQuestion();
+	}
+	
+	this.Hide = function()
+	{
+		//this.container.style.display = "none";
+		this.container.className = "fadeOut";
+		this.showing = false;
+	}
+	this.IsShowing = function()
+	{
+		return this.showing;
+	}
+	
+	this.SetText = function(t)
+	{
+		this.dialog.innerHTML = t;
+	}
+	this.UpdateQuestion = function()
+	{
+		var str = "Quiz<br>";
+		var qq = document.getElementById( 'question' );
+		str += myQuestions[this.curQuestion].question;
+		str += "<br><br>";
+		
+		
+		var numoptions = myQuestions[this.curQuestion].answers.length;
+		str += `<form>`;
+		str += `<div id="options" style="text-align:left;">`;
+		for ( letter in myQuestions[this.curQuestion].answers )
+		{
+			str +=  `<label>` +
+				   `<input tabindex="-1" type="radio" name="answer" value="` + letter + `">` +
+				   myQuestions[this.curQuestion].answers[letter] +
+				   `</label><br>`;
+		}
+		str += `</div>`;
+		str += "</form>";
+		
+		
+		str += `<a href="javascript:quiz.SubmitAnswer();">Submit</a>`;
+		
+		
+		this.SetText( str );
+	}
+	this.SubmitAnswer = function()
+	{
+	  //var radios = document.getElementsByName('answer');
+	  //alert('You chose: ' + radios[i].value);
+	  
+	  let letter = Array.from(document.getElementsByName("answer")).find(r => r.checked).value;
+	  
+	  if ( letter == myQuestions[this.curQuestion].correctAnswer )
+	  {
+		alert( 'correct');
+	  }
+	  else 
+	  {
+		alert( 'sorry, incorrect');
+	  }
+	  
+	  this.curQuestion += 1;
+	  this.curQuestion = ( this.curQuestion % myQuestions.length );
+	  
+	  this.Hide();
+	}
+	this.Create = function()
+	{
+		this.container = document.createElement("div");
+
+		this.container.id = "qmenu"; 
+		this.container.className = "fadeOut"; // start hidden
+		this.container.style.position = "absolute";
+		this.container.style.top      = "20%"; // 10 + 'px'; // "100px";
+		this.container.style.left     = "50%"; // "px"; //"200px";
+		//this.container.style.width     = "100%";
+		//this.container.style.height    = "100%";
+		this.container.style.margin   = '0px';
+		this.container.style.zIndex  = "auto";
+		//this.container.style.backgroundColor = "rgba(255, 22, 255, 0.4)";
+		//container.style.zoom = "70%";
+		document.body.appendChild( this.container );
+		
+		this.dialog = document.createElement("div");
+		this.dialog.style.position = "relative";
+		this.dialog.style.left = "-50%";
+		this.dialog.style.top  = "10%";
+		this.dialog.style.zIndex  = "45";
+		this.dialog.style.borderRadius = "5px";
+		this.dialog.style.borderColor = "#FFFF00";
+		this.dialog.style.border="3px solid rgba(255, 22, 0, 0.4)"
+		this.dialog.style.backgroundColor = "rgba(255, 22, 0, 0.9)";
+		this.dialog.style.padding = "30pt";
+		this.dialog.style.textAlign = "center";
+		this.dialog.style.display       = "block";
+		this.dialog.style.tabIndex ="-1";
+		this.container.appendChild( this.dialog );
+		
+		
+		this.dialog.innerHTML = "hello world";
+	}
+}
+
+var quiz = new Quiz();
+quiz.Create();
+
+
 function DivGif()
 {
 	this.pos     = {x:document.body.clientWidth*0.5,y:10};
@@ -348,10 +492,17 @@ function Player()
 	
 	this.Move = function(e)
 	{
+		if ( quiz.IsShowing() )
+		{
+			return;
+		}
+	
+		
 		if ( menu.IsShowing() )
 		{
 			return;
 		}
+		
 		
 		var fire = 0;
 		var firebomb = 0;
@@ -425,6 +576,7 @@ function Enemy()
 		this.div.style.top      = this.pos.y + "px"; //(document.body.clientHeight - 10 - 50) + "px";
 		this.div.style.width    = this.dim.x + "px"; //"50px";
 		this.div.style.height   = this.dim.y + "px"; //"50px";
+		this.div.style.zIndex   = -50;
 		//this.div.style.borderRadius = "5px";
 		//this.div.style.borderColor = "#FFFF00";
 		//this.div.style.border="3px solid rgba(255, 22, 0, 0.4)"
@@ -462,10 +614,17 @@ function Enemy()
 	
 	this.Update = function()
 	{
+		if ( quiz.IsShowing() )
+		{
+			return;
+		}
+		
+		
 		if ( menu.IsShowing() )
 		{
 			return;
 		}
+		
 		
 		var fire = 0;
 		var firebomb = 0;
@@ -585,5 +744,7 @@ setInterval(animationLoop, 50);
 <button onclick="menu.Show();">show</button>
 <button onclick="menu.Hide();">hide</button>
 
+<button onclick="quiz.Show();">showq</button>
+<button onclick="quiz.Hide();">hideq</button>
 
 </body></html>

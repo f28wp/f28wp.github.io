@@ -178,16 +178,44 @@
 					<textarea data-template>
 						## JavaScript Syntax
 
-						JavaScript supports 6 primitive types
+						JavaScript data types
+						
+						* **string** sequence of 16 bit UTF-16 characters	
+						* **number** type of double precision 64 bit IEEE for mat number	
+						* **boolean** type having value of true or false	
+						* number 	
+						* **function** declaration 
+						
+						-- These 2 types cannot contain values
+						
 						* **undefined** sole value possessed by unassigned variables
 						* **null** value denoting intentional lack of a value
-						* **Boolean** type having value of true or false
-						* **Number** type of double precision 64 bit IEEE for mat number
-						* **String** sequence of 16 bit UTF-16 characters
-						* Symbol ES 6+/- symbols have unique values and no literal syntax
+
+						-- Everything else is an object 
+						
 
 					</textarea>
 				</section>
+				
+							
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## JavaScript Syntax
+
+						The **typeof** operator is used to get the data type (**returns a string**) of its operand
+
+						```
+						  typeof(4+7);     //returns number
+						  typeof("47");    //returns string
+						```
+						
+						Six possible values that **typeof** returns: object, boolean, function, number, string, and undefined
+
+					</textarea>
+				</section>
+				
+				
+				
 				
 				<section>
 					<section data-markdown data-transition="slide" data-background="#11533c" data-background-transition="zoom">
@@ -196,8 +224,8 @@
 						Which primitive type represents integers in Javascript?
 						
 						* a) int
-						* b) Integer
-						* c) Number
+						* b) integer
+						* c) number
 						* d) double
 						* e) var
 
@@ -208,11 +236,8 @@
 						<textarea data-template>
 						## Answer
 						
-						Answer: **c) Number**
+						Answer: **c) number**
 						
-						JavaScript supports 6 **primitive** types 
-						* undefined, null, Boolean, Number, String and Symbol
-
 						</textarea>
 					</section>
 				</section>

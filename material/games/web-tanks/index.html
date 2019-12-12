@@ -68,6 +68,8 @@ padding: 0;
 <style>
     .coins {
 	  position: absolute;
+	  left: 25;
+	  top: 25;
       width: 75px;
       height: 75px;
       background-image: url("./imgs/coins2.png");
@@ -102,8 +104,8 @@ padding: 0;
 <style>
 .cursor-keys img {
     position: absolute;
-    left: 10;
-    bottom: 0;
+    left: 25;
+    bottom: 5;
 	width: 100pt;
 }
 </style>
@@ -114,10 +116,10 @@ padding: 0;
 
 
 	
-<div id="bomb"></div>
+<div id="bomb" class="bomb"></div>
 
 <style>
-#bomb {
+.bomb {
     width: 320px;
     height: 240px;
     position : absolute;
@@ -206,7 +208,7 @@ padding: 0;
 
 <div id="playertank" class="tank"></div>
 
-<div id="enemytank" class="tank"></div>
+<div id="enemytank" class="tank2"></div>
 
 <div id="snackbar">Some text some message..</div>
 
@@ -280,6 +282,30 @@ padding: 0;
   100% { background-position: -672px 0; }
 }
 
+.tank2 {
+  position: absolute;
+  left: 100px;
+  top:  100px;
+  width: 83px;   /* Viewport-width */
+  height: 83px;   /* Viewport-height */
+  background-position-y: 83px;
+  background: transparent url('./imgs/tanks3.png') 0 0 no-repeat;   /* Our sprite as the viewport background */
+  animation: tankanimation2 1s steps(8) infinite; /* The Animation */
+  z-index: -5;
+  transform: rotate(45deg);
+  transform-origin: 50% 50%;
+}
+
+/* Animation keyframes for the sprite */
+@keyframes tankanimation2 {
+  from { background-position-y: -83px;
+         background-position-x: 0px; 
+		}
+  to {  background-position-y: -83px;
+        background-position-x: -672px;
+	  }
+}
+
 .paused{
     -webkit-animation-play-state:paused !important;
     -moz-animation-play-state:paused !important;
@@ -287,12 +313,24 @@ padding: 0;
     animation-play-state:paused !important;
 }
 
+
+
+
+
 .tree {
     width: 50px; /* Icon width */
     height: 50px; /* Icon height */
     display: inline-block; /* Display icon as inline block */
     background-position: -200px -301px; /* Icon background position in sprite */
 	z-index: -2;
+}
+
+.wall {
+    width: 50px; /* Icon width */
+    height: 50px; /* Icon height */
+    display: inline-block; /* Display icon as inline block */
+    background-position: -100px -301px; /* Icon background position in sprite */
+	z-index: -1;
 }
 
 
@@ -319,6 +357,8 @@ var player = {
 	id: "playertank",
 	prev:{x:300, y:500}, 
 	pos: {x:300, y:100},
+	old: {x:300, y:100},
+	size: {x:10, y:10},
 	dir: {x:0, y:0}
 }
 
@@ -326,9 +366,17 @@ var enemy = {
     id: "enemytank",
 	prev:{x:300, y:500}, 
 	pos: {x:300, y:500},
+	size: {x:10, y:10},
 	dir: {x:0, y:0},
 	target: {x:600, y:200}
 };
+
+player.size.x = document.getElementById("playertank").offsetWidth;
+player.size.y = document.getElementById("playertank").offsetHeight;
+
+enemy.size.x = document.getElementById("enemytank").offsetWidth;
+enemy.size.y = document.getElementById("enemytank").offsetHeight;
+
 
 document.onkeypress = function()
 {
@@ -410,6 +458,7 @@ function snackBarMessage( msg ) {
 var shot = { 
 			dir:{x:1,y:0}, 
 			pos:{x:0,y:0}, 
+			spos:{x:0,y:0},
 			ang:0,
 			id:-1,
 			speed:15.0 };
@@ -427,8 +476,8 @@ function shoot()
     bullet.id = "bullet" + (count++);	
 	bullet.className       = "bullet";
 	bullet.style.position  = "absolute";
-	bullet.style.top       = (player.pos.y + 6) + "px";
-	bullet.style.left      = (player.pos.x + 24) + "px";
+	bullet.style.left      = (player.pos.x + player.size.x*0.5 - 15) + "px";
+	bullet.style.top       = (player.pos.y + player.size.y*0.5 - 35) + "px";
 	bullet.style.width     = "30";
 	bullet.style.height    = "70";
 	bullet.style.margin    = '0px';
@@ -442,8 +491,8 @@ function shoot()
 	bullets[ bullets.length - 1 ].id = bullet.id;
 	bullets[ bullets.length - 1 ].pos.x = player.pos.x + 24;
 	bullets[ bullets.length - 1 ].pos.y = player.pos.y + 6;
-
-	
+	bullets[ bullets.length - 1 ].spos.x = player.pos.x + 24;
+	bullets[ bullets.length - 1 ].spos.y = player.pos.y + 6;
 	
 	//alert( 'aa' );
 }
@@ -489,7 +538,7 @@ function calcAngleFromDir( obj, dx, dy )
 
 
 	
-	if ( obj.id == "player" )
+	if ( obj.id == "playertank" )
 	{
 	shot.dir.x = v2.x;
 	shot.dir.y = v2.y;
@@ -507,6 +556,7 @@ function keyUp(e)
 {
 	var obj = document.getElementById( "playertank" );	
 	obj.classList.add( "paused" );
+		
 }
 
 document.onkeyup = keyUp;
@@ -533,6 +583,8 @@ function keyDown(e) {
 	}
 	if (e && e.keyCode == '32') { shoot(); } // space
 	
+	player.old.x = player.pos.x;
+	player.old.y = player.pos.y;
 	
 	player.pos.x += delta.x;
 	player.pos.y += delta.y;
@@ -543,9 +595,23 @@ function keyDown(e) {
 	obj.style.left = player.pos.x + "px";
 	obj.style.top  = player.pos.y + "px";
 	
+	for (var ii=0; ii<walls.length; ii++)
+	{
+		walls[ii].checkIntersection(player.id, player, player.dims);
+	}
+	
+	obj.style.left = player.pos.x + "px";
+	obj.style.top  = player.pos.y + "px";
+	
+	
+	
 	//console.log( player.pos.x );
 	
-	obj.classList.remove( "paused" );
+	//while (obj.classList.contains('paused')) 
+	if ( e )
+	{
+		obj.classList.remove( "paused" );
+	}
 	//document.getElementById( "track" ).style.left = player.pos.x + "px";
 	//document.getElementById( "track" ).style.top  = player.pos.y + "px";
 	//console.log( player.pos.x );
@@ -664,9 +730,11 @@ showDialog(play);
 
 snackBarMessage("Welcome to web tanks...");
 
+var walls = [];
 
 keyDown(null);
 keyUp(null);
+
 
 
 var cursorX;
@@ -681,25 +749,34 @@ function enemyAI()
 	//enemy.target.x = cursorX;
 	//enemy.target.y = cursorY;
 
-	var dx = (enemy.target.x - (enemy.pos.x + 6) );
-	var dy = (enemy.target.y - (enemy.pos.y + 40) );
+	var dx = (enemy.target.x - (enemy.pos.x + enemy.size.x*0.5) );
+	var dy = (enemy.target.y - (enemy.pos.y + enemy.size.y*0.5) );
+
+	var speed = 10;
+	
+	var len = Math.sqrt( dx*dx + dy*dy );
+	//console.log( len );
+	if ( len < 5.0 )
+	{
+		var obj = document.getElementById( "enemytank" );	
+		obj.classList.add( "paused" );
+		
+		
+		
+		return;
+	}
+	
+	dx = dx / len;
+	dy = dy / len;
 
 	//console.log( cursorX, cursorY );
 
 	calcAngleFromDir( enemy, dx, dy );
-	
-	//enemy.pos.x = -100;
-	
-	if ( (dx*dx + dy*dy) > 5000 )
-	{
-		enemy.pos.x = enemy.pos.x + dx * 0.01;
-		enemy.pos.y = enemy.pos.y + dy * 0.01;
-	}
-	else 
-	{
-		var obj = document.getElementById( "enemytank" );	
-		obj.classList.add( "paused" );
-	}
+
+
+	enemy.pos.x = enemy.pos.x + dx * speed;
+	enemy.pos.y = enemy.pos.y + dy * speed;
+
 	
 	var div = document.getElementById( "enemytank" );
 	div.style.left = enemy.pos.x;
@@ -712,10 +789,21 @@ function enemyAI()
 	
 }
 
+function calcDist( sp, ep )
+{
+	var lenn = Math.sqrt( (sp.x-ep.x)*(sp.x-ep.x) + (sp.y-ep.y)*(sp.y-ep.y) );
+	return lenn;
+}
+
 function animationLoop()
 {
 	for (var kk=0; kk<bullets.length; ++kk)
 	{
+		if ( bullets[kk] == 0 )
+		{
+			continue;
+		}
+		
 		var bb = document.getElementById( bullets[kk].id );
 		
 		bullets[kk].pos.x += bullets[kk].dir.x * bullets[kk].speed;
@@ -723,7 +811,32 @@ function animationLoop()
 		
 		bb.style.left = bullets[kk].pos.x + 'px';
 		bb.style.top  = bullets[kk].pos.y + 'px';
+		
+		//console.log( bullets[kk].spos );
+		
+		var lenn = calcDist( bullets[kk].pos, bullets[kk].spos );
+		//console.log( lenn );
+		if ( lenn > 300 )
+		{
+			var explosion = document.createElement("bomb"); 
+			explosion.className = "bomb";
+			explosion.style.position = "absolute";
+			explosion.style.left     = bullets[kk].pos.x + "px";
+			explosion.style.top      = bullets[kk].pos.y + "px";
+			document.body.appendChild(explosion);
+			
+			document.body.removeChild( bb );
+			
+			bullets[kk] = 0;
+		}
+		// id == bomb
 	}
+
+	//for (var ii=0; ii<walls.length; ii++)
+	//{
+	//	walls[ii].checkIntersection(player.id, player, player.dims);
+	//}
+	keyDown(null);
 	
 	enemyAI();
 }
@@ -738,13 +851,13 @@ function getRandomIntInclusive(min, max) {
 }
 
 
-for (var ii=0; ii<10; ++ii)
+for (var ii=0; ii<20; ++ii)
 {
 	var tree = document.createElement("div"); 
 	tree.className = "tree";
 	tree.style.position = "absolute";
-	tree.style.top      = getRandomIntInclusive(10, document.body.clientWidth ) + "px";
-	tree.style.left     = getRandomIntInclusive(10, document.body.clientHeight) + "px";
+	tree.style.top      = getRandomIntInclusive(50, document.body.clientHeight-50 ) + "px";
+	tree.style.left     = getRandomIntInclusive(50, document.body.clientWidth-50) + "px";
 	tree.style.width     = "96";
 	tree.style.height    = "107";
 	tree.style.margin   = '0px';
@@ -752,6 +865,178 @@ for (var ii=0; ii<10; ++ii)
 	tree.style.backgroundImage = "url('./imgs/sheet_tanks.png')";
 	document.body.appendChild(tree);
 }
+
+
+
+function addWall(xp, yp, ww, hh)
+{
+	var wall = document.createElement("div"); 
+	wall.className = "wall";
+	wall.style.position = "absolute";
+	wall.style.left     = xp + "px";
+	wall.style.top      = yp + "px";
+	wall.style.width     = ww;
+	wall.style.height    = hh;
+	wall.style.margin   = '0px';
+	wall.style.zIndex   = -2;
+	wall.style.backgroundImage = "url('./imgs/wall.png')";
+	document.body.appendChild(wall);
+}
+
+var hh = document.body.clientHeight;
+var ww = document.body.clientWidth;
+//addWall( -20,   -20, ww+40, 40 ); 
+//addWall( -20, hh-20, ww+40, 40 );
+//addWall( -20,   -20, 40,    hh+40 );
+//addWall( ww/2,   -20, 40,    hh-100 );
+
+
+
+
+function addQuizWall(xp, yp, ww, hh)
+{
+	var wall = document.createElement("div"); 
+	wall.className = "wall";
+	wall.style.position = "absolute";
+	wall.style.left     = xp + "px";
+	wall.style.top      = yp + "px";
+	wall.style.width     = ww;
+	wall.style.height    = hh;
+	wall.style.margin   = '0px';
+	wall.style.zIndex   = -15;
+	wall.style.backgroundImage = "url('./imgs/green.png')";
+	document.body.appendChild(wall);
+}
+
+//addQuizWall( ww/2,   hh-120, 40,    100 );
+
+
+var uniqueids = 0;
+function MyObject (xx, yy, ww, hh, img) {
+	this.prevpos = {x:xx,  y:yy},
+    this.pos     = {x:xx,  y:yy};
+	this.id      = 'ids' + uniqueids;
+	uniqueids += 1;
+
+	this.setCentrePos = function(xx, yy)
+	{
+		this.prepos = this.pos;
+		this.pos    = {x:xx-this.dims.x*0.5, y:yy-this.dims.x*0.5};
+	}
+    this.getCentrePos = function() 
+	{
+		return { x: this.pos.x+this.dims.x*0.5, y: this.pos.y+this.dims.y*0.5 };
+	};
+	this.getDims = function()
+	{
+		return this.dims;
+	}
+	this.updateGraphic = function()
+	{
+		this.div.style.left = this.pos.x + 'px';
+		this.div.style.top  = this.pos.y + 'px';
+	}
+	this.checkIntersection = function(pid, player, dims)
+	{
+		dA = document.getElementById(pid);
+		dB = document.getElementById(this.id);
+		var wa = dA.offsetWidth;
+		var wb = dB.offsetWidth;
+		var ha = dA.offsetHeight;
+		var hb = dB.offsetHeight;
+		var xa = dA.offsetLeft;
+		var xb = dB.offsetLeft;
+		var ya = dA.offsetTop;
+		var yb = dB.offsetTop;
+		
+		var dx = ((xa+(wa*0.5)) - (xb+(wb*0.5)));
+		var dy = ((ya+(ha*0.5)) - (yb+(hb*0.5)));
+		
+		var sx = (wa*0.5+wb*0.5);
+		var sy = (ha*0.5+hb*0.5);
+		
+		
+		if ( Math.abs(dy) < Math.abs(sy)  && 
+  		     Math.abs(dx) < Math.abs(sx) )
+		{
+
+			if ( Math.abs(dy) < Math.abs(dx) )
+			{ 
+				//player.pos.y -= sign(dy) * (Math.abs(dy) - Math.abs( sy ))*0.1;
+				player.pos.y = player.old.y;
+			}
+			else  
+			{ 
+				//player.pos.x -= sign(dx) * (Math.abs(dx) - Math.abs( sx ))*0.1;
+				player.pos.x = player.old.x;
+			}
+			
+			
+			
+			//var ll = Math.sqrt(dx*dx + dy*dy);
+			//var ddx = player.old.x - pos.x;
+			//var ddy = player.old.y - pos.y;
+			//var ddd = Math.sqrt( ddx*ddx + ddy*ddy );
+			//ddx = ddx / ddd ;
+			//ddy = ddy / ddd;
+		
+			//console.log( dy );
+			//pos.x -= ddx * ll;
+			//pos.y -= ddy * ll;
+			
+			// code to deal with intersection
+			// move object dB away out of intersection 
+			// using the overlap calcluation.  Pick the largest
+			// overlap 
+			
+			//if   ( dy < dx ) { pos.x += dx; }
+			//else             { pos.y += dy; }
+			
+			return true; // Collision detected
+		}
+		return false; // No collision
+	}
+	
+	this.div                = document.createElement("div"); 
+	this.div.className      = "wall";
+	this.div.id             = this.id;
+	this.div.style.position = "absolute";
+	this.div.style.left     = this.pos.x + "px";
+	this.div.style.top      = this.pos.y + "px";
+	this.div.style.width    = ww;
+	this.div.style.height   = hh;
+	this.div.style.margin   = '0px';
+	this.div.style.zIndex   = -10;
+	this.div.style.backgroundImage = "url('"+img+"')";
+	document.body.appendChild(this.div);
+	
+	this.dims = {x: this.div.style.offsetWidth, x: this.div.style.offsetHeight };
+	
+	this.updateGraphic();
+}
+
+
+var hh = document.body.clientHeight;
+var ww = document.body.clientWidth;
+//addWall( -20,   -20, ww+40, 40 ); 
+//addWall( -20, hh-20, ww+40, 40 );
+//addWall( -20,   -20, 40,    hh+40 );
+//addWall( ww/2,   -20, 40,    hh-100 );
+
+
+// addQuizWall( ww/2,   hh-120, 40,    100 );
+//var walls = [];
+walls.push( new MyObject(ww/2, hh-120, 40, 100, './imgs/green.png') );
+walls.push( new MyObject(-20,   -20, ww+40, 40, './imgs/wall.png') );
+walls.push( new MyObject(-20, hh-20, ww+40, 40, './imgs/wall.png') );
+walls.push( new MyObject(-20,   -20, 40,    hh+40, './imgs/wall.png') );
+walls.push( new MyObject(ww/2,   -20, 40,    hh-100, './imgs/wall.png') );
+
+//quizwall.updateGraphic();
+
+
+
+
 
 /*
 var track = document.createElement("div");

@@ -1,0 +1,137 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Revision Crossword</title>
+
+<link rel="stylesheet" type="text/css" href="cw.css">
+
+<script type="text/javascript" src="cw.js"></script>
+
+<script type="text/javascript">
+window.onload = function(){
+
+    const myQuestions = [
+    {
+      clue: `GIT is a distributed version ___________ system`,
+      answer: "control"
+    }
+    ,
+    {
+      clue: `GitHub is the __________ code-hosting platform`,
+      answer: "social"
+    }
+    ,
+    {
+      clue: `Nodejs is an ________ source project on GitHub`,
+      answer: "open"
+    }
+    ,
+    {
+      clue: `_____________ is important in productive web programming`,
+      answer: "Scalability"
+    }
+    ,
+    {
+      clue: `Version control is a common ____________ practice`,
+      answer: "industry"
+    }
+	];
+	
+	
+	var words = [];
+	var clues = [];
+	
+	for (var aa=0; aa<myQuestions.length; aa++)
+	{
+		var wrd = myQuestions[aa].clue
+		wrd = wrd.replace(`<`, `&lt;`);
+		wrd = wrd.replace(`>`, `&gt;`);
+		
+		words.push( myQuestions[aa].answer.toLowerCase() );
+		clues.push( wrd );
+	}
+	
+	/*
+    // words[i] correlates to clues[i]
+    var words = ["dog", "cat", "bat", "elephant", "kangaroo"];
+    var clues = ["Man's best friend", "Likes to chase mice", "Flying mammal", "Has a trunk", "Large marsupial"];
+	*/
+	
+    // Create crossword object with the words and clues
+    var cw = new Crossword(words, clues);
+
+    // create the crossword grid (try to make it have a 1:1 width to height ratio in 10 tries)
+    var tries = 100; 
+    var grid = cw.getSquareGrid(tries);
+
+    // report a problem with the words in the crossword
+    if(grid == null){
+        var bad_words = cw.getBadWords();
+        var str = [];
+        for(var i = 0; i < bad_words.length; i++){
+            str.push(bad_words[i].word);
+        }
+        alert("Shoot! A grid could not be created with these words:\n" + str.join("\n"));
+        return;
+    }
+	
+	//console.log( grid );
+
+    // turn the crossword grid into HTML
+    var show_answers = true;
+    document.getElementById("crossword").innerHTML = CrosswordUtils.toHtml(grid, show_answers);
+
+    // make a nice legend for the clues
+    var legend = cw.getLegend(grid);
+    addLegendToPage(legend);
+};
+
+function addLegendToPage(groups){
+    for(var k in groups){
+        var html = [];
+        for(var i = 0; i < groups[k].length; i++){
+            html.push("<li><strong>" + groups[k][i]['position'] + ".</strong> " + groups[k][i]['clue'] + "</li>");
+        }
+        document.getElementById(k).innerHTML = html.join("\n");
+    }
+}
+</script>
+
+</head>
+
+<body> 
+    <div id="crossword"></div>
+    <table id="clues">
+        <thead>
+            <tr>
+                <th>Across</th>
+                <th>Down</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><ul id="across"></ul></td>
+                <td><ul id="down"></ul></td>
+            </tr>
+        </tbody>
+    </table>
+
+	<br>
+	<br>
+	<p style="text-align:center">
+	Revision Crossword<br> (Note: crossword squares turn yellow when the correct answer is typed).  Have fun!
+	</p>
+
+<div style="display: block; position: absolute; bottom: 0px; right: 0px; z-index:-90;">
+    <img src="../lectures/images/back.png" >
+</div>
+	
+<div id="myhome" style="display: block; position: absolute; bottom: 5px; left: 5px;">
+    <a href="https://f28wp.github.io" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+</div>
+
+
+</body>
+</html>

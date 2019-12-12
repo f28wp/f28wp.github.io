@@ -1,0 +1,658 @@
+
+<!--
+Simple collision detection with the screen border
+
+left right top bottom of the screen
+-->
+
+<!--
+p.offsetLeft; // read only (a value, i.e., number)
+p.style.left; // string (but has 'px' value) - also '' when read from Javascript initially
+parseInt(..) to convert strings to ints for calculations
+
+Tips
+When the object hits the wall, causing scrollbars to appear for 
+a flash - either disable scrollbars or add a safety border around 
+the edge (i.e., so it never goes within a specified distances)
+
+-->
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+
+<body>
+
+
+<style>
+#player {
+    border-radius: 50%; /* ball shape */
+	position: absolute;
+	top: 50px;
+	left: 20px;
+	background: #FC0;
+	width: 50px;
+	height: 50px;
+}
+</style>
+
+<style>
+.fadeIn {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.2s linear;
+}
+
+.fadeOut {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 1s, opacity 0.2s linear;
+}
+
+.flashing {
+  animation: flasher 1s linear infinite;
+}
+
+@keyframes flasher {
+  50% {
+    opacity: 0;
+  }
+}
+</style>
+
+
+<script>
+
+var alldivs = [];
+
+
+function Menu () 
+{
+	this.container = null;
+	this.dialog    = null;
+	this.showing   = false;
+	
+	this.Show = function()
+	{
+		//this.container.style.display = "block";
+		this.container.className = "fadeIn";
+		this.showing = true;
+	}
+	
+	this.Hide = function()
+	{
+		//this.container.style.display = "none";
+		this.container.className = "fadeOut";
+		this.showing = false;
+	}
+	this.IsShowing = function()
+	{
+		return this.showing;
+	}
+	
+	this.SetText = function(t)
+	{
+		this.dialog.innerHTML = t;
+	}
+	
+	this.Create = function()
+	{
+		this.container = document.createElement("div");
+
+		this.container.id = "menu"; 
+		this.container.className = "fadeOut"; // start hidden
+		this.container.style.position = "absolute";
+		this.container.style.top      = "20%"; // 10 + 'px'; // "100px";
+		this.container.style.left     = "50%"; // "px"; //"200px";
+		//this.container.style.width     = "100%";
+		//this.container.style.height    = "100%";
+		this.container.style.margin   = '0px';
+		this.container.style.zIndex  = -10;
+		//this.container.style.backgroundColor = "rgba(255, 0, 255, 0.4)";
+		//container.style.zoom = "70%";
+		document.body.appendChild( this.container );
+		
+		this.dialog = document.createElement("div");
+		this.dialog.style.position = "relative";
+		this.dialog.style.left = "-50%";
+		this.dialog.style.top  = "10%";
+		this.dialog.style.borderRadius = "5px";
+		this.dialog.style.borderColor = "#FFFF00";
+		this.dialog.style.border="3px solid rgba(255, 22, 0, 0.4)"
+		this.dialog.style.backgroundColor = "rgba(255, 0, 0, 0.8)";
+		this.dialog.style.padding = "30pt";
+		this.dialog.style.textAlign = "center";
+		this.container.appendChild( this.dialog );
+		
+		
+		this.dialog.innerHTML = "hello world";
+	}
+}
+
+var menu = new Menu();
+menu.Create();
+menu.SetText("<p style='font-size:85px;font-weight:bold;'> Bubble </p><br><br><p class='flashing'>Press Down Cursor Key to Play</p>");
+menu.Show();
+
+
+
+
+function Bullets()
+{
+	this.bullets   = [];
+	this.idcounter = 0;
+	
+	this.Create = function()
+	{
+	}
+	
+	this.CreateGraphic = function(pos, dim, id)
+	{
+		var div = document.createElement("div");
+		div.id = "bullet" + id;
+		div.style.position = "absolute";
+		div.style.left     = pos.x + "px";//"50px";
+		div.style.top      = pos.y + "px"; //(document.body.clientHeight - 10 - 50) + "px";
+		div.style.width    = dim.x + "px"; //"50px";
+		div.style.height   = dim.y + "px"; //"50px";
+		//this.div.style.borderRadius = "5px";
+		//this.div.style.borderColor = "#FFFF00";
+		//this.div.style.border="3px solid rgba(255, 22, 0, 0.4)"
+		div.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+		div.style.padding = "0pt";
+		//this.div.style.textAlign = "center";
+		//alldivs.push( div.id );
+		document.body.appendChild( div );
+		return div;
+	}
+	this.UpdateGraphics = function()
+	{
+		for (var aa=0; aa<this.bullets.length; aa++)
+		{
+			if ( this.bullets[aa] == null ) continue;
+			
+			this.bullets[aa].div.style.left = this.bullets[aa].pos.x + "px";
+			this.bullets[aa].div.style.top  = this.bullets[aa].pos.y + "px";
+			
+		}
+	}
+	
+	this.AddBullet = function(pos, dir, dim={x:5,y:5} )
+	{
+		var bdiv = this.CreateGraphic( pos, dim, this.idcounter++ );
+		
+		var newbullet = { "pos" : pos,
+					      "dir" : dir,
+					      "id"  : bdiv.id,
+					      "div" : bdiv }
+		var newbullet2 = JSON.parse(JSON.stringify(newbullet))
+		newbullet2.div = bdiv;
+					  
+		//console.log( newbullet2.id, bdiv.id );
+		
+		for (var aa=0; aa<bullets.length; aa++)
+		{
+			if ( bullets[aa] == null )
+			{
+				bullets[aa] = newbullet2;
+				return;
+			}
+		}
+		
+		this.bullets.push( newbullet2 );
+	}
+	
+	this.CheckCollision = function( otherdiv )
+	{
+		for (var aa=0; aa<this.bullets.length; aa++)
+		{
+			if ( this.bullets[aa] == null ) continue;
+			
+			dA = document.getElementById( otherdiv.id );
+			dB = document.getElementById( this.bullets[aa].id );
+			var wa = dA.offsetWidth;
+			var wb = dB.offsetWidth;
+			var ha = dA.offsetHeight;
+			var hb = dB.offsetHeight;
+			var xa = dA.offsetLeft;
+			var xb = dB.offsetLeft;
+			var ya = dA.offsetTop;
+			var yb = dB.offsetTop;
+			
+			var dx = ((xa+(wa*0.5)) - (xb+(wb*0.5)));
+			var dy = ((ya+(ha*0.5)) - (yb+(hb*0.5)));
+			
+			var sx = (wa*0.5+wb*0.5);
+			var sy = (ha*0.5+hb*0.5);
+			
+			
+			if ( Math.abs(dy) < Math.abs(sy)  && 
+				 Math.abs(dx) < Math.abs(sx) )
+			{
+				this.bullets[aa].pos.y = -1900;
+				return true;
+			}
+		}
+		return false;
+	}
+	this.Update = function()
+	{
+		var speed = 30;
+		for (var aa=0; aa<this.bullets.length; aa++)
+		{
+			if ( this.bullets[aa] == null ) continue;
+			this.bullets[aa].pos.x += this.bullets[aa].dir.x * speed;
+			this.bullets[aa].pos.y += this.bullets[aa].dir.y * speed;
+		}
+		this.UpdateGraphics();
+		
+		for (var aa=0; aa<this.bullets.length; aa++)
+		{
+			if ( this.bullets[aa] == null ) continue;
+			
+			if ( this.bullets[aa].pos.y < 0 )
+			{
+				// remove
+				var dd = document.getElementById( this.bullets[aa].id );
+				document.body.removeChild( dd );
+				
+				this.bullets[aa] = null;
+			}
+		}
+	}
+}
+
+var bullets = new Bullets();
+bullets.Create();
+
+var uniqueid = 0;
+
+
+function getRandomIntInclusive(min, max) 
+{
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min; //The maximum is inclusive and the minimum is inclusive 
+}
+
+function sign(v)
+{
+	if ( v > 0 )
+	{	
+		return 1.0;
+	}
+	return -1.0;
+}
+
+function Enemies()
+{
+	this.enemies = [];
+	
+	this.Create = function()
+	{
+		for (var aa=0; aa<5; ++aa)
+		{
+			var sz = getRandomIntInclusive(50, 100);
+			
+			var ww = document.documentElement.clientWidth;
+			var hh = document.documentElement.clientHeight;
+			
+			var enemy = { 
+							id: "enemy" + uniqueid++,
+							pos  : {x:getRandomIntInclusive(100,ww-100), 
+									y:getRandomIntInclusive(100,hh*0.5)},
+							dim  : {x:sz, y:sz},
+							dir  : {x:sign(getRandomIntInclusive(-1,1)), 
+									y:sign(getRandomIntInclusive(-1,1))},
+							speed : getRandomIntInclusive(3,10)
+						  };
+						  
+			var div = document.createElement("div");
+			div.style.position = "absolute";
+			div.id 			   = enemy.id;
+			div.style.left     = enemy.pos.x + "px";//"50px";
+			div.style.top      = enemy.pos.y + "px"; //(document.body.clientHeight 
+			div.style.width    = enemy.dim.x + "px";
+			div.style.height   = enemy.dim.y + "px";
+			div.style.backgroundColor = "rgba(0, 0, 255, 0.4)";
+			div.style.padding = "0pt";
+			div.style.borderRadius = "50%"; /* ball shape */
+			div.style.zIndex = -100;
+			alldivs.push( div.id );
+			document.body.appendChild( div );
+			
+			this.enemies.push( enemy );
+		}
+	}
+	
+	this.Update = function()
+	{
+		for (var aa=0; aa<this.enemies.length; aa++)
+		{
+			if ( this.enemies[aa] == 0 ) continue
+			
+			var p = document.getElementById( this.enemies[aa].id );
+			
+			let left = p.offsetLeft; // read only
+			let top  = p.offsetTop;  // read only 
+			
+			left += this.enemies[aa].dir.x * this.enemies[aa].speed;
+			top  += this.enemies[aa].dir.y * this.enemies[aa].speed;
+			
+			var body = document.body;
+			var html = document.documentElement;
+			var height = Math.max( body.scrollHeight, body.offsetHeight, 
+								   html.clientHeight, html.scrollHeight, html.offsetHeight );
+			var width  = Math.max( body.scrollWidth, body.offsetWidth, 
+								   html.clientWidth, html.scrollWidth, html.offsetWidth );
+			
+			width  = body.clientWidth;
+			height = html.clientHeight;
+			
+			var overlap = {x:0,y:0};
+			overlap.x = ( p.offsetLeft+p.offsetWidth  ) - width;
+			overlap.y = ( p.offsetTop +p.offsetHeight ) - height;
+			
+			// Two parts, the first is if we have intersected (>) or touched(=)
+			// the wall, the second is if we are moving towards the wall or away
+			// so we don't get stuck (i.e., next frame things we're still touching)
+			if ( overlap.x >= 0 && this.enemies[aa].dir.x > 0 )
+			{
+			  left -= overlap.x;
+			  this.enemies[aa].dir.x *= -1; // change direction
+			}
+			
+			if ( left <= 0 && this.enemies[aa].dir.x < 0)
+			{
+			  left = 0;
+			  this.enemies[aa].dir.x *= -1; // change direction
+			}
+
+			if ( overlap.y >= 0 & this.enemies[aa].dir.y > 0 )
+			{
+			  top -= overlap.y;
+			  this.enemies[aa].dir.y *= -1; // change direction
+			}
+			
+			if ( top <= 0 && this.enemies[aa].dir.y < 0)
+			{
+			  top = 0;
+			  this.enemies[aa].dir.y *= -1; // change direction
+			}
+				
+
+			p.style.left  = left  + 'px';
+			p.style.top   = top   + 'px';
+		}
+		
+	}
+}
+
+var enemies = new Enemies();
+enemies.Create();
+
+
+function Player()
+{
+	this.div = null;
+	this.pos = {x:50, y:document.documentElement.clientHeight - 10 - 50};
+	this.dim = {x:50, y:50};
+	this.id  = "myplayer";
+	
+	//this.divgif2 = new DivGif();
+	
+	
+	this.Create = function()
+	{
+		
+		this.div = document.createElement("div");
+		this.div.style.position = "absolute";
+		this.div.id = this.id;
+		this.div.style.left     = this.pos.x + "px";//"50px";
+		this.div.style.top      = this.pos.y + "px"; //(document.body.clientHeight - 10 - 50) + "px";
+		this.div.style.width    = this.dim.x + "px"; //"50px";
+		this.div.style.height   = this.dim.y + "px"; //"50px";
+		//this.div.style.borderRadius = "5px";
+		//this.div.style.borderColor = "#FFFF00";
+		//this.div.style.border="3px solid rgba(255, 22, 0, 0.4)"
+		this.div.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+		this.div.style.padding = "0pt";
+		//this.div.style.textAlign = "center";
+		alldivs.push( this.div.id );
+		document.body.appendChild( this.div );
+		
+		
+		/*
+		this.divgif2.gifoff  = {x:478,y:452};
+		this.divgif2.gifdims = {x:58, y:64};
+		this.divgif2.dims    = {x:this.dim.x, y:this.dim.y};
+		this.divgif2.Create();
+		this.divgif2.SetPosition( this.pos );
+		*/
+	}
+	
+	this.CheckCollision = function( otherdiv )
+	{
+		//for (var aa=0; aa<this.bullets.length; aa++)
+		//{
+			//if ( this.bullets[aa] == null ) continue;
+			
+			dA = document.getElementById( otherdiv.id );
+			dB = document.getElementById( this.id );
+			var wa = dA.offsetWidth;
+			var wb = dB.offsetWidth;
+			var ha = dA.offsetHeight;
+			var hb = dB.offsetHeight;
+			var xa = dA.offsetLeft;
+			var xb = dB.offsetLeft;
+			var ya = dA.offsetTop;
+			var yb = dB.offsetTop;
+			
+			var dx = ((xa+(wa*0.5)) - (xb+(wb*0.5)));
+			var dy = ((ya+(ha*0.5)) - (yb+(hb*0.5)));
+			
+			var sx = (wa*0.5+wb*0.5);
+			var sy = (ha*0.5+hb*0.5);
+			
+			
+			if ( Math.abs(dy) < Math.abs(sy)  && 
+				 Math.abs(dx) < Math.abs(sx) )
+			{
+				//this.bullets[aa].pos.y = -1900;
+				return true;
+			}
+		//}
+		return false;
+	}
+	
+	this.Move = function(e)
+	{
+		/*
+		if ( quiz.IsShowing() )
+		{
+			return;
+		}
+	
+		
+		if ( menu.IsShowing() )
+		{
+			return;
+		}
+		*/
+		
+		var fire = 0;
+		var firebomb = 0;
+		var dir = {x:0,y:0};
+	    //if      (e.keyCode == '38') { dir.y = -1; } // up arrow 
+		//else 
+		     if (e.keyCode == '40') { dir.y =  1; } // down arrow
+		else if (e.keyCode == '37') { dir.x = -1; } // left arrow
+		else if (e.keyCode == '39') { dir.x =  1; } // right arrow
+		else if (e.keyCode == '33') { fire = 1;   } // space
+		else if (e.keyCode == '18') { firebomb = 1;   } // alt
+		else if (e.keyCode == '38') { fire = 1;   } // up arrow
+	
+		var speed = 20.0;
+		this.pos.x += dir.x * speed;
+		//this.pos.y += dir.y * speed; // no y movement
+		
+		var border = 10;
+		var dx = 0;
+		if ( this.pos.x < border )
+		{
+			dx = this.pos.x - border;
+		}
+		if ( this.pos.x > (document.body.clientWidth - this.dim.x - border) )
+		{
+			dx = this.pos.x - (document.body.clientWidth - this.dim.x - border);
+		}
+		this.pos.x -= dx;
+	
+		this.div.style.left     = this.pos.x + "px";//"50px";
+		this.div.style.top      = this.pos.y + "px"; //(document.body.clientHeight 
+		//this.divgif2.SetPosition( this.pos );
+		
+		var cx = this.pos.x + this.dim.x*0.5;
+		var nosepos = {x:cx, y:this.pos.y};
+		if ( fire )
+		{
+			var cx = this.pos.x + this.dim.x*0.5;
+			bullets.AddBullet( nosepos, {x:0,y:-1} );
+			//console.log( 'fire' );
+		}
+		if ( firebomb )
+		{
+			bullets.AddBullet( nosepos, {x:0,y:-1}, {x:20,y:20} );
+		}
+	}
+} 
+
+var player = new Player();
+player.Create();
+
+
+// Initialize some variables that our program will use
+var reqID = -1;
+
+
+
+// This function moves the player div
+function startAnimation() 
+{
+	reqID = window.requestAnimationFrame(startAnimation);
+	
+	if ( menu.IsShowing() )
+	{
+		return;
+	}
+	
+	enemies.Update();
+	
+	
+	bullets.Update();
+	
+	for (var aa=0; aa<enemies.enemies.length; ++aa)
+	{
+		if ( enemies.enemies[ aa ] == 0 ) continue;
+		
+		var div = document.getElementById( enemies.enemies[ aa ].id );
+		if ( bullets.CheckCollision( div ) )
+		{
+			document.body.removeChild( div );
+			
+			enemies.enemies[ aa ] = 0;
+			//console.log( 'hit' );
+			break;
+		}
+	}
+	
+	for (var aa=0; aa<enemies.enemies.length; ++aa)
+	{
+		if ( enemies.enemies[ aa ] == 0 ) continue;
+		
+		var div = document.getElementById( enemies.enemies[ aa ].id );
+		if ( player.CheckCollision( div ) )
+		{
+			menu.Show();
+			// enemy has hit player! game over??
+			return;
+		}
+	}
+	
+	
+
+	
+}
+
+function stopAnimation() 
+{
+	window.cancelAnimationFrame(reqID);
+}
+
+
+// The window load event fires this function
+// This function is where you get everything ready in the program after document is fully loaded
+function docReady()
+{
+	// Start up the movement/animation
+	startAnimation();
+	
+	// stopAnimation(); // if we want to stop the animation
+	
+	// user input
+	document.onkeydown = checkKey;
+}
+
+
+function checkKey(e) 
+{	
+	e = e || window.event;
+	
+	if ( menu.IsShowing() )
+	{
+		if (e.keyCode == '40') // down
+		{
+			menu.Hide();
+			
+			for (var kk=0; kk<alldivs.length; ++kk)
+			{
+				var gg = document.getElementById( alldivs[kk] );
+				console.log( gg );
+				if ( gg == null )
+				{
+					continue;
+				}
+				document.body.removeChild( gg );
+			}
+			
+			enemies = null;
+			enemies = new Enemies();
+			enemies.Create();
+			
+			player = null;
+			player = new Player();
+			player.Create();
+		}
+		return;
+	}
+	
+    
+
+	player.Move(e);
+}
+
+// The window load event listener
+window.addEventListener("load", docReady);
+
+</script>
+
+<!--
+Press cursor keys to move left and right (up cursor to fire)
+-->
+
+</body>
+</html>
+
+

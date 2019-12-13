@@ -3,6 +3,10 @@
 
 
 <style>
+body {
+  background-color: black;
+}
+
 .fadeIn {
   visibility: visible;
   opacity: 1;
@@ -70,7 +74,7 @@ function Menu ()
 		//this.container.style.width     = "100%";
 		//this.container.style.height    = "100%";
 		this.container.style.margin   = '0px';
-		this.container.style.zIndex  = -10;
+		this.container.style.zIndex  = 10;
 		//this.container.style.backgroundColor = "rgba(255, 0, 255, 0.4)";
 		//container.style.zoom = "70%";
 		document.body.appendChild( this.container );
@@ -82,7 +86,7 @@ function Menu ()
 		this.dialog.style.borderRadius = "5px";
 		this.dialog.style.borderColor = "#FFFF00";
 		this.dialog.style.border="3px solid rgba(255, 22, 0, 0.4)"
-		this.dialog.style.backgroundColor = "rgba(255, 0, 0, 0.4)";
+		this.dialog.style.backgroundColor = "rgba(255, 200, 200, 0.9)";
 		this.dialog.style.padding = "30pt";
 		this.dialog.style.textAlign = "center";
 		this.container.appendChild( this.dialog );
@@ -94,7 +98,7 @@ function Menu ()
 
 var menu = new Menu();
 menu.Create();
-menu.SetText("<p style='font-size:65px;'>Space Invaders</p><br><br><p class='flashing'>Press Space to Play</p>");
+menu.SetText("<p style='font-size:65px;'>Space Invaders</p><br><br><p class='flashing'>Press Esc to Play</p>");
 
 
 
@@ -332,8 +336,17 @@ function Bullets()
 	this.bullets   = [];
 	this.idcounter = 0;
 	
+	this.divgif2 = new DivGif();
+			
+		
 	this.Create = function()
 	{
+		this.divgif2.gifoff  = {x:157,y:93};
+		this.divgif2.gifdims = {x:197, y:267};
+		this.divgif2.dims    = {x:30, y:30};
+		this.divgif2.gifname = "./imgs/fireball.gif";
+		this.divgif2.Create();
+		this.divgif2.SetPosition( {x:-9000,y:-10} );
 	}
 	
 	this.CreateGraphic = function(pos, dim, id)
@@ -360,20 +373,37 @@ function Bullets()
 		{
 			if ( this.bullets[aa] == null ) continue;
 			
+			if ( this.bullets[aa].type == 1 )
+			{
+				this.divgif2.SetPosition( this.bullets[aa].pos );
+				this.bullets[aa].div.style.backgroundColor = "rgba(255, 0, 0, 0.0)"
+			}
+			
 			this.bullets[aa].div.style.left = this.bullets[aa].pos.x + "px";
 			this.bullets[aa].div.style.top  = this.bullets[aa].pos.y + "px";
-			
 		}
 	}
 	
-	this.AddBullet = function(pos, dir, dim={x:5,y:5} )
+	this.AddBullet = function(pos, dir, dim={x:5,y:5}, type=0 )
 	{
+		if ( type == 1 ) // only 1 on screen at a time
+		{
+			if ( this.divgif2.pos.y > 100 )
+			{
+				//alert(this.divgif2.pos.y);
+				return; // still active - can't create
+			}
+		}
+	
 		var bdiv = this.CreateGraphic( pos, dim, this.idcounter++ );
+		
 		
 		var newbullet = { "pos" : pos,
 					      "dir" : dir,
 					      "id"  : bdiv.id,
-					      "div" : bdiv }
+					      "div" : bdiv,
+						  "type": type };
+						  
 		var newbullet2 = JSON.parse(JSON.stringify(newbullet))
 		newbullet2.div = bdiv;
 					  
@@ -419,6 +449,7 @@ function Bullets()
 				 Math.abs(dx) < Math.abs(sx) )
 			{
 				this.bullets[aa].pos.y = -1900;
+				
 				return true;
 			}
 		}
@@ -439,7 +470,7 @@ function Bullets()
 		{
 			if ( this.bullets[aa] == null ) continue;
 			
-			if ( this.bullets[aa].pos.y < 0 )
+			if ( this.bullets[aa].pos.y < -100 )
 			{
 				// remove
 				var dd = document.getElementById( this.bullets[aa].id );
@@ -465,7 +496,6 @@ function Player()
 	
 	this.Create = function()
 	{
-		
 		this.div = document.createElement("div");
 		this.div.style.position = "absolute";
 		this.div.id = "player";
@@ -513,7 +543,7 @@ function Player()
 		else if (e.keyCode == '37') { dir.x = -1; } // left arrow
 		else if (e.keyCode == '39') { dir.x =  1; } // right arrow
 		else if (e.keyCode == '33') { fire = 1;   } // space
-		else if (e.keyCode == '18') { firebomb = 1;   } // alt
+		else if (e.keyCode == '17') { firebomb = 1;   } // cnrl
 		else if (e.keyCode == '38') { fire = 1;   } // up arrow
 	
 		var speed = 20.0;
@@ -546,7 +576,7 @@ function Player()
 		}
 		if ( firebomb )
 		{
-			bullets.AddBullet( nosepos, {x:0,y:-1}, {x:20,y:20} );
+			bullets.AddBullet( nosepos, {x:0,y:-1}, {x:30,y:30}, 1 );
 		}
 	}
 } 
@@ -566,6 +596,9 @@ function Enemy()
 	this.pos = {x:getRandomIntInclusive(50, document.body.clientWidth-50), y:50};
 	this.dim = {x:50, y:50};
 	this.dir = {x:1,y:0};
+	this.type = 0;
+	
+	this.divgif2 = new DivGif();
 	
 	this.Create = function()
 	{
@@ -584,6 +617,23 @@ function Enemy()
 		this.div.style.padding = "0pt";
 		//this.div.style.textAlign = "center";
 		document.body.appendChild( this.div );
+		
+		if ( this.type == 0 )
+		{
+			this.divgif2.gifoff  = {x:114,y:388};
+			this.divgif2.gifdims = {x:41, y:38};
+			this.divgif2.dims    = {x:this.dim.x, y:this.dim.y};
+			this.divgif2.Create();
+			this.divgif2.SetPosition( this.pos );
+		}
+		else 
+		{
+			this.divgif2.gifoff  = {x:259,y:389};
+			this.divgif2.gifdims = {x:41, y:38};
+			this.divgif2.dims    = {x:this.dim.x, y:this.dim.y};
+			this.divgif2.Create();
+			this.divgif2.SetPosition( this.pos );
+		}
 	}
 	
 	this.GlobalUpdate = function()
@@ -637,7 +687,7 @@ function Enemy()
 		else if (e.keyCode == '37') { dir.x = -1; } // left arrow
 		else if (e.keyCode == '39') { dir.x =  1; } // right arrow
 		else if (e.keyCode == '33') { fire = 1;   } // space
-		else if (e.keyCode == '18') { firebomb = 1;   } // alt
+		else if (e.keyCode == '17') { firebomb = 1;   } // shift
 		else if (e.keyCode == '38') { fire = 1;   } // up arrow
 		*/
 		
@@ -660,6 +710,8 @@ function Enemy()
 		this.div.style.left     = this.pos.x + "px";//"50px";
 		this.div.style.top      = this.pos.y + "px"; //(document.body.clientHeight 
 		
+		this.divgif2.SetPosition( this.pos );
+		
 		var cx = this.pos.x + this.dim.x*0.5;
 		var nosepos = {x:cx, y:this.pos.y};
 		if ( fire )
@@ -674,7 +726,7 @@ function Enemy()
 		}
 	}
 	
-	this.Create();
+	//this.Create();
 } 
 
 
@@ -689,8 +741,28 @@ for (var xx=0; xx<10; ++xx)
 for (var yy=0; yy<5;  ++yy)
 {
 	enemies.push( new Enemy() );
+	
+	var rr = getRandomIntInclusive(0,100);
+	if ( rr > 90 ) // number of questions to pick
+	{
+		enemies[ enemies.length-1 ].type = 1;
+	}
+	
 	enemies[ enemies.length-1 ].pos.x = 100 + gap*xx;
 	enemies[ enemies.length-1 ].pos.y = 130 + gap*yy;
+	enemies[ enemies.length-1 ].Create();	
+}
+
+function ResetEnemies()
+{
+	var gg = 0;
+	for (var xx=0; xx<10; ++xx)
+	for (var yy=0; yy<5;  ++yy)
+	{
+		enemies[ gg ].pos.x = 100 + gap*xx;
+		enemies[ gg ].pos.y = 130 + gap*yy;
+		gg++;
+	}
 }
 
 
@@ -698,7 +770,24 @@ for (var yy=0; yy<5;  ++yy)
 function keyDown(e)
 {
 	e = e || window.event;
+	
+	if ( menu.IsShowing() )
+	{
+		if ( e.keyCode == '27' ) // esc
+		{
+			menu.Hide();
+		}
+		return;
+	}
+	
+	
 	player.Move(e);
+	
+	if ( e.keyCode == '27' ) // esc
+	{
+		menu.Show();
+	}
+	
 /*
     
 
@@ -720,16 +809,34 @@ function animationLoop()
 		enemies[ 0 ].GlobalUpdate();
 	}
 
+	var numDead = 0;
 	for (var aa=0; aa<enemies.length; ++aa)
 	{
 		enemies[aa].Update();
+		
+		if ( enemies[ aa ].pos.y > 4000 )
+		{
+			numDead++;
+		}
 	}
+	
+	if ( numDead >= enemies.length )
+	{
+		// restart game!
+		ResetEnemies();
+	}
+	
 	
 	for (var aa=0; aa<enemies.length; ++aa)
 	{
 		if ( bullets.CheckCollision( enemies[aa].div ) )
 		{
-			enemies[ aa ].pos.y = -900;
+			enemies[ aa ].pos.y = 5000;
+			
+			if ( enemies[aa].type == 1 )
+			{
+				quiz.Show();
+			}
 			break;
 		}
 	}
@@ -741,10 +848,13 @@ setInterval(animationLoop, 50);
 
 </script>
 
+<!--
 <button onclick="menu.Show();">show</button>
 <button onclick="menu.Hide();">hide</button>
 
 <button onclick="quiz.Show();">showq</button>
 <button onclick="quiz.Hide();">hideq</button>
+-->
+
 
 </body></html>

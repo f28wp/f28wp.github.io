@@ -17,7 +17,7 @@ function httpGet(theUrl)
     {
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
-            document.write( responsetext );
+            document.write( xmlhttp.responsetext );
         }
     }
     xmlhttp.open("GET", theUrl, true);

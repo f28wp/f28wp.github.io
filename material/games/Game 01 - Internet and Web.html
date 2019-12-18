@@ -19,7 +19,7 @@ function httpGet(theUrl)
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
 			// ./imgs/ -> '/'+path+'./imgs/'
-			var newpath = "/" + path + "/imgs/";
+			var newpath = "./" + path + "/imgs/";
 			//var res = xmlhttp.responseText.replace(/.//imgs///g, newpath);
 			var res = xmlhttp.responseText.split('./imgs/').join(newpath);
             document.write( res );

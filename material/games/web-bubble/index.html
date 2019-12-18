@@ -594,6 +594,7 @@ function stopAnimation()
 
 // The window load event fires this function
 // This function is where you get everything ready in the program after document is fully loaded
+/*
 function docReady()
 {
 	// Start up the movement/animation
@@ -603,14 +604,14 @@ function docReady()
 	
 
 }
-
+*/
 
 
 function checkKey(e) 
 {	
 	e = e || window.event;
 	
-	console.log( e );
+	//console.log( e );
 	
 	if ( menu.IsShowing() )
 	{
@@ -649,7 +650,9 @@ function checkKey(e)
 document.onkeydown = checkKey;
 
 // The window load event listener
-window.addEventListener("load", docReady);
+//window.addEventListener("load", docReady);
+
+startAnimation();
 
 </script>
 

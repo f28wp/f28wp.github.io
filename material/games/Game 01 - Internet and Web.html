@@ -21,7 +21,7 @@ function httpGet(theUrl)
 			// ./imgs/ -> '/'+path+'./imgs/'
 			var newpath = "/" + path + "/imgs/";
 			//var res = xmlhttp.responseText.replace(/.//imgs///g, newpath);
-			xmlhttp.responseText.split('./imgs/').join(newpath);
+			var res = xmlhttp.responseText.split('./imgs/').join(newpath);
             document.write( res );
         }
     }

@@ -17,13 +17,18 @@ function httpGet(theUrl)
     {
         if (xmlhttp.readyState==4 && xmlhttp.status==200)
         {
-            document.write( xmlhttp.responsetext );
+            document.write( xmlhttp.responseText );
         }
     }
     xmlhttp.open("GET", theUrl, true);
     xmlhttp.send();    
 }
-httpGet( gameurl );
+
+document.onload = function()
+{
+	httpGet( gameurl );
+};
+
 
 </script>
 

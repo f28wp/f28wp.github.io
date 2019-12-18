@@ -604,12 +604,13 @@ function docReady()
 
 }
 
-// user input
-document.onkeydown = checkKey;
+
 
 function checkKey(e) 
 {	
 	e = e || window.event;
+	
+	console.log( e );
 	
 	if ( menu.IsShowing() )
 	{
@@ -643,6 +644,9 @@ function checkKey(e)
 
 	player.Move(e);
 }
+
+// user input
+document.onkeydown = checkKey;
 
 // The window load event listener
 window.addEventListener("load", docReady);

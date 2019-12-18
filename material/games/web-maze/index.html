@@ -761,8 +761,12 @@ setInterval(animateCallback, ( 200 ));
 
 document.getElementsByTagName("BODY")[0].onresize = function()
 {
-   var divoffsetx = (window.innerWidth  - sizemaze) * 0.5;
-   var divoffsety = (window.innerHeight - sizemaze) * 0.5;
+   //var divoffsetx = (window.innerWidth  - sizemaze) * 0.5;
+   //var divoffsety = (window.innerHeight - sizemaze) * 0.5;
+   
+   var divoffsetx = (window.innerWidth*0.5  - sizemaze); // left not the middle
+   var divoffsety = (window.innerHeight*0.5 - sizemaze);
+   
    
    var mm = document.getElementById("cont");
    

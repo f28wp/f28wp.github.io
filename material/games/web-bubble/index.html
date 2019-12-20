@@ -311,7 +311,7 @@ function Enemies()
 						  
 			
 			var div = document.createElement("div");
-			div.style.position = "absolute";
+			div.style.position = "fixed";
 			div.id 			   = enemy.id;
 			div.style.left     = enemy.pos.x + "px";//"50px";
 			div.style.top      = enemy.pos.y + "px"; //(document.body.clientHeight 
@@ -322,6 +322,11 @@ function Enemies()
 			div.style.margin  = "0pt";
 			div.style.borderRadius = "50%"; // ball shape 
 			div.style.zIndex = -100;
+			div.style.overflow = "hidden";
+			//div.style.boxShadow = "0 0 0px 9999px white";
+			div.style.border   = "1px solid red";
+			div.style["boxShadow"] = "0 0 9px #999999";
+			//overflow: hidden;
 			alldivs.push( div.id );
 			document.body.appendChild( div );
 			

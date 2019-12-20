@@ -122,12 +122,17 @@ const result = self.hljs.highlightAuto(event.data);
 	<div class="leftcontainer">
 	Task Description
 	</div>
-	<div class="leftcontainer">
+	<div id="task" class="leftcontainer">
 	Edit the function so that when it is called, if the parameter is equal to "cat" the function returns
 	true otherwise the function returns false;
 	
 	<br><br>
 	After editing the code run the tests to verify your code works.
+	</div>
+	
+	<br><br>
+	<div class="leftcontainer">
+	<button onclick="nextTask();">Next Task</button>
 	</div>
 </div>
 
@@ -157,9 +162,23 @@ function get( abc )
 
 <script charset="UTF-8" href="...">
 
-function runTests()
+var test0 = {
+
+	task: `
+Edit the function so that when it is called, if the parameter is equal to "cat" the function returns true otherwise the function returns false;
+`,
+	
+	startcode: `
+function get( abc )
 {
-        var dd = document.getElementById( "editbox" );
+  // if abc == "cat" return true
+  // otherwise false
+  // add code
+}
+`,
+	runTests: function()
+	{
+	    var dd = document.getElementById( "editbox" );
        
         var code = dd.value;
 		
@@ -199,12 +218,133 @@ function runTests()
 		
 		var oo = document.getElementById( "output" );
 		oo.innerHTML = log;
+	},
+	
+	setup: function()
+	{
+		var tt = document.getElementById("task");
+		tt.innerHTML = this.task;
 		
-		/*
-		const result = self.hljs.highlightAuto(code);
-		console.log( result );
-		dd.value = result.value;
-		*/
+		var oo = document.getElementById( "output" );
+		oo.innerHTML = "";
+		
+		var dd = document.getElementById( "editbox" );
+		dd.value = this.startcode;
+	}
+}
+
+
+var test1 = {
+
+	task: `
+Edit the function so that it returns the total number of characters in the parameter string passed to the function, e.g., "abcd" == 4
+`,
+	
+	startcode: `
+function countchars( abc )
+{
+  // add code
+}
+`,
+	runTests: function()
+	{
+	    var dd = document.getElementById( "editbox" );
+       
+        var code = dd.value;
+		
+		//hljs.registerLanguage("javascript",function(e){var a="[a-zA-Z_$][a-zA-Z_$0-9]*"});
+		
+		
+        var log = "";
+        var tt = "none";
+        //console.log( code );
+        try {
+                eval( code );
+                //console.log("passes no errors");
+				log += "compiles no errors" + "<br>";
+               
+				var testcount = 0;
+                if ( countchars("abcdefghi") === 9 )
+                {
+                        //console.log("passes test");
+						log += "passed test 1" + "<br>";
+						testcount = testcount + 1;
+                }
+                else
+                {
+                        //console.log("fails test");
+						log += "failed test 1" + "<br>";
+						
+						
+                }
+				
+				if ( countchars("a") === 1 )
+                {
+                        //console.log("passes test");
+						log += "passed test 2" + "<br>";
+						testcount = testcount + 1;
+                }
+                else
+                {
+                        //console.log("fails test");
+						log += "failed test 1" + "<br>";
+						
+						
+                }
+				
+				if ( testcount == 2 )
+				{
+					log += "<font color='red'>Congratulations</font> (passes all tests)" + "<br>";
+				}
+				
+               
+        } catch (e) {
+                if (e instanceof SyntaxError) 
+				{
+                        tt = e.message;
+						log += "failed to compile:" + "<br>";
+						log += e.message;
+                }
+        }
+		
+		var oo = document.getElementById( "output" );
+		oo.innerHTML = log;
+	},
+	
+	setup: function()
+	{
+		var tt = document.getElementById("task");
+		tt.innerHTML = this.task;
+		
+		var oo = document.getElementById( "output" );
+		oo.innerHTML = "";
+		
+		var dd = document.getElementById( "editbox" );
+		dd.value = this.startcode;
+	}
+}
+
+
+
+var curTest = 0;
+tests = [ test0, test1 ];
+//tests[ curTest ].runTests();
+
+function nextTask()
+{
+	curTest = (curTest + 1) % tests.length;
+	tests[ curTest ].setup();
+}
+
+function runTests()
+{
+	tests[ curTest ].runTests();
+		
+	/*
+	const result = self.hljs.highlightAuto(code);
+	console.log( result );
+	dd.value = result.value;
+	*/
 }
 
 </script>

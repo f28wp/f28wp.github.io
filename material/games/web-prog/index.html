@@ -1,0 +1,214 @@
+
+
+<html><head>
+
+ 
+<meta charset="utf-8" >
+
+<!--
+<link rel="stylesheet" href="./styles/default.css">
+<script src="./highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+-->
+
+</head>
+<body>
+
+<style>
+html, body {
+margin: 0;
+padding: 0;
+}
+
+#left 
+{
+	float: left;
+	width: 30%;
+	height: 100%;
+	overflow: hidden;
+	border-color: #229922;
+	border-style: dotted dashed solid double;
+	border-width: 0px;
+	box-shadow:inset 0px 0px 0px 1px #ff0;
+	margin: 0px;
+	padding: 0px;
+}
+
+#right
+{
+	float: left;
+	width: 70%;
+	height: 100%;
+	background: light-gray;
+	overflow: hidden;
+	border-color: #992222;
+	border-style: dotted dashed solid double;
+	border-width: 0px;
+	box-shadow:inset 0px 0px 0px 1px #f00;
+	margin: 0;
+	padding: 0;
+}
+
+.leftcontainer
+{
+	margin: 0;
+	padding: 0;
+	padding: 10px;
+	
+	border-color: #992222;
+	border-style: dotted dashed solid double;
+	border-width: 1px;
+}
+
+.rightcontainer
+{
+	margin: 0;
+	padding: 0;
+	padding: 10px;
+	
+	border-color: #222299;
+	border-style: dotted dashed solid double;
+	border-width: 1px;
+}
+
+.rightcontainer
+{
+	margin: 0;
+	padding: 0;
+	padding: 10px;
+	
+	border-color: #222299;
+	border-style: dotted dashed solid double;
+	border-width: 1px;
+}
+
+.textarea{
+    background: url(./imgs/nums.png);
+	background-attachment: local;
+	background-repeat: no-repeat;
+	padding-left: 35px;
+	padding-top: 10px;
+    border-color:#ccc;
+}
+
+
+</style>
+
+<style>
+#demo { padding-left: 40px; position: relative; }
+#demo .line { position: absolute; left: 10px; width: 30px; display: inline-block; }
+
+#demo2 { padding-left: 40px; position: relative; }
+#demo2 .line { position: absolute; left: 0; width: 30px; text-align: right; display: inline-block;}
+</style>
+
+
+
+<link rel="stylesheet" href="./styles/default.css">
+<script src="./highlight.pack.js"></script>
+<!--
+<script>hljs.initHighlightingOnLoad();</script>
+-->
+
+
+	
+<!--
+const result = self.hljs.highlightAuto(event.data);
+-->
+
+
+
+<div id="left">
+	<div class="leftcontainer">
+	Task Description
+	</div>
+	<div class="leftcontainer">
+	Edit the function so that when it is called, if the parameter is equal to "cat" the function returns
+	true otherwise the function returns false;
+	
+	<br><br>
+	After editing the code run the tests to verify your code works.
+	</div>
+</div>
+
+<div id="right">
+	<div class="rightcontainer"  contenteditable="false">
+	Edit Code
+	</div>
+	<div class="rightcontainer">
+<textarea id="editbox" class="textarea" name="Text1" cols="60" rows="30">
+function get( abc )
+{
+  // if abc == "cat" return true
+  // otherwise false
+  // add code
+}
+</textarea>
+	
+	</div>
+	<div class="rightcontainer"  contenteditable="false">
+	<button onclick="runTests();">Run</button>
+	</div>
+	<div class="rightcontainer"  contenteditable="false">
+	Output/Results<div id="output"></div>
+	</div>
+	
+</div>
+
+<script charset="UTF-8" href="...">
+
+function runTests()
+{
+        var dd = document.getElementById( "editbox" );
+       
+        var code = dd.value;
+		
+		//hljs.registerLanguage("javascript",function(e){var a="[a-zA-Z_$][a-zA-Z_$0-9]*"});
+		
+		
+        var log = "";
+        var tt = "none";
+        //console.log( code );
+        try {
+                eval( code );
+                //console.log("passes no errors");
+				log += "compiles no errors" + "<br>";
+               
+                if ( get("cat") == true )
+                {
+                        //console.log("passes test");
+						log += "passed test 1" + "<br>";
+						log += "<font color='red'>Congratulations</font> (passes all tests)" + "<br>";
+                }
+                else
+                {
+                        //console.log("fails test");
+						log += "failed test 1" + "<br>";
+						
+						
+                }
+               
+        } catch (e) {
+                if (e instanceof SyntaxError) 
+				{
+                        tt = e.message;
+						log += "failed to compile:" + "<br>";
+						log += e.message;
+                }
+        }
+		
+		var oo = document.getElementById( "output" );
+		oo.innerHTML = log;
+		
+		/*
+		const result = self.hljs.highlightAuto(code);
+		console.log( result );
+		dd.value = result.value;
+		*/
+}
+
+</script>
+
+
+</body>
+</html>

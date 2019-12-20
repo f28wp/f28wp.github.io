@@ -44,10 +44,11 @@ var box = 20;
 var sizemaze = box * w;
 
 // offset from the side of the screen
-var pageoffset = 0;//(window.innerHeight - sizemaze) * 0.5;
+var pageoffsetx = -sizemaze*0.5;//(window.innerHeight - sizemaze) * 0.5;
+var pageoffsety = -sizemaze*0.5;
 
-var divoffsetx = (window.innerWidth*0.5  - sizemaze); // left not the middle
-var divoffsety = (window.innerHeight*0.5 - sizemaze);
+var divoffsetx = sizemaze*1.0; // (window.innerWidth*0.5  - sizemaze*1.0); // left not the middle
+var divoffsety = (window.innerHeight*0.5 - sizemaze*0.75);
    
 
 document.write("Maze and game is generated using only Javascript (procedural) <br>");
@@ -113,7 +114,7 @@ body {
   border: 16px solid orange;
   background-color: white;
   z-index: 1002;
-  overflow: auto;
+  //overflow: auto;
 }
 `;
 document.head.appendChild(style);
@@ -529,7 +530,7 @@ padding: 0;
 </style>`);
 
 
-document.write('<div id="cont" style="position:absolute;">');
+document.write('<div id="cont" style="position:absolute;left:50%;top:50%;">');
 for (var yy=0; yy<h; ++yy)
 for (var xx=0; xx<w; ++xx)
 {
@@ -544,7 +545,7 @@ for (var xx=0; xx<w; ++xx)
     if ( wally[ maze[a].up    ] ) t = 1;
     if ( wally[ maze[a].down  ] ) b = 1;
     
-    drawbox( pageoffset + xx*box,  pageoffset + yy*box,   box-2, box-2, t,b,l,r );
+    drawbox( pageoffsetx + xx*box,  pageoffsety + yy*box,   box-2, box-2, t,b,l,r );
 }
 
 document.write('<div id="player" style="' + pacmancss2 + '"></div>');
@@ -559,8 +560,8 @@ document.write('</div>');
 
 
 var mm = document.getElementById("cont");
-mm.style.left= divoffsetx + "pt";
-mm.style.top = divoffsety + "pt"; // divoffset
+//mm.style.left= divoffsetx + "pt";
+//mm.style.top = divoffsety + "pt"; // divoffset
 
 
 
@@ -601,8 +602,8 @@ function placeRandomFoods()
     f.x  = getRandomIntInclusive(0,w-1);
     f.y  = getRandomIntInclusive(0,h-1);
   
-    var px = pageoffset + f.x*box;
-    var py = pageoffset + f.y*box;
+    var px = pageoffsetx + f.x*box;
+    var py = pageoffsety + f.y*box;
 
     //document.write('<div id="' + f.id + '" style="width:16;height:16;background-color:green;position:absolute;border-radius: 50%;z-index:-10;"></div>');
     
@@ -627,8 +628,8 @@ function placeRandomFoods()
 function updatePosition( obj )
 {
   var index = obj.pos.x + obj.pos.y*h;
-  var px = pageoffset + obj.pos.x*box;
-  var py = pageoffset + obj.pos.y*box;
+  var px = pageoffsetx + obj.pos.x*box;
+  var py = pageoffsety + obj.pos.y*box;
 
   var pp = document.getElementById( obj.id );
   
@@ -764,14 +765,15 @@ document.getElementsByTagName("BODY")[0].onresize = function()
    //var divoffsetx = (window.innerWidth  - sizemaze) * 0.5;
    //var divoffsety = (window.innerHeight - sizemaze) * 0.5;
    
-   var divoffsetx = (window.innerWidth*0.5  - sizemaze); // left not the middle
-   var divoffsety = (window.innerHeight*0.5 - sizemaze);
+    var divoffsetx = sizemaze*1.0;
+	//var divoffsetx = (window.innerWidth*0.5  - sizemaze*0.5); // left not the middle
+	var divoffsety = (window.innerHeight*0.5 - sizemaze*0.75);
    
    
    var mm = document.getElementById("cont");
    
-	 mm.style.left= divoffsetx + "pt";
-	 mm.style.top = divoffsety + "pt"; // divoffset
+//	 mm.style.left= divoffsetx + "pt";
+//	 mm.style.top = divoffsety + "pt"; // divoffset
 };
 
 

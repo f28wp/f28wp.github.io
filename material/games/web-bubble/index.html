@@ -121,7 +121,7 @@ function Menu ()
 		this.dialog.style.borderRadius = "5px";
 		this.dialog.style.borderColor = "#FFFF00";
 		this.dialog.style.border="3px solid rgba(255, 22, 0, 0.4)"
-		this.dialog.style.backgroundColor = "rgba(255, 0, 0, 0.8)";
+		this.dialog.style.backgroundColor = "rgba(255, 90, 90, 1.0)";
 		this.dialog.style.padding = "30pt";
 		this.dialog.style.textAlign = "center";
 		this.container.appendChild( this.dialog );
@@ -309,6 +309,7 @@ function Enemies()
 							speed : getRandomIntInclusive(3,10)
 						  };
 						  
+			
 			var div = document.createElement("div");
 			div.style.position = "absolute";
 			div.id 			   = enemy.id;
@@ -318,10 +319,45 @@ function Enemies()
 			div.style.height   = enemy.dim.y + "px";
 			div.style.backgroundColor = "rgba(0, 0, 255, 0.4)";
 			div.style.padding = "0pt";
-			div.style.borderRadius = "50%"; /* ball shape */
+			div.style.margin  = "0pt";
+			div.style.borderRadius = "50%"; // ball shape 
 			div.style.zIndex = -100;
 			alldivs.push( div.id );
 			document.body.appendChild( div );
+			
+			
+			/*
+			var div = document.createElement("div");
+			div.style.position = "absolute";
+			div.id 			   = enemy.id;
+			div.style.left     = enemy.pos.x + "px";//"50px";
+			div.style.top      = enemy.pos.y + "px"; //(document.body.clientHeight 
+			div.style.width    = enemy.dim.x + "px";
+			div.style.height   = enemy.dim.y + "px";
+			//div.style.backgroundColor = "rgba(0, 0, 255, 0.4)";
+			div.style.padding = "0pt";
+			//div.style.borderRadius = "50%"; // ball shape 
+			div.style.zIndex = -100;
+			alldivs.push( div.id );
+			
+			var div2 = document.createElement("div");
+			div2.position = "relative";
+			div2.style.left = "0px";
+			div2.style.top = "0px";
+			div2.style.borderRadius = "50%"; // ball shape
+			div2.style.backgroundColor = "rgba(0, 0, 255, 0.4)";
+			div2.style.width    = "100%";
+			div2.style.height    = "100%";
+			div2.style.margin = 0;
+			div2.style.padding = 0;
+			div2.style.zIndex = -20;
+			div.appendChild( div2 );
+			
+			document.body.appendChild( div );
+			*/
+			
+			
+			//document.body.appendChild( div );
 			
 			this.enemies.push( enemy );
 		}
@@ -553,9 +589,14 @@ function startAnimation()
 	
 	bullets.Update();
 	
+	var numDeadEnemies = 0;
 	for (var aa=0; aa<enemies.enemies.length; ++aa)
 	{
-		if ( enemies.enemies[ aa ] == 0 ) continue;
+		if ( enemies.enemies[ aa ] == 0 )
+		{
+			numDeadEnemies++;
+			continue;
+		}
 		
 		var div = document.getElementById( enemies.enemies[ aa ].id );
 		if ( bullets.CheckCollision( div ) )
@@ -568,6 +609,8 @@ function startAnimation()
 		}
 	}
 	
+
+	
 	for (var aa=0; aa<enemies.enemies.length; ++aa)
 	{
 		if ( enemies.enemies[ aa ] == 0 ) continue;
@@ -579,6 +622,12 @@ function startAnimation()
 			// enemy has hit player! game over??
 			return;
 		}
+	}
+	
+	if ( numDeadEnemies === enemies.enemies.length )
+	{
+		menu.Show();
+		return;
 	}
 	
 	

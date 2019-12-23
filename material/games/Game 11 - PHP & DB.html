@@ -24,7 +24,7 @@ function httpGet(theUrl)
 			var res = xmlhttp.responseText.split('./imgs/').join(newpath);
 			
 			newpath = "./" + path + "/dist/";
-			var res2 = res.split('./imgs/').join(newpath);
+			var res2 = res.split('./dist/').join(newpath);
 			
             document.write( res2 );
 			document.close();

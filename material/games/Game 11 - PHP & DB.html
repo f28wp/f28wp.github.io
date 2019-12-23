@@ -22,7 +22,11 @@ function httpGet(theUrl)
 			var newpath = "./" + path + "/imgs/";
 			//var res = xmlhttp.responseText.replace(/.//imgs///g, newpath);
 			var res = xmlhttp.responseText.split('./imgs/').join(newpath);
-            document.write( res );
+			
+			newpath = "./" + path + "/dist/";
+			var res2 = res.split('./imgs/').join(newpath);
+			
+            document.write( res2 );
 			document.close();
         }
     }

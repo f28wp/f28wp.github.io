@@ -1,0 +1,543 @@
+
+
+<html><head>
+
+ 
+<meta charset="utf-8" >
+
+
+</head>
+<body>
+
+<style>
+html, body {
+margin: 0;
+padding: 0;
+}
+
+#left 
+{
+	float: left;
+	width: 30%;
+	height: 100%;
+	overflow: hidden;
+	border-color: #229922;
+	border-style: dotted dashed solid double;
+	border-width: 0px;
+	box-shadow:inset 0px 0px 0px 1px #ff0;
+	margin: 0px;
+	padding: 0px;
+}
+
+#right
+{
+	float: left;
+	width: 70%;
+	height: 100%;
+	background: light-gray;
+	overflow: hidden;
+	border-color: #992222;
+	border-style: dotted dashed solid double;
+	border-width: 0px;
+	box-shadow:inset 0px 0px 0px 1px #f00;
+	margin: 0;
+	padding: 0;
+}
+
+.leftcontainer
+{
+	margin: 0;
+	padding: 0;
+	padding: 10px;
+	
+	border-color: #992222;
+	border-style: dotted dashed solid double;
+	border-width: 1px;
+}
+
+.rightcontainer
+{
+	margin: 0;
+	padding: 0;
+	padding: 10px;
+	
+	border-color: #222299;
+	border-style: dotted dashed solid double;
+	border-width: 1px;
+}
+
+.rightcontainer
+{
+	margin: 0;
+	padding: 0;
+	padding: 10px;
+	
+	border-color: #222299;
+	border-style: dotted dashed solid double;
+	border-width: 1px;
+}
+
+.textarea{
+    background: url(./imgs/nums.png);
+	background-attachment: local;
+	background-repeat: no-repeat;
+	padding-left: 35px;
+	padding-top: 10px;
+    border-color:#ccc;
+}
+
+
+</style>
+
+<style>
+#demo { padding-left: 40px; position: relative; }
+#demo .line { position: absolute; left: 10px; width: 30px; display: inline-block; }
+
+#demo2 { padding-left: 40px; position: relative; }
+#demo2 .line { position: absolute; left: 0; width: 30px; text-align: right; display: inline-block;}
+</style>
+
+
+
+
+
+<div id="left">
+	<div class="leftcontainer">
+	Task Description
+	</div>
+	<div id="task" class="leftcontainer">
+	Edit the function so that when it is called, if the parameter is equal to "cat" the function returns
+	true otherwise the function returns false;
+	
+	<br><br>
+	After editing the code run the tests to verify your code works.
+	</div>
+	
+	<br><br>
+	<div class="leftcontainer">
+	<button onclick="nextTask();">Next Task</button>
+	</div>
+</div>
+
+<div id="right">
+	<div class="rightcontainer"  contenteditable="false">
+	Edit Code
+	</div>
+	<div class="rightcontainer">
+<textarea id="editbox" class="textarea" name="Text1" cols="60" rows="30">
+function get( abc )
+{
+  // if abc == "cat" return true
+  // otherwise false
+  // add code
+}
+</textarea>
+	
+	</div>
+	<div class="rightcontainer"  contenteditable="false">
+	<button onclick="runTests();">Run</button>
+	</div>
+	<div class="rightcontainer"  contenteditable="false">
+	Output/Results<div id="output"></div>
+	</div>
+	
+</div>
+
+<script src='./dist/sql-wasm-debug.js'></script>
+
+
+<script charset="UTF-8" href="...">
+
+
+		
+var test0 = {
+
+
+
+	task: `
+	Given an SQL table called 'test' <br><br>
+	Which contains the columns:<br>
+	id, name, designation, hired_on, commision <br><br>
+	
+	Write the SQL query to select the 'hired_on' value for employee with 'id' of 4.
+`,
+	
+	startcode: `
+/* write sql query statement here */
+`,
+	runTests: function()
+	{
+	    var dd = document.getElementById( "editbox" );
+       
+        var code = dd.value;
+		
+		//hljs.registerLanguage("javascript",function(e){var a="[a-zA-Z_$][a-zA-Z_$0-9]*"});
+		
+		
+	
+		
+		config = {
+			locateFile: (filename, prefix) => {
+			  console.log(`prefix is : ${prefix}`);
+			  return `./dist/${filename}`;
+			}
+		}
+		// The `initSqlJs` function is globally provided by all of the main dist files if loaded in the browser.
+		// We must specify this locateFile function if we are loading a wasm file from anywhere other than the current html page's folder.
+		
+		//window.log = "";
+		//window.tt = "none";
+			
+		//initSqlJs(config).then(function (SQL) {
+		
+		//var SQL = initSqlJs(config);
+
+		//var abc = initSqlJs(config);
+		//const SQL = await initSqlJs();
+
+		//config.log = logg;
+
+		var logg = "";
+		var ttt = "none";
+		
+		var oo = document.getElementById( "output" );
+		oo.innerHTML = logg;
+
+		//SQL({
+		//function test( SQL ) {
+		async function initApp(params) {
+			const SQL = await initSqlJs( params );
+			const db = new SQL.Database();
+			//Create the database
+			//var db = new SQL.Database();
+
+			var st = `DROP TABLE IF EXISTS test;
+			CREATE TABLE test(id          integer,  
+							  name    	  text,
+							  designation text,     manager integer,
+							  hired_on    date,     salary  integer,
+							  commission  float,    dept    integer);
+
+
+
+			INSERT INTO test VALUES (1,'JOHNSON','ADMIN',6,'1990-12-11',18000,NULL,4);
+			INSERT INTO test VALUES (2,'HARDING','MANAGER',9,'1998-02-02',52000,300,3);
+			INSERT INTO test VALUES (3,'TAFT','SALES I',2,'1996-01-02',25000,500,3);
+			INSERT INTO test VALUES (4,'HOOVER','SALES I',2,'1990-04-02',27000,NULL,3);
+			INSERT INTO test VALUES (5,'LINCOLN','TECH',6,'1994-06-23',22500,1400,4);
+			`;
+			
+			db.run( st );
+					
+			
+			//console.log( code );
+			
+			try 
+			{
+				//console.log('here');
+				
+				//var stmt = db.prepare("SELECT hired_on FROM test WHERE id=4;");
+				var stmt = db.prepare( code );
+				
+				//console.log('here2');
+				
+				var vv = "";
+				while (stmt.step()) 
+				{
+					//console.log('here3');
+					var row = stmt.getAsObject();
+					
+					//console.log( "::" + JSON.stringify(row) )
+					vv += JSON.stringify(row);
+				}
+				
+				//console.log('here4');
+			
+				if ( vv.indexOf( '1990-04-02' ) > -1 )
+				{
+					logg += "passed test 1" + "<br>";
+					logg += "<font color='red'>Congratulations</font> (passes all tests)" + "<br>";
+				}
+				else 
+				{
+					
+					logg += "<font color='red'>Failed</font> test 1" + "<br>";
+					
+				}
+			
+			} 
+			catch (e) 
+			{
+				//config.log += "test";
+				//var oo = document.getElementById( "output" );
+				// logg += "Syntax compile error";
+				//logg = "syntax error";
+				//console.log('aaa fail' );
+				//if (e instanceof SyntaxError) 
+				//console.log( 'log: ' + logg );
+				
+				{
+					//tt = e.message;
+					logg += "Failed to compile query:" + "<br>";
+					logg += "Error: " + e.message;
+				}
+			}
+			
+			var oo = document.getElementById( "output" );
+			oo.innerHTML += logg;
+		};
+		
+		initApp( config );
+		
+		
+		//if ( logg == "" )
+		//{
+			//logg += "Syntax compile error";
+		//}
+		
+		//SELECT designation,COUNT(*) AS nbr, (AVG(salary)) AS avg_salary FROM test GROUP BY designation ORDER BY avg_salary DESC;
+		//SELECT name,hired_on FROM test ORDER BY hired_on;`;
+
+
+		// Run a query without reading the results
+		//   db.run("CREATE TABLE test (col1, col2);");
+		// Insert two rows: (1,111) and (2,222)
+		//   db.run("INSERT INTO test VALUES (?,?), (?,?)", [1, 111, 2, 222]);
+
+		//var stmt = db.prepare("SELECT hired_on FROM test WHERE id=3;");
+		 
+		// Prepare a statement
+		//var stmt = db.prepare("SELECT * FROM test");
+		
+		var oo = document.getElementById( "output" );
+		oo.innerHTML += logg;
+	},
+	
+	setup: function()
+	{
+		var tt = document.getElementById("task");
+		tt.innerHTML = this.task;
+		
+		var oo = document.getElementById( "output" );
+		oo.innerHTML = "";
+		
+		var dd = document.getElementById( "editbox" );
+		dd.value = this.startcode;
+	}
+};
+
+
+
+
+
+var test1 = {
+
+
+
+	task: `
+	Given an SQL table called 'workers' <br><br>
+	Which contains the columns:<br>
+	id, name, designation, hired_on, commision <br><br>
+	
+	Write the SQL query to select the 'designation' value for employee with 'name' of 'LINCOLN'.
+`,
+	
+	startcode: `
+/* write sql query statement here */
+`,
+	runTests: function()
+	{
+	    var dd = document.getElementById( "editbox" );
+       
+        var code = dd.value;
+		
+		//hljs.registerLanguage("javascript",function(e){var a="[a-zA-Z_$][a-zA-Z_$0-9]*"});
+		
+		
+	
+		
+		config = {
+			locateFile: (filename, prefix) => {
+			  console.log(`prefix is : ${prefix}`);
+			  return `./dist/${filename}`;
+			}
+		}
+		// The `initSqlJs` function is globally provided by all of the main dist files if loaded in the browser.
+		// We must specify this locateFile function if we are loading a wasm file from anywhere other than the current html page's folder.
+		
+		//window.log = "";
+		//window.tt = "none";
+			
+		//initSqlJs(config).then(function (SQL) {
+		
+		//var SQL = initSqlJs(config);
+
+		//var abc = initSqlJs(config);
+		//const SQL = await initSqlJs();
+
+		//config.log = logg;
+
+		var logg = "";
+		var ttt = "none";
+		
+		var oo = document.getElementById( "output" );
+		oo.innerHTML = logg;
+
+		//SQL({
+		//function test( SQL ) {
+		async function initApp(params) {
+			const SQL = await initSqlJs( params );
+			const db = new SQL.Database();
+			//Create the database
+			//var db = new SQL.Database();
+
+			var st = `DROP TABLE IF EXISTS workers;
+			CREATE TABLE workers(id          integer,  
+							  name    	  text,
+							  designation text,     manager integer,
+							  hired_on    date,     salary  integer,
+							  commission  float,    dept    integer);
+
+
+
+			INSERT INTO workers VALUES (1,'JOHNSON','ADMIN',6,'1990-12-11',18000,NULL,4);
+			INSERT INTO workers VALUES (2,'HARDING','MANAGER',9,'1998-02-02',52000,300,3);
+			INSERT INTO workers VALUES (3,'TAFT','SALES I',2,'1996-01-02',25000,500,3);
+			INSERT INTO workers VALUES (4,'HOOVER','SALES I',2,'1990-04-02',27000,NULL,3);
+			INSERT INTO workers VALUES (5,'LINCOLN','TECH',6,'1994-06-23',22500,1400,4);
+			`;
+			
+			db.run( st );
+					
+			
+			//console.log( code );
+			
+			try 
+			{
+				//console.log('here');
+				
+				//var stmt = db.prepare("SELECT designation FROM workers WHERE name='LINCOLN';");
+				var stmt = db.prepare( code );
+				
+				//console.log('here2');
+				
+				var vv = "";
+				while (stmt.step()) 
+				{
+					//console.log('here3');
+					var row = stmt.getAsObject();
+					
+					//console.log( "::" + JSON.stringify(row) )
+					vv += JSON.stringify(row);
+				}
+				
+				//console.log('here4');
+			
+				if ( vv.indexOf( 'TECH' ) > -1 )
+				{
+					logg += "passed test 1" + "<br>";
+					logg += "<font color='red'>Congratulations</font> (passes all tests)" + "<br>";
+				}
+				else 
+				{
+					
+					logg += "<font color='red'>Failed</font> test 1" + "<br>";
+					
+				}
+			
+			} 
+			catch (e) 
+			{
+				//config.log += "test";
+				//var oo = document.getElementById( "output" );
+				// logg += "Syntax compile error";
+				//logg = "syntax error";
+				//console.log('aaa fail' );
+				//if (e instanceof SyntaxError) 
+				//console.log( 'log: ' + logg );
+				
+				{
+					//tt = e.message;
+					logg += "Failed to compile query:" + "<br>";
+					logg += "Error: " + e.message;
+				}
+			}
+			
+			var oo = document.getElementById( "output" );
+			oo.innerHTML += logg;
+		};
+		
+		initApp( config );
+		
+		
+		//if ( logg == "" )
+		//{
+			//logg += "Syntax compile error";
+		//}
+		
+		//SELECT designation,COUNT(*) AS nbr, (AVG(salary)) AS avg_salary FROM test GROUP BY designation ORDER BY avg_salary DESC;
+		//SELECT name,hired_on FROM test ORDER BY hired_on;`;
+
+
+		// Run a query without reading the results
+		//   db.run("CREATE TABLE test (col1, col2);");
+		// Insert two rows: (1,111) and (2,222)
+		//   db.run("INSERT INTO test VALUES (?,?), (?,?)", [1, 111, 2, 222]);
+
+		//var stmt = db.prepare("SELECT hired_on FROM test WHERE id=3;");
+		 
+		// Prepare a statement
+		//var stmt = db.prepare("SELECT * FROM test");
+		
+		var oo = document.getElementById( "output" );
+		oo.innerHTML += logg;
+	},
+	
+	setup: function()
+	{
+		var tt = document.getElementById("task");
+		tt.innerHTML = this.task;
+		
+		var oo = document.getElementById( "output" );
+		oo.innerHTML = "";
+		
+		var dd = document.getElementById( "editbox" );
+		dd.value = this.startcode;
+	}
+};
+
+
+
+
+
+
+
+
+var curTest = 0;
+tests = [ test0, test1 ];
+//tests[ curTest ].runTests();
+
+function nextTask()
+{
+	curTest = (curTest + 1) % tests.length;
+	tests[ curTest ].setup();
+}
+
+function runTests()
+{
+	tests[ curTest ].runTests();
+		
+	/*
+	const result = self.hljs.highlightAuto(code);
+	console.log( result );
+	dd.value = result.value;
+	*/
+}
+
+nextTask();
+
+</script>
+
+
+</body>
+</html>

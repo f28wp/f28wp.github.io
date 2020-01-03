@@ -359,8 +359,8 @@ border-style: dotted !important;
 
 var player = {
 	id: "playertank",
-	prev:{x:300, y:500}, 
-	pos: {x:300, y:100},
+	prev:{x:200, y:500}, 
+	pos: {x:200, y:500},
 	old: {x:300, y:100},
 	size: {x:10, y:10},
 	dir: {x:0, y:0}
@@ -368,11 +368,11 @@ var player = {
 
 var enemy = {
     id: "enemytank",
-	prev:{x:1000, y:500}, 
-	pos: {x:1000, y:500},
+	prev:{x:800, y:600}, 
+	pos: {x:800, y:600},
 	size: {x:10, y:10},
 	dir: {x:0, y:0},
-	target: {x:1000, y:100}
+	target: {x:800, y:100}
 };
 
 player.size.x = document.getElementById("playertank").offsetWidth;

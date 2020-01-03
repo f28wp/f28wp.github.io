@@ -10,9 +10,9 @@ Title: Web Tanks
 
 Features:
 1. Various sprite sheet animations 
-2. Explore
+2. Explore enviroment
 3. Simple vector maths (rotation and direction)
-4. Levels (ordering sprite animations in 2D/visuals - go under trees)
+4. Z-Index (ordering sprite animations in 2D/visuals - go under trees)
 
 
 Future work 
@@ -20,6 +20,7 @@ Additional animation
 Dynamic environment (change as the player navigates)
 Online leaderboard
 Complex problems (water, traps, roads, ...)
+AI
 ...
 
 
@@ -622,8 +623,10 @@ function keyDown(e) {
 // no scroll bars
 document.documentElement.style.overflow = 'hidden';  // firefox, chrome
 document.body.scroll = "no"; // ie only
-	
-var num = 20;
+
+
+// Background 	
+var num = 16;
 for (var xx=0; xx<num; ++xx) // floor
 for (var yy=0; yy<num; ++yy)
 {
@@ -638,6 +641,8 @@ newDiv.style.zIndex  = -19;
 newDiv.style.backgroundImage = "url('./imgs/sheet_tanks.png')";
 document.body.appendChild(newDiv);
 }
+
+
 
 dialogStack = []
 

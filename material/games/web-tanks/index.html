@@ -21,6 +21,7 @@ Dynamic environment (change as the player navigates)
 Online leaderboard
 Complex problems (water, traps, roads, ...)
 AI
+Complex levels (possibly editor)
 ...
 
 
@@ -371,7 +372,7 @@ var enemy = {
 	pos: {x:1000, y:500},
 	size: {x:10, y:10},
 	dir: {x:0, y:0},
-	target: {x:1500, y:200}
+	target: {x:1000, y:100}
 };
 
 player.size.x = document.getElementById("playertank").offsetWidth;
@@ -643,6 +644,13 @@ newDiv.style.backgroundImage = "url('./imgs/sheet_tanks.png')";
 document.body.appendChild(newDiv);
 }
 */
+
+document.body.style.backgroundImage  = "url(./imgs/bg.png)";
+document.body.style.backgroundRepeat = "repeat";
+//document.body.style.backgroundSize = "388px 388px";
+
+
+
 
 
 dialogStack = []

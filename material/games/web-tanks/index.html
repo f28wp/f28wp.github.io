@@ -367,8 +367,8 @@ var player = {
 
 var enemy = {
     id: "enemytank",
-	prev:{x:1500, y:500}, 
-	pos: {x:1500, y:500},
+	prev:{x:1000, y:500}, 
+	pos: {x:1000, y:500},
 	size: {x:10, y:10},
 	dir: {x:0, y:0},
 	target: {x:1500, y:200}
@@ -753,6 +753,8 @@ document.onmousemove = function(e){
 
 function enemyAI()
 {
+	return;
+	
 	//enemy.target.x = cursorX;
 	//enemy.target.y = cursorY;
 

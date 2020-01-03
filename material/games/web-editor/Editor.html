@@ -1,0 +1,504 @@
+<!--
+              ___.                .___.__  __                     .___                     
+__  _  __ ____\_ |__     ____   __| _/|__|/  |_  ___________    __| _/____   _____   ____  
+\ \/ \/ // __ \| __ \  _/ __ \ / __ | |  \   __\/  _ \_  __ \  / __ |/ __ \ /     \ /  _ \ 
+ \     /\  ___/| \_\ \ \  ___// /_/ | |  ||  | (  <_> )  | \/ / /_/ \  ___/|  Y Y  (  <_> )
+  \/\_/  \___  >___  /  \___  >____ | |__||__|  \____/|__|    \____ |\___  >__|_|  /\____/ 
+             \/    \/       \/     \/                              \/    \/      \/        
+
+
+https://f28wp.github.io
+
+Simple editor example
+
+Easy to customize the editor to any particular scroller based game (e.g., tanks, mario, shooter, ... ). 
+
+
+	 
+-->
+
+<html>
+<head>
+
+  <title>Level Editor/Maker Example</title>
+
+  <!-- reset the browser css settings (e.g., width/scrolling) -->
+  <style>
+	* {
+	margin: 0;
+	padding: 0;
+	border-collapse:collapse;
+	}
+  </style>
+  
+  <!-- styles for all the buttons/layout -->
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  
+
+</head>
+
+
+<body>
+
+<script>
+
+// Encapsulate the editor
+function Editor() {
+  var mainWrapper;
+  var logout;
+
+  var gameWorld;
+  var viewPort;
+
+  var grid;
+  var elementwrapper;
+
+  var map;
+  var maxWidth;
+  var height = 480;
+  var tileSize = 32;
+  var scrollMargin = 0;
+
+  var selectedElement = [];
+
+  var that = this;
+
+  this.log = function( s ){
+    if ( typeof(this.logout) === "undefined" )
+	{
+		this.logout  = document.createElement('textarea');
+	}
+	this.logout.value += s;
+	this.logout.value += "\n";
+	
+	this.logout.scrollTop = this.logout.scrollHeight;
+  }
+  
+  this.init = function() {
+	that.log( new Date() );
+	
+	mainWrapper = document.createElement( 'div' );
+	mainWrapper.style.className = 'game-screen';
+	document.body.appendChild( mainWrapper );
+	
+    viewPort = document.createElement('div');
+
+	viewPort.className = 'editor-screen';
+    that.style(viewPort, { display: 'block' });
+    that.append(mainWrapper, viewPort);
+
+    that.createLevelEditor();
+    that.drawGrid(3840); //draws grid of size 3840px by default at start
+    that.showElements();
+  };
+
+    this.append = function(parentElement, childElement) {
+	  //appends everything before the back button, score wrapper in top and everything else in between
+	  if (childElement.className == 'score-wrapper') {
+		parentElement.insertBefore(childElement, parentElement.firstChild);
+	  } else if (parentElement.lastChild && parentElement.lastChild.className == 'btn-wrapper') {
+		parentElement.insertBefore(childElement, parentElement.lastChild);
+	  } else {
+		parentElement.appendChild(childElement);
+	  }
+	};
+
+
+    //style = {display: 'block', position: 'absolute', ...}
+    this.style = function(element, styles) {
+      for (var property in styles) {
+        element.style[property] = styles[property];
+      }
+    };
+	
+	
+  this.createLevelEditor = function() {
+    var rightArrow = document.createElement('div');
+    var leftArrow = document.createElement('div');
+    gameWorld = document.createElement('div');
+
+    that.style(gameWorld, { width: 6400 + 'px' });
+    that.style(gameWorld, { height: height + 'px' });
+
+    rightArrow.className = 'right-arrow';
+	leftArrow.className = 'left-arrow';
+
+    this.append(viewPort, rightArrow);
+    this.append(viewPort, leftArrow);
+    this.append(viewPort, gameWorld);
+
+    rightArrow.addEventListener('click', that.rightScroll);
+    leftArrow.addEventListener('click', that.leftScroll);
+  };
+
+  this.drawGrid = function(width) {
+    maxWidth = width;
+    grid = document.createElement('table');
+
+    var row = height / tileSize;
+    var column = maxWidth / tileSize;
+	
+	this.log( 'Level grid - rows: ' + row + ', columns: ' + column );
+
+    var mousedown = false;
+    var selected = false;
+
+    for (i = 1; i <= row; i++) {
+      var tr = document.createElement('tr');
+      for (j = 1; j <= column; j++) {
+        var td = document.createElement('td');
+
+		td.className = 'cell';
+
+        td.addEventListener('mousedown', function(e) {
+          e.preventDefault(); //to stop the mouse pointer to change
+        });
+
+        td.onmousedown = (function(i, j) {
+          return function() {
+            selectedElement.push(this);
+			this.className = 'active';
+            mousedown = true;
+          };
+        })(i, j);
+
+        td.onmouseover = (function(i, j) {
+          return function() {
+            if (mousedown) {
+              selectedElement.push(this);
+			  this.className = 'active';
+            }
+          };
+        })(i, j);
+
+        td.onmouseup = function() {
+          mousedown = false;
+        };
+
+        this.append(tr, td);
+      }
+
+      this.append(grid, tr);
+
+      grid.onmouseleave = function() {
+        //if mouse hovers over the editor screen
+        mousedown = false;
+      };
+    }
+
+    this.append(gameWorld, grid);
+  };
+
+  this.showElements = function() {
+    elementWrapper = document.createElement('div');
+	
+
+
+	elementWrapper.className = 'element-wrapper';
+    //this.append(mainWrapper, elementWrapper);
+	mainWrapper.appendChild( elementWrapper );
+
+
+	
+	
+    var elements = [
+      'cell',
+      'platform',
+      'coin-box',
+      'power-up-box',
+      'useless-box',
+      'flag',
+      'flag-pole',
+      'pipe-left',
+      'pipe-right',
+      'pipe-top-left',
+      'pipe-top-right',
+      'goomba'
+    ];
+    var element;
+
+    var saveMap       = document.createElement('button');
+    var clearMap      = document.createElement('button');
+    var lvlSize       = document.createElement('div');
+    var gridSmallBtn  = document.createElement('button');
+    var gridMediumBtn = document.createElement('button');
+    var gridLargeBtn  = document.createElement('button');
+
+    //for every element in the 'elements' array, it creates a div and sets the class name
+    for (i = 0; i < elements.length; i++) {
+      element = document.createElement('div');
+
+	  element.className = elements[i];
+      this.append(elementWrapper, element);
+
+      element.onclick = (function(i) {
+        return function() {
+          that.drawElement(elements[i]);
+        };
+      })(i);
+    }
+	
+	element = document.createElement('div');
+	element.className = 'jello';
+	this.append(elementWrapper, element);
+	element.onclick = (function(i) {
+        return function() {
+          that.drawElement( 'jello' );
+        };
+      })(i);
+	  
+	
+
+    lvlSize.className         = 'lvl-size';
+    gridSmallBtn.className    = 'grid-small-btn';
+    gridMediumBtn.className   = 'grid-medium-btn';
+    gridLargeBtn.className    = 'grid-large-btn';
+    saveMap.className         = 'save-map-btn';
+    clearMap.className        = 'clear-map-btn';
+	
+    that.style(elementWrapper, { display: 'block' });
+    this.append(elementWrapper, lvlSize);
+    this.append(elementWrapper, gridSmallBtn);
+    this.append(elementWrapper, gridMediumBtn);
+    this.append(elementWrapper, gridLargeBtn);
+    this.append(elementWrapper, clearMap);
+    this.append(elementWrapper, saveMap);
+
+	clearMap.addEventListener('click', this.resetEditor);
+    saveMap.addEventListener('click', that.saveMap);
+    gridSmallBtn.addEventListener('click', that.gridSmall);
+    gridMediumBtn.addEventListener('click', that.gridMedium);
+    gridLargeBtn.addEventListener('click', that.gridLarge);
+	
+	if ( typeof(this.logout) === "undefined" )
+	{
+		this.logout  = document.createElement('textarea');
+	}
+
+	//this.logout.className = 'element-wrapper';
+	//this.logout.scrollTop = this.logout.scrollHeight;
+	/*
+	this.logout.style.borderStyle = "solid";
+	this.logout.style.borderColor = "black";
+	this.logout.style.borderWidth = "2px";
+	this.logout.style.margin = "0px 10px";
+	this.logout.style.padding = "0";
+	*/
+	//this.logout.style.display = 'block';
+	/*
+	this.logout.style.width = "1280px";
+	this.logout.style.height = "200px";
+	this.logout.style.verticalAlign = "top";
+	*/
+	this.logout.style.overflowY = "scroll";
+	this.logout.style.resize = "none"; // Remove this if you want the user to resize the textarea
+	this.logout.style.padding = "10px";
+	//this.logout.margin = "0 auto";
+	//this.logout.value += "Edit/create level\n";
+	//elementWrapper.appendChild( this.logout );
+	mainWrapper.appendChild(this.logout);
+  };
+  
+
+  
+  this.resetEditor = function() {
+    var gridRows = grid.getElementsByTagName('tr');
+    for (var i = 0; i < gridRows.length; i++) {
+      var gridColumns = gridRows[i].getElementsByTagName('td');
+
+      for (var j = 0; j < gridColumns.length; j++) {
+		gridColumns[j].className = 'cell';
+      }
+    }
+
+    selectedElement = [];
+    scrollMargin = 0;
+    that.style(gameWorld, { 'margin-left': scrollMargin + 'px' });
+  };
+  
+
+	
+
+  that.gridSmall = function() {
+	gameWorld.removeChild( grid );
+    that.drawGrid(1280); //small grid size
+  };
+
+  that.gridMedium = function() {
+	gameWorld.removeChild( grid );
+    that.drawGrid(3840); //medium grid size
+  };
+
+  that.gridLarge = function() {
+	gameWorld.removeChild( grid );
+    that.drawGrid(6400); //large grid size
+  };
+
+  this.drawElement = function(element) {
+    /*
+      every element that is selected is pushed into 'selectedElement' array
+      after clicking the required element, it loops through the array and sets the class name 
+      of that cell, changing the background of the cell.
+    */
+
+    for (var i = 0; i < selectedElement.length; i++) {
+	  selectedElement[i].className = element;
+    }
+
+    selectedElement = [];
+  };
+
+  that.generateMap = function() {
+    var newMap = [];
+    var gridRows = grid.getElementsByTagName('tr');
+
+    //loops throught the table cells and checks for the class-name, puts the value according to its className;
+    for (var i = 0; i < gridRows.length; i++) {
+      var columns = [];
+      var gridColumns = gridRows[i].getElementsByTagName('td');
+      for (var j = 0; j < gridColumns.length; j++) {
+        var value;
+
+        switch (gridColumns[j].className) {
+          case 'platform':
+            value = 1;
+            break;
+
+          case 'coin-box':
+            value = 2;
+            break;
+
+          case 'power-up-box':
+            value = 3;
+            break;
+
+          case 'useless-box':
+            value = 4;
+            break;
+
+          case 'goomba':
+            value = 20;
+            break;
+
+          case 'flag-pole':
+            value = 5;
+            break;
+
+          case 'flag':
+            value = 6;
+            break;
+
+          case 'pipe-left':
+            value = 7;
+            break;
+
+          case 'pipe-right':
+            value = 8;
+            break;
+
+          case 'pipe-top-left':
+            value = 9;
+            break;
+
+          case 'pipe-top-right':
+            value = 10;
+            break;
+			
+		  case 'jello':
+            value = 11;
+            break;
+
+          default:
+            value = 0;
+            break;
+        }
+        columns.push(value);
+      }
+      newMap.push(columns);
+    }
+    map = newMap;
+  };
+
+  this.saveMap = function() {
+	
+	that.generateMap();
+	//console.log( 'Level Template: (120 x 15) - 45 on screen - json format:' );
+	//console.log( map );
+	that.log("Generated map: ");
+	that.log( JSON.stringify( map ) );
+	//console.log( JSON.stringify( map ) );
+	//alert( 'Output written to console log output' );
+	
+  };
+
+  this.rightScroll = function() {
+    if (scrollMargin > -(maxWidth - 1280)) {
+      scrollMargin += -160;
+      that.style(gameWorld, { 'margin-left': scrollMargin + 'px' });
+    }
+  };
+
+  this.leftScroll = function() {
+    if (scrollMargin != 0) {
+      scrollMargin += 160;
+      that.style(gameWorld, { 'margin-left': scrollMargin + 'px' });
+    }
+  };
+
+  this.resetEditor = function() {
+    var gridRows = grid.getElementsByTagName('tr');
+    for (var i = 0; i < gridRows.length; i++) {
+      var gridColumns = gridRows[i].getElementsByTagName('td');
+
+      for (var j = 0; j < gridColumns.length; j++) {
+		gridColumns[j].className = 'cell';
+      }
+    }
+
+    selectedElement = [];
+    scrollMargin = 0;
+    that.style(gameWorld, { 'margin-left': scrollMargin + 'px' });
+  };
+
+}
+
+var ed = new Editor();
+ed.init();
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

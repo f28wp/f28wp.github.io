@@ -1,0 +1,152 @@
+
+<html>
+ <head>
+  <title>Duck Shoot</title>
+  <style>
+	#map
+	{
+	 z-index:0;
+	 postion:relative;
+	 margin:auto;
+	 height:97vh;
+	}
+	#land
+	{
+	 z-index:2;
+	 position:fixed;
+	 background:linear-gradient(white,darkgreen 20%,green);
+	 background-size:cover;
+	 top:85%;
+	 right:0px;
+	 bottom:0px;
+	 left:0px;
+	}
+	#duck
+	{
+	 z-index:1;
+	 position:absolute;
+	 background:url("./imgs/duck.gif");
+	 background-size:contain;
+	 background-repeat:no-repeat;
+	 height:150px;
+	 width:180px;
+	}
+	#chick
+	{
+	 z-index:1;
+	 position:absolute;
+	 background:url("./imgs/chick.gif");
+	 background-size:contain;
+	 background-repeat:no-repeat;
+	 height:100px;
+	 width:120px;
+	}
+	table
+	{
+	 z-index:3;
+	 position:fixed;
+	 border:white;
+	 top:20px;
+	 left:20px;
+	 font-family:courier;
+	}
+  </style>
+ </head>
+<body  onload="launchDucks()">
+ 
+<div id="map"><div id="land"></div></div>
+<div id="duck" onclick="shoot()"></div>
+<div id="chick"></div>
+
+<table>
+<tr> <td>SCORE :</td> <td id="score"></td> </tr>
+<tr> <td>LIVES :</td> <td id="lives"></td> </tr>
+</table>
+
+<script>
+var pos     = 1;
+var right   = true;
+var initpos = 0;
+var duck,scr,liv;
+var timer;
+var v=window.innerHeight,h=window.innerWidth;
+var lives   = 3;
+var score   = 0;
+
+function launchDucks()
+{
+	duck=document.getElementById("duck");
+	scr=document.getElementById("score");
+	liv=document.getElementById("lives");
+	scr.innerHTML=score;
+	liv.innerHTML=lives;
+	if (!right)
+	{
+		duck.style.left=initpos+"px";
+	}
+	else
+	{
+		duck.style.left=h*0.5+initpos-70+"px";
+	}
+	pos=1;
+	duck.style.bottom=0+"px";
+	timer=setInterval(fly,Math.floor(Math.random()*10)+10);
+}
+
+function fly()
+{
+	pos=pos+(score+1)/10;
+	if(!right)
+	{
+		duck.style.left=initpos+pos+"px";
+	}
+	else
+	{
+		duck.style.left=h*0.5+initpos-70-pos+"px";
+	}
+	
+	duck.style.bottom=3*pos+"px";
+	if((pos>v)||((!right)&&(initpos+pos+60>=h))||((right)&&(h*0.5+initpos-70-pos)<=0))
+	{
+		loselife();
+	}
+}
+
+function shoot()
+{
+	navigator.vibrate(100);
+	score++;
+	clearInterval(t);
+	right=!right;
+	if(right)
+	{
+		duck.style.transform="scaleX(1)";
+	}
+	else
+	{
+		duck.style.transform="scaleX(-1)";
+	}
+	initpos=Math.floor(Math.random()*h*0.5);
+	launchDucks();
+}
+
+function loselife()
+{
+	lives=lives-1;
+	if(lives<=0)
+	{
+		alert("GAME OVER!\nYour final score = "+score+"\nPress Ok to Restart");
+		lives=4;
+		score=0;
+		right=true;
+	}
+	else
+	{
+		score--;
+		shoot();
+	}
+}
+
+</script>
+
+</body></html>

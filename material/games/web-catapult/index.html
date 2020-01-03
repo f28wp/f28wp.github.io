@@ -1,0 +1,499 @@
+<html><head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+<style>
+body
+{ 
+  margin: 0; 
+  overflow: hidden;
+  background-color: #9ACCCC;
+  background-repeat: repeat-x;
+  background-position: 0px 300px;
+  background-image: url('./imgs/back2.jpg');
+}
+
+.cat
+{
+  position: absolute;
+  width: 69px;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-image: url("./imgs/catapult.png");
+  background-size: 100% auto;
+}
+
+.cat-sling
+{
+  stroke: #220f0b;
+  stroke-width:10;
+}
+
+.cat:after
+{
+  content: "";
+  position: absolute;
+  z-index: 2000;
+  width: 69px;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-image: url("./imgs/background.png");
+  background-size: 100% auto;
+  pointer-events: none;
+}
+
+.sprout
+{
+  z-index: 2;
+  background: #ddd;
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  background: url("./imgs/sprout3.png");
+  
+  background-position: 0 0;
+}
+
+.balloon
+{
+  position: absolute;
+  width: 69px;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-image: url("./imgs/balloon.png");
+  background-size: 100% auto;
+}
+
+table
+{
+ z-index:3;
+ position:fixed;
+ border:white;
+ top:20px;
+ left:20px;
+ font-family:courier;
+}
+
+</style>
+
+<div class="sprout"></div>
+<div class="cat"></div>
+<div class="balloon"></div>
+
+  <table>
+   <tr>
+    <td>SCORE :</td>
+    <td id="score"></td>
+   </tr>
+   <tr>
+    <td>LIVES :</td>
+    <td id="lives"></td>
+   </tr>
+  </table>
+  
+<script>
+
+
+var // Numbers
+    g                           = .15,
+    wind_resistance             = .0001,
+    angle                       = 0,
+    rolling_additional_angle    = 0,
+    floor_friction              = .1,
+    sprite_pos                  = 0,
+    
+    // Coordinates
+    cat_x,
+    cat_y,
+    vel_x,
+    vel_y,
+    sprout_x,
+    sprout_y,
+	scroll = 0,
+
+    // States
+    sprout_grabbed    = false,
+    flung           = false,
+    hit_wall        = false,
+    reset_called    = false,
+    hit_floor       = false,
+    
+    // Directional understanding
+    right_fling     = false,
+    flip            = false,
+
+    // Animation
+    blinking        = false,
+	
+	score           = 0,
+	lives           = 3,
+     
+    // Elements
+    $_sprout = $('.sprout'),
+    
+    // Functions
+    reset = function(){
+      
+      // Set sprouts position
+      sprout_x                    = ($(window).width()/5);
+      sprout_y                    = $(window).height() - 315;
+      
+      // Set catapults position
+      cat_x                     = sprout_x;
+      cat_y                     = sprout_y;
+      
+      // Set sprouts velocity to 0
+      vel_x                     = 0;
+      vel_y                     = 0;
+	  scroll                    = 0;
+
+      // Set/Reset states
+      flung                     = false;
+      hit_wall                  = false;
+      reset_called              = false;
+      hit_floor                 = false;
+      
+      // Set angles
+      rolling_additional_angle  = 0;
+      angle                     = 0;
+  
+      // Set the cursor css property to be pointer (shows its interactive, changes once flung)
+      $('.sprout').css('cursor','pointer');
+      
+      $('.cat').css({
+        
+        left : cat_x,
+        top : cat_y
+        
+      });
+	  
+	  $('.balloon').css({
+        
+        left : 1400,
+        top  : 400
+        
+      });
+	  
+	  $('.balloon').show();
+	  
+		scr=document.getElementById("score");
+		liv=document.getElementById("lives");
+		scr.innerHTML=score;
+		liv.innerHTML=lives;
+		
+	  if ( lives <= 0 )
+	  {
+		  // restart game
+		  score = 0;
+		  lives = 3;
+	  }
+	
+    };
+
+// Stretch the document body height
+$('body').css('height', $(window).height());
+
+// Set the game.
+reset();
+
+// Events
+$_sprout.mousedown(function(){
+  
+  if(!flung){
+
+    sprout_grabbed = true;
+    $('.sprout').css('cursor','grab');
+  }
+  
+  
+});
+
+function updateposition()
+{// Apply chances to the sprout div
+  $_sprout.css({
+
+    left                    : sprout_x + scroll,
+    top                     : sprout_y,
+                              
+                              // Spritesheet hack fix.
+    //height                  : (sprite_pos == -180) ? 61 : 60,
+
+    'transform'             : 'rotate('+angle+'deg)' + (flip ? ' scaleX(-1)' : ''),
+    '-ms-transform'         : 'rotate('+angle+'deg)',
+    '-webkit-transform'     : 'rotate('+angle+'deg)' + (flip ? ' scaleX(-1)' : ''),
+    //'background-position'   : "0 " + sprite_pos + "px"
+  });
+  
+  $('.cat').css({
+        
+        left : cat_x + scroll,
+        top : cat_y
+        
+  });
+  
+  $('.balloon').css({
+	
+	left : 1400 + scroll,
+	top  : 400
+	
+  });
+	  
+}
+
+function checkhit()
+{
+	var dx = $('.sprout').position().left - $('.balloon').position().left;
+	var dy = $('.sprout').position().top  - $('.balloon').position().top;
+	
+	//console.log( dx + ", " + dy );
+	if ( Math.abs( dx ) < 100 && Math.abs( dy ) < 100 )
+	{
+		score++;
+		$('.balloon').hide();
+		reset();
+	}
+}
+
+$('body').mousemove(function(e){
+  
+  if(sprout_grabbed){
+    
+    var dist_y = cat_y - sprout_y,
+        dist_x = cat_x - sprout_x;
+
+    // Get sprout to follow cursor
+    sprout_x = e.clientX - ($_sprout.width()/2);
+    sprout_y = e.clientY - ($_sprout.height()/2);
+    
+    // Floor "collision"
+    if(sprout_y > $('body').height() - $_sprout.height() - 45)
+    {
+      sprout_y = $('body').height() - $_sprout.height() - 45;
+    }
+    
+    // Catapult "collision"
+    if(dist_x < 30 && dist_y < -45 && right_fling)
+      sprout_x = cat_x - 30;
+    
+    if(Math.abs(dist_x) < 36 && dist_y < -45 && !right_fling)
+      sprout_x = cat_x + 36;
+    
+      // Trigonometry - ATAN(adjacent/opposite)
+    angle = Math.atan(dist_x/dist_y)
+
+            // Radians to Degrees
+            * (180/Math.PI);
+    
+    angle = 270 - angle;
+    
+    if(angle < 270 && angle > 90){
+      angle -= 180;
+    }
+    
+    // Work out which side its on
+    if(sprout_x > cat_x){
+      flip = true;
+    }else{
+      flip = false;
+    }
+    
+    // Positive if distance is a positive number or 0
+    right_fling = dist_x >= 0;
+    
+  }
+  
+});
+
+$('body').mouseup(function(e){
+  
+  // If sprout was grabbed when mouse is being released perform a fling!
+  if(sprout_grabbed){ 
+    
+    vel_x = (cat_x - sprout_x)/10;
+    vel_y = (cat_y - sprout_y)/10;
+	
+    flung = true;
+  }
+  
+  sprout_grabbed = false;
+  
+  // Make visually non interactable
+  $('.sprout').css('cursor','default');
+  
+});
+
+// "Gameloop"
+setInterval(function(){
+  
+
+  // If sprout has been flung
+  if(!sprout_grabbed && flung)
+  {
+    
+    // Apply the sprouts y velocity to the sprouts x position
+    sprout_x += vel_x;
+    
+    // Left screen edge "collision"
+    if(sprout_x < 0)
+    {
+      sprout_x = 0;
+      hit_wall = true;
+    }
+    
+    // Right screen edge "collision"   
+	/*
+    if(sprout_x > $('body').width() - $_sprout.width())
+    {
+      sprout_x = $('body').width() - $_sprout.width();
+      hit_wall = true;
+    }
+    */
+	
+	// scrolling
+	if(sprout_x > $('body').width() - $_sprout.width())
+    {
+      var off = $('body').width() - $_sprout.width() - sprout_x;
+
+	  scroll = off;
+	  
+      $('body').css({
+		'background-position-x'     : scroll + 'px'
+	  });
+    }
+	
+	
+    // Apply the sprouts y velocity to the sprouts y position
+    sprout_y += vel_y;
+
+	
+	
+    // Floor "collision"
+    if(sprout_y >= $('body').height() - $_sprout.height() - 105)
+    {
+      hit_floor = true;
+
+      sprout_y = $('body').height() - $_sprout.height() - 105;
+      
+      // If hasnt hit a wall yet apply floor friction to slow down sprout
+      if(!hit_wall)
+        vel_x -= floor_friction * (!right_fling ? -1 : 1);
+      
+      // If still moving
+      if(((vel_x > 0 && right_fling) || (vel_x < 0 && !right_fling)) && !hit_wall)
+      {
+        // Add/Minus the rolling additional angle, to create rolling effect
+        if(right_fling)
+          rolling_additional_angle += (vel_x/(floor_friction*10));
+        
+        if(!right_fling)
+          rolling_additional_angle -= ((vel_x*-1)/(floor_friction*10));
+      }
+
+      // Bounce maybe in t' future.
+    }
+    else
+    {
+      // Apply gravity
+      vel_y += g;
+    }  
+    
+    // Apply wind resisitance if hasnt hit a wall yet
+    if(!hit_wall)
+	{
+      vel_x -= wind_resistance * (!right_fling ? -1 : 1);
+    }
+	
+    // Stops any sprout "reversing" happening (movement)
+    if(right_fling){
+      
+      if(vel_x < 0){
+        
+        vel_x = 0;
+      }
+      
+    }else{
+    
+      if(vel_x > 0){
+        
+        vel_x = 0;
+      }
+    }
+        
+    // Trigonometry - ATAN(adjacent/opposite)
+    angle = Math.atan(vel_x/vel_y)
+
+            // Radians to Degrees
+            * (180/Math.PI);
+
+    angle = 270 - angle;
+    
+    // Have no idea why changing the 275 to 270 fixes it for left fling but not right...
+    if(angle < (right_fling ? 275 : 270) && angle > 90){
+      angle -= 180;
+    }
+    
+    // Apply the rolling effect
+    angle += rolling_additional_angle;
+    
+    // if the sprout has stopped moving...
+    if((vel_x == 0 || (hit_wall && sprout_y == $('body').height() - $_sprout.height() - 45)) && !reset_called){
+      
+      setTimeout(function(){
+        
+		lives--;
+        // Reset the "Game"
+        reset();
+		
+
+      }, 1000);
+      
+      // Allows "SetTimeout" to work within gameloop, means it only gets calleds onces which is what we wants, isnt it hobbitis.
+      reset_called = true;
+    }
+    
+    // Change sprite position to be the hurt sprout if hit wall or floor.
+    if(hit_floor || hit_wall){
+      sprite_pos = -180;
+    }else{
+      sprite_pos = -120;
+    }
+
+  }else{
+    
+    // Animation
+
+	/*
+    // If sprout is not blinking
+    if(!blinking){
+      
+      // Create random variable to chose animation from
+      var anim_rand = Math.random();
+
+      // 0.5% chance of blinking
+      if(anim_rand > .995){
+
+        blinking = true;
+
+        // Only gets called once
+        setTimeout(function(){
+
+          blinking = false;
+
+        }, 100);
+      }
+    }
+	*/
+    
+    // Alter sprite positions accordingly
+    sprite_pos = blinking ? -60 : 0;
+  }
+
+  updateposition();
+  
+  checkhit();
+  
+}, 12);
+
+</script>
+
+</body></html>

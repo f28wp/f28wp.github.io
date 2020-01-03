@@ -1,0 +1,40 @@
+<html><head></head><body>
+
+<script type="text/javascript">
+var gameurl = './web-catapult/index.html';
+var path = 'web-catapult';
+
+function httpGet(theUrl)
+{
+    if (window.XMLHttpRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp=new XMLHttpRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange=function()
+    {
+        if (xmlhttp.readyState==4 && xmlhttp.status==200)
+        {
+			// ./imgs/ -> '/'+path+'./imgs/'
+			var newpath = "./" + path + "/imgs/";
+			//var res = xmlhttp.responseText.replace(/.//imgs///g, newpath);
+			var res = xmlhttp.responseText.split('./imgs/').join(newpath);
+            document.write( res );
+			document.close();
+        }
+    }
+    xmlhttp.open("GET", theUrl, true);
+    xmlhttp.send();    
+}
+
+
+httpGet( gameurl );
+
+
+
+</script>
+
+</body></html>

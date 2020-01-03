@@ -909,24 +909,6 @@ var ww = document.body.clientWidth;
 
 
 
-function addQuizWall(xp, yp, ww, hh)
-{
-	var wall = document.createElement("div"); 
-	wall.className = "wall";
-	wall.style.position = "absolute";
-	wall.style.left     = xp + "px";
-	wall.style.top      = yp + "px";
-	wall.style.width     = ww;
-	wall.style.height    = hh;
-	wall.style.margin   = '0px';
-	wall.style.zIndex   = -15;
-	wall.style.backgroundImage = "url('./imgs/green.png')";
-	document.body.appendChild(wall);
-}
-
-//addQuizWall( ww/2,   hh-120, 40,    100 );
-
-
 var uniqueids = 0;
 function MyObject (xx, yy, ww, hh, img) {
 	this.prevpos = {x:xx,  y:yy},
@@ -1041,14 +1023,13 @@ var ww = document.body.clientWidth;
 
 
 
-// addQuizWall( ww/2,   hh-120, 40,    100 );
 //var walls = [];
-walls.push( new MyObject(ww/2, hh-120, 40, 100, './imgs/green.png') );
+//walls.push( new MyObject(600, hh-120, 40, 100, './imgs/green.png') );
 walls.push( new MyObject(-20,   -20, ww+40, 40, './imgs/wall.png') );
 walls.push( new MyObject(-20, hh-20, ww+40, 40, './imgs/wall.png') );
 walls.push( new MyObject(-20,   -20, 40,    hh+40, './imgs/wall.png') );
-walls.push( new MyObject(ww/2,   -20, 40,    hh-100, './imgs/wall.png') );
-
+walls.push( new MyObject(600,   -20, 40,    hh-100, './imgs/wall.png') );
+walls.push( new MyObject(ww-20,   -20, 40,    hh+40, './imgs/wall.png') );
 //quizwall.updateGraphic();
 
 

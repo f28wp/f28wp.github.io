@@ -601,6 +601,11 @@ function placeRandomFoods()
 
     f.x  = getRandomIntInclusive(0,w-1);
     f.y  = getRandomIntInclusive(0,h-1);
+	
+	if ( f.x == 0 && f.y == 0 )
+	{
+		f.x = 1;
+	}
   
     var px = pageoffsetx + f.x*box;
     var py = pageoffsety + f.y*box;

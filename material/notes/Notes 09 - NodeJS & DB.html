@@ -1,0 +1,382 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Web Programming F28WP</title>
+  <link rel="stylesheet" href="./md2html/theme.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
+
+<!--
+  <script src="https://cdn.rawgit.com/showdownjs/showdown/1.0.1/dist/showdown.min.js"></script>
+-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/xml.min.js"></script>
+
+</head>
+<body>
+  <textarea id="content">
+
+# Notes - Node.js & Database
+
+Supplementary notes to complement the lecture material for web programming (F28WP).
+
+# MySQL and SQL
+
+Relational databases (RDB) are based on relational model (RM).
+RM handles data as relations among strings, numbers and dates.
+SQL is widely supported Standard Query Language for RDBs.
+MySQL is popular RDB server suppor ting call level interface for SQL.
+MySQL on mysql-ser ver-1 (anubis) can be remotely queried by clients
+
+```
+linux% mysql --user=hamish --database=hamish --password
+Enter password: ?????????
+Welcome to the MySQL monitor. Commands end with ; or \g.
+mysql> help;
+```
+
+Select all attributes of tuples from STD relation:
+
+```
+mysql> select * from STD;
++----+------------+------------+---------------------+-----+
+|S |SNAME | BORN | DEP | IQ |
++----+------------+------------+---------------------+-----+
+| S1 | P Smythe | 1996-03-12 | Computer Science | 119 |
+| S2 | J Totten | 1997-09-19 | Computer Science | 125 |
+| S3 | A Armitage | 1996-08-04 | Business Management | 130 |
+| S4 | K Black | 1996-03-30 | Physics | 152 |
++----+------------+------------+---------------------+-----+
+4 rows in set (0.01 sec)
+```
+
+Unique identifier of row of table is pr imary key.
+Set of (allowed) values for attribute is its domain.
+- relation STD
+- tuple (S3, A Armitage, 1996-08-04, Business Management, 130)
+- attributes {S, SNAME, BORN, DEP, IQ}
+- datatypes {str ing, str ing, date, str ing, integer}
+- primary key S
+- domain of DEP {Business Management, Computer Science, Physics}
+
+
+# Selecting and Creating Tables
+
+```
+To retr ieve some attributes of STD relation satisfying condition:
+mysql> select SNAME, DEP from STD where DEP=’Computer Science’;
++----------+------------------+
+| SNAME | DEP |
++----------+------------------+
+|PSmythe | Computer Science |
+|JTotten | Computer Science |
++----------+------------------+
+2 rows in set (0.00 sec)
+```
+
+create table creates tables by
+- defining names and types of attributes
+- declar ing whether values must be supplied or not
+
+
+STD relation could be created by:
+```
+create table STD (
+	S char(5) not null,
+	SNAME char(20) not null,
+	BORN date,
+	DEP char(22) not null,
+	IQ integer,
+	primary key (S) );
+```
+
+
+insert into populates tables. STD relation is given by
+```
+insert into STD values
+(’S1’, ’P Smythe’, ’1996-03-12’, ’Computer Science’, 119);
+insert into STD values
+(’S2’, ’J Totten’, ’1997-09-19’, ’Computer Science’, 125);
+insert into STD values
+(’S3’, ’A Armitage’, ’1996-08-04’, ’Business Management’, 130);
+insert into STD values
+(’S4’, ’K Black’, ’1996-03-30’, ’Physics’, 152);
+```
+
+drop table removesatable from database:
+```
+mysql> drop table STD;
+Query OK, 0 rows affected (0.00 sec)
+```
+
+File of SQL commands cmd.sql can be executed as batch job
+```
+mysql> source cmd.sql;
+```
+
+Backup data with command file - drop table, create table, inserts.
+
+
+# Updating and Joining Tables
+update alters attribute values matching query:
+```
+mysql> update STD set BORN = ’1996-02-29’, IQ = 190
+-> where S = ’S4’ ;
+Query OK, 1 row affected (0.00 sec)
+```
+
+delete erases records such as those on Computer Science students:
+```
+mysql> delete from STD where DEP = ’Computer Science’;
+Query OK, 2 rows affected (0.00 sec)
+```
+
+Joins create new relations from 2 or more relations by
+- naming relations in from clause
+- selecting attributes from joined relations
+- equating joined attributes with where clause
+
+Department details might be stored as a DEPT relation:
+
+| DNAME | HEAD | SCHOOL |
+|:-- |:-- |:-- |
+| Physics | W.MacPherson | EPS| 
+| Computer Science | A.Ireland|  MACS| 
+| Business Management | U.Bbob|  SoSS| 
+
+STD and DEPT relations can be joined
+- to create new relation with attributes SNAME and SCHOOL
+- whenever DEP field in STD equals DNAME field in DEPT
+
+SQL query to join 2 relations and filter the result:
+
+```
+mysql> select SNAME, SCHOOL from STD, DEPT
+-> where STD.DEP = DEPT.DNAME and SCHOOL != ’MACS’;
++------------+--------+
+| SNAME | SCHOOL |
++------------+--------+
+|AArmitage | SoSS |
+|KBlack | EPS |
++------------+--------+
+2 rows in set (0.00 sec)
+```
+
+
+# Node.js and MySQL
+Install mysql module for driving and calling MySQL.
+```
+unix% npm install mysql
+```
+
+sqlquer y.js quer ies a MySQL server about stored book data
+```
+var mysql = require(’mysql’);
+var express = require(’express’);
+var http = require(’http’);
+var app = express();
+var nl = "\n";
+var head = "<!DOCTYPE html>" + nl + "<html>" + nl + "<head>" + nl;
+head += "<title>Books</title>" + nl + "</head>" + nl + "<body>" + nl;
+var conn = mysql.createConnection({
+host: "mysql-server-1.macs.hw.ac.uk",
+user: "hamish", password: "?????????", database: "hamish"
+});
+conn.connect(function(error) {
+if (error) { console.log(’error: ’ + error.stack); }
+});
+app.get(’/search’, function (req, res) {
+var s = req.query.search.trim();
+if ( s.indexOf(";") != -1 ) s = "*"; // stop injection attack
+var q = "select * from book";
+if ( s != "*" ) q += " where title=’" + s + "’ or author=’" + s + "’";
+conn.query(q, function (err, results, fields) {
+if (err) { res.send(’error querying: ’ + err); return; }
+var s = head + "<table border=’1’>" + nl + "<tr>";
+for (var i in fields) s += "<th>" + fields[i].name + "</th>";
+s += "</tr>" + nl;
+for (var row in results) {
+s += "<tr>" + nl;
+for (var col in results[row])
+s += "<td>" + results[row][col] + "</td>" + nl;
+s += "</tr>" + nl;
+}
+s += "</table>" + nl + "</body>" + nl + "</html>" + nl;
+res.send(s);
+});
+});
+var svr = http.createServer(app);
+svr.on(’error’, function(err) {console.log(’Server: ’ + err);});
+svr.listen(8080, function() {console.log("Node: linux06 port 8080");});
+```
+
+
+Web app can be run (and killed) remotely on linux06.
+
+
+
+
+# Node .js and MySQL
+
+To suppor t the adding of books augment sqlquer y.js with
+```
+app.get(’/add’, function (req, res) {
+var title = req.query.title.trim();
+var author = req.query.author.trim();
+var year = req.query.year.trim();
+var q = "insert into book values ";
+if ( title.indexOf(";") == -1 && author.indexOf(";") == -1 &&
+year.indexOf(";") == -1 )
+q += "(’" + title + "’, ’" + author + "’, ’" + year + "’)";
+else q = "";
+conn.query(q, function (err, results, fields) {
+if (err) { res.end(’error adding: ’ + err); return; }
+res.end(head + "<p>" + results.affectedRows +
+" record added</p>\n</body>\n</html>\n");
+});
+});
+```
+
+
+Exercise this Add functionality with for m on online page.
+
+To suppor t the deletion of books augment sqlquer y.js with
+```
+app.get(’/delete’, function (req, res) {
+var title = req.query.title.trim();
+var q = "delete from book where title=’" + title + "’";
+if ( title.indexOf(";") != -1 ) q = "";
+conn.query(q, function (err, results, fields) {
+if (err) { res.end(’error deleting: ’ + err); return; }
+res.end(head + "<p>" + results.affectedRows +
+" record deleted</p>\n</body>\n</html>\n");
+});
+});
+```
+
+Exercise this Delete functionality with for m on online page.
+
+Updating of year of books is enabled by adding to sqlquer y.js
+```
+app.get(’/update’, function (req, res) {
+var title = req.query.title.trim();
+var year = req.query.year.trim();
+var q = "update book set year=’" + year +
+"’ where title=’" + title +"’";
+if ( title.indexOf(";") != -1 || year.indexOf(";") != -1 ) q = "";
+conn.query(q, function (err, results, fields) {
+if (err) { res.end(’error updating: ’ + err); return; }
+res.end(head + "<p>" + results.changedRows +
+" record changed</p>\n</body>\n</html>\n");
+});
+});
+```
+
+
+Exercise this Update functionality with form on online page.
+
+
+# JavaScript Object Notation
+
+JSON is lightweight, language neutral, data-interchange for mat.
+
+JSON is built on 7 types of value including 2 types of structure
+- string double quoted string of characters
+- number (signed) integer or real number e.g. 42, 6.022e23, -273.15
+- special tr ue, false, null
+- array ordered sequence of comma separated values between [ and ]
+- object unordered bag of string/value pairs between { and }
+
+JSON objects and values are cut down versions of JavaScr ipt ones
+- objects can only have proper ties with double quoted names
+  cannot have proper ties with function values
+- values str ings, numbers, true, false, null, array, JSON object
+
+Strings can contain
+- any unicode character except " or \ or control character
+- escaped letters such as \", \\, \/, \b, \f, \n, \r, \t
+- 4 digit hex sequences preceded by backslash \ and letter u
+
+Examples of objects and arrays
+`{} {"age" : 18, "sex" : "male", "occupation" : null }`
+
+`[] [ {"alive":tr ue}, [1], null ] [ [], [[]], [[[]]]] ]`
+
+JavaScript like many other programming languages has API for JSON.
+
+JSON.parse() extracts JavaScr ipt objects from JSON syntax data.
+```
+var txt = ’{ \"bible\" : 2, \"whisky bottle\" : 3}’;
+var obj = JSON.parse(txt);
+```
+
+Value of obj.bible or obj["bible"] would then be 2.
+
+
+
+# Things To Do
+- Browse mysql module, Douglas Wilson
+  https://github.com/mysqljs/mysql
+- Browse mongoose module
+- http://mongoosejs.com/docs/
+- Try Quiz
+
+# Key Points
+- Node is part of the MEAN stack (MongoDB, Express, AngularJS,
+  Node) that’s supposedly replacing the LAMP web software stack
+  (Linux, Apache, MySQL, PHP).
+- NoSQL databases offer an alternative to relational databases
+  like MySQL. Its efficient implementation in C++, key-value data
+  model, and suitability for handling JSON data suit use with
+  Node.js for storing data for web service applications
+
+
+
+
+
+
+</textarea>
+
+
+  
+  
+  <script>
+	var text = document.getElementById('content');
+    
+    converter = new showdown.Converter({tables: 'true', disableForced4SpacesIndentedSublists: 'true', simpleLineBreaks: 'true'});
+	
+    var html = converter.makeHtml(text.value)
+    text.parentNode.removeChild( text );
+	
+	var div = document.createElement('div');
+    div.id = "content";
+    document.body.appendChild( div );
+    div.innerHTML = html;
+  
+	hljs.initHighlightingOnLoad();
+  </script>
+<!--
+  <script src="https://yihui.name/js/math-code.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  -->
+  
+<div id="myhome" style="z-index: auto; display: block; position: fixed; bottom: 5px; left: 5px;">
+    <a href="https://f28wp.github.io" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148326645-1');
+</script>
+
+
+</body>
+</html>

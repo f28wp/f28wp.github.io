@@ -19,7 +19,7 @@
 <body>
   <textarea id="content">
 
-# Notes - Ajax & JSON
+# Notes - Ajax and JSON
 
 Supplementary notes to complement the lecture material for web programming (F28WP).
 
@@ -35,9 +35,7 @@ to continue using the page and will handle the reply when it arrives).
 Asynchronous communication decouples user interaction from server interaction. As a
 result, when the user is using a web application, a client-side script running on that web
 application can request information from the server in the background. When new
-information arrives, the client-side script will only update the related user interface portion of
-the browser. An asynchronous processing is independent of the sessions on which requests
-are sent and replies are received.
+information arrives, the client-side script will only update the related user interface portion of the browser. An asynchronous processing is independent of the sessions on which requests are sent and replies are received.
 
 The term "Ajax" was first mentioned in 2005, originally stands for "Asynchronous JavaScript
 and XML". It has since gone beyond XML, and currently serves as a client-side technology
@@ -128,6 +126,7 @@ Example:
 ```
 
 
+
 XMLHttpRequest is subject to the browser's same-origin policy: for security reasons,
 requests will only succeed if they are made to the same server that served the original web
 page.
@@ -204,7 +203,6 @@ function loadAjaxText() {
 ```
 
 
-
 You need to run this example under a HTTP server (e.g., Apache) as it sends a HTTP POST
 request.
 The client-side HTML contains a `<div>`, to be used as placeholder for the response text. It
@@ -226,6 +224,8 @@ event. The readyState of 4 indicates Ajax transfer completed; status of 200
 (statusCode of OK) indicates successful request; the response message can be retrieved
 from the responseText. In this example, we load the responseText into the element
 with id="ajaxText".
+
+
 
 You can place the allocation of ajax object in a separate function for ease of maintenance:
 
@@ -252,10 +252,6 @@ broken)
 }
 ```
 
-
-
-
-
 ## Why Ajax (Instead of an Ordinary HTTP Form POST request)?
 
 
@@ -272,8 +268,9 @@ the page.
 ## Example 2: Ajax with PHP
 In this example, we trigger an Ajax POST request to a PHP page to obtain dynamic response (HelloAjaxPHP.html)
 
+
+
 ```
-<!DOCTYPE html>
 <html>
 <head>
 <title>Hello, Ajax</title>
@@ -282,10 +279,10 @@ In this example, we trigger an Ajax POST request to a PHP page to obtain dynamic
  <h2>Hello, Ajax</h2>
  <table>
  <tr>
- <td><textarea id="inText" name="inText" cols="40" rows="5">Enter
-your text here...</textarea></td>
- <td><textarea id="ajaxText" name="ajaxText" cols="40"
-rows="5"></textarea></td>
+ <td><texterea id="inText" name="inText" cols="40" rows="5">Enter
+your text here...</texterea></td>
+ <td><texterea id="ajaxText" name="ajaxText" cols="40"
+rows="5"></texterea></td>
  </tr>
  </table>
  <a href="test" onclick="return loadAjaxText()">SEND</a>
@@ -320,10 +317,15 @@ function loadAjaxText() {
 }
 </script>
 </html>
+
 ```
 
 
-The client-side HTML contains two <textarea>s, for the input and output respectively. It
+
+
+
+
+The client-side HTML contains two `<textarea>`s, for the input and output respectively. It
 also contains a hyperlink to trigger the Ajax request (the JavaScript function loadText()).
 The steps in using Ajax, in JavaScript function loadText() are:
 
@@ -549,6 +551,7 @@ jQuery.ajax({ cache: true, url: 'some', type: 'POST' } );
 
 
 </textarea>
+
 
 
   

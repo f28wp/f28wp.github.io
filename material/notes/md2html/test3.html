@@ -1,0 +1,60 @@
+<html><head></head>
+<body>
+
+
+<textarea id="abc">
+Showdown Tutorial
+=================
+
+This is a showdown tutorial. 
+
+Showdown supports a number of cool features, namely:
+
+  - headers 
+  - lists
+  - and other stuff too
+  
+It is also possible to include code:
+
+    var foo = 'bar';
+    
+    var baz = {
+      markdown: 'is great',
+      showdown: 'is awesome'
+    }
+```
+<body>
+<style>aaa = </style>
+</body>
+bb = 2
+```
+
+Don't forget to check the [extensions wiki][1].
+
+[1]: https://github.com/showdownjs/showdown/wiki/extensions
+
+</textarea>
+
+<script src="https://cdn.rawgit.com/showdownjs/showdown/1.0.1/dist/showdown.min.js"></script>
+
+
+<script>
+function run() {
+  var text = document.getElementById('abc');
+  var converter = new showdown.Converter();
+  var html = converter.makeHtml(text.value);
+  text.parentNode.removeChild( text );
+  
+  var div = document.createElement('div');
+  div.id = "efg";
+  document.body.appendChild( div );
+  div.innerHTML = html;
+	
+}
+run();
+</script>
+
+</body>
+</html>
+
+

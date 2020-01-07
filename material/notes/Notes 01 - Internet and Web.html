@@ -14,7 +14,7 @@
 
 </head>
 <body>
-  <div id="content">
+  <textarea id="content">
 
 # Notes - Internet and Web
 
@@ -482,15 +482,23 @@ Seminal early years in the history of the Web include:
 
 
 
-  </div>
+  </textarea>
   
-  <br><br>
+
   
   <script>
-    elem = document.getElementById('content')
-    converter = new showdown.Converter({tables: 'true', disableForced4SpacesIndentedSublists: 'true', simpleLineBreaks: 'true'});
-    elem.innerHTML = converter.makeHtml(elem.innerHTML)
+	var text = document.getElementById('content');
     
+    converter = new showdown.Converter({tables: 'true', disableForced4SpacesIndentedSublists: 'true', simpleLineBreaks: 'true'});
+	
+    var html = converter.makeHtml(text.value)
+    text.parentNode.removeChild( text );
+	
+	var div = document.createElement('div');
+    div.id = "content";
+    document.body.appendChild( div );
+    div.innerHTML = html;
+  
 	hljs.initHighlightingOnLoad();
   </script>
 <!--

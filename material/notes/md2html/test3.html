@@ -2,9 +2,30 @@
 <body>
 
 
-<textarea id="abc">
+<script src="https://cdn.rawgit.com/showdownjs/showdown/1.0.1/dist/showdown.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown-table.min.js"></script>
+ 
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+  
+
+<textarea id="content">
 Showdown Tutorial
 =================
+
+| *foo*  | **bar**  | ~~baz~~  |
+|:-- |:-- |:-- |
+| 100    | [a][1]   | ![b][2]  |
+
+
+| Layer   |		Functionality     |
+|:--      |:--                    |
+|application |interfaces directly with user applications or users |
+|transport 	|end to end (un)reliable delivery of TCP or UDP packets |
+|network 	|IP datagram deliver y, addressing, routing |
+|link 		|delivers frames, handles errors, drives physical transfers |
+
 
 This is a showdown tutorial. 
 
@@ -35,23 +56,47 @@ Don't forget to check the [extensions wiki][1].
 
 </textarea>
 
-<script src="https://cdn.rawgit.com/showdownjs/showdown/1.0.1/dist/showdown.min.js"></script>
-
+  
 
 <script>
+/*
 function run() {
   var text = document.getElementById('abc');
-  var converter = new showdown.Converter();
-  var html = converter.makeHtml(text.value);
+  var converter = new showdown.Converter({tables: 'true', disableForced4SpacesIndentedSublists: 'true', simpleLineBreaks: 'true'});
+  var html = converter.makeHtml(text.innerHTML);
   text.parentNode.removeChild( text );
-  
+
   var div = document.createElement('div');
   div.id = "efg";
   document.body.appendChild( div );
   div.innerHTML = html;
-	
 }
-run();
+*/
+
+/*
+function run() {
+  var text = document.getElementById('content');
+  var converter = new showdown.Converter({tables: 'true'});
+  var html = converter.makeHtml(text.innerHTML);
+  text.innerHTML = html;
+}
+*/
+
+var text = document.getElementById('content');
+
+converter = new showdown.Converter({tables: 'true', disableForced4SpacesIndentedSublists: 'true', simpleLineBreaks: 'true'});
+
+var html = converter.makeHtml(text.value)
+text.parentNode.removeChild( text );
+
+var div = document.createElement('div');
+div.id = "content";
+document.body.appendChild( div );
+div.innerHTML = html;
+	
+
+//run();
+
 </script>
 
 </body>

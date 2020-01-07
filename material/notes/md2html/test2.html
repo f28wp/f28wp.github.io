@@ -1,0 +1,105 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Marked in the browser</title>
+  <link rel="stylesheet" href="theme.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+
+</head>
+<body>
+  <div id="content">
+# hello
+
+# A Plain Markdown Post 
+
+A and & b go &amp;
+
+I can `statically` certainly further reduce the code, for example, by eliminating the CSS,  
+but I believe a tiny bit CSS can greatly improve readability. You cannot really find many CSS frameworks that only contain 50 lines of code.
+
+![asf](https://golang.org/doc/gopher/help.png)
+
+```go
+String toPostfix(String infix){
+     String postfix = "";
+     Stack stack = new Stack();
+	 
+	 if ( a < 2 ){ gogo };
+
+     for(char ch: infix){
+          if(isOperand(ch))
+               postfix.append(ch);
+          else{
+               while(!stack.isEmpty() && precedence(stack.peek(), ch))
+                    postfix.append(stack.pop());
+               stack.push(ch);
+          }
+     }
+
+     while(!stack.isEmtpy())
+          postfix.append(stack.pop());
+
+     return postfix;
+}
+public static void main(String args[]) {
+}
+```
+
+```javascript
+var b = 2;
+function gogo()
+{
+	const bb = "test";
+}
+```
+
+```
+func main(){
+    fmt.Println("sdf") & 
+}
+```
+i have $20 and you have $10
+
+running time: `$O(n^2)$`
+
+`$$O(X_2)$$`
+
+  </div>
+  
+  <br><br>
+  
+  <script>
+    elem = document.getElementById('content')
+    converter = new showdown.Converter();
+    elem.innerHTML = converter.makeHtml(elem.innerHTML)
+    
+	hljs.initHighlightingOnLoad();
+  </script>
+<!--
+  <script src="https://yihui.name/js/math-code.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  -->
+  
+<div id="myhome" style="z-index: auto; display: block; position: fixed; bottom: 5px; left: 5px;">
+    <a href="https://f28wp.github.io" data-show-count="false"><img src="../../lectures/images/webhome.png" width="8%"></a>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148326645-1');
+</script>
+
+
+</body>
+</html>

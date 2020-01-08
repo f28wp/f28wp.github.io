@@ -16,6 +16,17 @@ body {
     box-shadow: 0 0 10px;
 }
 
+
+body{
+    background: url("../../lectures/images/back.png");
+	background-position: right 0pt top 0pt;
+	background-repeat: no-repeat;
+	background-size: contain;	
+	background-color: #fff;
+}
+
+
+
 a {
     color: #4183C4;
     text-decoration: none;

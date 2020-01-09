@@ -1,0 +1,291 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple multiplayer online game</title>
+	
+<style type="text/css">
+html {
+overflow:hidden; /* disable scroll bars */
+}
+
+body {
+  background-image: url("./assets/bg.png");
+  background-repeat: repeat;
+}
+
+
+</style>
+
+<script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+
+
+</head>
+<body>
+ 
+
+<script type="text/javascript" src=".\assets\level0.json"></script>
+<script type="text/javascript" src=".\assets\tilesheet.json"></script>
+
+<script>
+
+var tilesheet = JSON.parse(tilesheet);
+console.log( tilesheet.version );
+
+var level = JSON.parse(level0);
+for (var i=0; i<level.objects.length; ++i)
+{
+	console.log( level.objects[i].name );
+	
+	let tileName = level.objects[i].name;
+	let tx      = tilesheet.tiles[ tileName ].x;
+	let ty      = tilesheet.tiles[ tileName ].y;
+	let tw      = tilesheet.tiles[ tileName ].w;
+	let th      = tilesheet.tiles[ tileName ].h;
+	let imgFile = tilesheet.source;
+	
+	let numInstances = level.objects[i].pos.length;
+	for (var k=0; k<numInstances; ++k)
+	{
+		var tile = document.createElement('div');
+		tile.style.position            = "absolute";
+		tile.style.backgroundImage     = "url('./assets/" + imgFile + "')";
+		tile.style.backgroundPosition  = "-"+tx+"px -"+ty+"px";
+		tile.style.position            = "absolute";
+		tile.style.left                = level.objects[i].pos[k][0] + "px"; 
+		tile.style.top                 = level.objects[i].pos[k][1] + 'px'; 
+		tile.style.width               = tw;
+		tile.style.height              = th;
+		tile.style.margin              = '0px';
+		tile.style.zIndex              = level.objects[i].zIndex;
+		tile.style.opacity             = level.objects[i].opacity;
+		document.body.appendChild( tile );
+	}
+}
+</script>
+
+
+<script>
+for (var p=0; p<10; ++p)
+{
+	let div = document.createElement("div");
+	div.style.position = "absolute";
+	div.style.backgroundColor = "blue";
+	div.style.borderRadius = "50%";
+	div.id = "i" + p;
+	div.style.left = "-200px";
+	div.style.zIndex = 1500;
+	div.style.width = 40;
+	div.style.height= 40;
+	if ( p == 0 )
+	{
+		div.style.backgroundColor = "red";
+	}
+	let tex = document.createElement('div');
+	tex.id = "t"+p;
+	div.appendChild( tex );
+	
+	document.body.appendChild( div );
+}
+</script>
+
+
+
+
+
+
+<script>
+/**
+ * AJAX long-polling
+ *
+ * 1. sends a request to the server (without a timestamp parameter)
+ * 2. waits for an answer from server.php (which can take forever)
+ * 3. if server.php responds (whenever), process the data
+ * 4. and call the function again
+ *
+ * @param timestamp
+ */
+ 
+ // random number between 0 to 100
+var uniqueid = Math.round(Math.random() * 100); 
+ 
+function getContent(timestamp)
+{
+	var xx = 100;
+	var yy = 100;
+	var found = -1;
+	for (let n=0; n<5; ++n)
+	{
+		let idd = parseInt( document.getElementById("t" + (n)).innerHTML );
+		if ( uniqueid == idd )
+		{
+			found = n;
+		}
+	}
+	if ( found != -1 )
+	{
+		xx = parseFloat( document.getElementById('i' + (found)).style.left );
+		yy = parseFloat( document.getElementById('i' + (found)).style.top );
+	}
+	
+    var queryString = {'timestamp' : timestamp,
+					   'uniqueid'  : uniqueid,
+	                   'xp'        : xx,
+					   'yp'        : yy };
+
+    $.ajax(
+        {
+            type: 'GET',
+            url: 'server.php',
+            data: queryString,
+            success: function(data){
+				
+				$('#response').html(data);
+				
+				
+				if ( data.indexOf('Warning') > 0 )
+				{
+					alert( data );
+				}
+				
+                // put result data into "obj"
+                var obj = jQuery.parseJSON(data);
+                // put the data_from_file into #timestamp
+				$('#timestamp').html(obj.timestamp);
+				// how many users do we have 
+				$('#users').html( 'number users: ' + obj.users.length );
+				
+				// This just displays the list of active users the server sent back to us
+				var userdata = "";
+				for (let n=0; n<obj.users.length; ++n)
+				{					
+					userdata += 'ip: '        + obj.users[ n ].ip + '<br>';
+					userdata += 'uniqueid: '  + obj.users[ n ].uniqueid + '<br>';
+					userdata += 'xp: '        + obj.users[ n ].xp + '<br>';
+					userdata += 'yp: '        + obj.users[ n ].yp + '<br>';
+					userdata += 'timestamp: ' + obj.users[ n ].timestamp + '<br>';
+				}
+				$('#userdata').html( userdata );
+				
+				// This updates the other users positions on the screen
+				var cc = 1; // image 0 is reserved for player
+				for (let n=0; n<5; ++n) // 5 images
+				{
+					if ( n < obj.users.length ) // only got 5 shapes to show
+					{
+						if ( obj.users[ n ].uniqueid == uniqueid )
+						{
+							continue
+						}
+						
+						// only 1 image for now, always update this image
+						document.getElementById('i' + (cc)).style.left=obj.users[ n ].xp;
+						document.getElementById('i' + (cc)).style.top =obj.users[ n ].yp;
+						document.getElementById("t" + (cc)).innerHTML =obj.users[ n ].uniqueid;
+					}
+					else 
+					{
+						document.getElementById('i' + (cc)).style.left = -200;
+						document.getElementById("t" + (cc)).innerHTML = 99;
+					}
+					cc++;
+				}
+			
+            }
+        }
+    );
+}
+
+
+
+document.addEventListener("keydown", keyDownTextField, false);
+
+function keyDownTextField(e) {
+	var keyCode = e.keyCode;
+	var xd = 0;
+	var yd = 0;
+	var sd = 10;
+	switch (e.key) {
+		case "ArrowLeft":
+			// Left pressed
+			xd = -sd;
+			break;
+		case "ArrowRight":
+			// Right pressed
+			xd = sd;
+			break;
+		case "ArrowUp":
+			// Up pressed
+			yd = -sd;
+			break;
+		case "ArrowDown":
+			// Down pressed
+			yd = sd;
+			break;
+	}
+	
+	let idd = parseInt( document.getElementById("t0").innerHTML );
+	if ( uniqueid != idd )
+	{
+		alert( "bug = t0 should be the id");
+	}
+	
+	var xx = parseFloat( document.getElementById('i0').style.left );
+	var yy = parseFloat( document.getElementById('i0').style.top );
+	
+	document.getElementById('i0').style.left=xx+xd;
+	document.getElementById('i0').style.top =yy+yd;	
+}
+
+var myTime  = null;
+var ticker  = 0;
+
+function MyTimer() // update timer display loop/show the script is ticking
+{  
+	ticker += 1;
+	document.getElementById("tick").innerHTML = 'Tick: ' + ticker + "<br> UniqueID: " + uniqueid;
+	
+	myTime=window.setTimeout('MyTimer()',200);
+		
+	// Pole server 
+	getContent();
+}
+
+
+
+myTime=setTimeout('MyTimer()',200);
+
+</script>
+
+
+
+<h1 style="z-index:auto;">Tick: </h1>
+<div id="tick">0.0</div>
+
+<h1>Response from server:</h1>
+<div id="response"></div>
+
+<h1>Timestamp:</h1>
+<div id="timestamp"></div>
+
+<br>
+Cursor keys to move **your** user object
+
+<h1>Users:</h1>
+<div id="users"></div>
+
+<h1>User Data:</h1>
+<div id="userdata"></div>
+
+
+
+<script>
+document.getElementById("t0").innerHTML = uniqueid;
+document.getElementById('i0').style.left = Math.random() * 500 + 100;
+document.getElementById('i0').style.top  = Math.random() * 500 + 100;
+</script>
+	
+	
+
+
+</body>
+</html>

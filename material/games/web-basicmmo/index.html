@@ -24,9 +24,41 @@ body {
   background-image: url("./assets/bg.png");
   background-repeat: repeat;
 }
-
-
 </style>
+
+<!--
+Animation css styles for the walk/idle little character on screen 
+-->
+<style>
+.manwalk {
+  width:  30px;
+  height: 30px;
+  background: url('./assets/man.png') left center;
+  animation: playwalk 0.8s steps(4) infinite;
+  background-position-y: -96px;
+}
+
+@keyframes playwalk {
+   from{ background-position-x:-38px;   }
+   to  { background-position-x:-168px;  }
+}
+</style>
+
+<style>
+.manidle {
+  width:  30px;
+  height: 33px;
+  background: url('./assets/man.png') left center;
+  animation: playidle 1.5s steps(3) infinite;
+  background-position-y: -159px;
+}
+
+@keyframes playidle {
+   from{ background-position-x:-38px;   }
+   to  { background-position-x:-132px;  }
+}
+</style>
+
 
 <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
 
@@ -80,21 +112,40 @@ for (var i=0; i<level.objects.length; ++i)
 for (var p=0; p<10; ++p)
 {
 	let div = document.createElement("div");
+	div.className = "manidle";
 	div.style.position = "absolute";
-	div.style.backgroundColor = "blue";
-	div.style.borderRadius = "50%";
+	//div.style.backgroundColor = "blue";
+	//div.style.borderRadius = "50%";
 	div.id = "i" + p;
 	div.style.left = "-200px";
 	div.style.zIndex = 1500;
-	div.style.width = 40;
-	div.style.height= 40;
-	if ( p == 0 )
-	{
-		div.style.backgroundColor = "red";
-	}
+	//div.style.width = 40;
+	//div.style.height= 40;
+	//if ( p == 0 )
+	//{
+	//	div.style.backgroundColor = "red";
+	//}
 	let tex = document.createElement('div');
 	tex.id = "t"+p;
+	tex.style.position = "relative";
+	tex.style.top = "-15px";
 	div.appendChild( tex );
+	
+	if ( p == 0 )
+	{
+		let dd = document.createElement('div');
+		dd.style.backgroundImage = "url('./assets/circle.gif')";
+		dd.style.backgroundSize =  "contain"; // auto|length|cover|contain
+		dd.style.position = "relative";
+		dd.style.left = "-25px";
+		dd.style.top = "-30px";
+		dd.style.zIndex = -100;
+		dd.style.width = "70";
+		dd.style.height = "70";
+		//dd.style.backgroundColor = "blue";
+		dd.style.opacity = 0.3;
+		div.appendChild( dd );
+	}
 	
 	document.body.appendChild( div );
 }
@@ -210,6 +261,7 @@ function getContent(timestamp)
 
 
 document.addEventListener("keydown", keyDownTextField, false);
+document.addEventListener("keyup",   keyUp, false);
 
 function keyDownTextField(e) {
 	var keyCode = e.keyCode;
@@ -246,6 +298,24 @@ function keyDownTextField(e) {
 	
 	document.getElementById('i0').style.left=xx+xd;
 	document.getElementById('i0').style.top =yy+yd;	
+	
+	document.getElementById('i0').className = "manwalk";
+	
+	// want the small animated image to face left or right
+	if( xd < 0)
+	{
+		document.getElementById('i0').style.transform="scaleX(1)";
+	}
+	else
+	{
+		document.getElementById('i0').style.transform="scaleX(-1)";
+	}
+	
+}
+
+function keyUp()
+{
+	document.getElementById('i0').className = "manidle";
 }
 
 var myTime  = null;
@@ -254,7 +324,7 @@ var ticker  = 0;
 function MyTimer() // update timer display loop/show the script is ticking
 {  
 	ticker += 1;
-	document.getElementById("tick").innerHTML = 'Tick: ' + ticker + "<br> UniqueID: " + uniqueid;
+	document.getElementById("tick").innerHTML = 'Tick: ' + ticker + "<br> Your UniqueID: " + uniqueid;
 	
 	myTime=window.setTimeout('MyTimer()',200);
 		
@@ -268,8 +338,38 @@ myTime=setTimeout('MyTimer()',200);
 
 </script>
 
+<style>
+.stats {
+  visibility: hidden;
+}
+button {
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+}
+</style>
 
+<script>
+function togglestats()
+{
+	var el = document.getElementById('stats');
+	//alert( el.style.visibility );
+	if ( el.style.visibility == 'visible' ) {
+		el.style.visibility = 'hidden';
+	}
+	else {
+		el.style.visibility = 'visible';
+	}
+	
+}
+</script>
 
+Show Stats <button onclick="togglestats()">[+/-]</button><div id="tick">0.0</div>
+
+<div id="stats" class="stats">
 <h1 style="z-index:auto;">Tick: </h1>
 <div id="tick">0.0</div>
 
@@ -287,6 +387,7 @@ Cursor keys to move **your** user object
 
 <h1>User Data:</h1>
 <div id="userdata"></div>
+</div>
 
 
 

@@ -330,9 +330,9 @@ $('body').mousemove( mouseMove );
 $('body').mouseup(mouseUp); 
 
 var sprout = document.getElementById('sprout');
-sprout.addEventListener('touchstart', mouseDown, false);
-document.body.addEventListener('touchmove', mouseMove, false);
-document.body.addEventListener('touchend', mouseUp, false);
+sprout.addEventListener('touchstart', mouseDown, true);
+document.body.addEventListener('touchmove', mouseMove, true);
+document.body.addEventListener('touchend', mouseUp, true);
 
 
 

@@ -198,7 +198,9 @@ reset();
 
 
 
-function mouseDown(){
+function mouseDown(e){
+  
+  e.preventDefault();
   
   if(!flung){
 
@@ -325,14 +327,20 @@ function mouseUp(e){
 
 
 // Events
+/*
 $_sprout.mousedown( mouseDown );
 $('body').mousemove( mouseMove );
 $('body').mouseup(mouseUp); 
+*/
 
 var sprout = document.getElementById('sprout');
 sprout.addEventListener('touchstart', mouseDown, false);
 sprout.addEventListener('touchmove', mouseMove, false);
 sprout.addEventListener('touchend', mouseUp, false);
+
+sprout.addEventListener('mousedown', mouseDown, false);
+sprout.addEventListener('mousemove', mouseMove, false);
+sprout.addEventListener('mouseup', mouseUp, false);
 
 
 

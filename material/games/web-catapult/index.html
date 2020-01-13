@@ -76,7 +76,7 @@ table
 
 </style>
 
-<div class="sprout"></div>
+<div class="sprout" id="sprout"></div>
 <div class="cat"></div>
 <div class="balloon"></div>
 
@@ -196,17 +196,16 @@ $('body').css('height', $(window).height());
 // Set the game.
 reset();
 
-// Events
-$_sprout.mousedown(function(){
+
+
+function mouseDown(){
   
   if(!flung){
 
     sprout_grabbed = true;
     $('.sprout').css('cursor','grab');
   }
-  
-  
-});
+};
 
 function updateposition()
 {// Apply chances to the sprout div
@@ -254,7 +253,9 @@ function checkhit()
 	}
 }
 
-$('body').mousemove(function(e){
+
+
+function mouseMove(e){
   
   if(sprout_grabbed){
     
@@ -302,9 +303,9 @@ $('body').mousemove(function(e){
     
   }
   
-});
+};
 
-$('body').mouseup(function(e){
+function mouseUp(e){
   
   // If sprout was grabbed when mouse is being released perform a fling!
   if(sprout_grabbed){ 
@@ -320,7 +321,21 @@ $('body').mouseup(function(e){
   // Make visually non interactable
   $('.sprout').css('cursor','default');
   
-});
+};
+
+
+// Events
+$_sprout.mousedown( mouseDown );
+$('body').mousemove( mouseMove );
+$('body').mouseup(mouseUp); 
+
+var sprout = document.getElementById('sprout');
+sprout.addEventListener('touchstart', mouseDown, false);
+document.body.addEventListener('touchmove', mouseMove, false);
+document.body.addEventListener('touchend', mouseUp, false);
+
+
+
 
 // "Gameloop"
 setInterval(function(){

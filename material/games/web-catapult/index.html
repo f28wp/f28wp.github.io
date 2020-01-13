@@ -199,9 +199,6 @@ reset();
 
 
 function mouseDown(e){
-  
-  e.preventDefault();
-  
   if(!flung){
 
     sprout_grabbed = true;
@@ -259,14 +256,26 @@ function checkhit()
 
 function mouseMove(e){
   
+  var posX = 0;
+  var posY = 0;
+	if ((e.clientX)&&(e.clientY)) {
+		posX = e.clientX;
+		posY = e.clientY;
+	} else if (e.targetTouches) {
+		posX = e.targetTouches[0].clientX;
+		posY = e.targetTouches[0].clientY;
+		e.preventDefault();
+	}
+  
+  
   if(sprout_grabbed){
     
     var dist_y = cat_y - sprout_y,
         dist_x = cat_x - sprout_x;
 
     // Get sprout to follow cursor
-    sprout_x = e.clientX - ($_sprout.width()/2);
-    sprout_y = e.clientY - ($_sprout.height()/2);
+    sprout_x = posX - ($_sprout.width()/2);
+    sprout_y = posY - ($_sprout.height()/2);
     
     // Floor "collision"
     if(sprout_y > $('body').height() - $_sprout.height() - 45)

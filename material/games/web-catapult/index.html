@@ -354,6 +354,22 @@ sprout.addEventListener('mouseup', mouseUp, false);
 
 
 
+
+$( window ).on( "orientationchange", function( event ) {
+  //$( "#orientation" ).text( "This device is in " + event.orientation + " mode!" );
+  document.location.reload();
+});
+
+/*
+// Or if we ant the orientation angle
+window.onorientationchange = function() { 
+  //console.log("the orientation of the device is now " + screen.orientation.angle);
+  document.location.reload();
+};
+*/
+
+
+
 // "Gameloop"
 setInterval(function(){
   

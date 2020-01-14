@@ -269,7 +269,7 @@ function checkhit()
 	//console.log( dx + ", " + dy );
 	if ( Math.abs( dx ) < 100 && Math.abs( dy ) < 100 )
 	{
-		hit_object = 90; // 100 ticks before resetting the game
+		hit_object = 80; // 80 ticks before resetting the game
 		score++;
 		
 		// restart the gif animation
@@ -408,9 +408,11 @@ setInterval(function(){
   {
     hit_object = hit_object - 1;
 	
-	if ( hit_object == 0 )
+	if ( hit_object == 0 ) // finished showing the 'hit' animation
 	{		
+	    $('.pop').hide();
 		reset();
+		updateposition();
 	}
 	
 	return;

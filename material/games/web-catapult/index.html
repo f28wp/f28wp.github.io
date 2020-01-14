@@ -57,10 +57,20 @@ body
 .balloon
 {
   position: absolute;
-  width: 69px;
-  height: 200px;
+  width: 350px;
+  height: 350px;
   background-repeat: no-repeat;
   background-image: url("./imgs/balloon.png");
+  background-size: 100% auto;
+}
+
+.pop
+{
+  position: absolute;
+  width: 350px;
+  height: 350px;
+  background-repeat: no-repeat;
+  background-image: url("./imgs/pop.gif");
   background-size: 100% auto;
 }
 
@@ -79,6 +89,7 @@ table
 <div class="sprout" id="sprout"></div>
 <div class="cat"></div>
 <div class="balloon"></div>
+<div class="pop"></div>
 
   <table>
    <tr>
@@ -115,6 +126,7 @@ var // Numbers
     sprout_grabbed    = false,
     flung           = false,
     hit_wall        = false,
+	hit_object      = 0;
     reset_called    = false,
     hit_floor       = false,
     
@@ -127,6 +139,8 @@ var // Numbers
 	
 	score           = 0,
 	lives           = 3,
+	
+	gamestate       = 0,
      
     // Elements
     $_sprout = $('.sprout'),
@@ -175,6 +189,8 @@ var // Numbers
       });
 	  
 	  $('.balloon').show();
+	  $('.pop').hide();
+	  $('.sprout').show();
 	  
 		scr=document.getElementById("score");
 		liv=document.getElementById("lives");
@@ -231,8 +247,15 @@ function updateposition()
   
   $('.balloon').css({
 	
-	left : 1400 + scroll,
-	top  : 400
+	left : 1200 + scroll,
+	top  : 300
+	
+  });
+  
+  $('.pop').css({
+	
+	left : 1200 + scroll,
+	top  : 300
 	
   });
 	  
@@ -246,9 +269,17 @@ function checkhit()
 	//console.log( dx + ", " + dy );
 	if ( Math.abs( dx ) < 100 && Math.abs( dy ) < 100 )
 	{
+		hit_object = 90; // 100 ticks before resetting the game
 		score++;
+		
+		// restart the gif animation
+		$('.pop').removeAttr('src', '');
+		
+		$('.sprout').hide();
 		$('.balloon').hide();
-		reset();
+		$('.pop').show();
+	
+		//reset();
 	}
 }
 
@@ -344,12 +375,12 @@ $('body').mouseup(mouseUp);
 
 var sprout = document.getElementById('sprout');
 sprout.addEventListener('touchstart', mouseDown, false);
-sprout.addEventListener('touchmove', mouseMove, false);
-sprout.addEventListener('touchend', mouseUp, false);
+sprout.addEventListener('touchmove',  mouseMove, false);
+sprout.addEventListener('touchend',   mouseUp, false);
 
-sprout.addEventListener('mousedown', mouseDown, false);
-sprout.addEventListener('mousemove', mouseMove, false);
-sprout.addEventListener('mouseup', mouseUp, false);
+sprout.addEventListener('mousedown',  mouseDown, false);
+sprout.addEventListener('mousemove',  mouseMove, false);
+sprout.addEventListener('mouseup',    mouseUp, false);
 
 
 
@@ -372,7 +403,18 @@ window.onorientationchange = function() {
 
 // "Gameloop"
 setInterval(function(){
-  
+
+  if ( hit_object > 0 )
+  {
+    hit_object = hit_object - 1;
+	
+	if ( hit_object == 0 )
+	{		
+		reset();
+	}
+	
+	return;
+  }
 
   // If sprout has been flung
   if(!sprout_grabbed && flung)
@@ -536,8 +578,9 @@ setInterval(function(){
     sprite_pos = blinking ? -60 : 0;
   }
 
+
   updateposition();
-  
+   
   checkhit();
   
 }, 12);

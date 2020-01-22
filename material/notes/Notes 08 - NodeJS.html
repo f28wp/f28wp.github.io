@@ -137,7 +137,7 @@ case ".xhtml": mimetype = "application/xhtml+xml"; break;
 case ".xml": mimetype = "text/xml"; break;
 default: i = -1;
 }
-fs.readFile("/home/hamish/www/wp" + path, function (err, data) {
+fs.readFile("/home/test/www/wp" + path, function (err, data) {
 var code = 404;
 if ( err ) {
 mimetype = "text/plain";
@@ -178,7 +178,7 @@ var app = express();
 var head = ["<!DOCTYPE html>", "<html>", "<head>",
 "<title>Images</title>", "</head>", "<body>" ];
 var tail = ["</body>", "</html>"];
-var directory = "/home/hamish/www/images";
+var directory = "/home/test/www/images";
 var nl = "0;
 // serve static files in images/ directory
 app.use(express.static(directory));

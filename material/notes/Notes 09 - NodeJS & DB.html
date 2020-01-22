@@ -32,7 +32,7 @@ MySQL is popular RDB server suppor ting call level interface for SQL.
 MySQL on mysql-ser ver-1 (anubis) can be remotely queried by clients
 
 ```
-linux% mysql --user=hamish --database=hamish --password
+linux% mysql --user=smith --database=smith --password
 Enter password: ?????????
 Welcome to the MySQL monitor. Commands end with ; or \g.
 mysql> help;
@@ -183,7 +183,7 @@ var head = "<!DOCTYPE html>" + nl + "<html>" + nl + "<head>" + nl;
 head += "<title>Books</title>" + nl + "</head>" + nl + "<body>" + nl;
 var conn = mysql.createConnection({
 host: "mysql-server-1.macs.hw.ac.uk",
-user: "hamish", password: "?????????", database: "hamish"
+user: "smith", password: "?????????", database: "smith"
 });
 conn.connect(function(error) {
 if (error) { console.log(’error: ’ + error.stack); }

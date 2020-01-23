@@ -1,0 +1,239 @@
+
+<html><head></head>
+<body>
+
+<style>
+#gameArea {
+   position: absolute;
+   width   : 480px;
+   height  : 320px;
+   top     : 50%;
+   left    : 50%;
+   border  : 2px solid red;
+   margin  : -240px 0 0 -160px;
+}
+</style>
+
+<div id="score">Score: </div>
+<div id="lives">Lives: </div>
+<div id="gameArea" style="width:480px;height:320px;">
+</div>
+
+<script>
+var gameArea         = document.getElementById("gameArea");
+gameArea.width       = 480;
+gameArea.height      = 320;
+var ballRadius       = 10;
+var x                = gameArea.width/2;
+var y 			     = gameArea.height-30;
+var dx 			     = 2;
+var dy 			     = -2;
+var paddleHeight     = 10;
+var paddleWidth      = 75;
+var paddleX          = (gameArea.width-paddleWidth)/2;
+var rightPressed     = false;
+var leftPressed      = false;
+var brickRowCount    = 5;
+var brickColumnCount = 3;
+var brickWidth       = 75;
+var brickHeight      = 20;
+var brickPadding     = 10;
+var brickOffsetTop   = 30;
+var brickOffsetLeft  = 30;
+var score            = 0;
+var lives            = 3;
+
+var bricks = [];
+for(var c=0; c<brickColumnCount; c++) {
+  bricks[c] = [];
+  for(var r=0; r<brickRowCount; r++) {
+    bricks[c][r] = { x: 0, y: 0, status: 1 };
+  }
+}
+
+document.addEventListener("keydown",   keyDownHandler,   false);
+document.addEventListener("keyup",     keyUpHandler,     false);
+document.addEventListener("mousemove", mouseMoveHandler, false);
+
+function keyDownHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = true;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = true;
+    }
+}
+
+function keyUpHandler(e) {
+    if(e.key == "Right" || e.key == "ArrowRight") {
+        rightPressed = false;
+    }
+    else if(e.key == "Left" || e.key == "ArrowLeft") {
+        leftPressed = false;
+    }
+}
+
+function mouseMoveHandler(e) {
+  var relativeX = e.clientX - gameArea.offsetLeft;
+  if(relativeX > 0 && relativeX < gameArea.width) {
+    paddleX = relativeX - paddleWidth/2;
+  }
+}
+
+function collisionDetection() {
+  for(var c=0; c<brickColumnCount; c++) {
+    for(var r=0; r<brickRowCount; r++) {
+      var b = bricks[c][r];
+      if(b.status == 1) {
+        if(x > b.x && x < b.x+brickWidth && y > b.y && y < b.y+brickHeight) {
+          dy = -dy;
+          b.status = 0;
+          score++;
+          if(score == brickRowCount*brickColumnCount) {
+            alert("YOU WIN, CONGRATS!");
+            document.location.reload();
+          }
+        }
+      }
+    }
+  }
+}
+
+/* Create the graphic elements for the game, so they're easier to
+   customize and update in code - also we have a large number off
+   repetative elements (blocks)
+*/
+function setup()
+{
+	// ball
+	var ball                     = document.createElement('div');
+	ball.id                      = "ball";
+	ball.style.position          = "absolute";
+	ball.style.width             = ballRadius;
+	ball.style.height            = ballRadius;
+	ball.style.borderRadius      = "50%";
+	ball.style.backgroundColor   = "red";
+	gameArea.appendChild( ball );
+	
+    // paddle
+	var paddle                   = document.createElement('div');
+	paddle.id                    = "paddle";
+	paddle.style.position        = "absolute";
+	paddle.style.width           = paddleWidth;
+	paddle.style.height          = paddleHeight;
+	paddle.style.backgroundColor = "blue";
+	gameArea.appendChild( paddle );
+	
+	// Bricks
+	for(var c=0; c<brickColumnCount; c++) {
+		for(var r=0; r<brickRowCount; r++) {
+			let brick                   = document.createElement('div');
+			brick.id                    = "brick" + c + "" + r + "";
+			brick.style.position        = "absolute";
+			brick.style.width           = brickWidth;
+			brick.style.height          = brickHeight;
+			brick.style.backgroundColor = "green";
+			gameArea.appendChild( brick );
+		}
+	}
+}
+
+function drawBall() {
+  var ball = document.getElementById( "ball" );
+  ball.style.left = x + "px";
+  ball.style.top  = y + "px";
+}
+
+function drawPaddle() {
+  var paddle        = document.getElementById( "paddle" );
+  paddle.style.left = paddleX + "px";
+  paddle.style.top  = (gameArea.height-paddleHeight) + "px";
+}
+
+function drawBricks() {
+  for(var c=0; c<brickColumnCount; c++) {
+    for(var r=0; r<brickRowCount; r++) {
+	  if(bricks[c][r].status == 0) {
+		let brick           = document.getElementById( "brick" + c + "" + r + "" );
+		brick.style.display = "none";
+	  }
+      else {
+        var brickX = (r*(brickWidth+brickPadding))+brickOffsetLeft;
+        var brickY = (c*(brickHeight+brickPadding))+brickOffsetTop;
+        bricks[c][r].x = brickX;
+        bricks[c][r].y = brickY;
+		
+		let brick = document.getElementById( "brick" + c + "" + r + "" );
+		brick.style.left    = brickX + "px";
+		brick.style.top     = brickY + "px";
+		brick.style.display = "block";
+      }
+    }
+  }
+}
+function drawScore() {
+	var sc = document.getElementById("score");
+	sc.innerHTML = "Score: " + score;
+}
+function drawLives() {
+	var lv = document.getElementById("lives");
+	lv.innerHTML = "Lives: " + lives;
+}
+
+function draw() {
+  // update graphical elements
+  drawBricks();
+  drawBall();
+  drawPaddle();
+  drawScore();
+  drawLives();
+  collisionDetection();
+
+  if(x + dx > gameArea.width-ballRadius || x + dx < ballRadius) {
+    dx = -dx;
+  }
+  if(y + dy < ballRadius) {
+    dy = -dy;
+  }
+  else if(y + dy > gameArea.height-ballRadius) {
+    if(x > paddleX && x < paddleX + paddleWidth) {
+      dy = -dy;
+    }
+    else {
+      lives--;
+      if(!lives) {
+        alert("GAME OVER");
+        document.location.reload();
+      }
+      else {
+        x = gameArea.width/2;
+        y = gameArea.height-30;
+        dx = 3;
+        dy = -3;
+        paddleX = (gameArea.width-paddleWidth)/2;
+      }
+    }
+  }
+
+  if(rightPressed && paddleX < gameArea.width-paddleWidth) {
+    paddleX += 7;
+  }
+  else if(leftPressed && paddleX > 0) {
+    paddleX -= 7;
+  }
+
+  x += dx;
+  y += dy;
+  requestAnimationFrame(draw);
+}
+
+setup();
+draw();
+</script>
+
+
+</body>
+</html>
+
+
+

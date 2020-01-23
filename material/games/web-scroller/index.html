@@ -1,0 +1,218 @@
+
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<style>
+#gameContainer {
+    position        : absolute;
+    border          : 1px solid #d3d3d3;
+    background-color: #f1f1f1;
+    width           : 480px;
+    height          : 320px;
+	z-index         : -100;
+	top             : 50%;
+    left            : 50%;
+	margin          : -240px 0 0 -160px;
+}
+</style>
+
+</head>
+<body>
+
+<br>
+<div style="text-align:center;width:100%;">
+  <button ontouchstart="moveup()"    onmousedown="moveup()"    onmouseup="clearmove()">UP</button><br><br>
+  <button ontouchstart="moveleft()"  onmousedown="moveleft()"  onmouseup="clearmove()">LEFT</button>
+  <button ontouchstart="moveright()" onmousedown="moveright()" onmouseup="clearmove()">RIGHT</button><br><br>
+  <button ontouchstart="movedown()"  onmousedown="movedown()"  onmouseup="clearmove()">DOWN</button>
+</div>
+
+<br>
+<div id="myscore" style="text-align:center;width:100%;"></div>
+
+<div id="gameContainer">
+	<div id="myfilter" style="position:absolute;background-color:#000000;opacity:0.3;display:none"></div>
+	<div id="myrestartbutton" style="position:absolute;padding-top:75px;padding-left:120px;display:none;">
+		<button onclick="startGame()">Restart</button>
+	</div>
+</div>
+
+
+<script>
+
+var gameContainer = 0;
+var myGameArea    = 0;
+var myGamePiece   = 0;
+var myscore       = 0;
+var myObstacles   = [];
+
+function startGame() {
+	for (i = 0; i < myObstacles.length; i += 1) {
+        myObstacles[i].release();
+		myObstacles.pop( i );
+    }
+	if ( myGamePiece != 0 )
+	{
+		myGamePiece.release();
+		myGamePiece = 0;
+	}
+	
+	document.getElementById("myfilter").style.display        = "none";
+	document.getElementById("myrestartbutton").style.display = "none";
+	myscore     = 0;
+    myGameArea  = new gamearea();
+    myGamePiece = new component(30, 30, "red", 10, 75);
+    myGameArea.start();
+}
+
+function gamearea() {
+    gameContainer = document.getElementById("gameContainer");
+    gameContainer.width        = 320;
+    gameContainer.height       = 180; 
+	gameContainer.style.width  = 320;
+    gameContainer.style.height = 180 + 100 + 40;    
+	
+	document.getElementById("myfilter").style.width  = gameContainer.style.width;
+	document.getElementById("myfilter").style.height = gameContainer.style.height;
+
+    this.pause   = false;
+    this.frameNo = 0;
+    this.start   = function() {
+        this.interval = setInterval(updateGameArea, 20);
+    }
+    this.stop = function() {
+        clearInterval(this.interval);
+        this.pause = true;
+    }
+}
+
+
+function component(width, height, color, x, y, type) {
+
+    this.type = type;
+    if (type == "text") {
+        this.text = color;
+    }
+    this.score  = 0;    
+	this.width  = width;
+    this.height = height;
+    this.speedX = 0;
+    this.speedY = 0;    
+    this.x      = x;
+    this.y      = y; 
+
+	this.wall                = document.createElement('div');
+	this.wall.style.position = "absolute";
+	this.wall.style.left     = x + "px";
+	this.wall.style.top      = y + "px";
+	this.wall.style.width    = width;
+	this.wall.style.height   = height;
+	this.wall.style.backgroundColor = color;
+	gameContainer.appendChild( this.wall );
+
+    this.update = function() {
+        if (this.type == "text") {
+			this.wall.innerHTML = this.text;
+			
+        } else {
+			this.wall.style.left   = this.x + "px";
+			this.wall.style.top    = this.y + "px";
+			this.wall.style.width  = this.width;
+			this.wall.style.height = this.height;
+        }
+    }
+		
+	this.release = function() {
+		this.wall.parentNode.removeChild( this.wall );
+	}
+	
+    this.crashWith = function(otherobj) {
+        var myleft      = this.x;
+        var myright     = this.x + (this.width);
+        var mytop       = this.y;
+        var mybottom    = this.y + (this.height);
+        var otherleft   = otherobj.x;
+        var otherright  = otherobj.x + (otherobj.width);
+        var othertop    = otherobj.y;
+        var otherbottom = otherobj.y + (otherobj.height);
+        var crash       = true;
+        if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
+            crash = false;
+        }
+        return crash;
+    }
+}
+
+function updateGameArea() {
+    var x, y, min, max, height, gap;
+    for (i = 0; i < myObstacles.length; i += 1) {
+        if (myGamePiece.crashWith(myObstacles[i])) {
+            myGameArea.stop();
+            document.getElementById("myfilter").style.display        = "block";
+            document.getElementById("myrestartbutton").style.display = "block";
+            return;
+        } 
+    }
+    if (myGameArea.pause == false) {
+
+        myGameArea.frameNo += 1;
+        myscore +=1;        
+        if (myGameArea.frameNo == 1 || everyinterval(150)) {
+            x      = gameContainer.width;
+            y      = gameContainer.height - 100;
+            min    = 20;
+            max    = 100;
+            height = Math.floor(Math.random()*(max-min+1)+min);
+            min    = 50;
+            max    = 100;
+            gap    = Math.floor(Math.random()*(max-min+1)+min);
+            myObstacles.push(new component(10, height, "blue", x, 0));
+            myObstacles.push(new component(10, x - height - gap, "blue", x, height + gap));
+        }
+        for (i = 0; i < myObstacles.length; i += 1) {
+            myObstacles[i].x += -1;
+            myObstacles[i].update();
+        }
+		var score = document.getElementById("myscore");
+        score.innerHTML = "SCORE: " + myscore;        
+        myGamePiece.x += myGamePiece.speedX;
+        myGamePiece.y += myGamePiece.speedY;    
+        myGamePiece.update();
+    }
+}
+
+function everyinterval(n) {
+    if ((myGameArea.frameNo / n) % 1 == 0) {return true;}
+    return false;
+}
+
+function moveup(e) {
+    myGamePiece.speedY = -1; 
+}
+
+function movedown() {
+    myGamePiece.speedY = 1; 
+}
+
+function moveleft() {
+    myGamePiece.speedX = -1; 
+}
+
+function moveright() {
+    myGamePiece.speedX = 1; 
+}
+
+function clearmove(e) {
+    myGamePiece.speedX = 0; 
+    myGamePiece.speedY = 0; 
+}
+startGame();
+
+</script>
+
+</body></html>
+
+
+
+

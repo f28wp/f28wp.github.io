@@ -1,7 +1,6 @@
 
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <style>
 #gameContainer {
@@ -10,7 +9,7 @@
     background-color: #f1f1f1;
     width           : 480px;
     height          : 320px;
-	z-index         : -100;
+	z-index         : 5;
 	top             : 50%;
     left            : 50%;
 	margin          : -240px 0 0 -160px;
@@ -29,12 +28,12 @@
 </div>
 
 <br>
-<div id="myscore" style="text-align:center;width:100%;"></div>
+<div id="myscore" style="text-align:center;width:100%;z-index:auto;"></div>
 
 <div id="gameContainer">
-	<div id="myfilter" style="position:absolute;background-color:#000000;opacity:0.3;display:none"></div>
-	<div id="myrestartbutton" style="position:absolute;padding-top:75px;padding-left:120px;display:none;">
-		<button onclick="startGame()">Restart</button>
+	<div id="myfilter" style="position:absolute;background-color:#000000;opacity:0.3;display:none;z-index:auto;"></div>
+	<div id="myrestartbutton" style="position:absolute;padding-top:75px;padding-left:120px;display:none;z-index:auto;">
+		<button onclick="startGame()" style="z-index:-1;">Restart</button>
 	</div>
 </div>
 
@@ -48,10 +47,11 @@ var myscore       = 0;
 var myObstacles   = [];
 
 function startGame() {
+	console.log( 'start game' );
 	for (i = 0; i < myObstacles.length; i += 1) {
         myObstacles[i].release();
-		myObstacles.pop( i );
     }
+	myObstacles = [];
 	if ( myGamePiece != 0 )
 	{
 		myGamePiece.release();

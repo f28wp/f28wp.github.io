@@ -21,11 +21,28 @@
 
 <br>
 <div style="text-align:center;width:100%;">
-  <button ontouchstart="moveup()"    onmousedown="moveup()"    onmouseup="clearmove()">UP</button><br><br>
-  <button ontouchstart="moveleft()"  onmousedown="moveleft()"  onmouseup="clearmove()">LEFT</button>
-  <button ontouchstart="moveright()" onmousedown="moveright()" onmouseup="clearmove()">RIGHT</button><br><br>
-  <button ontouchstart="movedown()"  onmousedown="movedown()"  onmouseup="clearmove()">DOWN</button>
+  Use the Cursor Arrowy Keys to Control Your Player
 </div>
+
+<script>
+document.onkeydown = keyDown;
+function keyDown(e)
+{
+	e = e || window.event;
+	
+    if      (e.keyCode == '38') { moveup();    } // up arrow 
+    else if (e.keyCode == '40') { movedown();  } // down arrow
+    else if (e.keyCode == '37') { moveleft();  } // left arrow
+    else if (e.keyCode == '39') { moveright(); } // right arrow
+}
+
+document.onkeyup = keyUp;
+function keyUp(e)
+{
+	e = e || window.event;
+	clearmove(e) 
+}
+</script>
 
 <br>
 <div id="myscore" style="text-align:center;width:100%;z-index:auto;"></div>
@@ -167,8 +184,8 @@ function updateGameArea() {
             min    = 50;
             max    = 100;
             gap    = Math.floor(Math.random()*(max-min+1)+min);
-            myObstacles.push(new component(10, height, "blue", x, 0));
-            myObstacles.push(new component(10, x - height - gap, "blue", x, height + gap));
+            myObstacles.push(new component(10, height, "purple", x, 0));
+            myObstacles.push(new component(10, x - height - gap, "purple", x, height + gap));
         }
         for (i = 0; i < myObstacles.length; i += 1) {
             myObstacles[i].x += -1;

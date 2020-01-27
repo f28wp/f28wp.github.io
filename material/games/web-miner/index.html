@@ -4,6 +4,18 @@
 <head>
 <title>Web Miner</title>
 
+<!--
+Simple tech demo 
+
+- Level is stored json data file 
+- Basic navigation/interaction 
+- Simple animations/graphics 
+
+
+
+
+-->
+
 <style>
 	#gameArea {
 		position : absolute;
@@ -24,6 +36,37 @@
 const Key = {
     "left": 0, "right": 1, "up": 2, "down": 3, "reset": 4
 }
+
+
+
+const Direction = { 
+    "none": 0, "left": 1, "right": 2, "up": 3, "down": 4 
+};
+
+const Sprite = {
+    "nothing":   0, 
+	"stone":     1, 
+	"ground":    2, 
+	"ghost180":  3, 
+	"uvexit":    4, 
+    "diamond":   5, 
+	"wall":      6, 
+	"ghost90L":  7, 
+	"marker":    8, 
+	"uvstone":   9, 
+	"player":    10,
+    "ghost90LR": 11, 
+	"exit":      12, 
+	"buffer":    13, 
+	"changer":   14, 
+	"ghost90R":  15,
+};
+
+
+const Sound = {
+    "diamond": 0, "stone": 1, "step": 2
+};
+
 
 
 function Game(gameArea) {
@@ -123,41 +166,20 @@ Game.prototype.reset = function () {
 			div.style.padding             = 0;
 			div.style.margin              = 0;
 			
-
-			/*
-			{
-				let tx = spriteIndex * 16 * 2;
-				let ty = 0;
-				
-				//let div 					  = this._divs[x + y*20];
-				div.style.left  			  = ( x * 16 * 2 ) + "px";
-				div.style.top   			  = ( y * (16 * 2) + (32 * 2) ) + "px";
-				div.style.width 			  = (16 * 2) + "px";
-				div.style.height			  = (16 * 2) + "px";
-				div.style.backgroundPosition  = "-"+tx+"px -"+ty+"px";
-			}
-			
-			if ( spriteIndex >= 7 && spriteIndex <= 13 )
-			{	
-				div.style.backgroundImage     = "url('./assets/gem3.gif')";
-				div.style.backgroundPosition  = "-0px -0px";
-			}
-			*/
 			
 			this._gameArea.appendChild( div );
 			this._divs[ x + y*20 ] = div;
-			//this._divs.push( div ); 
         }
     }
 	
 };
 
 Game.prototype.loadLevel = function () {
-    this._level       = new Level(levelData[this._room]);
+	
+	this._level       = new Level( levelData[ this._room ] );
     this._keys        = [false, false, false, false];
     this._keysRelease = [false, false, false, false];
     this._tick        = 0;
-    //this.paint();
 };
 
 Game.prototype.nextLevel = function () {
@@ -202,10 +224,10 @@ Game.prototype.interval = function () {
     }
     this._score       += this._level.score;
     this._level.score = 0;
-    this.paint();
+    this.updateGraphics();
 };
 
-Game.prototype.paint = function () {
+Game.prototype.updateGraphics = function () {
     var blink = ((this._blink + 4) % 6);
     // update statusbar
 	this._fontIndex = 0;
@@ -387,47 +409,6 @@ Game.prototype.stopEvent = function (e) {
 
 
 
-
-
-
-function Base64Reader(data) {
-    this._alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-    this._position = 0;
-    this._bits = 0;
-    this._bitsLength = 0;
-    this._data = data;
-};
-
-Base64Reader.prototype.readByte = function () {
-    if (this._bitsLength === 0) {
-        var tailBits = 0;
-        while (this._position < this._data.length && this._bitsLength < 24) {
-            var ch = this._data.charAt(this._position++);
-            var index = this._alphabet.indexOf(ch);
-            if (index < 64) {
-                this._bits = (this._bits << 6) | index;
-            }
-            else {
-                this._bits <<= 6;
-                tailBits += 6;
-            }
-            this._bitsLength += 6;
-        }
-        if (this._position >= this._data.length && this._bitsLength === 0) {
-            return -1;
-        }
-        tailBits = (tailBits === 6) ? 8 : (tailBits === 12) ? 16 : tailBits;
-        this._bits = this._bits >> tailBits;
-        this._bitsLength -= tailBits;
-    }
-    this._bitsLength -= 8;
-    return (this._bits >> this._bitsLength) & 0xff;
-};
-
-var Direction = { 
-    "none": 0, "left": 1, "right": 2, "up": 3, "down": 4 
-};
-
 function Ghost(position, type, direction, lastTurn) {
     this.alive = true;
     this.position = position;
@@ -439,40 +420,48 @@ Ghost.prototype.getImageIndex = function () {
     return [4, 4, 5, 6, 3][this.direction];
 };
 
-var Sprite = {
-    "nothing": 0, "stone": 1, "ground": 2, "ghost180": 3, "uvexit": 4, 
-    "diamond": 5, "wall": 6, "ghost90L": 7, "marker": 8, "uvstone": 9, "player": 10,
-    "ghost90LR": 11, "exit": 12, "buffer": 13, "changer": 14, "ghost90R": 15,
-};
 
-function Level(data) {
+
+
+
+
+
+
+
+function Levelold(data) {
     this.collected = 0;
-    this.time = 5000;
-    this.score = 0;
-    this._map = [];
+    this.time      = 5000;
+    this.score     = 0;
+    this._map      = [];
     for (var x = 0; x < 20; x++) {
         this._map[x] = [];
     }
+	
     var reader = new Base64Reader(data);
     for (var y = 0; y < 14; y++) {
         for (var x = 0; x < 10; x++) {
             var b = reader.readByte();
             this._map[x * 2 + 1][y] = b & 0x0f;
-            this._map[x * 2][y] = b >> 4;
+            this._map[x * 2][y]     = b >> 4;
         }
     }
     for (var i = 0; i < 5; i++) {
         reader.readByte();
     }
+	
     var position = new Position(reader.readByte(), reader.readByte() - 2);
     this._player = new Player(position);
+	
     this._map[this._player.position.x][this._player.position.y] = Sprite.player;
-    this.diamonds = reader.readByte();
+    
+	this.diamonds = reader.readByte();
     this.diamonds = (this.diamonds >> 4) * 10 + (this.diamonds & 0x0f);
-    var ghostData = [];
+    
+	var ghostData = [];
     for (var i = 0; i < 8; i++) {
         ghostData.push(reader.readByte());
     }
+	
     var index = 0;
     this._ghosts = [];
     for (var y = 0; y < 14; y++) {
@@ -487,6 +476,53 @@ function Level(data) {
         }
     }
 };
+
+function Level(data) {
+
+    this.collected = 0;
+    this.time      = 5000;
+    this.score     = 0;
+    this._map      = [];
+    for (var x = 0; x < 20; x++) {
+        this._map[x] = [];
+    }
+	
+    for (var y = 0; y < 14; y++) {
+        for (var x = 0; x < 20; x++) {
+			this._map[x][y] = data.map[x][y];
+        }
+    }
+
+    var position = new Position(data.player.x, data.player.y);
+    this._player = new Player(position);
+	
+    this._map[this._player.position.x][this._player.position.y] = Sprite.player;
+    
+	this.diamonds = data.diamonds;
+
+	var ghostData = [];
+    for (var i = 0; i < 8; i++) {
+		ghostData.push( data.ghostData[ i ] );
+    }
+	
+    var index = 0;
+    this._ghosts = [];
+    for (var y = 0; y < 14; y++) {
+        for (var x = 0; x < 20; x++) {
+            if (this.isGhost(x, y)) {
+                var info = index & 1 !== 0 ? (ghostData[index >> 1] & 0x0f) : (ghostData[index >> 1] >> 4);
+                var direction = info < 4 ? [Direction.down, Direction.up, Direction.right, Direction.left][info] : Direction.none;
+                var lastTurn = index & 1 !== 0 ? Direction.right : Direction.left;
+                this._ghosts.push(new Ghost(new Position(x, y), this._map[x][y], direction, lastTurn));
+                index++;
+            }
+        }
+    }
+};
+
+
+
+
 
 Level.prototype.isPlayerAlive = function () {
     return this._player.alive;
@@ -932,6 +968,10 @@ Level.prototype.getSpriteIndex = function (x, y, blink) {
     }
 };
 
+
+
+
+
 function Player(position) {
     this._direction = Direction.none;
     this.stone      = [false, false];
@@ -988,9 +1028,11 @@ Position.prototype.clone = function () {
     return new Position(this.x, this.y);
 };
 
-var Sound = {
-    "diamond": 0, "stone": 1, "step": 2
-};
+
+
+
+
+
 
 function SoundPlayer() {
     this._soundTable = {};
@@ -1022,71 +1064,133 @@ SoundPlayer.prototype.play = function (name) {
 
 
 
-
-
 var levelData = [
-    
-`ZmZmZmZmZmZmZmUiIiIcEmIiJlZgEmZiERJiIiZWYCJlYhESYmZmVmAlZWYiIlJiIlZgJVVWZlIiYiFWZmZmVVZWZmIiVmERElVWVmVSIVZmFSBWVlZiUiFWYRWgZlZWYlIhVmYVIGVWVmJSIVZhFSBlUhJVUiFWZhUhZVISVVIiVmZmZmZmZmZmZmYBAECcQAQLUwAAAAAAAAAA`,
-    "ZmZmZmZmZmZmZmoBAiIiIiIAARZmZgImZmFiVVVWYiICJlVhYiIiJmJRUSZVYWIAARZiJlZmVWFiVVVWYiZVVlVRYiIiJmImVlZVYWIiIiZiJlVmZmFiIiImYiZlVWwhIiIiJmIiZlYiJmZmIhZiIiZmIiIiIiEWYiACIiERVVVVVmZmZmZmZmZmZmYCnEA4QQEDQgAAAAAAAAAA",
-    "ZmZmZmZmZmZmZmERERERERFhERZgAiIiIiIiYREWYAIiIiIiIm7u5mACZiIiIiEiIqZgAiImIiIlJSLGYAIiIiISIiElVm4iIiIiIiIiIiZgBlZWFVZmZmZmYAYGVhVWAAAAVmAGBlZlZgAAAFZgAAYGZWAAAABWYAAABmVVVVVVVmZmZmZmZmZmZmYDOEHUQRIGNgAAAAAAAAAA",
-    "ZmZmZmZmZmZmZmVVVVVlFRUVFRZgAHAAYAcAAAAGYREREWIiIiIixmEREREiIiIiIiZu7u7iIiIRESImYiIiIiIiFRUiJmIiIiISImZmIiZhEREhEiIiJiIWYiIqIhESIhYSVmZmZiISIiVWUiZiISEiEiJSJiIWZRIiIRIhERYiVmZmZmZmZmZmZmYE1EGsUQULIAAAAAAAAAAA",
-    "ZmZmZmZmZmZmZmFhVSIiJlVQASZqIiIlZlYiIGYmYGBgZmImAABiJmBgYGUBJgMAYmZgYGBmBmZhImUmY2BgYQZmFmBmBmBgYGY2IiVgxiZlYGBlBmAGYCYGYmBgZSFgBlBWJmViY2ZmYBZRVgZiZWABJmAmZmYmZWVlUlZgUgICBmZmZmZmZmZmZmYFrFHYTwEEICIAAAAAAAAA",
-    "ZmZmZmbGZmZmZmIAAAAHAAAAAFZlZmZmZmZmZmYmYmUiIiIiIiJWVmViZmZmYmZmJiZiYmAAAPAABiZWZWJgZmZmZgYmJmJiYGAFUAYGJlZlYmAAYAYABiYmYmJmZmZmZmYmVmVlIiIiIiIiViZiZmZmamZmZmZWZQAAAAAAAAAAJmZmZmZmZmZmZmYG2E9wQgkNGDIAAAAAAAAA",
-    "ZmZmZmZmZmZmZmEREREVVVa7u8ZiIiIi5VVWu7u2YwAAABVVVgu7tmIiIiLlVVYAAAZiIiIiFVVWEAAGYiIiImZmZhZmZmMQAiIiIiISIiZhEiIgIiIiEiImYRJSICIiIhIiJmEVVSAiIiISIiZhEREgIiIiEiImYqIiIyIiIiIiJmZmZmZmZmZmZmYHcEKoQwIOJiIiIiIiIiIh",
-    "ZmZmZmZmZmZmZmIiIiIiIiIRIiZiEhISEhIiIiImYSEhISEhIiIiJmZmZmZmZgLiIiZiERERERHmIiImYiIiIiIiBiIiJmIiIiIiIAYiIiZiIiIiIgAGIiImYiIiIiAABiIiJmIiIiIiIiYiIiZiIiIiIiEWZmYmaiIiIiIiIiIiLGZmZmZmZmZmZmYIqEMMQwEOEQAAAAAAAAAA",
-    "ZmZmZmZmZmZmZmIiIiJrAAAAAAZjADAFZmBmZgMGYiImJmAAAAYABmAANrZmJmYGMAZiIiYGMAAGBgMGYAMGBlVVVgYABmIiJgZVVTYGMAZgMAYGVVVWBgMGYiImBmZmZgYABmMABgAAAAAGMAZiIiZmZmZmZgAGaiImwAAAAAAABmZmZmZmZmZmZmYJDENERAEOFSIgMAICMCAg",
-    "ZmZmZmZmZmZmZmIiIiIiIiIiIiZiIiIiIiIiIiImYiIiIiIiIiIiJmIiIiIiIiIiIiZiIiIiIiIiIiImYiIiIiIiIiIiJmIiIiIiIiIiIiZiIiIiIiIiIiIma7u7u7AAACEiJmu7u7uwAAABEiZlVVVVVVVVUiImbFVVVVVVVVIipmZmZmZmZmZmZmYQRER0UBIOJyIiIiIiIiIi",
-    "ZmZmZmZmZmZmZmJiYmJiYmJiYmZiYmJiAmJiYmLGYmJiAgICYmJiBmJiAgICAgJiAgZiAgICsgICAgIGYgICsgKyAgICtmICsgICArICsgZisgICAgICsgIGYgICAmICAgICBmICAmJiYgICAmZiAmJiYmJiAmJmamJiYmJiYmJiZmZmZmZmZmZmZmYRdFDgRAEOAAAAAAAAAAAA",
-    "ZmZmZmZmZmZmZmIREREREiIiJhZiIiIiIiIiIiYWYiIiIiIiIiImFmoiIiIiIiIiJiZiISEhBiIiIiImYiIiIgYiYiIiJmIiIiImImIAICZiIiEhJiJu7u7mYiIiIiIiYAAABmADAwAAAGAAAAZmYAADAABgAAAGbGUFIiIlYAAABmZmZmZmZmZmZmYS4ER8RQEGEjIgAAAAAAAA",
-    "ZmZmZmZmZmZmZmISEhISEhISEhZhISEhISEhISEWYhISEhISEhISZmEhISEhISEhImZiEhISEhISEiJmYSEhISEhISZmZmIiIiIiIiIiIiZiIiImIiIiIiImYiIiJmAiIiIAtmIiIiZgZiIiIiZqIiImYG4iIiImbCIiJmBiIiIiJmZmZmZmZmZmZmYTfEUYRgENIDAAAAAAAAAA",
-    "ZmZmZmZmZmZmZmsLAAICAgICAlZlVVUGAgICAgJWZmZmBgICAgICVmAAAAYyMjIyMlZgZmZmZmZmZmFWYAAABmxVIiJiJmZmZgBmZiIiYiZgAAAGZVUgAGImYGZmZmZmILBiJmAAAKZVVSAAYiZmZmYGZmYgsGImYAAABlVVIABiJmZmZmZmZmZmZmYUGEa0RgYMIyIRERIwAAAA",
-    "ZmZmZmZmZmZmZmAAAlUSIhISEhZhIgJVUgISEiEmZRIAVVIiEhIhJmESAFZmIhISEhZhEgVmIiISEhIWZmAGZSIiIiIiJmFgFRVgAAAAAAZhYGZmVWMAMAA2YKBlVlVmAzAwBmZjZlZVVgMDMwZmAwZWZlYwAwA2ZszGVVVWMAAABmZmZmZmZmZmZmYVtEbsRwILMCIzMyIjIjMy",
-    "ZmZmZmZmZmZmZmIVESJhFiIhIlZiFSIioiAAAmZmYhVmEgBgAAIhVmIRFhABYCIiISZiIVZgImIiMAIWZmYSBRVlYgMBJmIiElERZWIAMhZiZmZmZmZiAwEmYSERASVVESIiJm4RIiIiUiIiISZlJTAAABAAEhUWZQESUiEgDCFRVmZmZmZmZmZmZmYW7EckSQgEICMjMAAAAAAA",
-    "ZmZmZmZmZmZmZmERYRFiIiwRERZiomERYAMGEREWYgJhEWAANmZVVmICYRFgAwZVVVZiAmERYDAGIiImYiJmFmMABiUiJmIiIiIiIiIiUiZiJVUiIiIiIiJWYiIiIhISIlJSJmIiIiISEiIiJSZmZmZmYmZmZmZmYwAAAABVVVVVVmZmZmZmZmZmZmYXJEkQUQIEICIzMwAAAAAA",
-    "ZmZmZmZmZmZmZmBWAiYiAAVhEhZvZgYmJgUCYioWYAAGJiayAmImZmZmJiImAABiIiZiFiZmZmUAYRJmYVYlZSViAGISJmEWYmJmZgBgIiZlUAAAZQYAZRJmZiZmZmIGxmYiFmAAAAAABmYgEhZgZmZmAAYhIGZmYAVWVwAAAQADBmZmZmZmZmZmZmYYEFHASREEEgAiAAAAAAAA",
-    "ZmZmZmZmZmZmZmEREREREiUVEiZiIiIiIiZmFiEmYiIiIiImthayJmpSUlJSJmYWVSZibu5iYiZWFmYmY2AAYmICIiIiJmJgAGJiAlISUiZiZmZiYgJSEiImYmVVYmICIhIiJmJlVWJiMlISIiZiZVViZmZiEiFWYiIiIyUiMhIlVmZmZmZmZmbGZmYZwEn4SgEGMQAAIAAAAAAA",
-    "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",
-    "ZmZmZmZmZmZmZmIiIiIiIiIiIiZiIiIiIiIiIiImYiIAciBwInACJmIiAAIgACIAAiZiIlACJQAiUAImYiIiIiIiIiIiJmIiIiIiIiIiIiZiIgACIAAiAAImYiJwAiBwIgByJmIiUAIlACJQACZiIiIiIiIiIiImbKIiIiIiIiIiJmZmZmZmZmZmZmY1wFRcVQIOBiIiIiIiIiIh",
-    "ZmZmZmZmZmZmZmAAdiISJSxgAHZgAAYiEVIiYAAGZQACIRUSIiUABmZmZiVSIlJmZmZgAHYiIlUAYAB2YAAGIRIiImAABmUAAiEgAiIlAAZmZmYiIAISZmZmYiUmIiICIiAAdmJVJiIiIiJgAAZiIiIiIiISYAAGagImASJQImUABmZmZmZmZmZmZmY2XFX4VQEOFyIgMAICMCAg",
-    "ZmZmZmZmZmZmZmFRVRUVVRFRURZlFVFRURVVFVVWYVVVUVVVFVUVFmVRVVUVFVVVUVZhVVUVUVFRUVUWZmYmZmZmZiZmZmAAAABgAAAAAMZgAAAAYAAAAAAGYAAAAGAAAAAABmAAAAAgAAAAAAZgAAAAYBARAAAGahVVFWFVFVAVVmZmZmZmZmZmZmY3+FWUVgEOZgAAAAAAAAAA",
-    "ZmZmZmZmZmZmZmERERIhERERERZhERESACIiIiImYREREiIiIiIiJmERERIiIiIiIiZiIiIiIiIiIu7mYiIiIiIiIiIiJmAAACJQAAAAAAZgAAAiVQAAAAAGYAAAIlVQAAAABmImZmYiJmbiIiZnd3d3dwAAAiImZ3fHd3AAAAIgpmZmZmZmZmZmZmY4lFYwVxIOFiIiIiIAIiIi",
-    "ZmZmZmZmZmZmZmwiIiIiIiIhIiZmYiIgAHACIhEmYGIiICIiAgEiJmpiIiAiIgIiIiZgZmVgZmYGAAAGYABlYAEAdlAABmAQZWBmZgZVAAZgZmVgZ3YGVVAGYGVVYGd2BlVVBmBlVWBgAAZVVVZgZmZgZmYGZmZmYAAAAP8AAAB3dmZmZmZmZmZmZmY5MFfMVwEGJDIgAAAAAAAA",
-    "ZmZmZmZmZmZmZmBwYRERUREWAHxgAGURFRFRFgAGYABhFREVUVYABmAAYVFREREWAAZlAGERFRVRFlAGYiIiIiIiIiIiJmIiIiIiIiIiIiZiIiAAAAAAAiImYqIgAAAAAAIiJmZmYAAAAAAGZmZgcABwAHAAcAB2YAcABwAHAAcABmZmZmZmZmZmZmZCBFmgWQILESIzMyIjIjMy",
-    "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",
-    "ZmZmZmZmZmZmZmoAAGEAAAYiVVZiIiIlEAACIiIWYiIiEREAAAAiVmZmZmZmBmZmZmZhECJgAAAmFVFWZSIiUQAAJlFVFmZmZmVQACIiIiZiIiJlVQAiIiImYABwZmYGZmZmZmIiImAAAAYQIVZgECIgVQBSIiFWZSAibFIBFiIiJmZmZmZmZmZmZmZj4GV4ZgEDJAAAAABmZmZm",
-    "ZmZmZmZmZmZmZmAAEAsAEAAAAAZgYmVmYGZmZmAGY2BmYlBsZVVgBmAQAAVgZhEWYAZgYAACZWIiImIGZVUABWpgAwBgBmZmUAJlZRUVYAZlZmUFZmIiImMGZWZmUmBiUVJgBmVmZmVgJVZVYAZlZmZmY2ZmZm4mZQAwBgAAAAAABmZmZmZmZmZmZmZkeGYQZwkINCAwEgBmZmZm",
-    "ZmZmZmZmZmZmZmUhEABgAhIAAAZlIiAAYCEgAABmZSABAGFiAAAABmIAAiBlYCZmZgZgADACBWAAVVYGZmRGZmVgACFWBmAQEBBlYAEhVgZiISAgZWNRJma2YiLuImVgZmBmBmUAAAVlYGxgZgZlUABVZWBmYGYGZVUFVWoAAGAABmZmZmZmZmZmZmZlEGeoZwkONCAAAABmZmZm",
-    "ZmZmZmZmZmZmZmAAAAAgAABWDBZgZmZgZmZiImYWYGVVYGVVYQZWJmBlZWBlZWIGVgZgZmVgZWZhBlYGb1VVamVVUgVmBmBmZmVmZiZmYAZgIiJmUAAwBWAGYAAAJWAAMAJeBmYSIiZSaWlpYAZlFRYWIi5eXlYGYVJVUVFSIiIlVmZmZmZmZmZmZmZnQGjYaAcIQQIwAABmZmZm",
-    "ZmZmZmZmZmZmZmISIiIsIiIiISZiIiIiIiIiIiImYiIiIiIiIiIiJmIiIiIiIiIiIiZiIiIiuzsiIiImYiIiIvVfIiIiJmIiIiK1WyIiIiZiIiIie7ciIiImYiIiIiIiIiIiJmIiIiIiIiIiIiZiIiIiIiIiIiImYiIiIioiIiIiJmZmZmZmZmZmZmZpcGkQagkOAjMzMwAAAAAA",
-    "ZmZmZmZmZmZmZmAABABURAAAQAZgBAAAQAQEQAAGZAQEREBEBAREVmAEAABAAAAEQEZgRAREQEBAAAAGYAAAAAAEBERERmREREBARAAAAAZgAEBAAAQEAEBWYEBARAREBERARmBAAEAABAAAAAZtREQARARAREBGagAAAAQAAABABmZmZmZmZmZmZmZwEGqoagEOAwAAAABmZmZm",
-    "ZmZmZmZmZmZmZmERUSYiIiIiIiZiIiImMAAAACAGYLAABlVVVVVVVmIiIhYDAAAAAAZlVVVVVVVVVVVWYhISEhIAEhISFmEhISEhISEhISZiIiIiIiIiIiImYCIiIiIiIiIiJmMloAAAAAAAAAZgJQAAAAAAAAAGbBIiIiIiIiIiJmZmZmZmZmZmZmZyQGvgawQMKAAAAAAAAAAA",
-    "ZmZmZmZmZmZmZmIiIiYRERYCIqZiEhImEREWAhImYSEhJhERFgIhJmISEiARERACIiZiIiImEWEWMwAGYDAAJmYWZiISJmIiIiIiIiIiIiZiIiIiIhISEhImZmbu7mIubmLmJmAAAABgADAAAAZlAAAAYAAAADAGZVAAAGAAMFAAxmZmZmZmZmZmZmZ1IG3AbRIDIBIiIgAAAAAA",
-    "ZmZmZmZmZmZmZmEREWISEhEgCQZhERFiISEhIAkGYRERYRISESAJBmEREWIiIiIgCQZmERZiIiIiKgCWZmJmAzAAAiIiJmIiImIiIiIiIiZiIiJmZubmIiImZm7uYAawBlVVVmAAAAsGBrZRURZgAAALtjYGFVVWYAAAAAYABlFVxmZmZmZmZmZmZmZ2wG1gbg8HQCIAAAAAAAAA",
-    "ZmZmZmZmZmZmZmIRwiIioiIiJlZiEWISEiISERZWYhFiEhIhIhEWVmIhJmZmIiIiJlZiIiYiIiADAAZWZiImJmViIiImVmIiJiZWYAMABlZgMAYiImZmZiFmYmZmYm7u7iICJmERESJgYAIiAiZu7u7iYGBiYgYmYiIiImBgsLACVmZmZmZmZmZmZmZ3YG4AbwoDJyIgAAAAAAAA",
-    "ZmZmZmZmZmZmZmIiIhIiIqEiIhZhERIhESEiERImZVVQJVIlIlVbBmUiKyVRJSJSVSZlISAlJSUiURUWZVUgJSUlIlEVJmUiKyUiVSJRFRZlILAlIFUiURUmZREgJSslIlJVBmVVUCUABSJVUrZu7u7u7u7u7u7mbAAAAAAAAAAAxmZmZmZmZmZmZmaAQHAAAAwDdQAAAAAAAAAA"
+// level 0
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,5,0,0,0,0,6,1,6,1,6,1,6,6],[6,2,1,2,2,2,6,1,1,1,1,1,1,6],[6,2,2,2,5,5,6,1,5,5,5,5,5,6],[6,2,6,6,6,5,6,1,2,10,2,2,2,6],[6,2,6,5,5,5,6,2,0,0,0,0,1,6],[6,2,6,6,6,5,5,5,5,6,6,6,6,6],[6,2,2,2,6,6,5,5,6,6,5,5,5,6],[6,1,1,1,2,6,5,5,5,5,5,5,5,6],[6,12,1,1,2,6,6,6,6,6,6,2,2,6],[6,1,1,1,2,5,5,5,5,5,5,1,1,6],[6,2,2,2,2,2,6,6,6,6,6,2,2,6],[6,6,6,6,5,2,6,6,6,6,6,5,5,6],[6,2,2,2,2,2,6,5,2,2,2,5,5,6],[6,2,2,6,6,6,6,5,5,5,5,5,5,6],[6,2,2,6,2,2,2,2,2,2,2,2,2,6],[6,2,2,6,2,2,2,2,2,2,2,2,2,6],[6,6,6,6,2,1,2,1,1,1,1,1,2,6],[6,5,5,5,5,5,5,5,5,5,5,5,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":4,"y":9},"diamonds":53,"ghostData":[0,0,0,0,0,0,0,0]}
+,
+// level 1
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,10,6,2,2,2,2,2,2,2,2,2,2,6],[6,0,6,2,5,2,2,2,2,2,2,2,2,6],[6,1,6,2,1,6,6,6,6,6,2,2,0,6],[6,0,0,0,5,5,5,5,5,6,6,2,0,6],[6,2,2,2,1,6,5,6,5,5,6,6,2,6],[6,2,2,2,2,6,5,5,6,5,5,6,2,6],[6,2,6,6,6,6,6,6,6,5,6,6,2,6],[6,2,6,5,5,5,5,5,6,6,2,2,2,6],[6,2,6,5,5,5,5,5,6,12,2,2,1,6],[6,2,6,6,6,6,5,6,6,2,2,2,1,6],[6,2,1,1,1,1,1,1,1,1,6,2,1,6],[6,2,6,6,6,6,6,6,6,2,6,2,5,6],[6,2,2,2,2,2,2,2,2,2,6,2,5,6],[6,0,5,2,0,5,2,2,2,2,6,2,5,6],[6,0,5,2,0,5,2,2,2,2,6,2,5,6],[6,0,5,2,0,5,2,2,2,2,2,2,5,6],[6,1,5,2,1,5,2,2,2,2,2,1,5,6],[6,1,5,2,1,5,2,2,2,2,1,1,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":1},"diamonds":42,"ghostData":[0,0,0,0,0,0,0,0]}
+,
+// level 2
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,0,0,0,0,0,14,0,0,0,0,0,6],[6,1,0,0,0,0,0,2,0,0,0,0,0,6],[6,1,2,2,2,2,2,2,6,6,6,0,0,6],[6,1,2,2,6,2,2,2,5,0,0,0,0,6],[6,1,2,2,6,2,2,2,6,6,6,6,0,6],[6,1,2,2,2,2,2,2,5,5,5,0,0,6],[6,1,2,2,2,6,2,2,6,6,6,6,6,6],[6,1,2,2,2,2,2,2,1,1,6,6,6,6],[6,1,2,2,2,2,2,2,5,5,5,5,5,6],[6,1,2,2,2,2,1,2,5,5,6,6,5,6],[6,1,2,2,2,2,2,2,6,6,6,0,5,6],[6,1,2,2,2,2,2,2,6,0,0,0,5,6],[6,1,2,2,1,5,2,2,6,0,0,0,5,6],[6,6,6,6,2,2,2,2,6,0,0,0,5,6],[6,1,1,14,2,5,1,2,6,0,0,0,5,6],[6,1,1,14,2,2,2,2,6,0,0,0,5,6],[6,1,1,14,2,2,5,2,6,0,0,0,5,6],[6,1,1,14,10,12,5,2,6,5,5,5,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":18,"y":4},"diamonds":36,"ghostData":[0,0,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,5,0,1,1,14,2,2,1,2,6,2,5,6],[6,5,0,1,1,14,2,2,1,2,6,2,1,6],[6,5,0,1,1,14,2,2,1,2,6,1,2,6],[6,5,7,1,1,14,2,2,1,2,6,2,2,6],[6,5,0,1,1,14,2,2,1,10,6,1,2,6],[6,5,0,1,1,14,2,2,2,2,2,2,2,6],[6,5,0,1,1,2,2,2,1,2,2,2,1,6],[6,6,6,6,2,2,2,1,1,1,1,1,1,6],[6,5,0,2,2,2,2,2,2,1,2,2,2,6],[6,1,0,2,2,2,2,2,2,1,2,2,2,6],[6,5,7,2,2,2,2,2,2,2,2,2,1,6],[6,1,0,2,2,1,1,6,2,2,2,5,1,6],[6,5,0,2,2,1,5,6,2,2,5,2,1,6],[6,1,0,2,2,1,1,6,2,1,5,2,1,6],[6,5,0,2,2,1,5,6,6,6,6,6,6,6],[6,1,0,2,2,2,2,2,2,1,5,2,2,6],[6,5,0,2,2,2,2,2,2,2,2,2,2,6],[6,1,0,12,2,2,2,2,1,5,2,1,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":5,"y":9},"diamonds":20,"ghostData":[0,0,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,10,0,0,0,3,0,5,2,5,2,5,6],[6,6,2,6,6,6,6,6,6,6,6,6,6,6],[6,1,2,0,0,0,0,0,0,0,2,5,5,6],[6,5,2,6,6,6,6,6,6,6,6,6,6,6],[6,5,2,0,0,0,0,0,0,0,3,0,5,6],[6,2,2,6,6,6,6,6,6,6,6,0,5,6],[6,2,5,6,5,6,1,6,5,5,6,1,2,6],[6,2,6,6,0,0,0,3,0,2,6,2,5,6],[6,2,6,2,1,6,6,6,6,1,6,6,6,6],[6,2,5,2,2,6,6,2,6,6,6,6,6,6],[6,6,6,6,6,6,6,2,0,0,0,0,0,6],[6,5,2,0,0,6,1,2,0,0,1,2,5,6],[6,5,2,0,3,1,6,5,6,6,6,6,2,6],[6,5,2,0,0,2,6,6,6,5,5,6,0,6],[6,0,0,0,0,2,0,0,0,0,1,6,2,6],[6,0,6,6,6,6,6,12,2,5,5,6,0,6],[6,1,6,2,2,5,6,6,6,6,6,6,2,6],[6,2,2,2,6,2,0,2,0,2,0,2,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":2},"diamonds":20,"ghostData":[34,0,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,5,2,5,2,5,2,5,2,5,2,5,6],[6,0,6,6,6,6,6,6,6,6,6,6,0,6],[6,0,6,5,2,2,2,2,2,2,5,6,0,6],[6,0,6,2,6,6,6,6,6,6,2,6,0,6],[6,0,6,2,6,0,0,0,0,6,2,6,0,6],[6,0,6,2,6,0,6,6,0,6,2,6,0,6],[6,0,6,2,6,0,6,0,0,6,2,6,0,6],[6,0,6,2,6,0,6,0,6,6,2,6,0,6],[6,7,6,2,6,0,6,5,0,6,2,10,0,6],[12,0,6,2,6,15,6,5,0,6,2,6,0,6],[6,0,6,2,2,0,6,0,6,6,2,6,0,6],[6,0,6,2,6,0,6,0,0,6,2,6,0,6],[6,0,6,2,6,0,6,6,0,6,2,6,0,6],[6,0,6,2,6,0,0,0,0,6,2,6,0,6],[6,0,6,2,6,6,6,6,6,6,2,6,0,6],[6,0,6,5,2,2,2,2,2,2,5,6,0,6],[6,0,6,6,6,6,6,6,6,6,6,6,0,6],[6,5,2,5,2,5,2,5,2,5,2,5,2,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":9,"y":11},"diamonds":18,"ghostData":[50,0,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,2,3,2,2,2,3,1,1,1,1,2,6],[6,1,2,0,2,2,2,1,1,1,1,1,10,6],[6,1,2,0,2,2,2,0,2,2,5,1,2,6],[6,1,2,0,2,2,2,0,2,5,5,1,2,6],[6,1,2,0,2,2,2,2,2,2,5,1,2,6],[6,1,2,0,2,2,2,2,2,2,2,2,2,6],[6,1,2,0,2,2,2,2,0,0,0,0,3,6],[6,1,14,1,14,1,6,2,2,2,2,2,2,6],[6,5,5,5,5,5,6,2,2,2,2,2,2,6],[6,5,5,5,5,5,6,2,2,2,2,2,2,6],[6,5,5,5,5,5,6,2,2,2,2,2,2,6],[6,5,5,5,5,5,6,2,2,2,2,2,2,6],[6,6,6,6,6,6,6,2,2,2,2,2,2,6],[6,11,11,0,0,1,1,1,1,1,1,1,2,6],[6,11,11,11,0,0,6,2,2,2,2,2,2,6],[6,11,11,11,0,0,6,2,2,2,2,2,2,6],[6,11,11,11,0,0,6,2,2,2,2,2,2,6],[6,12,11,11,0,0,6,2,2,2,2,2,2,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":2,"y":12},"diamonds":26,"ghostData":[34,34,34,34,34,34,34,33]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,2,1,6,2,2,2,2,2,2,2,10,6],[6,2,1,2,6,1,2,2,2,2,2,2,2,6],[6,2,2,1,6,1,2,2,2,2,2,2,2,6],[6,2,1,2,6,1,2,2,2,2,2,2,2,6],[6,2,2,1,6,1,2,2,2,2,2,2,2,6],[6,2,1,2,6,1,2,2,2,2,2,2,2,6],[6,2,2,1,6,1,2,2,2,2,2,2,2,6],[6,2,1,2,6,1,2,2,2,2,2,2,2,6],[6,2,2,1,6,1,2,2,2,0,2,2,2,6],[6,2,1,2,6,1,2,2,0,0,2,2,2,6],[6,2,2,1,6,1,2,0,0,0,2,1,2,6],[6,2,2,2,0,14,0,0,0,0,2,1,2,6],[6,2,2,2,2,6,6,6,6,6,6,6,2,6],[6,1,2,2,14,2,2,2,2,2,2,6,2,6],[6,1,2,2,2,2,2,2,2,2,2,6,2,6],[6,2,2,2,2,2,2,2,2,2,2,6,2,6],[6,2,2,2,2,2,2,2,2,2,2,6,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,6,6,6,6,6,6,6,6,6,6,6,12,6]],"player":{"x":1,"y":12},"diamonds":11,"ghostData":[0,0,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,3,2,0,2,0,2,0,2,3,2,10,6],[6,2,0,2,0,2,0,2,3,2,0,2,2,6],[6,2,0,2,0,2,3,2,0,2,0,2,2,6],[6,2,3,2,3,2,0,2,0,2,0,2,2,6],[6,2,0,6,6,6,6,6,6,6,6,6,6,6],[6,2,0,2,11,0,0,0,0,0,0,6,12,6],[6,2,5,6,6,6,6,6,6,6,0,6,0,6],[6,6,6,6,6,3,5,5,5,6,0,6,0,6],[6,11,6,0,6,0,5,5,5,6,0,6,0,6],[6,0,6,0,2,0,5,5,5,6,0,6,0,6],[6,0,0,0,6,0,5,5,5,6,0,6,0,6],[6,0,6,0,6,0,5,3,5,6,0,6,0,6],[6,0,6,0,6,6,6,6,6,6,0,6,0,6],[6,0,6,0,0,0,0,0,0,0,0,6,0,6],[6,0,6,6,6,6,6,6,6,6,6,6,0,6],[6,0,0,0,3,0,0,3,0,0,3,0,0,6],[6,0,3,0,0,3,0,0,3,0,0,0,0,6],[6,0,0,0,0,0,0,0,0,0,0,0,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":12},"diamonds":15,"ghostData":[34,32,48,2,2,48,32,32]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,2,2,2,2,2,2,2,11,11,5,12,6],[6,2,2,2,2,2,2,2,2,11,11,5,5,6],[6,2,2,2,2,2,2,2,2,11,11,5,5,6],[6,2,2,2,2,2,2,2,2,11,11,5,5,6],[6,2,2,2,2,2,2,2,2,11,11,5,5,6],[6,2,2,2,2,2,2,2,2,11,11,5,5,6],[6,2,2,2,2,2,2,2,2,11,11,5,5,6],[6,2,2,2,2,2,2,2,2,11,11,5,5,6],[6,2,2,2,2,2,2,2,2,0,0,5,5,6],[6,2,2,2,2,2,2,2,2,0,0,5,5,6],[6,2,2,2,2,2,2,2,2,0,0,5,5,6],[6,2,2,2,2,2,2,2,2,0,0,5,5,6],[6,2,2,2,2,2,2,2,2,0,0,5,5,6],[6,2,2,2,2,2,2,2,2,2,0,5,5,6],[6,2,2,2,2,2,2,2,2,1,1,2,2,6],[6,2,2,2,2,2,2,2,2,2,1,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,10,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":18,"y":12},"diamonds":27,"ghostData":[34,34,34,34,34,34,34,34]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,2,2,2,2,2,2,2,2,2,2,10,6],[6,6,6,6,6,0,0,0,11,0,0,0,6,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,6,6,6,0,0,0,11,0,0,0,6,6,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,6,6,0,0,0,11,0,0,0,6,6,6,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,6,0,0,0,11,0,0,0,6,6,6,6,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,6,6,0,0,0,11,0,0,0,6,6,6,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,6,6,6,0,0,0,11,0,0,0,6,6,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,6,6,6,6,0,0,0,11,0,0,0,6,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,6,6,6,0,0,0,11,0,0,0,6,6,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,6,12,0,0,0,11,0,0,0,6,6,6,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":12},"diamonds":0,"ghostData":[0,0,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,2,2,10,2,2,2,2,2,0,6,12,6],[6,1,2,2,2,2,2,2,2,2,0,6,6,6],[6,1,2,2,2,1,2,2,2,2,3,0,5,6],[6,1,2,2,2,2,2,2,2,2,0,0,0,6],[6,1,2,2,2,1,2,2,1,2,3,0,5,6],[6,1,2,2,2,2,2,2,2,2,0,0,2,6],[6,1,2,2,2,1,2,2,1,2,0,3,2,6],[6,1,2,2,2,0,0,2,2,2,0,0,2,6],[6,1,2,2,2,6,6,6,6,2,0,0,2,6],[6,1,2,2,2,2,2,2,2,2,0,0,2,6],[6,2,2,2,2,2,2,2,2,2,0,0,5,6],[6,2,2,2,2,2,6,6,6,6,6,6,6,6],[6,2,2,2,2,2,2,2,14,0,0,0,0,6],[6,2,2,2,2,2,2,0,14,0,0,0,0,6],[6,2,2,2,2,2,2,0,14,0,0,0,0,6],[6,2,2,2,2,2,2,2,14,0,0,0,0,6],[6,6,6,6,6,2,2,0,14,0,0,0,0,6],[6,1,1,1,2,2,2,2,14,0,0,0,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":4},"diamonds":12,"ghostData":[50,32,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,1,2,1,2,1,2,2,2,2,10,12,6],[6,1,2,1,2,1,2,2,2,2,2,2,2,6],[6,2,1,2,1,2,1,2,2,2,2,2,2,6],[6,1,2,1,2,1,2,2,2,2,2,2,2,6],[6,2,1,2,1,2,1,2,2,2,2,2,2,6],[6,1,2,1,2,1,2,2,2,2,2,2,2,6],[6,2,1,2,1,2,1,2,6,6,6,6,6,6],[6,1,2,1,2,1,2,2,2,6,6,6,6,6],[6,2,1,2,1,2,1,2,2,0,0,0,0,6],[6,1,2,1,2,1,2,2,2,2,6,6,6,6],[6,2,1,2,1,2,1,2,2,2,6,14,2,6],[6,1,2,1,2,1,2,2,2,2,2,2,2,6],[6,2,1,2,1,2,1,2,2,2,2,2,2,6],[6,1,2,1,2,1,2,2,2,2,2,2,2,6],[6,2,1,2,1,2,6,2,2,2,2,2,2,6],[6,1,2,1,2,2,6,2,2,0,2,2,2,6],[6,2,1,2,2,2,6,2,2,0,2,2,2,6],[6,1,1,6,6,6,6,2,2,11,2,2,2,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":11},"diamonds":20,"ghostData":[48,0,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,11,5,6,0,0,0,6,0,0,0,6,0,6],[6,0,5,6,0,6,0,6,0,6,0,6,0,6],[6,11,5,6,0,6,0,6,0,6,0,6,0,6],[6,0,5,6,0,6,0,6,0,6,0,6,0,6],[6,0,5,6,0,6,0,6,0,6,0,6,0,6],[6,0,0,0,0,6,0,0,0,6,10,0,0,6],[6,2,6,6,6,6,6,0,6,6,6,6,6,6],[6,0,0,0,3,6,6,6,6,6,5,6,5,6],[6,2,2,2,2,6,12,6,5,6,5,6,5,6],[6,0,0,0,3,6,5,6,5,6,5,6,5,6],[6,2,2,2,2,6,5,6,5,6,5,6,5,6],[6,0,0,0,3,6,2,2,2,2,2,2,2,6],[6,2,2,2,2,6,2,2,0,0,0,0,0,6],[6,0,0,0,3,6,2,2,0,11,0,11,0,6],[6,2,2,2,2,6,2,2,0,0,0,0,0,6],[6,0,0,0,3,6,6,6,6,6,6,6,6,6],[6,2,2,2,2,1,2,2,2,2,2,2,2,6],[6,5,5,5,5,5,2,2,2,2,2,2,2,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":6,"y":10},"diamonds":23,"ghostData":[34,17,17,18,48,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,0,1,5,1,1,6,1,1,0,6,6,6,6],[6,0,2,1,1,1,6,6,6,10,6,0,12,6],[6,0,2,2,2,2,0,0,0,0,3,3,12,6],[6,0,0,0,0,0,0,1,6,6,6,0,12,6],[6,2,2,0,0,5,6,5,6,5,6,6,6,6],[6,5,5,5,5,6,6,1,6,5,5,5,5,6],[6,5,5,5,6,6,5,5,6,6,6,6,5,6],[6,1,5,5,6,2,2,6,5,5,5,6,5,6],[6,2,2,2,6,2,2,0,5,5,5,6,5,6],[6,2,0,2,2,2,2,0,6,6,5,5,5,6],[6,2,2,2,2,2,2,0,3,6,6,6,6,6],[6,1,1,1,1,1,2,0,0,0,0,3,3,6],[6,2,2,2,2,2,2,0,0,3,3,0,0,6],[6,1,1,1,1,1,2,0,3,3,0,0,0,6],[6,2,2,2,2,2,2,0,0,0,3,3,0,6],[6,1,2,2,1,1,2,0,0,3,3,0,0,6],[6,2,1,1,2,2,2,0,0,0,3,0,0,6],[6,1,2,2,1,1,2,0,3,0,0,3,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":2,"y":9},"diamonds":30,"ghostData":[34,51,51,34,35,34,51,50]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,2,2,2,2,6,2,2,1,14,5,5,6],[6,1,1,1,1,2,6,2,6,2,1,2,0,6],[6,5,5,5,1,1,6,2,6,1,1,5,1,6],[6,1,2,6,1,5,1,1,6,1,2,3,1,6],[6,1,2,6,6,6,2,2,6,1,2,0,2,6],[6,2,2,1,1,6,0,5,6,0,2,0,5,6],[6,2,2,2,0,0,5,1,6,1,2,0,2,6],[6,6,10,0,0,2,1,1,6,2,2,0,2,6],[6,1,2,0,1,2,5,1,6,5,2,0,1,6],[6,1,2,6,6,6,6,6,6,5,5,1,2,6],[6,6,0,0,0,2,5,5,6,5,2,0,0,6],[6,2,0,0,2,2,6,6,6,1,2,0,0,6],[6,2,0,0,2,2,2,2,2,1,2,0,12,6],[6,2,0,0,2,3,0,0,0,2,2,1,2,6],[6,1,2,2,2,0,3,0,3,2,2,2,1,6],[6,2,6,2,2,0,0,3,0,2,2,1,5,6],[6,2,6,1,1,2,1,2,1,2,1,5,1,6],[6,5,6,5,2,1,2,1,2,2,2,1,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":8,"y":2},"diamonds":20,"ghostData":[35,35,48,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,2,2,2,2,2,2,2,2,2,6,3,6],[6,1,10,0,0,0,2,2,2,2,2,6,0,6],[6,1,2,2,2,2,2,2,5,2,2,6,0,6],[6,6,6,6,6,6,6,2,5,2,2,6,0,6],[6,1,1,1,1,1,6,2,5,2,2,6,0,6],[6,1,1,1,1,1,1,2,2,2,2,6,0,6],[6,1,1,1,1,1,6,2,2,2,2,6,0,6],[6,6,6,6,6,6,6,2,2,1,1,6,0,6],[6,2,0,0,0,0,3,2,2,2,2,2,0,6],[6,2,0,0,0,3,0,2,2,1,1,6,5,6],[6,2,3,0,3,0,0,2,2,2,2,6,5,6],[6,2,0,3,0,0,0,2,2,2,2,6,5,6],[6,12,6,6,6,6,6,2,2,2,2,6,5,6],[6,1,1,6,5,2,2,2,2,5,2,6,5,6],[6,1,1,6,5,2,5,2,2,2,2,6,5,6],[6,1,1,5,5,2,2,5,2,5,2,6,5,6],[6,1,1,5,5,2,2,2,2,2,5,6,5,6],[6,1,1,5,5,2,2,2,5,2,2,6,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":2,"y":2},"diamonds":20,"ghostData":[34,51,51,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,0,15,0,6,2,1,1,5,6,0,0,0,6],[6,5,6,0,6,1,5,1,5,2,0,6,0,6],[6,6,6,0,6,6,6,6,0,6,0,6,5,6],[6,0,0,0,2,2,2,6,0,6,0,6,5,6],[6,2,6,6,6,6,5,2,0,6,0,6,6,6],[6,2,2,2,2,6,6,6,0,6,0,6,5,6],[6,6,6,6,2,6,5,2,0,6,0,6,7,6],[6,2,2,2,2,6,2,6,6,6,0,0,0,6],[6,2,6,6,6,6,5,6,5,2,0,0,0,6],[6,0,0,11,0,6,6,6,0,0,0,0,0,6],[6,0,5,2,0,5,2,6,6,6,6,6,0,6],[6,0,0,0,0,0,0,0,0,12,6,2,0,6],[6,5,2,2,0,0,0,0,0,6,6,1,1,6],[6,6,6,6,6,6,6,6,6,6,2,2,0,6],[6,1,2,2,2,1,2,0,5,6,0,0,0,6],[6,1,2,2,2,1,1,2,1,2,1,6,0,6],[6,2,10,6,2,2,2,2,2,2,2,6,3,6],[6,1,1,6,2,6,2,2,6,1,1,6,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":17,"y":2},"diamonds":12,"ghostData":[0,34,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,2,2,10,2,3,2,2,2,2,2,2,6],[6,1,2,2,5,6,6,6,6,6,6,6,2,6],[6,1,2,2,2,14,0,0,6,5,5,5,2,6],[6,1,2,2,5,14,0,0,6,5,5,5,2,6],[6,1,2,2,2,14,0,0,6,5,5,5,2,6],[6,1,2,2,5,6,6,6,6,6,6,6,2,6],[6,1,2,2,2,2,2,2,2,2,2,2,3,6],[6,1,2,2,5,6,6,6,6,6,6,6,2,6],[6,1,2,2,2,2,2,2,2,2,2,6,5,6],[6,1,2,2,2,2,0,0,0,0,3,6,2,6],[6,2,6,6,6,6,2,2,2,2,2,6,2,6],[6,2,6,11,6,5,2,5,5,2,5,6,3,6],[6,5,6,6,6,6,2,2,2,2,2,2,2,6],[6,1,1,1,1,1,2,1,1,1,1,1,1,12],[6,5,6,6,6,6,2,2,2,2,2,2,2,6],[6,1,2,11,5,6,2,5,2,2,2,2,2,6],[6,2,1,2,5,6,2,2,2,2,2,1,5,6],[6,2,2,2,2,2,2,2,2,2,2,5,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":4},"diamonds":31,"ghostData":[0,0,32,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,1,1,1,14,2,3,2,3,2,2,10,6],[6,1,1,1,1,14,2,0,2,0,2,2,2,6],[6,1,1,1,1,14,2,0,2,0,2,2,2,6],[6,1,1,1,1,14,2,0,2,0,2,2,2,6],[6,1,1,1,1,14,2,0,2,0,2,2,2,6],[6,6,6,6,6,6,2,0,2,0,2,2,2,6],[6,11,0,0,2,2,2,5,2,0,5,2,2,6],[6,0,0,0,2,2,2,5,2,0,2,2,2,6],[6,1,1,2,2,2,6,1,2,1,2,2,2,6],[6,1,1,2,2,5,6,1,2,1,1,2,2,6],[6,1,1,2,2,11,6,6,6,6,6,6,6,6],[6,2,2,2,2,0,2,0,3,0,6,2,2,6],[6,2,2,2,1,0,2,0,0,0,6,1,2,6],[6,2,2,6,1,0,2,3,0,0,6,2,5,6],[6,1,1,6,1,0,2,0,0,0,6,1,2,6],[6,2,2,6,1,0,2,0,0,3,6,2,5,6],[6,1,2,6,1,0,2,0,0,0,6,1,2,6],[6,12,2,6,1,0,2,0,0,0,6,2,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":12},"diamonds":27,"ghostData":[32,34,34,32,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,5,5,6,0,11,0,6,0,0,0,6,10,6],[6,1,1,6,1,6,5,6,11,6,0,6,2,6],[6,1,1,1,1,1,1,2,2,2,2,2,11,6],[6,1,6,1,6,1,6,5,6,2,6,2,0,6],[6,5,5,2,5,5,1,1,1,2,2,2,0,6],[6,5,1,6,1,6,5,6,1,6,2,6,11,6],[6,1,1,1,1,2,1,1,1,2,2,2,0,6],[6,2,6,5,6,1,6,2,6,2,6,2,0,6],[6,1,2,1,1,2,2,2,2,2,2,2,11,6],[6,1,2,6,1,6,2,6,2,6,2,6,0,6],[6,1,2,2,1,2,2,2,2,1,2,2,0,6],[6,1,6,1,6,1,6,2,6,2,6,2,0,6],[6,2,1,2,2,2,2,2,2,2,2,2,0,6],[6,2,1,6,2,6,1,6,2,6,1,6,0,6],[6,2,2,2,2,2,2,2,2,2,2,2,0,6],[6,2,12,1,6,1,6,1,6,1,2,2,0,6],[6,2,6,1,6,1,6,1,6,1,2,2,0,6],[6,0,0,0,0,0,0,0,0,0,0,0,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":12},"diamonds":9,"ghostData":[32,34,32,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,1,2,2,6,3,6,3,2,6,0,1,6],[6,2,2,2,5,2,0,2,0,2,6,1,5,6],[6,2,2,2,2,6,0,2,0,2,6,1,1,6],[6,1,2,2,0,6,0,2,0,2,6,1,5,6],[6,1,2,2,0,6,0,2,0,2,6,2,0,6],[6,1,6,2,6,6,6,6,6,2,6,2,0,6],[6,6,6,10,6,6,6,6,6,6,6,2,0,6],[6,2,2,2,14,0,0,0,6,3,0,0,0,6],[6,5,1,5,6,2,0,0,6,2,2,2,0,6],[6,5,5,11,6,2,0,0,6,6,6,6,3,6],[6,1,1,12,6,2,0,0,6,0,2,2,0,6],[6,6,6,6,6,2,0,0,6,0,6,6,6,6],[6,0,0,0,0,2,0,3,6,0,2,6,12,6],[6,0,5,6,0,2,0,0,6,3,2,6,2,6],[6,0,5,6,0,2,0,0,6,0,6,6,2,6],[6,0,5,6,0,2,3,0,6,0,2,6,2,6],[6,7,5,6,0,2,6,0,6,0,6,6,2,6],[6,6,0,0,0,2,6,0,6,0,2,2,2,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":7,"y":3},"diamonds":9,"ghostData":[48,35,50,3,32,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,6,1,1,1,1,5,2,2,6,0,1,6],[6,1,3,2,2,2,2,5,6,2,6,1,5,6],[12,2,1,1,1,1,1,5,2,2,6,1,1,6],[6,2,6,6,6,6,6,5,6,2,6,2,10,6],[6,2,1,1,5,6,0,0,2,2,1,2,2,6],[6,1,1,1,5,6,0,0,2,11,1,2,5,6],[6,1,1,1,5,6,0,0,2,0,1,2,2,6],[6,5,5,5,5,6,0,0,2,0,1,2,2,6],[6,5,5,5,5,6,0,0,2,1,1,2,5,6],[6,5,6,5,5,6,0,0,2,1,2,1,2,6],[6,6,2,6,6,6,6,0,2,2,2,2,2,6],[6,1,2,3,0,0,0,0,0,0,0,0,0,6],[6,6,6,6,6,6,0,0,6,0,6,0,0,6],[6,11,5,11,5,6,1,2,6,0,6,0,0,6],[6,5,11,5,11,6,1,2,6,0,6,0,7,6],[6,11,5,11,5,6,1,5,6,0,6,0,0,6],[6,5,11,5,11,6,1,5,6,0,6,0,0,6],[6,11,5,11,5,6,1,5,6,0,0,0,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":4,"y":12},"diamonds":17,"ghostData":[0,2,0,0,0,0,34,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,2,11,11,6,2,2,2,2,2,0,0,6],[6,1,2,0,2,6,2,2,2,2,0,0,0,6],[6,1,2,0,2,6,2,2,2,0,0,0,10,6],[6,1,2,0,2,6,2,2,0,0,0,0,0,6],[6,1,2,2,2,6,2,0,0,0,0,0,0,6],[6,1,2,2,2,2,2,1,1,1,1,1,1,6],[6,1,2,5,6,5,6,6,6,6,6,6,6,6],[6,1,2,5,6,5,6,5,5,6,3,5,5,6],[6,6,6,6,6,6,6,5,5,6,0,5,5,6],[6,2,2,2,2,2,6,2,5,6,0,5,5,6],[6,1,1,2,2,2,2,2,2,2,0,5,5,6],[6,1,1,2,2,6,6,6,6,6,6,6,12,6],[6,1,1,2,2,6,11,11,0,11,5,5,5,6],[6,1,1,2,2,6,11,11,0,11,5,5,5,6],[6,1,1,2,2,6,6,6,6,6,6,6,12,6],[6,1,1,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,6,6,6,6,6,6,6,6],[6,2,2,2,2,2,2,0,0,0,0,0,11,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":3,"y":12},"diamonds":20,"ghostData":[32,17,17,17,33,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,0,0,0,0,0,0,0,0,0,0,0,12,6],[6,0,0,3,0,0,3,0,6,0,3,0,5,6],[6,0,0,0,0,0,0,0,6,0,0,0,0,6],[6,6,0,6,3,0,6,0,6,0,6,0,3,6],[6,0,0,6,0,0,0,0,6,0,6,0,0,6],[6,0,0,0,6,0,3,0,6,0,6,0,0,6],[6,5,6,5,6,0,0,0,0,0,6,0,0,6],[6,6,6,6,6,0,6,0,3,0,6,0,6,6],[6,0,0,0,6,0,6,0,0,0,0,0,10,6],[6,0,6,0,6,0,6,0,0,0,3,0,6,6],[6,0,6,0,0,0,6,0,0,0,0,0,0,6],[6,0,0,0,3,0,6,0,3,0,6,6,3,6],[6,0,6,0,0,0,0,0,0,0,0,0,0,6],[6,0,0,0,3,0,0,6,0,3,0,0,0,6],[6,0,3,0,0,0,6,5,6,0,0,0,0,6],[6,0,0,3,0,0,6,0,0,3,0,0,6,6],[6,0,0,0,0,0,6,0,0,0,0,0,5,6],[6,0,0,5,6,5,6,5,6,5,6,5,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":9,"y":12},"diamonds":11,"ghostData":[32,2,0,32,2,0,32,34]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,1,1,2,0,0,0,0,0,0,0,10,6],[6,2,2,2,2,0,6,6,6,6,6,6,0,6],[6,1,1,5,6,0,0,7,6,7,0,0,5,6],[6,1,1,5,6,0,6,6,6,6,6,6,0,6],[6,1,1,5,6,0,0,0,0,0,0,0,0,6],[6,0,1,5,6,6,6,6,6,6,6,6,6,6],[6,0,2,1,6,1,2,2,2,2,2,2,2,6],[6,0,2,1,6,1,2,6,6,6,5,6,2,6],[6,2,2,1,6,1,2,6,5,6,2,6,2,12],[6,2,2,2,2,2,2,6,1,6,6,6,1,6],[6,1,6,6,6,6,2,1,1,1,1,1,5,6],[6,2,1,2,2,2,2,1,2,2,5,1,5,6],[6,2,2,1,2,2,2,2,2,2,6,6,6,6],[6,2,1,2,2,1,1,2,2,2,7,0,0,6],[6,1,6,6,1,6,6,6,6,6,0,2,0,6],[6,0,0,5,2,6,0,7,0,6,0,2,0,6],[6,0,2,2,2,6,0,6,0,6,0,0,7,6],[6,1,2,1,1,6,0,6,6,6,5,2,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":12},"diamonds":7,"ghostData":[17,16,16,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,2,1,2,2,2,2,2,2,2,0,12,6],[6,2,2,1,2,2,2,2,1,2,6,0,10,6],[6,6,6,6,6,1,6,6,6,6,6,0,0,6],[6,5,6,2,2,0,0,0,5,5,6,0,0,6],[6,6,6,2,2,2,2,2,1,5,6,0,0,6],[6,2,2,2,2,2,2,14,0,1,6,0,0,6],[6,2,2,2,2,2,1,6,0,5,6,0,0,6],[6,2,2,2,2,2,2,14,0,1,6,0,0,6],[6,0,0,3,0,2,1,6,0,6,6,3,0,6],[6,2,2,2,2,2,2,14,0,11,6,0,0,6],[6,3,0,0,0,2,1,6,0,6,6,0,0,6],[6,2,2,2,2,2,2,14,0,1,6,0,0,6],[6,2,2,2,2,2,1,6,0,5,6,0,3,6],[6,2,6,6,6,2,2,14,0,0,6,0,0,6],[6,2,6,3,2,2,2,6,0,11,6,0,0,6],[6,2,6,0,2,2,1,6,6,6,6,0,0,6],[6,2,6,0,2,2,1,6,2,2,14,0,0,6],[6,1,2,2,2,2,2,2,2,2,6,0,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":2,"y":12},"diamonds":1,"ghostData":[0,32,2,48,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,12,0,0,0,0,0,0,0,0,0,0,0,6],[6,6,6,6,6,10,6,6,6,6,6,6,0,6],[6,1,2,1,6,6,6,0,0,0,11,6,0,6],[6,1,2,2,1,2,2,0,5,2,0,6,0,6],[6,1,2,2,1,2,2,0,5,2,0,6,0,6],[6,1,2,2,1,2,2,0,5,2,0,6,0,6],[6,1,2,2,1,2,2,11,0,0,0,6,0,6],[6,2,2,2,2,2,2,2,2,2,2,6,0,6],[6,1,2,2,2,2,2,0,0,0,11,6,0,6],[6,1,6,6,6,6,6,2,2,2,2,6,0,6],[6,2,2,2,2,2,2,2,5,3,2,6,0,6],[6,2,2,2,2,2,2,2,2,5,5,6,0,6],[6,2,2,2,2,2,2,2,2,5,11,6,0,6],[6,2,2,2,2,2,2,6,6,6,6,6,0,6],[6,5,5,2,2,2,2,6,5,2,5,6,0,6],[6,11,5,2,2,2,2,6,5,2,5,6,0,6],[6,6,6,3,0,0,0,6,6,6,6,6,0,6],[6,11,2,2,0,0,0,0,0,15,0,0,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":2,"y":5},"diamonds":10,"ghostData":[0,3,0,33,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,11,0,0,0,6,2,0,2,10,6,0,0,6],[6,0,6,0,0,6,2,0,5,2,6,11,0,6],[6,0,6,0,5,6,2,3,2,2,6,0,0,6],[6,0,6,0,0,6,2,0,2,5,6,0,11,6],[6,0,5,6,0,6,2,0,5,2,6,0,0,6],[6,0,0,0,0,6,6,1,6,6,6,2,5,6],[6,6,0,6,5,2,6,0,0,2,0,5,5,6],[6,0,11,0,6,2,6,0,2,2,0,5,5,6],[6,0,6,0,6,2,2,0,6,6,6,5,5,6],[6,0,6,0,6,1,2,0,0,0,12,6,6,6],[6,11,6,0,0,2,2,0,6,6,6,11,0,6],[6,0,5,6,0,2,2,0,6,3,2,11,0,6],[6,0,0,0,2,2,2,0,6,0,2,0,0,6],[6,6,6,0,2,5,1,10,6,0,2,0,0,6],[6,5,6,0,2,2,1,1,6,0,2,0,0,6],[6,5,6,0,2,5,2,2,2,0,2,0,5,6],[6,5,6,0,2,5,1,1,6,0,2,0,5,6],[6,0,0,0,5,5,2,2,6,0,6,5,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":9},"diamonds":26,"ghostData":[3,34,50,32,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,0,0,0,0,11,0,0,0,0,0,0,11,6],[6,0,6,6,12,6,6,6,6,6,6,6,0,6],[6,0,6,1,6,5,6,0,0,0,0,6,0,6],[6,11,6,5,6,10,6,0,0,0,11,6,0,6],[6,0,6,1,6,2,6,6,0,0,11,6,0,6],[6,0,2,2,2,5,2,1,5,2,2,6,0,6],[6,0,6,2,2,2,2,2,2,2,5,6,0,6],[6,0,6,9,9,2,0,0,0,3,5,6,11,6],[6,0,6,2,2,5,2,2,2,2,2,6,0,6],[6,0,6,6,6,2,2,0,2,2,2,6,0,6],[6,11,6,0,6,5,2,2,0,2,5,6,0,6],[6,0,6,0,0,2,2,0,2,5,1,6,0,6],[6,0,6,5,6,2,2,2,5,1,5,2,0,6],[6,0,6,0,6,5,2,1,5,1,5,6,0,6],[6,0,6,0,6,2,5,5,1,5,5,6,11,6],[6,0,6,3,6,1,5,5,1,5,5,6,0,6],[6,0,6,6,6,6,6,6,6,6,6,6,0,6],[6,11,0,0,0,0,0,0,11,0,0,0,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":4,"y":5},"diamonds":23,"ghostData":[51,51,1,33,18,34,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,12,5,5,2,6,0,2,2,2,0,5,5,6],[6,6,2,2,2,6,0,2,6,2,1,1,6,6],[6,5,2,6,2,6,6,2,6,2,0,6,1,6],[6,2,2,6,2,2,2,2,2,2,0,6,5,6],[6,2,0,2,5,6,6,5,5,2,0,0,5,6],[6,6,6,2,1,2,0,1,5,2,6,1,1,6],[6,5,2,2,1,6,0,6,6,2,0,0,5,6],[6,1,2,6,5,2,0,0,2,2,6,6,6,6],[6,5,2,6,1,2,6,2,2,2,6,1,2,6],[6,1,5,2,5,2,6,2,2,2,6,5,2,6],[6,1,1,2,6,2,6,2,2,6,6,5,2,6],[6,1,6,15,5,2,1,0,2,2,0,2,6,6],[6,2,2,15,6,2,1,2,6,2,0,2,6,6],[6,5,1,2,6,2,5,2,5,5,6,2,2,6],[6,6,6,2,6,6,1,2,6,6,6,2,2,6],[6,0,2,2,0,2,2,0,2,2,0,2,2,6],[6,1,6,2,0,2,2,6,2,2,1,6,6,6],[6,5,6,2,10,2,5,6,1,2,2,2,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":18,"y":4},"diamonds":25,"ghostData":[0,0,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,2,2,2,2,2,2,2,2,2,2,12,6],[6,2,2,2,2,2,2,2,2,2,2,2,10,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,0,0,5,2,2,0,7,5,2,2,6],[6,2,2,0,0,0,2,2,0,0,0,2,2,6],[6,2,2,7,0,0,2,2,0,0,0,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,0,0,5,2,2,0,0,5,2,2,6],[6,2,2,7,0,0,2,2,0,7,0,2,2,6],[6,2,2,0,0,0,2,2,0,0,0,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,7,0,5,2,2,0,0,5,2,2,6],[6,2,2,0,0,0,2,2,0,0,0,2,2,6],[6,2,2,0,0,0,2,2,0,7,0,2,2,6],[6,2,2,2,2,2,2,2,2,2,0,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":2,"y":12},"diamonds":6,"ghostData":[34,34,34,34,34,34,34,33]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,0,0,5,6,0,0,5,6,2,2,2,10,6],[6,0,0,0,6,0,0,0,6,2,5,2,0,6],[6,0,0,0,6,0,0,0,6,5,5,2,2,6],[6,7,0,0,6,7,0,0,6,2,2,2,2,6],[6,6,6,2,6,6,6,2,6,6,6,2,6,6],[6,2,2,2,2,2,2,2,2,2,2,2,0,6],[6,2,2,1,5,2,1,1,2,2,2,2,1,6],[6,1,1,1,5,2,1,2,2,2,2,2,2,6],[6,2,1,5,2,2,2,0,0,2,2,2,2,6],[6,2,5,1,2,5,2,0,0,0,2,2,5,6],[6,5,2,2,2,5,2,2,2,2,2,2,0,6],[6,2,2,2,5,0,2,2,1,2,2,1,2,6],[6,12,2,2,2,0,2,2,2,2,2,2,2,6],[6,6,6,2,6,6,6,2,6,2,6,6,6,6],[6,0,0,5,6,0,0,5,6,0,0,0,5,6],[6,0,0,0,6,0,0,0,6,0,0,0,0,6],[6,0,0,0,6,0,0,0,6,0,0,0,0,6],[6,7,0,0,6,7,0,0,6,7,0,0,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":12},"diamonds":17,"ghostData":[34,32,48,2,2,48,32,32]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,5,1,5,1,6,0,0,0,0,0,10,6],[6,5,1,5,5,5,6,0,0,0,0,0,1,6],[6,1,5,5,1,5,6,0,0,0,0,0,5,6],[6,5,5,5,5,5,2,0,0,0,0,0,5,6],[6,5,1,5,5,5,6,0,0,0,0,0,5,6],[6,1,5,5,5,1,6,0,0,0,0,0,1,6],[6,5,1,1,5,5,6,0,0,0,0,0,5,6],[6,1,5,5,1,5,6,6,6,6,2,6,6,6],[6,5,1,5,5,1,6,0,0,0,0,0,1,6],[6,5,1,5,1,5,6,0,0,0,0,1,5,6],[6,5,5,5,5,1,6,0,0,0,0,0,5,6],[6,1,5,1,5,5,6,0,0,0,0,1,1,6],[6,1,5,5,5,1,6,0,0,0,0,1,5,6],[6,5,1,5,5,5,2,0,0,0,0,0,5,6],[6,1,5,5,5,1,6,0,0,0,0,0,0,6],[6,5,5,1,5,5,6,0,0,0,0,0,1,6],[6,1,5,5,1,5,6,0,0,0,0,0,5,6],[6,1,5,1,5,1,6,12,0,0,0,0,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":12},"diamonds":66,"ghostData":[0,0,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,1,1,1,2,2,0,0,0,2,7,7,6],[6,1,1,1,1,2,2,0,0,0,2,7,7,6],[6,1,1,1,1,2,2,0,0,0,6,7,7,6],[6,1,1,1,1,2,2,0,0,0,6,7,12,6],[6,1,1,1,1,2,2,0,0,0,6,7,7,6],[6,1,1,1,1,2,2,2,2,2,6,7,7,6],[6,2,2,2,2,2,2,2,2,2,6,7,7,6],[6,2,0,2,2,2,2,5,5,5,2,7,7,6],[6,1,0,2,2,2,2,0,5,5,2,7,0,6],[6,1,2,2,2,2,2,0,0,5,2,0,0,6],[6,1,2,2,2,2,2,0,0,0,6,0,0,6],[6,1,2,2,2,2,2,0,0,0,6,0,0,6],[6,1,2,2,2,2,2,0,0,0,6,0,0,6],[6,1,2,2,2,2,2,0,0,0,14,0,0,6],[6,1,2,2,2,2,2,0,0,0,2,2,2,6],[6,1,2,2,2,14,2,0,0,0,2,2,2,6],[6,1,2,2,2,14,2,0,0,0,2,2,0,6],[6,1,2,2,2,14,2,0,0,0,2,2,10,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":18,"y":12},"diamonds":16,"ghostData":[34,34,34,34,0,34,34,34]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,12,6,0,10,0,0,0,0,0,0,0,0,6],[6,2,6,6,6,6,0,1,6,6,6,6,0,6],[6,2,2,2,2,6,0,0,6,5,5,6,0,6],[6,2,2,2,2,6,6,6,6,5,5,6,0,6],[6,2,2,2,2,5,5,5,5,5,5,6,0,6],[6,2,2,2,2,6,6,6,6,6,6,6,0,6],[6,2,0,0,0,0,0,0,0,0,0,0,0,6],[6,2,0,2,2,6,0,6,6,6,6,6,15,6],[6,2,0,2,2,6,1,6,7,7,0,6,15,6],[6,2,7,2,2,6,0,6,7,7,0,6,0,6],[6,2,0,2,2,6,0,6,6,6,0,6,0,6],[6,2,0,0,0,0,7,0,0,0,0,0,0,6],[6,2,2,2,2,6,6,6,6,6,6,6,0,6],[6,2,2,0,2,0,5,5,5,5,5,6,0,6],[6,1,2,1,2,0,0,5,5,5,5,6,0,6],[6,2,1,2,2,0,0,0,5,5,5,6,7,6],[6,2,1,2,2,0,0,0,0,5,5,6,7,6],[6,2,2,2,2,0,0,0,0,0,5,6,7,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":4},"diamonds":24,"ghostData":[50,32,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,0,0,0,0,5,2,2,2,2,6,0,0,6],[6,7,0,0,0,0,2,2,2,10,6,7,0,6],[6,0,0,0,0,0,2,2,2,2,6,0,7,6],[6,6,6,6,6,6,2,2,2,2,6,0,0,6],[6,1,5,1,1,1,2,2,0,0,0,0,0,6],[6,1,1,1,5,1,2,2,0,0,0,7,0,6],[6,1,1,5,1,1,2,2,0,0,0,0,7,6],[6,1,1,1,5,1,2,2,0,0,0,0,0,6],[6,1,5,1,1,5,2,2,0,0,0,0,0,6],[6,5,1,1,1,1,2,2,0,0,0,7,0,6],[6,1,1,5,1,5,2,2,0,0,0,0,7,6],[6,1,5,5,1,5,2,2,0,0,0,0,0,6],[6,1,1,1,1,1,2,2,0,0,0,0,0,6],[6,1,1,5,1,1,2,2,0,0,0,7,0,6],[6,6,6,6,6,6,2,2,2,2,6,0,7,6],[6,0,0,0,0,5,2,2,2,2,6,0,0,6],[6,0,0,0,0,0,2,2,2,2,6,0,0,6],[6,7,0,0,0,0,2,2,2,2,6,7,0,6],[6,12,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":2,"y":9},"diamonds":11,"ghostData":[34,51,51,34,35,34,51,50]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,7,5,5,6,7,0,0,0,6,0,0,7,6],[6,0,0,5,6,0,2,2,0,6,0,2,2,6],[6,0,0,0,0,0,5,2,0,0,0,2,10,6],[6,15,0,0,0,0,5,2,0,0,0,2,0,6],[6,15,0,0,0,0,5,2,0,0,0,0,0,6],[6,6,6,0,0,0,2,2,0,0,0,6,6,6],[6,7,0,0,0,0,0,0,0,0,0,0,0,6],[6,0,2,5,2,0,12,12,0,2,1,2,0,6],[6,0,1,5,2,0,12,12,0,5,1,2,0,6],[6,0,2,5,2,0,12,12,0,5,1,2,0,6],[6,0,2,5,2,0,12,12,0,2,5,2,0,6],[6,0,0,0,0,0,0,0,0,0,0,0,7,6],[6,6,6,0,0,0,2,2,0,0,0,6,6,6],[6,0,0,0,0,0,5,2,0,0,0,0,0,6],[6,0,0,0,0,0,2,2,0,0,0,0,0,6],[6,0,0,0,0,0,5,2,0,0,0,0,0,6],[6,0,0,0,6,0,2,2,0,6,0,0,0,6],[6,7,0,0,6,0,0,0,7,6,0,0,7,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":3,"y":12},"diamonds":15,"ghostData":[32,17,17,17,33,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,5,7,5,5,5,5,5,5,2,2,7,2,6],[6,7,5,5,5,5,5,5,5,2,2,0,2,6],[6,5,7,5,5,5,5,5,5,2,2,0,2,6],[6,6,6,6,6,6,6,6,6,6,6,0,1,6],[6,2,0,0,0,0,0,0,0,0,6,0,2,6],[6,2,0,6,6,6,6,6,6,0,6,0,1,6],[6,6,0,6,0,0,0,0,6,0,6,0,2,6],[6,6,10,6,0,6,6,0,6,0,6,0,2,6],[6,6,0,6,0,6,7,0,6,0,6,0,1,6],[6,6,0,6,0,6,6,6,6,0,6,0,1,6],[6,6,0,6,0,0,0,0,0,0,6,0,2,6],[6,6,0,6,6,6,6,6,6,6,6,0,1,6],[6,6,0,0,0,0,0,0,0,0,0,0,2,6],[6,6,6,6,6,6,6,6,6,6,6,0,2,6],[6,0,0,0,6,0,0,0,6,7,6,0,1,6],[6,5,6,0,0,0,6,0,0,0,2,0,2,6],[6,6,6,6,6,6,6,6,6,6,6,0,1,6],[6,12,0,0,0,0,0,0,0,0,0,0,2,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":8,"y":2},"diamonds":21,"ghostData":[35,35,48,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,2,9,9,14,0,0,0,0,0,0,10,6],[6,1,2,2,2,6,6,6,6,6,2,6,2,6],[6,1,2,2,2,2,1,1,1,6,0,6,2,6],[6,1,2,2,2,2,1,1,1,6,0,6,0,6],[6,1,2,2,2,2,2,2,2,0,7,6,0,6],[6,1,2,2,6,6,6,6,6,6,6,6,0,6],[6,1,2,2,6,5,5,6,7,12,6,0,11,6],[6,1,2,2,6,5,5,6,0,7,6,6,0,6],[6,1,2,2,6,5,5,6,7,0,2,6,0,6],[6,1,2,2,6,5,5,6,0,7,6,6,0,6],[6,1,2,2,6,5,5,6,6,6,6,2,0,6],[6,2,2,2,6,6,6,6,6,0,6,6,0,6],[6,0,0,7,0,0,0,0,0,0,2,6,5,6],[6,6,6,6,6,6,6,6,6,6,0,6,7,6],[6,9,9,14,2,6,9,5,2,2,0,6,0,6],[6,9,9,14,2,6,9,5,2,2,0,6,0,6],[6,9,9,14,2,6,9,5,2,1,0,6,0,6],[6,9,9,14,2,6,9,5,2,1,2,2,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":12},"diamonds":34,"ghostData":[17,16,16,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,5,5,1,1,1,0,0,0,14,0,0,0,6],[6,2,5,1,1,1,0,0,0,14,0,0,0,6],[6,3,5,0,0,0,0,0,2,6,6,0,0,6],[6,2,2,2,2,2,1,2,2,2,6,0,0,6],[6,2,2,2,2,2,1,2,2,2,6,0,0,6],[6,5,6,6,0,0,1,2,2,2,6,0,0,6],[6,5,6,6,0,0,1,2,2,2,2,0,0,6],[6,2,6,6,0,0,1,2,2,2,6,6,6,6],[6,5,6,6,0,0,1,2,2,2,2,6,6,6],[6,5,1,5,2,2,1,2,2,2,5,5,6,6],[6,5,1,5,2,2,1,2,2,5,1,5,6,6],[6,5,1,2,2,2,1,2,2,1,2,12,6,6],[6,5,5,2,1,1,1,2,2,5,5,6,6,6],[6,10,2,2,6,6,6,2,2,2,2,2,6,6],[6,2,2,2,2,6,6,2,2,2,2,2,6,6],[6,6,6,6,2,2,2,2,2,5,5,2,6,6],[6,6,5,5,1,5,6,1,5,5,5,2,6,6],[6,6,1,5,1,1,6,1,1,5,5,6,6,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":14,"y":1},"diamonds":42,"ghostData":[0,0,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,6,2,2,2,2,2,2,2,2,2,2,2,6],[6,1,2,2,2,2,6,6,6,6,6,6,10,6],[6,1,1,1,2,2,2,0,14,0,0,6,6,6],[6,1,1,2,2,6,2,0,14,0,0,6,6,6],[6,1,1,2,2,6,2,6,6,6,2,6,6,6],[6,6,6,6,2,6,2,15,0,0,0,0,0,6],[6,6,6,6,2,2,2,0,2,6,1,5,6,6],[6,5,2,2,6,2,6,0,6,6,5,5,6,6],[6,5,5,2,0,0,0,7,0,0,0,0,12,6],[6,5,5,2,0,2,5,2,2,2,6,6,6,6],[6,6,6,6,0,2,2,1,1,5,14,0,0,6],[6,0,0,0,11,2,5,1,1,5,14,0,0,6],[6,0,2,2,1,1,5,1,1,5,14,0,0,6],[6,0,6,2,6,6,2,2,2,2,2,0,0,6],[6,0,6,5,1,5,5,2,2,2,2,2,6,6],[6,0,6,2,2,2,6,2,2,2,6,6,5,6],[6,0,0,0,0,0,0,0,0,0,2,5,5,6],[6,2,5,2,5,2,5,2,2,6,5,1,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":2,"y":12},"diamonds":40,"ghostData":[0,0,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,2,5,5,5,6,6,6,2,0,0,11,6],[6,2,2,5,2,5,5,6,5,2,0,12,0,6],[6,2,2,5,2,5,5,6,6,2,0,0,0,6],[6,2,2,6,6,6,6,6,0,0,6,6,6,6],[6,0,0,0,0,3,2,2,0,0,0,0,3,6],[6,1,2,2,6,0,6,2,2,2,6,6,6,6],[6,1,2,2,6,0,6,2,5,2,5,2,5,6],[6,1,2,2,0,0,6,6,6,6,0,6,6,6],[6,1,6,6,6,0,6,0,0,6,0,5,2,6],[6,1,2,2,6,0,14,0,0,6,0,5,6,6],[6,1,2,2,6,0,14,0,0,6,0,6,6,6],[6,1,2,2,6,0,14,0,0,6,0,0,0,6],[6,1,2,2,6,0,14,0,0,6,0,0,0,6],[6,1,2,2,5,0,6,6,6,6,2,2,2,6],[6,1,6,2,2,2,0,0,0,0,0,0,3,6],[6,1,2,10,6,6,6,2,2,2,2,6,5,6],[6,1,2,2,6,6,6,6,6,6,2,6,5,6],[6,1,2,5,5,5,2,2,2,2,2,6,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":16,"y":3},"diamonds":30,"ghostData":[18,17,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,5,5,6,6,5,6,6,5,5,6,6,6],[6,2,2,0,0,0,0,0,0,2,2,2,6,6],[6,2,0,0,6,6,2,6,0,0,0,0,6,6],[6,6,0,6,2,1,2,12,6,6,6,0,11,6],[6,6,0,2,5,1,5,14,0,0,5,6,0,6],[6,2,0,0,6,1,5,14,0,0,5,6,0,6],[6,5,2,11,6,1,5,14,0,0,5,6,0,6],[6,6,0,0,6,1,5,14,0,0,5,6,0,6],[6,6,0,6,1,1,10,14,0,0,1,2,0,6],[6,2,0,6,1,1,5,14,0,0,5,6,0,6],[6,6,0,2,1,1,5,6,2,2,1,2,0,6],[6,2,0,2,6,6,2,6,6,2,5,6,0,6],[6,6,0,6,5,6,6,2,2,2,1,2,0,6],[6,2,0,2,5,6,0,0,0,0,3,6,0,6],[6,6,0,6,6,6,2,2,2,1,6,6,0,6],[6,2,0,0,6,6,6,2,2,0,0,0,0,6],[6,5,6,0,6,0,0,0,2,0,0,6,6,6],[6,5,2,0,0,0,6,0,11,0,6,0,6,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":9,"y":6},"diamonds":34,"ghostData":[49,18,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,0,0,0,0,6,0,0,0,0,0,0,11,6],[6,0,12,6,0,6,0,6,6,6,5,6,0,6],[6,0,0,6,0,6,0,0,0,6,0,6,0,6],[6,6,0,6,0,6,6,6,0,6,0,6,0,6],[6,6,0,0,0,0,0,0,0,6,0,6,0,6],[6,5,2,5,6,5,6,5,6,6,0,6,0,6],[6,0,0,0,0,0,0,0,0,0,0,6,0,6],[6,0,6,5,6,0,5,6,2,6,5,6,0,6],[6,0,6,0,6,6,6,0,0,0,0,0,0,6],[6,10,6,0,0,0,6,6,6,2,6,6,2,6],[6,0,6,6,6,0,6,0,0,0,0,6,0,6],[6,0,6,0,6,0,0,0,6,0,6,6,0,6],[6,0,0,0,6,0,6,6,6,0,0,0,11,6],[6,0,6,0,0,0,0,15,6,6,0,0,6,6],[6,0,6,0,6,0,6,6,6,0,0,6,6,6],[6,0,0,0,0,0,0,0,0,0,0,6,5,6],[6,6,6,6,6,6,6,2,6,6,2,6,5,6],[6,5,5,5,5,5,2,5,6,0,0,0,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":10,"y":1},"diamonds":17,"ghostData":[17,16,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,5,1,6,3,2,5,6,1,2,5,5,6],[6,5,2,5,2,0,6,5,6,1,1,5,5,6],[6,0,0,3,0,0,1,2,6,1,2,5,5,6],[6,2,6,6,6,0,5,5,6,6,2,6,6,6],[6,2,6,5,6,0,1,1,6,5,2,2,5,6],[6,2,6,5,6,0,6,2,6,0,0,0,3,6],[6,2,6,2,6,6,6,2,2,2,6,6,6,6],[6,5,5,5,5,5,5,5,1,1,6,5,5,6],[6,6,6,6,0,6,0,2,2,5,6,2,10,6],[6,5,6,6,0,6,6,6,6,5,6,2,5,6],[6,0,0,0,0,0,0,3,2,5,6,6,2,6],[6,2,6,6,3,0,0,0,0,0,0,6,2,6],[6,2,1,14,0,2,2,6,6,2,0,6,2,6],[6,1,1,14,0,6,0,0,0,0,0,0,3,6],[6,1,1,14,5,6,5,6,0,6,6,6,12,6],[6,1,2,14,2,6,5,6,2,6,2,5,5,6],[6,1,2,5,1,2,1,2,2,5,1,5,5,6],[6,1,2,5,5,2,2,2,2,5,2,5,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":9,"y":12},"diamonds":45,"ghostData":[16,17,16,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,6,2,5,1,2,6,3,6,0,6,0,12,6],[6,2,2,2,5,5,2,0,6,0,6,0,6,6],[6,2,5,2,6,6,2,0,2,0,2,0,5,6],[6,0,0,0,0,3,6,0,6,3,2,0,5,6],[6,5,6,6,6,6,6,0,6,2,2,0,5,6],[6,2,5,5,5,5,2,0,6,6,2,0,6,6],[6,6,5,2,2,6,6,5,6,6,2,0,2,6],[6,2,3,0,0,0,0,0,2,2,6,3,2,6],[6,6,6,6,6,6,6,6,6,5,6,6,2,6],[6,6,6,5,5,2,5,5,6,0,0,0,3,6],[6,5,6,5,2,6,6,2,6,2,6,5,2,6],[6,5,6,6,3,0,0,0,6,2,0,6,6,6],[6,2,2,0,2,5,6,2,6,2,0,6,3,6],[6,5,6,0,6,5,6,5,2,2,0,6,0,6],[6,5,6,0,6,6,5,1,1,6,0,6,0,6],[6,5,6,0,6,5,1,5,5,2,3,2,0,6],[6,5,6,0,6,5,6,2,6,6,6,2,2,6],[6,5,2,3,5,5,6,3,0,0,0,2,10,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":18,"y":12},"diamonds":38,"ghostData":[3,1,32,51,49,32,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,5,6,0,6,2,2,5,2,5,2,6,10,6],[6,5,2,1,6,5,6,0,0,0,3,6,3,6],[6,5,6,5,6,2,6,6,6,6,2,2,0,6],[6,5,6,2,6,0,0,0,0,0,3,6,0,6],[6,5,6,2,6,2,6,1,2,2,6,2,0,6],[6,5,6,5,6,0,6,0,0,0,5,6,0,6],[6,5,6,5,6,0,6,5,6,5,2,6,0,6],[6,1,6,0,2,0,6,2,6,2,6,6,0,6],[6,0,0,0,6,0,6,5,6,2,6,5,6,6],[6,2,6,6,6,0,2,3,0,0,0,0,0,6],[6,0,0,0,0,0,6,5,6,2,0,2,2,6],[6,2,6,6,2,6,6,0,2,6,2,6,6,6],[6,3,0,0,0,0,6,6,2,0,0,0,11,6],[6,0,5,6,6,6,6,0,2,0,5,2,0,6],[6,0,5,6,2,2,0,0,2,0,5,2,0,6],[6,0,2,6,5,5,6,0,6,0,5,2,0,6],[6,0,1,2,6,5,6,0,2,11,0,0,0,6],[6,0,0,2,2,2,6,3,5,2,0,0,12,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":12},"diamonds":27,"ghostData":[0,51,17,34,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,0,0,0,0,0,0,0,0,0,3,2,6],[6,5,6,6,6,6,0,6,6,2,6,6,2,6],[6,2,6,3,0,0,0,6,5,2,5,2,2,6],[6,5,6,0,6,6,6,6,0,6,0,6,2,6],[6,2,2,0,2,5,0,0,0,6,0,6,2,6],[6,5,6,0,6,6,6,0,0,6,0,0,2,6],[6,5,6,0,5,2,6,0,0,6,6,6,2,6],[6,5,6,6,6,5,6,0,0,6,0,0,5,6],[6,3,0,0,0,0,0,0,6,6,6,0,6,6],[6,0,6,0,6,6,6,0,0,6,3,0,6,6],[6,0,6,0,6,5,0,0,0,6,0,0,0,6],[6,0,0,0,6,5,6,6,0,6,0,0,6,6],[6,0,6,10,6,2,6,0,0,0,0,0,3,6],[6,0,2,0,2,5,6,6,2,6,6,0,6,6],[6,0,6,0,6,2,0,6,0,0,0,0,0,6],[6,0,6,6,6,6,0,6,0,6,6,6,0,6],[6,0,0,0,0,0,3,6,0,0,0,0,0,6],[6,6,6,6,0,6,0,0,0,6,6,6,12,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":13,"y":3},"diamonds":14,"ghostData":[4,36,34,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,10,2,2,6,1,5,6,2,0,2,0,5,6],[6,0,2,2,6,1,2,6,2,0,2,1,2,6],[6,0,2,2,6,0,2,6,2,0,2,0,0,6],[6,0,2,2,6,2,2,6,2,7,2,2,2,6],[6,0,2,2,6,2,2,6,2,0,2,2,2,6],[6,6,2,1,6,6,5,6,6,6,6,2,6,6],[6,1,5,1,6,0,1,5,5,6,0,0,12,6],[6,0,1,1,6,0,0,5,5,6,0,5,5,6],[6,0,0,1,6,0,0,0,5,6,0,5,2,6],[6,0,0,0,0,0,0,0,0,0,0,0,0,6],[6,0,0,0,6,0,0,0,0,6,0,0,1,6],[6,0,0,0,6,2,2,2,2,6,0,5,1,6],[6,6,2,0,6,6,6,2,2,6,6,2,6,6],[6,2,2,0,6,1,5,2,2,6,1,2,2,6],[6,2,2,0,6,5,1,2,2,6,0,2,2,6],[6,5,2,2,6,5,5,2,2,6,2,2,2,6],[6,5,2,2,6,1,5,2,2,6,1,1,2,6],[6,5,1,5,6,5,1,2,2,6,5,5,2,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":1},"diamonds":24,"ghostData":[0,0,0,0,102,102,102,102]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,0,0,3,0,0,5,6,5,5,5,5,5,6],[6,0,6,6,1,6,5,6,6,6,6,6,0,6],[6,0,2,0,0,0,5,6,6,6,6,6,0,6],[6,1,6,6,0,0,0,5,6,6,6,6,3,6],[6,0,5,6,0,0,0,0,5,6,6,6,0,6],[6,0,6,6,0,0,0,0,0,5,6,6,0,6],[6,11,6,2,5,2,5,2,5,2,5,6,6,6],[6,0,6,5,6,6,6,6,6,6,6,6,0,6],[6,0,0,0,0,5,10,5,6,0,0,3,0,6],[6,1,6,6,6,6,6,6,6,6,2,6,0,6],[6,0,6,12,6,2,0,5,2,2,5,6,0,6],[6,0,6,6,1,2,0,1,2,5,5,6,0,6],[6,0,6,5,1,2,3,5,2,1,6,6,0,6],[6,0,6,5,1,2,0,1,2,5,5,6,0,6],[6,0,6,5,6,2,0,5,2,2,5,6,0,6],[6,0,6,6,6,6,6,6,6,6,6,6,0,6],[6,0,0,0,0,2,0,0,3,0,0,14,0,6],[6,0,0,0,0,0,0,0,0,0,0,2,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":9,"y":6},"diamonds":34,"ghostData":[32,48,18,0,102,102,102,102]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,5,5,5,2,0,6,0,2,2,5,5,5,6],[6,2,2,2,0,0,6,1,2,2,0,5,5,6],[6,1,2,0,0,0,4,0,1,2,0,0,5,6],[6,1,2,0,0,3,4,1,2,14,0,0,0,6],[6,0,0,1,2,0,6,0,0,14,0,0,5,6],[6,0,0,0,2,0,6,1,2,2,0,5,5,6],[6,0,0,0,0,2,6,0,0,2,5,5,5,6],[6,6,6,6,6,0,6,6,6,6,6,6,6,6],[6,0,0,1,5,5,5,5,5,5,5,5,10,6],[6,0,2,6,6,6,6,6,6,6,6,6,0,6],[6,2,1,2,0,0,0,0,3,0,0,0,0,6],[6,1,2,0,2,0,0,0,5,6,6,6,0,6],[6,2,0,0,6,0,0,1,1,6,12,6,0,6],[6,0,0,0,6,5,2,2,2,6,6,6,6,6],[6,0,0,0,6,5,1,1,6,0,0,0,0,6],[6,0,0,0,6,5,5,5,6,6,6,6,0,6],[6,0,0,0,6,6,6,6,6,6,6,6,0,6],[6,0,6,0,0,0,0,0,11,0,0,0,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":9,"y":12},"diamonds":34,"ghostData":[32,0,0,0,102,102,102,102]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,0,0,0,0,0,15,0,0,0,6,5,1,6],[6,0,6,6,6,6,5,6,2,0,1,1,5,6],[6,0,6,5,5,6,5,6,2,0,2,5,2,6],[6,0,6,5,6,6,5,6,2,0,2,1,5,6],[6,0,6,5,5,5,5,6,2,0,2,6,5,6],[6,0,6,6,6,6,6,6,6,2,2,1,5,6],[6,0,0,0,0,0,10,5,6,5,6,6,1,6],[6,2,6,6,6,6,6,6,5,6,5,2,5,6],[6,0,6,5,5,5,5,6,0,0,2,2,1,6],[6,0,6,5,6,6,5,6,0,0,6,2,5,6],[6,0,6,5,5,6,5,6,0,0,9,14,2,6],[6,0,6,6,6,6,5,2,3,3,6,5,2,6],[6,0,2,1,2,1,2,6,0,0,9,14,2,6],[6,5,2,0,0,0,0,6,0,0,6,5,2,6],[6,6,2,6,6,6,5,6,5,2,9,14,2,6],[6,0,6,5,5,5,6,6,6,5,6,5,2,6],[6,12,6,6,6,6,6,0,0,14,0,6,5,6],[6,1,1,2,0,0,0,0,0,0,0,0,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":7,"y":6},"diamonds":41,"ghostData":[2,48,0,0,102,102,102,102]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,1,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,11,15,11,7,2,2,2,2,6],[6,12,2,2,2,11,5,5,11,2,2,2,10,6],[6,2,2,2,2,3,5,5,11,2,2,2,2,6],[6,2,2,2,2,11,15,11,7,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,1,2,2,2,2,2,2,2,2,2,2,2,6],[6,2,2,2,2,2,2,2,2,2,2,2,2,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":9,"y":12},"diamonds":2,"ghostData":[51,51,51,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,0,0,4,0,0,0,4,0,0,0,13,10,6],[6,0,0,0,0,4,0,4,0,4,4,4,0,6],[6,0,4,4,4,4,0,4,0,0,0,4,0,6],[6,0,0,0,0,0,0,4,4,4,0,4,0,6],[6,4,0,4,0,4,0,4,0,0,0,4,0,6],[6,0,0,4,0,4,0,4,4,4,4,0,0,6],[6,0,0,4,0,4,0,0,0,4,0,0,0,6],[6,5,4,4,4,4,0,4,0,0,0,4,0,6],[6,4,0,0,0,0,0,0,0,4,0,4,4,6],[6,4,0,4,0,4,0,4,0,4,0,0,0,6],[6,4,4,4,0,0,4,4,4,4,4,4,0,6],[6,0,0,0,0,4,0,0,0,0,0,4,0,6],[6,0,4,4,0,0,4,0,4,4,0,0,0,6],[6,0,4,0,0,0,4,0,0,4,0,4,0,6],[6,0,0,4,4,0,4,0,0,4,0,4,0,6],[6,4,0,4,4,0,4,0,4,4,0,4,4,6],[6,0,0,4,0,0,4,0,0,0,0,0,0,6],[6,0,0,5,4,0,4,0,5,4,0,4,0,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":1,"y":12},"diamonds":3,"ghostData":[0,0,0,0,102,102,102,102]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,2,0,2,5,2,1,2,0,3,0,12,6],[6,1,2,11,2,5,1,2,2,2,2,2,1,6],[6,1,2,0,2,5,2,1,2,2,5,5,2,6],[6,5,2,0,2,5,1,2,2,2,10,0,2,6],[6,1,2,0,2,5,2,1,2,2,0,0,2,6],[6,2,2,0,1,5,1,2,2,2,0,0,2,6],[6,6,6,6,6,5,2,1,2,2,0,0,2,6],[6,2,3,5,0,5,1,2,2,2,0,0,2,6],[6,2,0,5,3,5,2,1,2,2,0,0,2,6],[6,2,0,5,0,5,0,2,2,2,0,0,2,6],[6,2,0,5,0,5,0,1,2,2,0,0,2,6],[6,2,0,5,0,5,1,2,2,2,0,0,2,6],[6,2,0,5,0,5,2,1,2,2,0,0,2,6],[6,2,0,5,0,5,1,2,2,2,0,0,2,6],[6,2,0,5,0,5,2,1,2,2,0,0,2,6],[6,2,2,5,0,5,1,2,2,2,0,0,2,6],[6,2,0,5,0,5,2,1,2,2,0,0,2,6],[6,2,0,5,0,5,1,2,2,2,0,0,2,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":4,"y":10},"diamonds":28,"ghostData":[0,0,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,2,1,2,2,0,2,2,6,0,5,5,6],[6,2,1,2,1,2,3,2,2,6,0,0,5,6],[6,2,2,1,2,2,0,2,2,6,0,0,0,6],[6,2,1,2,1,2,0,2,2,14,0,0,0,6],[6,2,2,1,2,2,0,2,2,14,0,0,0,6],[6,2,2,2,2,2,2,2,2,14,0,0,0,6],[6,6,6,6,0,6,6,2,2,14,0,0,0,6],[6,1,1,1,1,1,6,2,2,6,6,6,6,6],[6,1,1,1,1,1,6,2,2,2,0,0,0,6],[6,1,1,1,1,6,1,2,1,2,0,0,0,6],[6,1,1,1,1,1,6,2,2,14,0,0,0,6],[6,1,1,1,1,1,6,2,1,6,3,0,3,6],[6,6,6,6,0,6,6,2,2,14,0,0,0,6],[6,0,0,0,0,3,2,2,1,6,0,0,5,6],[6,2,2,2,2,3,2,2,2,2,0,0,0,6],[6,2,1,2,2,0,1,2,1,14,0,3,0,6],[6,2,2,1,2,0,2,2,2,6,0,0,0,6],[6,10,2,2,2,0,2,2,2,2,0,0,12,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":18,"y":1},"diamonds":20,"ghostData":[18,34,34,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,1,1,1,1,6,6,2,2,6,0,0,0,6],[6,1,1,1,1,1,6,2,2,6,0,0,0,6],[6,1,1,1,1,1,2,2,2,14,0,0,0,6],[6,1,1,1,1,1,6,2,2,14,0,0,0,6],[6,1,1,1,1,6,6,2,2,14,0,0,0,6],[6,6,6,6,6,6,0,6,6,6,0,0,0,6],[6,2,2,1,2,2,3,2,6,0,11,11,0,6],[6,1,2,1,2,2,3,2,6,0,0,11,0,6],[6,2,1,2,2,2,0,2,6,6,6,6,6,6],[6,1,2,1,2,2,0,2,14,11,0,3,0,6],[6,2,1,2,2,2,0,2,6,0,6,6,0,6],[6,1,2,1,2,2,0,2,14,0,11,0,0,6],[6,1,1,1,2,2,2,2,6,6,6,6,6,6],[6,2,2,2,2,2,2,2,2,5,5,1,5,6],[6,0,0,0,0,10,2,2,2,5,1,5,1,6],[6,0,0,0,0,0,2,2,2,5,5,5,5,6],[6,9,9,9,9,0,2,2,2,5,1,5,5,6],[6,0,0,0,0,9,2,2,2,5,1,5,12,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":15,"y":5},"diamonds":40,"ghostData":[34,0,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,2,2,2,2,6,2,0,2,1,14,2,6],[6,1,1,1,2,2,2,2,3,6,1,14,2,6],[6,1,1,1,1,2,2,2,0,6,1,14,2,6],[6,12,6,6,2,2,2,2,0,6,1,14,2,6],[6,2,2,2,6,6,6,6,6,6,1,14,2,6],[6,2,1,1,6,2,2,2,2,6,2,14,2,6],[6,2,2,2,6,2,6,6,2,2,2,2,2,6],[6,2,1,1,6,2,6,5,2,6,6,6,6,6],[6,2,2,2,6,2,5,6,2,14,0,0,0,6],[6,10,2,2,2,2,6,6,6,14,6,6,6,6],[6,2,2,1,2,0,2,0,6,14,0,0,0,6],[6,2,1,2,2,0,2,0,6,14,0,6,11,6],[6,2,2,2,2,3,2,3,6,14,2,2,0,6],[6,2,1,1,2,0,2,0,6,2,2,6,11,6],[6,2,1,1,2,0,2,0,6,2,2,2,0,6],[6,2,1,1,2,0,2,0,2,0,0,0,0,6],[6,6,6,6,6,6,6,6,1,2,2,6,2,6],[6,5,5,5,5,5,5,5,6,2,2,2,5,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":10,"y":1},"diamonds":27,"ghostData":[34,32,0,0,0,0,0,0]}
+,
+{"map":[[6,6,6,6,6,6,6,6,6,6,6,6,6,6],[6,2,1,5,5,5,5,5,5,5,5,14,12,6],[6,2,1,5,2,2,5,2,2,1,5,14,0,6],[6,2,1,5,2,1,5,2,0,1,5,14,0,6],[6,2,1,5,2,2,2,2,11,2,5,14,0,6],[6,2,2,0,11,0,0,11,0,0,0,14,0,6],[6,1,2,2,2,2,2,2,2,2,2,14,0,6],[6,2,1,5,5,5,5,5,5,5,5,14,0,6],[6,2,1,5,5,2,2,2,2,2,0,14,0,6],[6,2,1,2,1,5,5,2,0,11,0,14,0,6],[6,2,2,2,2,2,2,5,5,2,0,14,0,6],[6,2,1,5,5,5,5,5,5,5,5,14,0,6],[6,10,2,2,2,2,2,2,2,2,2,14,0,6],[6,1,2,2,2,2,2,2,2,2,2,14,0,6],[6,2,1,5,5,5,5,5,5,5,5,14,0,6],[6,2,1,5,2,1,1,1,1,2,5,14,0,6],[6,2,1,5,5,1,1,1,1,5,5,14,0,6],[6,2,2,11,5,5,5,5,5,5,2,14,0,6],[6,1,2,0,2,1,2,1,2,0,11,14,12,6],[6,6,6,6,6,6,6,6,6,6,6,6,6,6]],"player":{"x":12,"y":1},"diamonds":75,"ghostData":[0,0,0,0,0,0,0,0]}
 ];
+
+
+
 
 
 

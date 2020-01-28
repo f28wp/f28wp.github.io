@@ -1,0 +1,180 @@
+
+<html>
+	<head>
+		<style>
+          	body{
+				margin:0;
+				padding:0;
+			}
+			
+
+			#gameArea {
+				position : absolute;
+				top      : 50%;
+				left     : 50%;
+				transform: translate(-50%, -50%);
+				width    : 315;
+				height   : 315;
+				background-color: #dddddd;
+			}
+
+          </style>
+		  
+	</head>
+	<body>
+	
+		Select matching blocks.  
+		<div id="gameArea"></div>
+	
+		<script type="text/javascript">
+		 
+			var tileSize = 35;                	// tile size, in pixels
+			var fieldSize = 9;				// number of tiles per row/column
+			var tileTypes = 3;                 // different kind of tiles allowed
+			var tileArray = [];                // array with all game tiles
+
+			var tileColors = ['red', 'green', 'blue' ];
+			
+			let gameArea = document.getElementById( 'gameArea' );
+			
+			
+			function createRandomTile(i, j)
+			{
+				var randomTile                = Math.floor(Math.random()*tileTypes)
+				let theTile                   = document.createElement('div');
+				theTile.style.position        = "absolute";
+				theTile.style.width           = tileSize;
+				theTile.style.height          = tileSize;
+				theTile.style.left            = (i*tileSize + 1*(i+1)) + "px";
+				theTile.style.top             = (j*tileSize + 1*(j+1)) + "px";
+				theTile.style.padding         = 0;
+				theTile.style.margin          = 0;
+				theTile.style.backgroundColor = tileColors[ randomTile ];
+				theTile.onclick               = function() { pickTile(i, j); }
+				theTile.frame                 = randomTile;
+				gameArea.appendChild( theTile );
+				return theTile;
+			}
+             
+			// when the game is created, generate the tiles
+			function startGame(){
+				for(let i=0;i<fieldSize;i++){
+					tileArray[i]=[];
+					for(let j=0;j<fieldSize;j++){
+						tileArray[i][j]=createRandomTile(i, j);
+					}
+				}
+				
+				setInterval( fallTween, 10 );
+			}
+
+			// a tile has been picked
+			function pickTile(selectedRow, selectedCol){
+				//console.log('i:'+selectedRow +',j:' + selectedCol);
+				// delete using flood fill
+				floodFill(selectedRow,selectedCol,tileArray[selectedRow][selectedCol].frame);
+				// make existing gems fall down
+				fallDown();
+				// replenish game field from the top 
+				fallFromTop();
+			}
+			
+			// flood fill function. There is an entire post about it at http://bit.ly/1BsyiOd
+               function floodFill(row,col,val){
+				if(row>=0 && row<fieldSize && col>=0 && col<fieldSize){
+					if(tileArray[row][col]!=null && tileArray[row][col].frame==val){
+						
+						gameArea.removeChild( tileArray[row][col] );
+						tileArray[row][col]=null;
+						
+						floodFill(row+1,col,val);
+	                         floodFill(row-1,col,val);
+	                         floodFill(row,col+1,val);
+	                         floodFill(row,col-1,val);	
+					}
+				}	
+			}
+			
+            // function to make remaining tiles fall down once you removed tiles
+			function fallDown(){
+				for(let i=0;i<fieldSize;i++){
+					for(let j=fieldSize-1;j>=0;j--){
+						if(tileArray[i][j]!=null){
+		                         let delta = holesBelow(i,j);
+		                         
+								 if(delta>0){
+		                            tileArray[i][j+delta]=tileArray[i][j];
+									tileArray[i][j+delta].onclick = function() { pickTile(i, j+delta); }
+									
+	                              	tileArray[i][j]=null;
+									
+		                         }
+								 
+						}	
+					}
+				}
+			}
+			
+			// simple animation function
+			function fallTween() {
+				for(let i=0;i<fieldSize;i++){
+					for(let j=0;j<fieldSize;j++){
+						if ( tileArray[i][j] == null )
+						{
+							continue
+						}
+						
+						let left            = (i*tileSize + 1*(i+1));
+						let top             = (j*tileSize + 1*(j+1));
+						
+						let ctop = parseFloat( tileArray[i][j].style.top );
+						
+						let delta = top - ctop;
+						if ( Math.abs( delta ) > 0.01  )
+						{
+							tileArray[i][j].style.top = (ctop + delta*0.01) + 'px';
+							
+						}
+					}
+				}
+			}
+
+			// function to add new tiles falling from the top
+            function fallFromTop(){
+				for(let i=0;i<fieldSize;i++){
+					let holes = holesBelow(i,0);
+					//console.log('i:'+i+',holes:'+holes);
+					for(let j=0;j<holes;j++){
+						//var randomTile = Math.floor(Math.random()*tileTypes);
+						
+						let tileXPos = i*tileSize + (i+1);//+tileSize/2;
+						let tileYPos = -(holes-j)*tileSize;//-tileSize/2;
+
+						tileArray[i][j]            = createRandomTile(i, j);		
+						
+						tileArray[i][j].style.left = tileXPos + "px";
+						tileArray[i][j].style.top  = tileYPos + "px";
+				
+					}
+				}
+			}
+
+            // given a row and a column position, returns how may holes (empty places) we have under such position
+			function holesBelow(col,start){
+				var holes = 0;
+				for(var j=start;j<fieldSize;j++){
+					if(tileArray[col][j]==null){
+						holes++;
+					}		
+				}
+				return holes;				
+			}
+			    
+
+			startGame();
+		</script>
+
+    </body>
+</html>
+
+

@@ -89,6 +89,7 @@ function gamearea() {
     gameContainer.height       = 180; 
 	gameContainer.style.width  = 320;
     gameContainer.style.height = 180 + 100 + 40;    
+	gameContainer.focus();
 	
 	document.getElementById("myfilter").style.width  = gameContainer.style.width;
 	document.getElementById("myfilter").style.height = gameContainer.style.height;
@@ -184,8 +185,11 @@ function updateGameArea() {
             min    = 50;
             max    = 100;
             gap    = Math.floor(Math.random()*(max-min+1)+min);
-            myObstacles.push(new component(10, height, "purple", x, 0));
-            myObstacles.push(new component(10, x - height - gap, "purple", x, height + gap));
+			
+			let ww = 10 + Math.random()*30;
+			
+            myObstacles.push(new component(ww, height, "purple", x, 0));
+            myObstacles.push(new component(ww, x - height - gap, "purple", x, height + gap));
         }
         for (i = 0; i < myObstacles.length; i += 1) {
             myObstacles[i].x += -1;

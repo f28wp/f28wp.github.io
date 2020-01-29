@@ -7,15 +7,21 @@
 				padding:0;
 			}
 			
-
 			#gameArea {
-				position : absolute;
-				top      : 50%;
-				left     : 50%;
-				transform: translate(-50%, -50%);
+				position : relative;
 				width    : 315;
 				height   : 315;
 				background-color: #dddddd;
+				margin: 20px;
+			}
+			
+			#gameContainer {
+				position  : absolute;
+				top       : 50%;
+				left      : 50%;
+				transform : translate(-50%, -50%);
+				text-align: center;
+				
 			}
 
           </style>
@@ -23,8 +29,13 @@
 	</head>
 	<body>
 	
-		Select matching blocks.  
-		<div id="gameArea"></div>
+		
+		<div id="gameContainer">
+			Click Squares
+			<div id="gameArea"></div>
+			
+			Make all the blocks the same color
+		</div>
 	
 		<script type="text/javascript">
 		 

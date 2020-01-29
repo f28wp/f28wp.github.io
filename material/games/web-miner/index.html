@@ -17,11 +17,16 @@ Simple tech demo
 -->
 
 <style>
-	#gameArea {
+	#gameContainer {
 		position : absolute;
 		top      : 50%;
 		left     : 50%;
 		transform: translate(-50%, -50%);
+		background-color: transparent;
+		text-align: center
+	}
+	#gameArea {
+		position : relative;
 		width    : 640;
 		height   : 512;
 		background-color: #dddddd;
@@ -978,9 +983,14 @@ function Player(position) {
     this.step       = 0;
     this.alive      = true;
     this.position   = position;
+	let status = document.getElementById('status');
+	status.innerHTML = "Press Cursor Keys to Navigate the Level";
 };
 
 Player.prototype.kill = function () {
+	// dead
+	let status = document.getElementById('status');
+	status.innerHTML = "Game Over. Press Return to Try Again";
     this.alive = false;
 };
 
@@ -1200,10 +1210,11 @@ var levelData = [
 <body bgcolor="#ffffff" onload="javascript:new Game(document.getElementById('gameArea'))">
 
 
-
-<div id="gameArea" tabindex="1">
+<div id="gameContainer">
+	<div id="gameArea" tabindex="1">
+	</div>
+	<div id="status"></div>
 </div>
-
 
 </body>
 

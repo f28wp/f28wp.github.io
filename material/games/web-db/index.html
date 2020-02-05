@@ -337,7 +337,7 @@ var test1 = {
 	task: `
 	Given an SQL table called 'workers' <br><br>
 	Which contains the columns:<br>
-	id, name, designation, hired_on, commision <br><br>
+	id, name, designation, hired_on, commission <br><br>
 	
 	Write the SQL query to select the 'designation' value for employee with 'name' of 'LINCOLN'.
 `,
@@ -431,18 +431,34 @@ var test1 = {
 					vv += JSON.stringify(row);
 				}
 				
+				let passes = 0;
 				//console.log('here4');
+				if ( vv.indexOf( 'HOOVER' ) > -1 )
+				{
+					logg += "<font color='red'>Failed</font> test 1" + "<br>";
+				}
+				else 
+				{
+					logg += "passed test 1" + "<br>";
+					passes += 1;
+					
+				}
 			
 				if ( vv.indexOf( 'TECH' ) > -1 )
 				{
-					logg += "passed test 1" + "<br>";
-					logg += "<font color='red'>Congratulations</font> (passes all tests)" + "<br>";
+					logg += "passed test 2" + "<br>";
+					passes += 1;
 				}
 				else 
 				{
 					
-					logg += "<font color='red'>Failed</font> test 1" + "<br>";
+					logg += "<font color='red'>Failed</font> test 2" + "<br>";
 					
+				}
+				
+				if ( passes === 2 )
+				{
+					logg += "<font color='red'>Congratulations</font> (passes all tests)" + "<br>";
 				}
 			
 			} 

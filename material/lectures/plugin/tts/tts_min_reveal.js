@@ -49,12 +49,12 @@ setTimeout(function(){
 			console.log( '>>> default voice: ' + voice.name );
 		}
 		// *** hack - force voice ***
-		/*
+		
 		if ( voice.name == 'Google UK English Female' )
 		{
 			tts.DvIndex = ix;
 		}
-		*/
+		
 		if ( selectvoice != "" )
 		{
 			if ( voice.name == selectvoice )
@@ -138,7 +138,7 @@ tts.ReadTextQueue = function()
 	if ( txt == '[empty]' )
 	{
 		//console.log('speech pause');
-		timeoutQueue = setTimeout(function(){ tts.ReadTextQueue(); }, 8000); // default pause 5 seconds with no text
+		timeoutQueue = setTimeout(function(){ tts.ReadTextQueue(); }, 9000); // default pause 5 seconds with no text
 		return;
 	}
 	

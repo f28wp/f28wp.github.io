@@ -27,7 +27,7 @@ for (var ix = 0; ix < tts.Voices.length; ix++) {
 
 
 tts.DvIndex = 0; //Used to help identify the default tts voice for Chrome or FF on the users platform.
-tts.DvRate = 0.9; // .85; // used to set speech rate between 0 and 2, 1 = 'normal'- there are other seemingly optional parameters like pitch, language, volume.
+tts.DvRate = 0.85; // .85; // used to set speech rate between 0 and 2, 1 = 'normal'- there are other seemingly optional parameters like pitch, language, volume.
 tts.On = false; //Set to false to prevent tts production.
 tts.Cancel = true; // Set to true if you want reading to stop with a slide change. Otherwise, all readable text is queued for speech output.
 tts.readPage  = false;

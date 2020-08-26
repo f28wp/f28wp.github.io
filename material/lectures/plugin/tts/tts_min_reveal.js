@@ -27,7 +27,7 @@ for (var ix = 0; ix < tts.Voices.length; ix++) {
 
 
 tts.DvIndex = 0; //Used to help identify the default tts voice for Chrome or FF on the users platform.
-tts.DvRate = 1.0; // .85; // used to set speech rate between 0 and 2, 1 = 'normal'- there are other seemingly optional parameters like pitch, language, volume.
+tts.DvRate = 0.9; // .85; // used to set speech rate between 0 and 2, 1 = 'normal'- there are other seemingly optional parameters like pitch, language, volume.
 tts.On = false; //Set to false to prevent tts production.
 tts.Cancel = true; // Set to true if you want reading to stop with a slide change. Otherwise, all readable text is queued for speech output.
 tts.readPage  = false;
@@ -121,6 +121,7 @@ tts.ReadTextQueue = function()
 	
 	if ( txt == '[next]' )
 	{
+		console.log('read:>' + '[next]' );
 		//console.log('***start next slide***');
 		Reveal.next();
 		
@@ -130,7 +131,8 @@ tts.ReadTextQueue = function()
 	
 	if ( txt == '[pause]' )
 	{
-		console.log('small speech pause');
+		//console.log('small speech pause');
+		console.log('read:>' + '[pause]' );
 		timeoutQueue = setTimeout(function(){ tts.ReadTextQueue(); }, 1000); // default pause 5 seconds with no text
 		return;
 	}
@@ -138,7 +140,8 @@ tts.ReadTextQueue = function()
 	if ( txt == '[empty]' )
 	{
 		//console.log('speech pause');
-		timeoutQueue = setTimeout(function(){ tts.ReadTextQueue(); }, 9000); // default pause 5 seconds with no text
+		console.log('read:>' + '[empty]' );
+		timeoutQueue = setTimeout(function(){ tts.ReadTextQueue(); }, 8000); // default pause 5 seconds with no text
 		return;
 	}
 	
@@ -190,10 +193,16 @@ tts.ReadText = function(txt)
 	let parts = txt.split('[pause]');
 	for (let i=0; i<parts.length; i++)
 	{
-		ttsQueue.push( parts[i] );
-		console.log('add queue: ' + parts[i] );
+		let part = parts[i];
+		part = part.trim();
+
+		if ( part.length > 0 )
+		{
+			ttsQueue.push( part );
+			console.log('add queue: ' + part );
+		}
 		
-		if ( parts.length>1 && i<parts.length-1 )
+		if ( parts.length>1 )
 		{
 			ttsQueue.push( '[pause]' );
 			console.log('add queue: pause' );

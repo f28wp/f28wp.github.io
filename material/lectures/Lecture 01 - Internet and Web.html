@@ -51,6 +51,9 @@
 					<p>
 						<small>2019-2020</small>
 					</p>
+<aside class='notes'>
+The Internet and the Web
+</aside>
 				</section>
 
 
@@ -62,7 +65,11 @@
 						* How the Internet and the Web has Evolved
 						* Standards and Protocol
 						* Questions and Discussion
-						
+<aside class='notes'>
+In this lecture, you'll learn about the origins of the internet. 
+How it has evolved. and how it led to today's standards and protocols.
+We will conclude with questions and discussions.
+</aside>
 					</textarea>
 				</section>
 				
@@ -71,6 +78,12 @@
 					<div id="white">
 					<h1 style="color:black">How does the internet work?</h1>
 					</div>
+<aside class='notes'>
+You all use the internet regularly.
+It connects everyone to everyone around the world.
+Yet have you ever wondered.
+How does it work?
+</aside>
 				</section>
 				
 				<section data-markdown style="text-align: left;" data-background="./images/back01.jpg">
@@ -82,7 +95,10 @@
 						* **Exchange data** and information
 
 						
-						
+<aside class='notes'>
+The internet works because of an agreed set of standards.
+If everyone did not agree on the same set of standard. No would be able to connect to one another.
+</aside>
 						
 					</textarea>
 				</section>
@@ -93,6 +109,10 @@
 					<div id="white">
 					<h1 style="color:black">What is the World Wide Web?</h1>
 					</div>
+<aside class='notes'>
+The internet is not the same as the world wide web [pause]
+Why?
+</aside>
 				</section>
 				
 				
@@ -124,7 +144,12 @@
 						security features - authentication, encrypted communications (https)
 						stylesheet languages - CSS, XSL
 						-->
-						
+<aside class='notes'>
+The world wide web is a global scale client server architecture. 
+This architecture is built on top of the uniform resource identifiers and hyper text transfer protocol.
+[pause]
+This has resulted in client and browsers being able to agreed communication standard allows software systems.
+</aside>
 					</textarea>
 				</section>
 				
@@ -137,6 +162,10 @@
 							<p>Type 'hw.ac.uk'</p>
 							
 						</div>
+<aside class='notes'>
+As an example, you can use applications such as geo-trace to see how data is routed around the world through internet protocols.
+[pause][pause]
+</aside>
 					</section>
 
 
@@ -170,13 +199,32 @@
 						* Internet has **no central operations** room or global operations manager
 						* Each Internet host has an IP address e.g. 137.195.13.48
 						* Some Internet hosts have a domain name e.g. www.macs.hw.ac.uk
+<aside class='notes'>
+This might make you wonder what is the nature of the internet?
+[pause]
+What is at the heart of what makes the internet work?
+[pause]
+The internet is about connecting and communication systems reliably.
+[pause]
+The internet is made up of wide are networks.
+which conform to standard protocols.
+[pause]
+Importantly, the internet has no central operations manager. which is what makes it so reliable.
+[pause]
+Each host has its own IP address which identifies it on the network.
+For example, the human readable address macs.hw.ac.uk can be translated to an IP address.
+</aside>
 					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: center;">
 					<textarea data-template>
 						## What is the IP for www.hw.ac.uk?
-
+<aside class='notes'>
+Given any URL.
+(human readable address).
+How can you find the IP?
+</aside>
 					</textarea>
 				</section>
 				
@@ -188,6 +236,11 @@
 							<p>Type 'hw.ac.uk'</p>
 							
 						</div>
+<aside class='notes'>
+DNS servers keep track of the URLs and IPs.
+[pause]
+For example, if you visit this web page you can lookup IP addresses for any URL you want.
+</aside>
 					</section>
 					
 					
@@ -195,6 +248,9 @@
 					<div id="white">
 					<h1 style="color:black">Who regulates the internet?</h1>
 					</div>
+<aside class='notes'>
+If the internet has no central operations manager. who keeps it running smoothly?
+</aside>
 				</section>
 			
 				
@@ -206,7 +262,10 @@
 							- Internet Engineering Task Force (IETF) 
 							- Internet Corporation for Assigned Names and Numbers or ICANN
 							- Internet Society (ISOC)
-						
+<aside class='notes'>
+A set of global organisations provide guidance on regulations.
+[pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -214,6 +273,9 @@
 				<section data-markdown style="text-align: center;">
 					<textarea data-template>
 						## How are the TCP/IP Networks Structured?
+<aside class='notes'>
+Given these TCP/IP network. How is it actually structured?
+</aside>
 					</textarea>
 				</section>
 				
@@ -222,7 +284,17 @@
 					<textarea data-template>
 						## TCP/IP Networks can be viewed as 4 layer structure
 
-						![](./images/layers.png)
+						<img width="150%" src="./images/layers.png">
+<aside class='notes'>
+The following diagram helps you see how the TCP/IP network is broken down into the seperate components and how they are connected.
+[pause]
+At the bottom you have the local area network (LAN) and 
+wide are network (wan).
+[pause]
+At the client the data propagates through the internet layer up through the transport layer and to the application.
+[pause]
+For example, the application would be the browser.
+</aside>
 					</textarea>
 				</section>
 				
@@ -235,7 +307,13 @@
 					* Transport end to end (un)reliable delivery of **TCP** or UDP packets
 					* **Network** IP datagram delivery, addressing, routing
 					* Link delivers frames, handles errors, drives **physical transfers**
-	
+<aside class='notes'>
+The transport link alone connects systems but is not reliable.
+[pause]
+Combining the transport link with additional layers allows for the creation of a reliable communication system.  
+[pause]
+That is, it can track lost data and errors. 
+</aside>
 					</textarea>
 				</section>
 
@@ -254,7 +332,15 @@
 					
 					* TCP carries reliable services - email (SMTP, IMAP), **web (HTTP)**
 					* UDP carries best efforts services - DNS, media streams (RTP)
+<aside class='notes'>
+Each layer is made up of different protocols.
+[pause]
+The protocols have different factors. such as. speed, reliability and overhead.
+[pause]
+Email communication would use TCP.
+while streaming video would use UDP.
 
+</aside>
 					</textarea>
 				</section>
 				
@@ -267,7 +353,16 @@
 					* When would you use TCP or UDP?
 					
 					![](./images/tcpvsip.png)
-
+<aside class='notes'>
+What's the difference between TCP and UDP?
+[pause]
+At the heart of the reason, is TCP has more overheads so provides a more reliable solution.
+This comes at the cost of being slower.
+[pause]
+Some systems don't require a very reliable connection.
+They could suffer from losing some information.
+For example, streaming video, which needs to be fast but not highly reliable.
+</aside>
 					</textarea>
 				</section>
 				
@@ -279,7 +374,13 @@
 
 					* **The day the Internet age began**, Vinton G. Cerf, Nature, vol 461, 1202-1203, 29 October 2009 [Link](https://www.nature.com/articles/4611202a)
 					
-
+<aside class='notes'>
+It's recommended that you read around the subject of the internet.
+[pause]
+An interesting read is the article called: 
+The day the internet age began.
+by Vinton Cerf.
+</aside>
 					</textarea>
 				</section>
 				
@@ -292,6 +393,11 @@
 						&bull; Structure and Terminology  <br>
 						&bull; High and Low Level View  <br>
 					</p>
+<aside class='notes'>
+This short lecture has given you a taste of what makes the internet work.
+What are some of the most popular standards and protocols. 
+A high and low level view of what is going on under the bonnet.
+</aside>
 				</section>
 
 
@@ -306,7 +412,11 @@
 					* Experiment (get into good habits) 
 					* **Coursework** teams 
 					* GitHub (practice)
-
+<aside class='notes'>
+Review the slides.
+Try out the revision questions.
+Read around the topic to help you gain a wide depth of knowledge on the whys and whats of the internet.
+</aside>
 					</textarea>
 				</section>
 
@@ -334,7 +444,8 @@
 					{ src: 'plugin/highlight/highlight.js', async: true },
 					{ src: 'plugin/search/search.js', async: true },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/tts/tts_min_reveal.js', async: false}
 				]
 			});
 
@@ -352,6 +463,11 @@
 		<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="images/webprint.png" width="7.5%"></a>
     </div>
 </div>
+
+<div style="display: block; position: absolute; bottom: 3px; left: 95px; margin-left: 0px; z-index: 20; text-align: left;">
+	<a onclick="tts.ToggleSpeech();"><img src="./images/webtalk.png" width="7.5%"></a>
+</div>
+
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>

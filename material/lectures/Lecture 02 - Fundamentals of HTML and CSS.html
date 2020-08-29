@@ -46,22 +46,34 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h2>Fundementals of HTML and CSS</h2>
+					<h2>Fundamentals of HTML and CSS</h2>
 					<h4>F28WP Web Programming</h4>
 					<p>
 						<small>2019-2020</small>
 					</p>
+<aside class='notes'>
+Fundamentals of HTML and CSS
+</aside>
 				</section>
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Overview
 
-						* Fundemental HTML and CSS concepts?
-						* Review HTML and CSS Syntax
-						* Examples
+						* Fundamental **HTML** and **CSS** concepts?
+						* Review HTML and CSS **Syntax**
+						* Dynamic vs Static Websites
+						* **Examples**
 						* Questions and Discussion
-						
+<aside class='notes'>
+This lecture will provide an introduction to the core HTML and CSS concepts [pause]
+For example, essential HTML tags and formatting syntax.
+We will use a number of examples to show html and css concepts in context.
+[pause]
+We will also discuss websites that are generated dynamically versus static websites.
+[pause]
+We will then close with some examples and a closing discussion on the subject.
+</aside>
 						
 					</textarea>
 				</section>
@@ -86,7 +98,10 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## What is the difference between **Static** and **Dynamic** Web Pages?
-						
+<aside class='notes'>
+Let's ask the question [pause]
+What's the difference between a static and a dynamic web page?
+</aside>
 					</textarea>
 				</section>
 				
@@ -96,6 +111,12 @@
 						**Static** website pages are self-contained individual pages (or pages) sent to the browser from the server one-page-at-a-time
 						
 						![](./images/lec02-01.png)
+						
+<aside class='notes'>
+Static web pages are simple and written in the HTML language and stored in web server. Whenever server receives a request regarding a web page, it sends a response along with the requested web page to the client without performing any additional processing. It just locates that page on its hard disk and add HTTP headers, and reply back an HTTP response.
+
+
+</aside>
 					</textarea>
 				</section>
 				
@@ -105,6 +126,10 @@
 						**Dynamic** web content is built when the page is requested (by the user directly or programmatically while the user is on the page, e.g., Facebook updates)
 						
 						![](./images/lec02-02.png)
+						
+<aside class='notes'>
+Dynamic web pages provide a solution for the static web pages. The dynamic web page content can vary depending on the number of parameters. As it is discussed above that dissimilar to static web age, it not just simply send HTML page in response. The web server calls a program located on the hard disk which can access a database, perform transaction procedure, etcetera. If the application program produces HTML output, which is used to construct an HTTP response by the web server. The web server sends the HTTP response thus created, back to the web browser.
+</aside>
 					</textarea>
 				</section>
 				
@@ -119,20 +144,38 @@
 						## How do we structure content, presentation and behaviour?
 						
 						* What are the **layers/structure** of web design?
-						
+<aside class='notes'>
+When you start to create a web page you need to think about structure.
+So it is easier to develop, maintain and debug.
+[pause]
+Hence, web pages often use a layering structure.
+</aside>
 					</textarea>
 				</section>
 				
 				<section data-background="images/lec02-03.png" data-background-size="contain">
+<aside class='notes'>
+HTML used to represent the content.
+CSS the style or presentation.
+And Javascript the websites behaviour.
+</aside>
 				</section>
 				
 				<section data-markdown style="text-align: center;">
 					<textarea data-template>
-						## Fundementals of a Web Page
+						## Fundamentals of a Web Page
 
 						<img src="./images/js_css_html.png" width="600pt" style="border:0;">
 						
-						
+<aside class='notes'>
+Given these three layers.
+We have the fundamentals of a web page.
+[pause]
+Behaviour.
+Presentation.
+and Content.
+[pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -142,7 +185,11 @@
 						## HTML
 
 						![](./images/html01.png)
-						
+<aside class='notes'>
+Let's start by looking at HTML.
+HTML stands for Hypertext Markup Language.
+And is the standard markup language for documents designed to be displayed in a web browser.
+</aside>
 					</textarea>
 				</section>
 				
@@ -153,7 +200,12 @@
 						## Hyper Text
 						## +
 						## Markup Language
-						
+<aside class='notes'>
+Hyper Text
+is combined with a
+Markup language  
+
+</aside>
 					</textarea>
 				</section>
 				
@@ -166,17 +218,35 @@
 						```
 						<tag>Content</tag>
 						```
+<aside class='notes'>
+The markup language consists of tags.
+These tags use triangle symbols.
+Usually an open tag and a closing tag.
+[pause]
+As you can see in the slide.
+</aside>
 					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: center;">
 					<textarea data-template>
 						## Can you list the essential HTML Tags?
-						
+<aside class='notes'>
+Once you know how to write a tag [pause]
+That is using triangle delimiter symbols. [pause]
+You just need to know the essential predefined HTML tags and what each tag does.
+[pause]
+Do you know all of the HTML tags?
+[pause] 
+</aside>
 					</textarea>
 				</section>
 				
 				<section data-background="images/lec02-04.png" data-background-size="contain">
+<aside class='notes'>
+Here you can se short list of some of the essential HTML tags you would used regularly.
+[pause]
+</aside>
 				</section>
 				
 				<section data-markdown id="bigcode" style="text-align:center;">
@@ -191,6 +261,14 @@
 						
 						* Tag element format
 						> name="value"
+<aside class='notes'>
+In addition to the tags additional attributes can be added [pause]
+The attributes provide control information.
+such as, size or language details.
+[pause]
+The attributes are usually defined in the opening tag delimiter in the form of the name and value assignment.
+As shown in the slide.
+</aside>
 					</textarea>
 				</section>
 				
@@ -204,7 +282,13 @@
 						
 						* Yes
 						* No
-
+<aside class='notes'>
+A question to get you thinking. [pause]
+Are attribute values case sensitive?
+[pause]
+Take a moment to think about this [pause]
+[pause][pause][pause]
+</aside>
 						</textarea>
 					</section>
 					
@@ -215,7 +299,10 @@
 						Are attribute values case-sensitive?
 						
 						* Yes
-
+<aside class='notes'>
+Did you guess correctly? [pause]
+Yes attributes are case-sensitive.
+</aside>
 						</textarea>
 					</section>
 				</section>
@@ -232,7 +319,13 @@
 						* b. ```<tag attribute=value> <tag>```
 						* c. ```<tag attribute="value"> <tag>```
 						* d. ```<tag attribute="value"> </tag>```
-
+<aside class='notes'>
+Another revision question [pause]
+What is the basic syntax for HTML tags and attributes.
+[pause]
+Take a moment to think about which one is correct from the options
+[pause][pause][pause]
+</aside>
 						</textarea>
 					</section>
 					
@@ -243,7 +336,12 @@
 						Basic syntax for HTML tags and attributes is:
 						
 						* d. ```<tag attribute="value"> </tag>```
-
+<aside class='notes'>
+Did you guess correct?
+[pause]
+The answer is d.
+[pause]
+</aside>
 						</textarea>
 					</section>
 				</section>
@@ -262,7 +360,13 @@
 						* b. ```<heading>```
 						* c. ```<h6>```
 						* d. ```<h1>```
-
+<aside class='notes'>
+This should be an easy question. [pause]
+Which is the correct HTML tag for the largest heading.
+[pause]
+Take a moment to think about your answer
+[pause][pause][pause]
+</aside>
 						</textarea>
 					</section>
 					
@@ -273,7 +377,11 @@
 						Choose the correct HTML tag for the largest heading
 						
 						* d. ```<h1>```
-
+<aside class='notes'>
+Did you guess correctly?[pause]
+The answer is d
+[pause][pause]
+</aside>
 						</textarea>
 					</section>
 				</section>
@@ -289,7 +397,12 @@
 						* a. ```<lb>```
 						* b. ```<break>```
 						* c. ```<br>```
-
+<aside class='notes'>
+What is the correct HTML tag for inserting a line break?
+[pause]
+Take a moment to pick one.
+[pause][pause][pause]
+</aside>
 						</textarea>
 					</section>
 					
@@ -300,7 +413,10 @@
 						What is the correct HTML tag for inserting a line break?
 	
 						* c. ```<br>```
-
+<aside class='notes'>
+Did you guess correct?
+[pause][pause][pause]
+</aside>
 						</textarea>
 					</section>
 				</section>
@@ -312,6 +428,9 @@
 						## CSS		
 						
 						![](./images/cssa.jpg)
+<aside class='notes'>
+Now let us move onto CSS.
+</aside>
 					</textarea>
 				</section>
 				
@@ -320,7 +439,9 @@
 						## Cascade
 						## +
 						## Style Sheet
-						
+<aside class='notes'>
+CSS stands for Cascading Style Sheets. CSS describes how HTML elements are to be displayed [pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -329,7 +450,11 @@
 						## Stylesheet	
 						
 						* Rules defining **presentation**
-						* Targetted to specific **elements/tags** in the html
+						* Targeted to specific **elements/tags** in the html
+<aside class='notes'>
+The style sheet is design to control the presentation [pause]
+Connects visual information to specific tags or elements in the html.
+</aside>
 					</textarea>
 				</section>
 				
@@ -337,9 +462,13 @@
 					<textarea data-template>
 						## Cascade	
 						
-						* Manages priorties and conflicts
+						* Manages priorities and conflicts
 						* Multiple CSS rules
 						* Importances and **inheritance**
+<aside class='notes'>
+The cascade component is for managing priorities and conflicts. [pause]
+CSS through cascade supports inheritance.
+</aside>
 					</textarea>
 				</section>
 				
@@ -350,7 +479,14 @@
 						* Elements inherit style properties
 						
 						![](./images/css01.png)
-						
+<aside class='notes'>
+A simple example is shown here 
+[pause]
+As you can see how the html tags are structured in a hierarchical format.
+[pause]
+Style information can be passed down from parent to child.
+[pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -360,13 +496,31 @@
 						
 			
 						![](./images/css02.png)
-						
+<aside class='notes'>
+For example, font size and font style defined in the top body tag is inherited by child paragraph tags.
+[pause]
+
+</aside>
 					</textarea>
 				</section>
 				
 				<section>
 				<h2>Example</h2>
 				<iframe data-src="https://jsfiddle.net/f28wp/w6qb0edk/embedded/html,result/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+<aside class='notes'>
+You can see a live example of a script here.
+[pause]
+Parent style are set for the font color and style.
+[pause]
+Child tags automatically inherit these properties
+[pause]
+However, you can also override these inherited properties.
+[pause]
+As shown in the example, default is red text, which if explicitly set will override the parent one.
+[pause]
+Try out the example live, edit the tags and styles in the demo 
+[pause][pause]
+</aside>
 				</section>
 				
 				
@@ -377,7 +531,11 @@
 						* Great Control
 						* Override
 						* Specific
-						
+<aside class='notes'>
+The CSS syntax gives you enormous visual control [pause]
+The syntax is easy to override and can be very specific if needed [pause]
+Target all tags or a single element on the screen. [pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -390,7 +548,12 @@
 						>1. CSS Rules
 						2. CSS Selectors
 						3. CSS Declaration
-						
+<aside class='notes'>
+Three terms for describing style [pause]
+Firstly CSS rules.
+Secondly CSS selectors.
+Finally CSS declaration.
+</aside>
 					</textarea>
 				</section>
 				
@@ -407,6 +570,10 @@
 						* property:value is known as the **declaration**
 						* Every style has a **selector** and **declaration**
 						* property/value pair called a CSS Rule
+<aside class='notes'>
+Here shows an example of a CSS rule 
+[pause][pause][pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -423,6 +590,10 @@
 						---
 						
 						* **selector** associates **css rules** with html elements
+<aside class='notes'>
+Here shows an example of a CSS selector 
+[pause][pause][pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -435,7 +606,11 @@
 						* **declaration block** contains one or **more** declarations separated by semicolons. 
 						
 						* Each declaration includes a CSS property **name and a value**, separated by a colon 
-					
+<aside class='notes'>
+The CSS syntax consists of a selector and a declaration block. [pause]
+The declaration block may contain one or more declarations seperated by colons [pause]
+Each declaration has a name and value.
+</aside>
 					</textarea>
 				</section>
 				
@@ -449,13 +624,15 @@
 						
 						* ``` .     Class ```
 						
-					
+<aside class='notes'>
+We select tags or elements using either a type, an ID or a class [pause]
+</aside>
 					</textarea>
 				</section>
 				
 				<section data-markdown id="bigcode" style="text-align: left;">
 					<textarea data-template>
-						## Type (element) Selectors
+						## **Type** (element) Selectors
 
 						```
 						body {declaration}
@@ -465,7 +642,9 @@
 						
 						* Simplest selector 
 						* Targets html elements by name
-						
+<aside class='notes'>
+Here is an example of a type selector [pause][pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -485,7 +664,10 @@
 						
 						* ID is an **attribute** added to the html
 						* Reference ID in the CSS with a **hash**
-						
+<aside class='notes'>
+Here is an example of an ID selector 
+[pause][pause][pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -506,14 +688,19 @@
 						
 						* class is a html **attribute** added to the markup language
 						* referenced in the css with a **period**
-						
+<aside class='notes'>
+Finally an example of a class selector
+[pause][pause][pause]
+</aside>
 					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: center;">
 					<textarea data-template>
 						## Which is better?  ID or Class?
-						
+<aside class='notes'>
+Should you lean towards IDs or classes for your selectors?
+</aside>
 					</textarea>
 				</section>
 				
@@ -531,6 +718,14 @@
 					<div id="right">
 						<img src="./images/css03.png">
 					</div>
+<aside class='notes'>
+ID is good if you want to be very specific.
+Each element has a unique ID.
+For example, a single element on screen.
+[pause]
+While a class can be used to identify groups of elements.
+For example, all of the paragraph tags.
+</aside>
 				</section>
 				
 				
@@ -550,7 +745,14 @@
 						* b. External style sheet
 						* c. External style stylist sheet
 						* d. None of the above
+<aside class='notes'>
+A quick revision question. [pause]
+Which style is this?
+[pause]
+Take a moment to pick your answer from list of options.
+[pause][pause][pause][pause]
 
+</aside>
 						</textarea>
 					</section>
 					
@@ -565,7 +767,12 @@
 						```
 
 						* a. Inline style
-
+<aside class='notes'>
+Did you guess correctly?
+[pause]
+The answer was A  for an inline style
+[pause]
+</aside>
 						</textarea>
 					</section>
 				</section>
@@ -583,6 +790,13 @@
 							* b. color
 							* c. text-decoration
 							* d. design 
+<aside class='notes'>
+What is the missing word?
+[pause]
+Take a moment to pick one of the options.
+[pause][pause][pause]
+
+</aside>
 						</textarea>
 					</section>
 					
@@ -593,6 +807,12 @@
 							The _______ property is used to set the color of the text.
 							
 							* b. color
+<aside class='notes'>
+The correct answer is b for color 
+[pause]
+Did you get it correct?
+[pause][pause]
+</aside>
 						</textarea>
 					</section>
 				</section>
@@ -615,6 +835,13 @@
 							  </body>
 							</html>
 							```
+<aside class='notes'>
+Here is a small sample program written in HTML and CSS.
+[pause]
+What does the program output? [pause]
+Take a moment to look over the code 
+[pause][pause][pause]
+</aside>
 						</textarea>
 					</section>
 					
@@ -622,10 +849,13 @@
 						<textarea data-template>
 							## Answer
 							
-							Displays Nothing
+							**Displays Nothing**
 							
 							* Missing closing ```</style>``` tag
-							
+<aside class='notes'>
+Did you notice the missing tag?
+[pause][pause][pause][pause]
+</aside>
 						</textarea>
 					</section>
 				</section>
@@ -650,6 +880,14 @@
 							  </body>
 							</html>
 							```
+<aside class='notes'>
+How about this small program?
+[pause]
+What does the following program output?
+[pause]
+Take a moment to study the listing 
+[pause][pause][pause][pause]
+</aside>
 						</textarea>
 					</section>
 
@@ -662,6 +900,11 @@
 							Blue `Hello Hello'
 							
 							* Associated with a **valid** selector ID
+<aside class='notes'>
+Did you guess correctly?[pause]
+Says hello hello in a blue colored font.
+[pause][pause]
+</aside>
 						</textarea>
 					</section>
 				</section>
@@ -676,6 +919,12 @@
 						<div id="white">
 						<h1 style="color:black">How do you validate your HTML and CSS?</h1>
 						</div>
+<aside class='notes'>
+As you noticed in the previous questions [pause]
+Your html or CSS might have errors. [pause]
+From simple missing tags to typing errors [pause]
+How do you check for errors?
+</aside>
 					</section>
 				
 				
@@ -688,7 +937,11 @@
 							* http://jigsaw.w3.org/css-validator/
 							
 							* https://validator.w3.org/checklink
-							
+<aside class='notes'>
+One solution is to use one of the many validation programs available online [pause]
+Here shows just a few of the most popular ones to check your html and css syntax.
+[pause]
+</aside>
 						</textarea>
 					</section>
 				
@@ -700,6 +953,11 @@
 							<p>Validate your website/html</p>
 							
 						</div>
+<aside class='notes'>
+Example of an online validation tool [pause]
+Checks for syntax errors, supported browsers and so on.
+[pause][pause]
+</aside>
 					</section>
 
 				</section>
@@ -711,26 +969,40 @@
 					<textarea data-template>
 						## Summary
 
-						* Understand **fundemental** HTML and CSS concepts
+						* Understand **fundamental** HTML and CSS concepts
 						* Essential **syntax**
 						* Layers/management (HTML, CSS and Javascript)
-						* Review (not new material)
-						
+						* Review (small taste)
+<aside class='notes'>
+This lecture has gone through the essential HTML and CSS concepts. [pause]
+If you're struggling with these fundamentals then you should put in extra time revising and bringing yourself up to speed.
+The support notes provide more details on the HTML and CSS standard.
+Also remember there are a number of text books on the topic that you can use to help you get up to speed quickly.
+
+</aside>
 					</textarea>
 				</section>
 				
 
-				<section style="text-align: left;">
-					<h2>To do this week ...</h2>
-					<p>
-						&bull; Read over the lectures <br>
-						&bull; Review the revision questions <br>
-						&bull; Work through tutorial practicals <br>
-						&bull; Challenging – so start early <br>
-						&bull; Experiment (get into good habits) <br>
-					</p>
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## To do this week ...
+
+						* **Read** over the lectures 
+						* **Review** the revision questions 
+						* Work through tutorial practicals
+						* Challenging – so start early 
+						* **Experiment** (get into good habits) 
+<aside class='notes'>
+This week, review the lecture material.
+Including the support notes.
+Try the revision questions and activities.
+Get into the good habit of experimenting and trying out coding examples. [pause]
+Thank you.
+</aside>
+					</textarea>
 				</section>
-				
+								
 
 			</div>
 
@@ -756,7 +1028,8 @@
 					{ src: 'plugin/highlight/highlight.js', async: true },
 					{ src: 'plugin/search/search.js', async: true },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/tts/tts_min_reveal.js', async: false}
 				]
 			});
 
@@ -774,6 +1047,11 @@
 		<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="images/webprint.png" width="7.5%"></a>
     </div>
 </div>
+
+<div style="display: block; position: absolute; bottom: 3px; left: 95px; margin-left: 0px; z-index: 20; text-align: left;">
+	<a onclick="tts.ToggleSpeech();"><img src="./images/webtalk.png" width="7.5%"></a>
+</div>
+
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>

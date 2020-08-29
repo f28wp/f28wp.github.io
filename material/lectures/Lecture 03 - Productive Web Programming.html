@@ -51,6 +51,9 @@
 					<p>
 						<small>2019-2020</small>
 					</p>
+<aside class='notes'>
+Productive Web Programming
+</aside>
 				</section>
 
 				<section data-markdown style="text-align: left;">
@@ -65,7 +68,14 @@
 						* Testing and validation
 						* **Open source** practices
 						* Questions and Discussion
-						
+<aside class='notes'>
+Today's lecture is about good and bad practices [pause]
+How to manage your work [pause]
+Using industry standard practices, such as, version control and open source tools [pause]
+Validation and testing procedures [pause]
+Close with some questions and discussions
+
+</aside>		
 						
 					</textarea>
 				</section>
@@ -74,7 +84,10 @@
 					<textarea data-template>
 						## What do we mean by Productive Web Programming?
 						
-						
+<aside class='notes'>
+Let's start by asking [pause]
+What do we actually mean by productive web programming?
+</aside>
 					</textarea>
 				</section>
 				
@@ -87,7 +100,13 @@
 						* Robustness
 						* Scalability
 						* ..
-						
+<aside class='notes'>
+When we say productive, we mean a solution that has [pause]
+structure [pause]
+robust [pause]
+scalable [pause]
+and more
+</aside>
 					</textarea>
 				</section>
 				
@@ -101,72 +120,210 @@
 						* Logical and **reliable**
 						* **Client-server** interaction
 						* What goes where and why (e.g., client or server)
-						
+<aside class='notes'>
+Structure is important as it helps us understand how everything fits together [pause]
+Also makes it easier for us to manage large and complex projects [pause]
+It helps us separate and modularize the problem [pause]
+That is, what goes where and why.
+Which is important for client server archtiectures.
+</aside>
 					</textarea>
 				</section>
 				
 			
 
 				<section data-background="images/lec14-01.png" data-background-size="contain">
+<aside class='notes'>
+This leads us to the Three-their Architecture [pause]
+Which splits the client server interaction and connection into three components [pause]
+Client side which represents the front-end application [pause]
+while the server side is made up of the back-end software and data base.
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-02.png" data-background-size="contain">
+<aside class='notes'>
+The interaction between layers is shown in the figure [pause]
+With the client using scripts to relay information to the server which then accesses the database.
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-03.png" data-background-size="contain">
+<aside class='notes'>
+The client side is designed to run scripts on the user's machine.
+For example, javascript.
+[pause]
+The server side runs scripts designed for the server and cannot be seen by the user's.
+For example, the reading and writing to the database is done using scripts on the server.
+The client cannot directly access the database.
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-04.png" data-background-size="contain">
+<aside class='notes'>
+You can think of scripting languages as the glue that holds everything together.
+[pause]
+Without the scripts the client and server applications would be static.
+[pause]
+That is they would not be interactive and dynamic.
+[pause]
+Also you should understand that a script is different from a compiled program.
+Scripts are interpreted directly. while compiled source code is compiled direclty to machine language for the machine it will run on. Will not run on other platforms.
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-05.png" data-background-size="contain">
+<aside class='notes'>
+Web scripting can get messy [pause]
+What the user sees is often not what is happening underneath.
+[pause]
+Don't get into the bad habit of writing and hiding messy unmanageable scripts.
+[pause]
+Becomes an issue when you need to fix a bug and a new feature.
+</aside>
 				</section>
 				
 				<section>
-				<h1>Web Scripting Best Practices</h1>
+				<h1>Web Scripting Good Practices</h1>
+<aside class='notes'>
+So what are some web scripting good practices?
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-06.png" data-background-size="contain">
+<aside class='notes'>
+Think maintenance [pause]
+It's harder to read code than to write it 
+[pause]
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-07.png" data-background-size="contain">
+<aside class='notes'>
+For example, make your code readable [pause]
+Use indentation.
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-08.png" data-background-size="contain">
+<aside class='notes'>
+Write helpful comments [pause]
+Don't just comment randomly.
+[pause]
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-09.png" data-background-size="contain">
+<aside class='notes'>
+A good folder structure is always important [pause]
+Not to mention, file names [pause]
+Don't just throw all your files into one folder [pause]
+[pause]
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-10.png" data-background-size="contain">
+<aside class='notes'>
+Naming consistency [pause]
+Don't change your naming style constantly [pause]
+For example, underscores or camel case naming convention [pause]
+Use one or another 
+[pause]
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-11.png" data-background-size="contain">
+<aside class='notes'>
+Group libraries together [pause]
+separate client and server scripts [pause]
+Use a hierarchy if necessary [pause]
+
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-12.png" data-background-size="contain">
+<aside class='notes'>
+Small robust scripts that are easy to test and validate is better than lots of large scripts that do everything.
+[pause]
+Don't cut corners by having scripts bypass safety checks.
+[pause]
+For example, if you have a database manager to track and manage database reads and writes. [pause]
+Avoid accessing the database directly and avoiding the manager.
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-13.png" data-background-size="contain">
+<aside class='notes'>
+Use object orientated programming tactics
+[pause]
+Group data and functionality together 
+[pause]
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-14.png" data-background-size="contain">
+<aside class='notes'>
+Avoid reinventing the wheel
+[pause]
+If global variables and pre existing functions exist, use them.
+[pause]
+Don't create your own just because you're too lazy.
+[pause]
+Helps make the code more readable and robust.
+[pause]
+Since it will use a consistent set of global variables and functions. 
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-15.png" data-background-size="contain">
+<aside class='notes'>
+Focus on having implementations that do one thing.
+[pause]
+Don't go and try to overload and ultimately overcomplicate scripts.
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-16.png" data-background-size="contain">
+<aside class='notes'>
+Feature creep
+[pause]
+Starts off as nice tidy function but ends up doing lots of things 
+[pause]
+Difficult to manage, test and integrate into a system 
+[pause]
+Also have lots of overhead and redundancy.
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-17.png" data-background-size="contain">
+<aside class='notes'>
+Think about the future [pause]
+Write code that doesn't have to be changed every time the requirements change 
+[pause]
+For example, use object orientated conepts such as encapsulation.
+[pause]
+</aside>
 				</section>
 				
 				
 				<section data-background="images/lec14-19.png" data-background-size="contain">
+<aside class='notes'>
+Modular components [pause]
+Easy to understand [pause]
+Clear set of interfaces for how they connect 
+[pause]
+</aside>
 				</section>
 				
 				<section data-background="images/lec14-20.png" data-background-size="contain">
+<aside class='notes'>
+Think about making your code reusable and modular.
+[pause]
+Write small functions that perform a single task
+[pause]
+Avoid using global variables 
+[pause]
+</aside>
 				</section>
 				
 				
@@ -177,6 +334,14 @@
 						* Which companies use version control?
 						* What is the most popular version control system?
 						* Why wouldn't you use version control?
+<aside class='notes'>
+Is it important that you use version control?
+[pause]
+What advantages does version control bring to a project?
+[pause]
+Why wouldn't you use version control?
+[pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -186,11 +351,17 @@
 
 						* **Industry standard**
 						* Track progress, changes, bugs, ..
-						* Safey (backup)
+						* Safety (backup)
 						* Collaborately working (team)
 						* Flexible
 						
-						
+<aside class='notes'>
+In essence, version control is an industry standard 
+[pause]
+Helps you track changes, bugs, progress and more [pause]
+There is no reason why you should not be using version control tools 
+[pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -206,6 +377,13 @@
 					<div id="right">
 					<img src="./images/gitandhub.jpg">
 					</div>
+<aside class='notes'>
+One of the most popular version control systems today is GIT 
+[pause]
+A free online hosting platform for GIT is GitHub. [pause]
+GitHub is one of the most popular choices for web development.
+For example, Nodejs, Angularjs and Reactjs use GitHub.
+</aside>
 				</section>
 				
 				<!--
@@ -218,7 +396,12 @@
 						## Who uses Git?
 
 						![](./images/whousesgit.jpg)
-						
+<aside class='notes'>
+Git is used by facebook, microsoft, google and even netflix.
+[pause]
+So you should take the time to learn how to use git properly
+[pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -230,7 +413,14 @@
 						## Right Tool Right Job
 
 						![](./images/righttool.png)
-						
+<aside class='notes'>
+Try and be open minded [pause]
+Review and try out new tools. [pause]
+Don't just use an API or a system because it is what you have used in the past.
+[pause]
+Think about the pros and cons 
+[pause]
+</aside>
 					</textarea>
 				</section>
 
@@ -242,7 +432,12 @@
 						![](./images/checklist.png)
 						
 						* Don't ignore good programming practices (just because it's **web**)
-						
+<aside class='notes'>
+To review [pause]
+ensure you're using version control [pause]
+you have a good naming convention [pause]
+you are keeping track of issues [pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -257,7 +452,12 @@
 						* **Skillset, abilities, ..**
 						* Appreciate different perspectives
 						
-						
+<aside class='notes'>
+Teamwork is essential [pause]
+Can be challenging but it is also important [pause]
+Manage how to work with people of different abilities and skillsets [pause]
+Communication skills [pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -267,7 +467,10 @@
 
 						![](./images/teamwork.png)
 
-						
+<aside class='notes'>
+Avoid letting teamwork fall into chaos.
+[pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -286,6 +489,13 @@
 							
 						</div>
 						-->
+<aside class='notes'>
+Manage your teams activities.  [pause]
+Keep track of what is done [pause]
+Use version control as evidence [pause] 
+For example, tracking bugs, features, tasks or lines of code. 
+[pause]
+</aside>
 				</section>
 				
 
@@ -296,7 +506,9 @@
 
 						Are open source projects really that **important**?
 					
-						
+<aside class='notes'>
+
+</aside>
 					</textarea>
 				</section>
 				
@@ -305,7 +517,9 @@
 						## Open Source Community
 
 						![](./images/os-people.jpg)
-						
+<aside class='notes'>
+Open source projects enable faster, cleaner work, and place a growing emphasis on security. As our love of open source continues to grow, along with our dependence on the open source projects that power and support the software products we create, it's important to remember to give back to the open source community
+</aside>
 					</textarea>
 				</section>
 				
@@ -317,6 +531,9 @@
 						* Coding and **learning**
 						* Business card for skills (**portfolio**)
 						* **Community** support (bring ideas to life)
+<aside class='notes'>
+Open source has become the de facto way to build software — not only in tech, but across diverse industries. 
+</aside>
 					</textarea>
 				</section>
 				
@@ -333,7 +550,14 @@
 						* **Help** others
 						* **Synergy**
 					
-						
+<aside class='notes'>
+Open source practices help you develop writing useful documentation [pause]
+Good standards [pause]
+Write comments to help others [pause]
+You comment for others not yourself [pause]
+Encourages synergy 
+[pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -348,7 +572,14 @@
 						* Use available **tools** (e.g., GitHub)
 						* Plan
 					
-						
+<aside class='notes'>
+With any project, it is important that you [pause]
+Track bugs [pause]
+Track tasks [pause]
+Track features [pause]
+Make a plan and use it to track your progress [pause]
+Use the tools available to achieve this, such as, GitHub.
+</aside>
 					</textarea>
 				</section>
 				
@@ -364,6 +595,12 @@
 						* Release **builds**
 						  - 0.1, 0.12, ...
 						  - features with each build
+<aside class='notes'>
+Large community built around web programming [pause]
+Most of the tools and technologies that you use are developed by open source communities [pause]
+Make sure you keep track of the builds you create and the libraries you use 
+[pause]
+</aside>
 					</textarea>
 				</section>
 				
@@ -376,12 +613,18 @@
 					<textarea data-template>
 						## Summary
 
-						* Understand Productive Web Programming Concepts
-						* Good and bad examples
+						* Understand **Productive** Web Programming Concepts
+						* **Good and the bad** examples
 						* How to apply them in practice (e.g., **Coursework**)
 						* Real-world (standards, planning, features, bugs, ..)
 						* Open source (important and useful)
-						
+<aside class='notes'>
+We have covered a wide range of important concepts.
+[pause]
+You'll use these concepts in your coursework to demonstrate good working practices.
+[pause]
+From good documentation and comments through to testing, feature lists and more.
+</aside>
 					</textarea>
 				</section>
 				
@@ -397,7 +640,13 @@
 						* **Coursework** (continue to work on your project) 
 						  - Teams and project should be setup/running this week
 						* Experiment (get into good habits) 
-						
+<aside class='notes'>
+This week continue to review the course material.
+Practice the revision questions [pause]
+And continue to work through the labs to help you learn and master specific concepts.
+[pause]
+Thank you.
+</aside>
 					</textarea>
 				</section>
 				
@@ -427,7 +676,8 @@
 					{ src: 'plugin/highlight/highlight.js', async: true },
 					{ src: 'plugin/search/search.js', async: true },
 					{ src: 'plugin/zoom-js/zoom.js', async: true },
-					{ src: 'plugin/notes/notes.js', async: true }
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/tts/tts_min_reveal.js', async: false}
 				]
 			});
 
@@ -445,6 +695,11 @@
 		<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="images/webprint.png" width="7.5%"></a>
     </div>
 </div>
+
+<div style="display: block; position: absolute; bottom: 3px; left: 95px; margin-left: 0px; z-index: 20; text-align: left;">
+	<a onclick="tts.ToggleSpeech();"><img src="./images/webtalk.png" width="7.5%"></a>
+</div>
+
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>

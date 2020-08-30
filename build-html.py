@@ -13,10 +13,13 @@ Example:
 
 
 # list of videos that correlate with the lectures - play through the commentary (sit and watch)
-videos = { "Introduction": "https://www.youtube.com/embed/V5jkHVk1fXE?start=5&autoplay=1"
+videos = { "Introduction"                 : "https://www.youtube.com/embed/V5jkHVk1fXE?start=5&autoplay=1", 
+           "Internet and Web"             : "https://www.youtube.com/embed/8CBhwckd9eo?start=5&autoplay=1",
+		   "Fundamentals of HTML and CSS" : "https://www.youtube.com/embed/bFhOCKI4eUI?start=5&autoplay=1",
+		   "Productive Web Programming"   : "https://www.youtube.com/embed/9V2e_V1hl_c?start=5&autoplay=1"
 		 }
 		 
-		 
+
 
 import os
 
@@ -174,7 +177,7 @@ for i in range(0,25):
 	if tmp == 0:
 		str += "<td> - </td>" 
 	else:
-		str += "<td><a href='%s'> Media </td>" % videos[ topic ]
+		str += "<td><a href='%s'> Video </td>" % videos[ topic ]
 	
 	str += '<td>      &nbsp;  		</td>';
 	

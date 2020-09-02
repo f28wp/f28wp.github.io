@@ -188,7 +188,7 @@ for i in range(0,25):
 		str += "<td><a href='%s'>Notes</td>" % tmp[1]
 	
 	
-	tmp = finddir( 'Lab %02d' % (i), 'pdf' )
+	tmp = finddir( 'Lab %02d' % (i), 'html' )
 	if tmp == 0:
 		str += "<td> - </td>" 
 	else:

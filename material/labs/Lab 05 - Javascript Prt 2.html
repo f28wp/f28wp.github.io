@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Web Programming F28WP</title>
+  <link rel="stylesheet" href="./md2html/theme.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+
+</head>
+<body>
+  <div id="content">
+
+# Lab - Javascript Prt 2
+
+
+# Introduction
+In this lab, you’ll further develop your understanding of Javascript.
+
+
+
+# 1.1 Features/Experiment
+
+Take the `basic’ skeleton Javascript code for Santa game:
+
+```
+https://f28wp.github.io/material/labs/javascriptsanta/JavaScriptSanta.html
+```
+
+Add additional features (using Javascript).
+
+For example:
+  -	Collision detection
+  -	Score/pause
+  -	Improved GUI/Layout
+  -	Animations
+  -	Multiplayer
+  -	…
+
+Note.  The Javascript Santa game is currently in a single .html file, with two images (img.gif and ball.gif)
+
+
+Zip file with the html and images:
+```
+https://f28wp.github.io/material/labs/javascriptsanta/javascriptsanta.zip
+```
+
+ 
+
+
+# 2.0 Drawing Program
+
+Create a new html file and add the following script.  The script demonstrates a `minimal’ drawing program using the mouse.  So you can drag the mouse cursor around the screen to draw.  Enhance the implementation.  
+
+```
+// create canvas element and append it to document body
+var canvas = document.createElement('canvas');
+document.body.appendChild(canvas);
+
+// some hotfixes
+document.body.style.margin = 0;
+canvas.style.position = 'fixed';
+
+// get canvas 2D context and set him correct size
+var ctx = canvas.getContext('2d');
+resize();
+
+// last known position
+var pos = { x: 0, y: 0 };
+
+window.addEventListener('resize', resize);
+document.addEventListener('mousemove', draw);
+document.addEventListener('mousedown', setPosition);
+document.addEventListener('mouseenter', setPosition);
+
+// new position from mouse event
+function setPosition(e) {
+  pos.x = e.clientX;
+  pos.y = e.clientY;
+}
+
+// resize canvas
+function resize() {
+  ctx.canvas.width = window.innerWidth;
+  ctx.canvas.height = window.innerHeight;
+}
+
+function draw(e) {
+  // mouse left button must be pressed
+  if (e.buttons !== 1) return;
+
+  ctx.beginPath(); // begin
+
+  ctx.lineWidth = 5;
+  ctx.lineCap = 'round';
+  ctx.strokeStyle = '#c0392b';
+
+  ctx.moveTo(pos.x, pos.y); // from
+  setPosition(e);
+  ctx.lineTo(pos.x, pos.y); // to
+
+  ctx.stroke(); // draw it!
+}
+
+```
+
+  * Task 1. Implement the minimum working example and ensure it works
+  * Task 2. Add additional features, for example, `clear` button
+  * Task 3. Add a `save’ button, so you store the drawing (e.g., use an array to store the positions as the drawing evolves).  Then when clear is pressed, you have a `restore’ button to draw the saved image back to the screen.
+  * Task 4. Add a colour pick option button (so you can select a colour to be drawn on the screen.
+  * Task 5. Add a line thickness button (so you can choose how thick the line is that you’ll draw with)
+
+
+
+
+
+  </div>
+  
+  <br><br>
+  
+  <script>
+    elem = document.getElementById('content')
+    converter = new showdown.Converter();
+    elem.innerHTML = converter.makeHtml(elem.innerHTML)
+    
+	hljs.initHighlightingOnLoad();
+  </script>
+<!--
+  <script src="https://yihui.name/js/math-code.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  -->
+  
+<div id="myhome" style="z-index: auto; display: block; position: fixed; bottom: 5px; left: 5px;">
+    <a href="https://f27id.github.io" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Web Programming F28WP</title>
+  <link rel="stylesheet" href="./md2html/theme.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+
+</head>
+<body>
+  <div id="content">
+
+# Lab - jQuery
+
+# Introduction
+In this lab, you’ll further develop your understanding of jQuery. The purpose of jQuery is to make it much easier to use JavaScript on your website. jQuery is a lightweight, "write less, do more", JavaScript library.
+
+
+# 1.1 jQuery - load() Example
+
+
+Implement the following sample, with a local client script (i.e., index.html, and on your server, e.g., macs folder (e.g., public_html folder on your university computer, which is accessible from www2.macs.hw.ac.uk/~username/)
+
+Client side (index.html)
+```
+<!DOCTYPE html> 
+<html> 
+    <head> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script> 
+        <script> 
+            $(document).ready(function(){ 
+                $("button").click(function(){ 
+                    $("#divContent").load("send.php"); 
+                }); 
+            }); 
+        </script> 
+        <style> 
+            body { 
+                text-align: center; 
+            } 
+            #divContent { 
+                font-size: 40px; 
+                font-weight: bold; 
+                color: green; 
+            } 
+        </style> 
+    </head> 
+    <body> 
+        <div id="divContent"> 
+            Default Content
+        </div> 
+    </body> 
+</html>
+
+```
+ 
+
+Server side (send.php)
+```
+<?php
+  $t=time(); 
+  echo($t . "<br>");
+  echo(date("Y-m-d",$t));
+?>
+
+```
+ 
+
+When you run the following script.  You should see the content on the page updated (i.e., div section called divContent, replace the Default Content with the information retrieved from send.php).
+
+Try modifying the code to have a Javascript timer keep updating the time information in real-time (i.e., keeps retrieving the information from send.php and updating the text on screen).
+
+Pass arguments to the php script to have it return different information (e.g., send.php?val=2;).  In the php script check if the value is set and echo different information.
+
+
+
+
+
+  </div>
+  
+  <br><br>
+  
+  <script>
+    elem = document.getElementById('content')
+    converter = new showdown.Converter();
+    elem.innerHTML = converter.makeHtml(elem.innerHTML)
+    
+	hljs.initHighlightingOnLoad();
+  </script>
+<!--
+  <script src="https://yihui.name/js/math-code.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  -->
+  
+<div id="myhome" style="z-index: auto; display: block; position: fixed; bottom: 5px; left: 5px;">
+    <a href="https://f27id.github.io" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+</div>
+
+
+
+</body>
+</html>

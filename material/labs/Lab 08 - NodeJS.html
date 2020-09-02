@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Web Programming F28WP</title>
+  <link rel="stylesheet" href="./md2html/theme.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+
+</head>
+<body>
+  <div id="content">
+
+# Lab - Node.JS
+
+
+# Introduction
+In this lab, you’ll further develop your understanding of NodeJS. 
+
+# 1.1 NodeJS Command Prompt
+
+Go to the command prompt and type ‘node’.
+This should launch the node.exe interpreter in the command prompt directly.  
+You can then directly type and test out node commands in the command prompt.
+
+```
+C:\>node
+>var aa = “test”;
+>undefined
+>aa
+`test’
+```
+
+To exit the node interpreter in the terminal, type ‘Cntrl C’ twice.
+
+Just to note, the `undefined’ returned when executing instructions, is to inform you that no return was given from the execution.
+
+
+# 2.1 NodeJS Sandbox (https://codesandbox.io/)
+
+Code Sandbox (https://codesandbox.io) is an online editor which you can use to try out and explore node examples.
+
+For example, to see a simple nodejs example configured and for you to look at goto:
+
+```
+https://codesandbox.io/s/node
+```
+
+However, you should read through the examples and tutorials and implement a simple node system yourself from scratch so you comprehend and understand the syntax and workings (e.g., http output and possibly some simple sockets and other packages available to node)
+
+Some of the examples on code sandbox include, chat clients, shared drawing applications.
+
+# 3.1 NodeJS Socket.io
+
+Minimal client/server chat app
+
+
+For the socket.io, review the simple example on codesandbox.io – attempt to modify the core implementation (e.g., if certain words are entered, such as, ‘hello’, the server will highlight them in red/blue):
+
+```
+https://codesandbox.io/s/node-sandbox-mtfyn
+```
+
+Core elements to identify are:
+1. require
+2. init
+3. integrates into Node.js
+
+
+
+
+# 3.1 NodeJS Sandbox Examples
+
+Try out various demos, for example, simple 2D multiplayer game:
+
+```
+https://codesandbox.io/s/2vmx2l1x9n
+```
+
+However, be aware of dependences, assets and versions, get into the good practice of reading around and experimenting - looking at other examples for inspiration and insights (avoid simply `copying’ or plagiarising).
+
+
+
+
+
+
+
+  </div>
+  
+  <br><br>
+  
+  <script>
+    elem = document.getElementById('content')
+    converter = new showdown.Converter();
+    elem.innerHTML = converter.makeHtml(elem.innerHTML)
+    
+	hljs.initHighlightingOnLoad();
+  </script>
+<!--
+  <script src="https://yihui.name/js/math-code.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  -->
+  
+<div id="myhome" style="z-index: auto; display: block; position: fixed; bottom: 5px; left: 5px;">
+    <a href="https://f27id.github.io" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+</div>
+
+
+
+</body>
+</html>

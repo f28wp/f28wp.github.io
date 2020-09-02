@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Web Programming F28WP</title>
+  <link rel="stylesheet" href="./md2html/theme.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+
+</head>
+<body>
+  <div id="content">
+
+# Lab - PHP
+
+
+# Introduction
+In this lab, you’ll further test and develop your understanding of web programming concepts
+
+
+
+# 1.1 PHP 
+
+Setup a very simple script in PHP so you can test and debug simple PHP scripts live on your university space.
+
+On your H drive you should have a folder called ‘public_html’.  This is mapped to:
+```
+http://www2.macs.hw.ac.uk/~[USERNAME]/
+```
+
+Task 1: Create the simplescript.php in your public_html directory.
+
+Type the following in the script:
+
+```
+<?php
+echo “hello php world”;
+?>
+```
+
+In the browser, goto the URL to check your php script is working:
+
+```
+http://www2.macs.hw.ac.uk/~[USERNAME]/simplescript.php
+```
+
+# 1.1 PHP Errors
+
+You’ll often have errors in your script (or other problems), especially when using per-made code and changing parameters/configurations.  Also be aware of the popular mistake of having scripts with wrong permission settings (this is important when scripts need to read, write information to files). 
+Typically, PHP by default, is not so good telling what is wrong. So, to help you get feedback on the error, you add an additional lines to the top of your php (i.e., inform php to print errors to the screen). Following lines of code:
+
+```
+<?php 
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+
+// rest of your php script
+?>
+```
+
+Add the following debug lines to the top of your script and test out various debug output (e.g., mistyped variable names, missing semicolon).
+
+
+
+
+
+
+
+
+
+
+  </div>
+  
+  <br><br>
+  
+  <script>
+    elem = document.getElementById('content')
+    converter = new showdown.Converter();
+    elem.innerHTML = converter.makeHtml(elem.innerHTML)
+    
+	hljs.initHighlightingOnLoad();
+  </script>
+<!--
+  <script src="https://yihui.name/js/math-code.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  -->
+  
+<div id="myhome" style="z-index: auto; display: block; position: fixed; bottom: 5px; left: 5px;">
+    <a href="https://f27id.github.io" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+</div>
+
+
+
+</body>
+</html>

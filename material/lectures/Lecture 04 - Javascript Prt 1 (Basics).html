@@ -290,7 +290,7 @@ Javascript Part 1
 						* In ES 6+ let and const declare **block-scoped** variables.
 						* **let** variables can’t be redeclared in scope. var variables can.
 						* **const** variables can index loops but can’t be reassigned values.
-						```
+						```js
 						  var i, number_of_hits = 0, done = true, fruit = "yoghurt";
 						  let ID = Symbol();
 						  const pi = Math.PI;
@@ -381,7 +381,7 @@ Javascript Part 1
 						## Question
 						What does the following Javascript output?
 						
-						```
+						```js
 						var a = 22;
 						a *= 3;
 						alert( a );
@@ -433,7 +433,7 @@ Javascript Part 1
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Examples of conditional expressions
+						## Examples of **conditional** expressions
 
 						```
 						if ( s.length > 10 ) {
@@ -458,9 +458,9 @@ Javascript Part 1
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						### Examples of loops 
+						### Examples of **loops**
 
-						* for 
+						* for loop
 
 						```
 						let sum = 0;
@@ -486,7 +486,7 @@ Javascript Part 1
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						### Examples of loops 
+						### Examples of **loops** 
 						
 						* do while 
 						* while
@@ -516,7 +516,7 @@ Javascript Part 1
 						## Question
 						What does the following Javascript code output?
 						
-						```
+						```js
 						let sum = 0;
 						let arr = [1, 2, 3];
 						for (let i=1; i<arr.length; i++) { // classic loop
@@ -623,12 +623,12 @@ Javascript Part 1
 						
 						* Examples would be
 						
-						```
+						```js
 							anon = function() { print('I am anonymous'); }
 							anon();
 						```
 						
-						```
+						```js
 							invoke = function(fn, arg) { print(fn(arg)); }
 							invoke(function(i) {return i+1;}, 5 );
 						```
@@ -670,20 +670,21 @@ Javascript Part 1
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## JavaScript String Handling
+					## JavaScript String Handling
 						
-						Methods and properties for handling strings include
-
-					* charAt(N) 	   returns character at index N
-					* indexOf(S) 	   returns index of S in string
-					* lastIndexOf(S)   returns last index of S in string
-					* length 		   property stor ing length of string
-					* split(S) 		   returns array of substr ings separated by S
-					* substring(M)    returns substr ing from index to end
-					* substring(M, N) returns substr ing between given indices
-					* toLowerCase()    maps all letters to lower case
-					* toUpperCase()    maps all letters to upper case
-					* trim() 		   removes whitespace from both ends of string
+					Methods and properties for handling strings include
+					
+					* **charAt(N)** 	   returns character at index N
+					* **indexOf(S)** 	   returns index of S in string
+					* **lastIndexOf(S)**   returns last index of S in string
+					* **length** 		   property stor ing length of string
+					* **split(S)** 		   returns array of substr ings separated by S
+					* **substring(M)**    returns substr ing from index to end
+					* **substring(M, N)** returns substr ing between given indices
+					* **toLowerCase()**    maps all letters to lower case
+					* **toUpperCase()**    maps all letters to upper case
+					* **trim()** 		   removes whitespace from both ends of string
+					
 <aside class='notes'>
 </aside>
 					</textarea>
@@ -696,7 +697,7 @@ Javascript Part 1
 						## Question
 						How would you concatenate two Javscript strings?
 						
-						```
+						```js
 						var a = "cat";
 						var b = "bat";
 						// how to combine them into a new string "catbat"?
@@ -714,7 +715,7 @@ Javascript Part 1
 						
 						Note there is also:
 						
-						```
+						```js
 						str.concat(string2, string3, string4,......, stringN)
 						```
 <aside class='notes'>
@@ -726,7 +727,7 @@ Javascript Part 1
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					Example function in url.js shows how to normalise a URL: 
+					Example function in url.js shows how to **normalise a URL**: 
 
 					```
 					function normaliseURL(url) {
@@ -765,9 +766,9 @@ Javascript Part 1
 					<textarea data-template>
 					## JavaScript Arrays 
 					
-					* JavaScript Array is created using Array builtin
+					* JavaScript Array is created using Array built-in
 					
-					```
+					```js
 					var cars = new Array();
 					cars[0] = "Honda Civic";
 					cars[1] = "Ford Focus";
@@ -776,7 +777,7 @@ Javascript Part 1
 					
 					* Same array can also be created by either of
 					
-					```
+					```js
 					cars = new Array("Honda Civic", "Ford Focus", "Fiat Punto"); 
 					cars = ["Honda Civic", "Ford Focus", "Fiat Punto"];
 					```
@@ -789,9 +790,9 @@ Javascript Part 1
 					<textarea data-template>
 					## JavaScript Arrays 
 					
-					* Useful properties for an Array include
-					- **length** number of elements
-					- prototype property allowing Array object to be extended
+					* Useful properties for an Array include:
+					  - **length** number of elements
+					  - prototype property allowing Array object to be extended
 
 					```
 					var cars = [ "Honda Civic", "Ford Focus", "Fiat Punto" ]
@@ -816,7 +817,7 @@ Javascript Part 1
 						## Question
 						What does the following Javascript code output?
 						
-						```
+						```js
 						let arr = ['a', 2, 'c'];
 						alert( arr[9] );
 						```
@@ -861,7 +862,7 @@ Javascript Part 1
 					<textarea data-template>
 					## JavaScript Arrays Example
 					
-					```
+					```js
 					var cars = [ "Honda Civic", "Ford Focus", "Fiat Punto" ]
 					cars.indexOf("Fiat Punto")
 					> 2
@@ -912,7 +913,7 @@ Javascript Part 1
 					
 					* **Duplicate** elements in array can be removed by filter() thus:
 					
-					```
+					```js
 					var bag = [4, 1, 4, 7, 1, 2]
 					bag.filter(function(e, i, ar) { return i === ar.indexOf(e); })
 					
@@ -961,7 +962,7 @@ Javascript Part 1
 					 - are **non-primitive** values
 					 - have prototypes that are also objects
 					 - inherit their properties and methods from their prototype
-					* **All** objects **inherit from prototype** called Object.prototype.
+					* **All** objects **inherit from prototype** called Object.prototype
 <aside class='notes'>
 </aside>
 					</textarea>
@@ -973,7 +974,7 @@ Javascript Part 1
 					## JavaScript Object **Examples**
 					
 					* Create an object with new keyword and assign properties to it:
-					```
+					```js
 					vehicle = new Object();
 					vehicle.make = "Ford";
 					vehicle.model = "Focus";
@@ -981,7 +982,7 @@ Javascript Part 1
 					```
 					
 					* Vehicle can also be declared and initialised **directly**
-					```
+					```js
 					vehicle = { make: "Ford", model: "Focus", year: 2012 };
 					```
 <aside class='notes'>
@@ -995,7 +996,7 @@ Javascript Part 1
 					## JavaScript Object **Examples**
 					
 					* **Associative array syntax** in JavaScript can also create vehicle
-					```
+					```js
 					vehicle["make"] = "Ford";
 					vehicle["model"] = "Focus";
 					vehicle["year"] = 2012;
@@ -1003,7 +1004,7 @@ Javascript Part 1
 					* Object prototype is standardly created by a constructor function.
 					
 					 - **car.js** defines a constructor for object instances
-					 ```
+					 ```js
 					function car(make, model, year) {
 					this.make = make;
 					this.model = model;
@@ -1012,7 +1013,7 @@ Javascript Part 1
 					```
 					
 					- that can be used with new keyword in expressions such as
-					```
+					```js
 					vehicle = new car("lamborghini", "gallardo", 2013);
 					```
 <aside class='notes'>
@@ -1027,7 +1028,7 @@ Javascript Part 1
 					
 					* Object’s properties can be listed by (e.g., getProps.js)
 
-					```
+					```js
 					function getProps(obj) {
 					var props = [];
 					for (var p in obj) { props.push(p); }
@@ -1043,11 +1044,12 @@ Javascript Part 1
 				</section>
 
 
+<!-- remove example - make into online frame instead - for students can interact with.
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					## JavaScript Object **Example**
 					
-					```
+					```js
 					load("car.js")
 					load("getProps.js")
 					v=new car("porsche", 911, 2016)
@@ -1074,6 +1076,7 @@ Javascript Part 1
 </aside>
 					</textarea>
 				</section>
+-->
 
 
 				<section data-markdown style="text-align: left;">
@@ -1102,14 +1105,14 @@ Javascript Part 1
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## JavaScript Object 
+					## JavaScript Object (**class**)
 					
-					ES 6 introduced class notation to JavaScript where
+					ES 6 introduced **class notation** to JavaScript where
 					* classes are syntactic sugar over **prototype-based objects**
 					* no new object-oriented model is introduced
 					
 					Example class declaration **circle.js** can define a class function
-					```
+					```js
 					class Circle {
 					constructor(radius, x, y) { this.radius = radius;
 					this.x = x; this.y = y; }
@@ -1119,7 +1122,7 @@ Javascript Part 1
 					```
 					
 					* A class expression (with/without a name) can also define it
-					```
+					```js
 					var ring = class Circle { ... }
 					```
 <aside class='notes'>
@@ -1202,20 +1205,23 @@ Javascript Part 1
 </aside>
 					</textarea>
 				</section>
-
-				<section style="text-align: left;">
-					<h2>To do this week ...</h2>
-					<p>
-						&bull; Read over the lectures <br>
-						&bull; Review the revision questions <br>
-						&bull; Work through tutorial practicals <br>
-						&bull;  Browse ECMAScript® 2018 Language Specification
-http://www.ecma-inter national.org/ecma-262/9.0/ <br>
-						&bull; Experiment (get into good habits) <br>
-					</p>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## To do this week ...
+						* Read over the lectures
+						* Review the revision questions 
+						* Work through tutorial practicals 
+						* Browse ECMAScript 2018 **Language Specification**
+						<a href='http://www.ecma-international.org/ecma-262/9.0/'>(LINK)</a>
+						* **Experiment** (get into good habits) 
 <aside class='notes'>
 </aside>
-				</section>
+					</textarea>
+				</section>		
+
+
 				
 
 			</div>

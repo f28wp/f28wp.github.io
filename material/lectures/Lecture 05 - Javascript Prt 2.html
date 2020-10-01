@@ -79,7 +79,7 @@ Javascript Part 2
 						## Revision Question
 						What's the output?
 						
-						```
+						```js
 							function sum(a, b) {
 							  return a + b;
 							}
@@ -119,7 +119,7 @@ Javascript Part 2
 						## Revision Question
 						What will the following Javascript code output?
 						
-						```
+						```js
 						var a = [];
 						a[0] = 'test';
 						a[3] = 9;
@@ -149,7 +149,7 @@ Javascript Part 2
 						## Revision Question
 						What does the following Javascript output?
 						
-						```
+						```js
 						var a = 1/0;
 						```
 						
@@ -180,7 +180,7 @@ Javascript Part 2
 						## Revision Question
 						What does the following Javascript output (and why)?
 						
-						```
+						```js
 						// Self invoking function
 						(function () {
 						  var abc = "Hello";  // I will invoke myself
@@ -270,7 +270,7 @@ Javascript Part 2
 						## Revision Question
 						What does the following Javascript output?
 						
-						```
+						```js
 						var myvalue;
 						alert( myvalue );
 						```
@@ -346,7 +346,7 @@ Javascript Part 2
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Examples
-						```
+						```js
 						parseInt("06"); //returns 6
 						parseInt("07"); //returns 7
 						parseInt("08"); //returns 0
@@ -366,7 +366,7 @@ Javascript Part 2
 						## Revision Question
 						What does the following Javascript output?
 						
-						```
+						```js
 						var a = 1/"2";
 						var b = a + 1;
 						alert( b );
@@ -387,7 +387,7 @@ Javascript Part 2
 						
 						Answer: **d. None of the above**
 						
-						```
+						```js
 						var a = 1/"2"; // -> a = 0.5  (convert "2" to 2)
 						var b = a + 1; // -> 0.5 + 1 = 1.5
 						```
@@ -405,7 +405,7 @@ Javascript Part 2
 						## Revision Question
 						What does the following Javascript output?
 						
-						```
+						```js
 						var a = "cat" * 2
 						alert( a );
 						```
@@ -494,13 +494,13 @@ Javascript Part 2
 						## Example
 						
 						Create a new JavaScript object with four properties:
-						```
+						```js
 						var person = new Object();
 						person.firstName = "John";
 						person.age = 50;
 						```
 						Same as:
-						```
+						```js
 						var person = {firstName:"John", age:50};
 						```
 <aside class='notes'>
@@ -514,7 +514,7 @@ Javascript Part 2
 						## Revision Question
 						What does the following Javascript output?
 						
-						```
+						```js
 						var n = new Object();
 						n.cat = [1,3,5];
 						n["cat"] = "hello";
@@ -620,7 +620,7 @@ Javascript Part 2
 					<textarea data-template>
 						## Switch statement
 						
-						```
+						```js
 						switch (expression) {
 							case ':':
 							case ',':
@@ -644,7 +644,7 @@ Javascript Part 2
 					<textarea data-template>
 						## Try statement
 						
-						```
+						```js
 						try {
 							...
 						}
@@ -669,7 +669,7 @@ Javascript Part 2
 					<textarea data-template>
 						## Throw statement
 						
-						```
+						```js
 						throw new Error(reason);
 						
 						throw {
@@ -714,7 +714,7 @@ Javascript Part 2
 						* **Types** are **not** specified 
 						* Initial values are optional 
 						
-						```
+						```js
 						var name;
 						var nrErrors = 0;
 						var a, b, c;
@@ -810,11 +810,11 @@ Javascript Part 2
 					<textarea data-template>
 						## Example Object Literals
 						
-						```
+						```js
 						var myob = {name:'bob', goto:'test' };
 						```
 						
-						```
+						```js
 						var theName = myob.name;
 						var dest    = myob[ 'goto' ];
 						```
@@ -829,7 +829,7 @@ Javascript Part 2
 					<textarea data-template>
 						## Maker Function 
 						
-						```
+						```js
 						function maker(name, where, grade)
 						{
 							var it = {};
@@ -854,10 +854,10 @@ Javascript Part 2
 					<textarea data-template>
 						## Object Literals
 						
-						```
+						```js
 						var myob = {
 						   name: 'bob',
-						   'goto': `test',
+						   'goto': 'test',
 						   format: { 
 							  type: 'rect',
 							  inter: false 
@@ -899,7 +899,7 @@ Javascript Part 2
 						* No need to define a new class 
 						* On the fly/dynamically
 						
-						```
+						```js
 						myobj.format.col = 'rgb';
 						
 						myobj[ name ] = value;

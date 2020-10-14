@@ -23,16 +23,16 @@
 
 Supplementary notes to complement the lecture material for web programming (F28WP).
 
-# Node .js
+# Node.js
 
-Node.js is open source, high perfor mance JavaScr ipt Server
+Node.js is open source, high performance JavaScript Server
 - executing on top of Google’s V8 engine
 - originally written by Ryan Dahl in 2009
 
 Node.js supports high throughput, real-time, scalable use
-- via asynchronous and ev ent driven API calls
+- via asynchronous and event driven API calls
 - running as a single non-blocking thread
-- without buffer ing data - it is output in chunks
+- without buffering data - it is output in chunks
 
 However, Node.js isn’t suitable for CPU intensive applications.
 Node.js can be exercised on departmental Linux hosts thus:
@@ -40,7 +40,10 @@ Node.js can be exercised on departmental Linux hosts thus:
 linux% node
 > console.log("Hello World!")
 Hello World!
-Its Read Evaluate Print Loop is similar to jjs REPL interface
+```
+
+NodeJS interpreter is similar to jjs REPL interface
+```
 linux% node
 > n=7
 7
@@ -73,14 +76,14 @@ HTTP handler hello.js ser ves single web page on port 8080
 ```
 var http = require("http");
 var svr = http.createServer(function (request, response) {
-response.writeHead(200, {’Content-Type’: ’text/plain’});
-response.end(’Hello World’);
+  response.writeHead(200, {’Content-Type’: ’text/plain’});
+  response.end(’Hello World’);
 });
 svr.on(’error’, function(err){ console.log(’Server: ’ + err); });
 svr.listen(8080, function(){console.log(’Node: linux02 port 8080’);});
 ```
 
-createServer() registers callback that’s run by request ev ent.
+createServer() registers callback that’s run by request event.
 Code using http package can be run on linux02 with
 ```
 linux02% node hello.js
@@ -120,35 +123,35 @@ var fs = require(’fs’);
 var http = require(’http’);
 var url = require(’url’);
 var svr = http.createServer( function (request, response) {
-var path = url.parse(request.url).pathname;
-var mimetype = "text/plain";
-var i = path.lastIndexOf(".");
-if ( i != -1 )
-switch ( path.substring(i) ) {
-case ".css": mimetype = "text/css"; break;
-case ".gif": mimetype = "image/gif"; break;
-case ".html": mimetype = "text/html"; break;
-case ".jpg": mimetype = "image/jpg"; break;
-case ".js": mimetype = "text/javascript"; break;
-case ".png": mimetype = "image/png"; break;
-case ".pdf": mimetype = "application/pdf"; break;
-case ".svg": mimetype = "image/svg+xml"; break;
-case ".xhtml": mimetype = "application/xhtml+xml"; break;
-case ".xml": mimetype = "text/xml"; break;
-default: i = -1;
-}
-fs.readFile("/home/test/www/wp" + path, function (err, data) {
-var code = 404;
-if ( err ) {
-mimetype = "text/plain";
-data = "file not found";
-} else if ( i == -1 ) {
-data = "invalid path";
-} else code = 200;
-response.writeHead( code, {’Content-Type’: mimetype} );
-response.write( data );
-response.end();
-});
+	var path = url.parse(request.url).pathname;
+	var mimetype = "text/plain";
+	var i = path.lastIndexOf(".");
+	  if ( i != -1 )
+	  switch ( path.substring(i) ) {
+	  case ".css": mimetype = "text/css"; break;
+	  case ".gif": mimetype = "image/gif"; break;
+	  case ".html": mimetype = "text/html"; break;
+	  case ".jpg": mimetype = "image/jpg"; break;
+	  case ".js": mimetype = "text/javascript"; break;
+	  case ".png": mimetype = "image/png"; break;
+	  case ".pdf": mimetype = "application/pdf"; break;
+	  case ".svg": mimetype = "image/svg+xml"; break;
+	  case ".xhtml": mimetype = "application/xhtml+xml"; break;
+	  case ".xml": mimetype = "text/xml"; break;
+	  default: i = -1;
+	}
+	fs.readFile("/home/test/www/wp" + path, function (err, data) {
+	  var code = 404;
+	  if ( err ) {
+		mimetype = "text/plain";
+		data = "file not found";
+	  } else if ( i == -1 ) {
+		data = "invalid path";
+	  } else code = 200;
+	  response.writeHead( code, {’Content-Type’: mimetype} );
+	  response.write( data );
+	  response.end();
+	});
 });
 svr.on(’error’, function(err) {console.log(’Server: ’ + err);});
 svr.listen(8081, function() {console.log(’Node: linux03 port 8081’);});
@@ -317,7 +320,7 @@ Server’s sole thread avoids need to control concurrency of updates.
 
 Web apps can support database operations over records held in a file.
 Book catalogue file might contain lines of title@author@year data.
-Node app filedata.js suppor ts retr ieval over such data
+Node app filedata.js supports retr ieval over such data
 
 ```
 var express = require(’express’);
@@ -331,28 +334,28 @@ head += "<head><title>Books</title></head>\n";
 function book(t,a,y) { this.title = t; this.author = a;
 this.year = y; }
 function fileload() {
-books = new Array();
-fs.readFile(storage, (err, data) => {
-if (err) throw err;
-var list = data.toString(’ascii’).split("\n");
-for (var i=0; i<list.length-1; i++) {
-var b = list[i].split("@");
-books.push(new book(b[0], b[1], b[2]));
-}
-});
+  books = new Array();
+  fs.readFile(storage, (err, data) => {
+    if (err) throw err;
+    var list = data.toString(’ascii’).split("\n");
+    for (var i=0; i<list.length-1; i++) {
+      var b = list[i].split("@");
+      books.push(new book(b[0], b[1], b[2]));
+    }
+  });
 }
 app.get(’/search’, function (req, res) {
-var qstring = req.query.term.trim();
-page = head + "<body>\n<table border=’1’>\n"
-page += "<tr><th>title</th><th>author</th><th>year</th></tr>\n";
-for (var i=0; i<books.length; i++)
-if ( qstring == "*" ||
-(books[i].title == qstring || books[i].author == qstring) ) {
-page += "<tr><td>" + books[i].title + "</td>";
-page += "<td>" + books[i].author + "</td>";
-page += "<td>" + books[i].year + "</td></tr>\n";
-}
-res.end(page + "</table>\n</body>\n</html>\n");
+  var qstring = req.query.term.trim();
+  page = head + "<body>\n<table border=’1’>\n"
+  page += "<tr><th>title</th><th>author</th><th>year</th></tr>\n";
+  for (var i=0; i<books.length; i++)
+  if ( qstring == "*" ||
+  (books[i].title == qstring || books[i].author == qstring) ) {
+     page += "<tr><td>" + books[i].title + "</td>";
+     page += "<td>" + books[i].author + "</td>";
+     page += "<td>" + books[i].year + "</td></tr>\n";
+  }
+  res.end(page + "</table>\n</body>\n</html>\n");
 });
 var sv = http.createServer(app);
 sv.on(’error’, function(err){ console.log(’Node error: ’ + err); });
@@ -370,36 +373,43 @@ To support creation of books augment filedata.js with
 
 ```
 function filesave() {
-var data = "";
-for (var i=0; i<books.length; i++)
-data += books[i].title + "@" + books[i].author + "@";
-data += books[i].year + "\n";
-fs.writeFile(storage, data, (err) => { if (err) throw err; });
+  var data = "";
+  for (var i=0; i<books.length; i++)
+  data += books[i].title + "@" + books[i].author + "@";
+  data += books[i].year + "\n";
+  fs.writeFile(storage, data, (err) => { if (err) throw err; });
 }
 app.get(’/add’, function (req, res) {
-var title = req.query.title.trim();
-var author = req.query.author.trim();
-var year = req.query.year.trim();
-books.push(new book(title, author, year));
-res.end(head + "<p>new record added</p>\n</body>\n</html>\n");
-filesave();
+  var title = req.query.title.trim();
+  var author = req.query.author.trim();
+  var year = req.query.year.trim();
+  books.push(new book(title, author, year));
+  res.end(head + "<p>new record added</p>\n</body>\n</html>\n");
+  filesave();
 });
+```
+
 It adds new record to books and then saves the array inafile.
-To suppor t deletion of books augment filedata.js with
+To support deletion of books augment filedata.js with
+```
 app.get(’/delete’, function (req, res) {
 var title = req.query.title.trim();
 var i = 0;
 while ( i < books.length && title != books[i].title )
 i++;
 if ( i < books.length ) {
-books.splice(i, 1);
-reply = "1 record deleted";
+  books.splice(i, 1);
+  reply = "1 record deleted";
 } else reply = "record not found";
-res.end(head + "<p>" + reply + "</p>\n</body>\n</html>\n");
-if ( reply == "1 record deleted" )
-filesave();
+  res.end(head + "<p>" + reply + "</p>\n</body>\n</html>\n");
+  if ( reply == "1 record deleted" )
+  filesave();
 });
-To suppor t updating of years of books augment filedata.js with
+```
+
+To support updating of years of books augment filedata.js with
+
+```
 app.get(’/update’, function (req, res) {
 var n = 0;
 for (var i=0; i<books.length; i++)
@@ -415,7 +425,7 @@ filesave();
 
 
 
-# Node .js File Upload
+# Node.js File Upload
 
 Node.js provides multer package to handle file uploading
 ```
@@ -426,7 +436,7 @@ Description <input name="label" required> <input type="submit">
 </form>
 ```
 
-Multer parses multipar t/for m-data submissions as per RFC 1867
+Multer parses multipart/for m-data submissions as per RFC 1867
 Upload can be handled by upload.js
 ```
 var express = require(’express’);
@@ -466,7 +476,7 @@ Web service can be run (and killed) remotely on linux05.
 
 # Pros and Cons of Node.js
 Node.js is innovative web server technology that offers
-- JavaScr ipt for use as web server programming language
+- JavaScript for use as web server programming language
 - high throughput, real-time, scalable web server apps
 
 Drawbacks of Node.js for web server app development include
@@ -475,16 +485,16 @@ Drawbacks of Node.js for web server app development include
 - unsuitability for CPU intensive applications
 
 Traditional web application servers like Tomcat
--  suppor t a wide range of web server applications
+-  support a wide range of web server applications
 -  host server applications from multiple different users
 -  execute multiple server applications via multithreading
 
 In contrast Node.js servers
--  only typically supportafew applications each
+-  only typically support by few applications each
 -  aren’t often used for hosting var ious apps from multiple users
 -  execute multiple server apps via a single service thread
 
-Node.js requires users to write their JavaScr ipt code to
+Node.js requires users to write their JavaScript code to
 -  setup event handlers and register callbacks
 -  only use non-blocking asynchronous IO with files, buffers etc.
 -  decompose long program tasks into multiple, short-lived callbacks
@@ -504,7 +514,7 @@ It swaps a callback hell for prior multi-threading hell.
 
 # Key Points
 
-- Node.js is a high perfor mance platfor m based on Google’s
+- Node.js is a high performance platform based on Google’s
   JavaScript V8 engine that supports an event-driven architecture
   and non-blocking I/O APIs to achieve high throughput and
   scalability for real-time web applications.

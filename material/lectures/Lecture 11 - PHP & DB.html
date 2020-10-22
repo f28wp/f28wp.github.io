@@ -195,6 +195,14 @@
 						  - MySQL, SQLITE, NoSQL, ...
 						* PHP **compatable** with almost all servers
 						
+Note:
+Web applications including PHP often require to store and retrieve data to perform their job and produce dynamic web content. 
+There are numerous examples of  such applications, ticket reservation, hotel booking, online stores, subscription services, etc. 
+
+Storing and retrieving data can be done using the file system. This might be an option for small amount data but 
+when dealing with larger and more complicated data a lot of development effort is required, which is error prone and not efficient. 
+In these scenarios databases are the rational choice. 
+PHP support a wide range of database technologies including MySQL, PostgreSQL, Windows SQL server, SQLITE, NoSQL, etc. 
 						
 					</textarea>
 				</section>
@@ -215,6 +223,21 @@
 						* Cross platform / architecture
 						* Small size/footprint
 						* Reliable
+Note:
+As the name implies SQLite is a lightweight database management system.
+
+SQLite is an embedded SQL database engine. Unlike most other SQL databases, SQLite does not have a separate server process. 
+
+SQLite reads and writes directly to ordinary disk files. 
+
+A complete SQL database with multiple tables, indices, triggers, and views, is contained in a single disk file. 
+
+The database file format is cross-platform - you can freely copy a database between 32-bit and 64-bit systems or between big-endian and little-endian architectures. 
+
+SQLite is a compact library. With all features enabled, the library size can be less than 1MB.
+
+It is carefully tested before each release and is highly reliable.
+
 					</textarea>
 				</section>
 				
@@ -226,7 +249,18 @@
 						* Zero configuration
 						* **Portable**
 						* Public domain (open source)
-						  - Adobe, Apple, Google, McAfee, Firefox, Skype
+						* Adobe, Apple, Google, McAfee, Firefox, Skype
+Note:
+SQLite is an in-process library that implements a self-contained, serverless, zero-configuration, SQL database engine. 
+
+SQLite code is in the public domain and is free for both private and commercial use. 
+
+It has been adopted by many major brands including Adobe, Apple, Google, Firefox and skype in their applications. 
+
+In fact it is the most widely used database platform due its use in devices and websites. 
+
+All These features in addition to the features mentioned in the previous slide, make SQLite a popular choice.
+
 					</textarea>
 				</section>
 
@@ -241,13 +275,26 @@
 						* Local node storage
 						* **Communication between apps**
 						* Embedded devices
+Note:
+SQLite is often used as the on-disk file format for desktop applications.  
+Updates happen automatically as application content is revised. 
+There are many benefits to this approach, including improved performance, reduced cost and complexity, and improved reliability.
+
+Can be used as an **in-memory** database to store and manipulate temporary data.
+
+SQLite can be used as the database engine in enterprises with low to medium size database..
+
+Can replace ordinary disk files to store information
+
+SQLite can be used as a container for transferring content from one system to another since the whole database is a single compact file in a well-defined cross-platform format.
+
+Because an SQLite database requires no administration, it works well in devices. 
+SQLite is a good fit for use in phones, televisions, game consoles, kitchen appliances, etc.
+
 					</textarea>
 				</section>
 
 
-				
-
-				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -269,6 +316,12 @@
 						You can see the names of various extensions by using ```phpinfo()```
 						
 						[Try on CodePad](http://codepad.org/DRPqPriD)
+
+Note:
+SQLite has interface for different languages including PHP.
+SQLite3 has been included by default a part of the PHP 5.3.0 
+You can see the name of various extensions in your PHP environment including SQLite by using phpinfo and the *extesnsion_loaded* function
+
 					</textarea>
 				</section>
 				
@@ -314,6 +367,8 @@
 							["versionNumber"]=>
 							int(3020001) }
 						```
+Note:
+This example shows you how to display SQLite version information in PHP
 					</textarea>
 				</section>
 				
@@ -337,6 +392,24 @@
 						$ php version.php
 						3.20.1
 						```
+Note:
+You will study databases in a dedicated module next semester.
+
+Here we only see some introductory use of databases in the context of PHP.
+
+In general a relation database is a set of tables. 
+Each table usually contains information about a group of similar objects where each row contains information of an individual object. 
+
+For example, each row of a Book table can contain information for each individual book in a library, 
+or each row of a customer table contains an individual customer’s data.
+
+SQL is a language for querying relational databases (i.e. querying information contained in the tables of the database).
+
+The example shows how to create a database in the first instance. 
+The database name is test.db and it will be created or just opened if it already exists.  
+
+The second line runs a simple query against the database to check the version of the database.
+
 					</textarea>
 				</section>
 				
@@ -365,6 +438,19 @@
 						$db = new SQLite3( 'sqlite.db3' , 
 						SQLITE3_OPEN_READWRITE  | SQLITE3_OPEN_CREATE |     SQLITE3_OPEN_SHAREDCACHE );
 						```
+Note:
+Using new SQLite you can create different types of database.
+
+If the filename is given as ':memory:', SQLite3 will create an in-memory database in RAM that lasts only for the duration of the session. 
+
+If no file name is given then a new temporary file is created to hold the database. Temporary databases are automatically deleted when the 
+conection that created them closes.
+
+The database is opened shared cache enabled. If shared-cache mode is enabled multiple connections to the same database, 
+all the connections share a single data and schema cache. 
+
+This intended for embedded system to reduce the memory usage and is not set by default.
+
 					</textarea>
 				</section>
 				
@@ -379,7 +465,7 @@
 						* SELECT * FROM
 						* ..
 						
-						Futher Reading [Link](http://zetcode.com/php/sqlite3/)
+						Further Reading [Link](http://zetcode.com/php/sqlite3/)
 					</textarea>
 				</section>
 				
@@ -404,6 +490,16 @@
 							echo "{$row[0]} {$row[1]}\n";
 						}
 						```
+Note:
+SQL queries are used to create and populate database tables and retrieving data.
+
+To run SQLite queries you can use the exec function and pass a query statement (SQL) as its parameter.
+
+In this example first a Create query creates a table called friends with two column id and name. 
+
+The next three Insert statements add three rows to the table. Only value for the name column is provided the Id value is generated automatically. 
+
+The Select statement will retrieve all the rows from the friends table an put in $res variable.
 						
 					</textarea>
 				</section>
@@ -484,6 +580,12 @@
 						goodbye|40
 						sqlite>
 						```
+Note:
+SQLite has also command prompt interface. 
+
+You can use the command prompt interface to access the database directly in opposed to interacting through a programming language interface like PHP.
+
+You can use the command prompt to create and/or connect to databases, create and populated tables, to query databases directly. 
 						
 					</textarea>
 				</section>

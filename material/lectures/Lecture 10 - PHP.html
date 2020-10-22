@@ -111,13 +111,13 @@
 					<textarea data-template>
 						## What is PHP?
 						
-						* PHP Server Scripting Language
+						* PHP Server side Scripting Language
 						* Powerful tool for making **dynamic** and **interactive** web pages
 						* PHP free and widely used 
 						* PHP is acronym for **PHP: Hypertext Preprocessor**
 						* PHP runs on the **server**
 						
-					</textarea>
+					</textarea>					
 				</section>
 				
 				
@@ -133,7 +133,7 @@
 					</textarea>
 				</section>
 				
-								
+																
 				<section data-markdown style="text-align: center;">
 					<textarea data-template>
 						## PHP Dead/Outdated?
@@ -146,10 +146,40 @@
 	
 						* **Right tool for the right job**
 						  - Data processing/performance
-						  - e.g., Node.js is comparatively new
-						
+
 					</textarea>
 				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## PHP Strengths
+						
+						- Main competitors: Python, Ruby, Node.js, Perl,.NET, and Java <br/>
+						In comparison PHP has many strengths:
+						
+						* Performance - PHP is very fast
+							- A single inexpensive server can serve millions of hits per day
+
+						* **Scalability** - “shared-nothing” architecture
+
+						* Interfaces to **many database** systems
+
+						* **Built-in libraries** for many common web tasks
+			
+						* Strong object-oriented support
+
+						* **Portability** - Code usually work on windows, linux, OS X, …
+
+						* Availability of source code
+
+						* Support and documentation
+
+
+
+
+					</textarea>
+				</section>
+				
 				
 				<section data-markdown style="text-align: center;">
 					<textarea data-template>
@@ -167,7 +197,7 @@
 						## Basic PHP Syntax
 						
 						* PHP script can be placed anywhere in a document 
-						* PHP script starts with **<?** ends with **?>**
+						* PHP script starts with **<?php** and ends with **?>**
 						
 						```
 						<!DOCTYPE html><html><body>
@@ -179,8 +209,9 @@
 						</body></html>
 						```
 						
-						* PHP files have use ```.php``` extension
+						* PHP files use ```.php``` extension
 						  - e.g., index.php
+
 					</textarea>
 				</section>
 				
@@ -188,8 +219,8 @@
 
 						<h2> Important </h2>
 						
-						<p style="color:red; font-size:250pt;">
-						&lt;? ?&gt;
+						<p style="color:red; font-size:150pt;">
+						&lt;?php  . . .  ?&gt;
 						</p>
 						
 				</section>
@@ -217,6 +248,8 @@
 						  - cannot start with a number 
 						  - only contain alpha-numeric characters and underscores
 						* Variable names are **case-sensitive**
+						* Variable Variables 
+							- Allows value of a variable used to define another variable 
 						
 						```
 						$age = 2;
@@ -264,6 +297,11 @@
 					error_reporting(E_ALL);
 					?>
 					```
+					
+					**php.ini** contains configuration parameters for PHP
+					
+					*ini_set* function is used to set a single parameter in php.ini
+					
 				</textarea>
 				</section>
 				
@@ -311,7 +349,8 @@
 					* local 
 					* global 
 					* static 
-				</textarea>
+					
+					</textarea>
 				</section>
 				
 								
@@ -448,10 +487,10 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## PHP **Object**
+					## PHP **Object (1)**
 					
 					* Object is a data type which stores data and information
-					* PHP an object must be declared **explicitly**
+					* An object must be declared **explicitly**
 					
 					```
 					<?php
@@ -468,6 +507,26 @@
 					echo $mycar->model;
 					?>
 					```
+
+				</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## PHP **Object (2)**
+					
+					* you must use the keyword class
+
+					* **Visibility** can be specified before attribute/operation name: 
+						- public, private, or protected (default is public)
+
+					* Constructor is declared same as other operations, but has special name **__construct()**
+					
+					* Destructor for a class must be named **__destruct()**
+					* **->** is used to access attributes and operations
+
+					* To specify a subclass use the keyword **extends**
+					
 				</textarea>
 				</section>
 
@@ -509,7 +568,6 @@
 					  echo strlen('hello'); // what will be the output?
 					?>
 					```
-					
 				</textarea>
 				</section>
 				
@@ -596,6 +654,7 @@
 					## PHP Functions 
 					
 					* Function is a block statement (called as needed)
+					
 					Syntax 
 					* Declarations start with the word **function**
 					
@@ -714,9 +773,32 @@
 					
 				</textarea>
 				</section>
-				
+			
 				
 				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Accessing form data	
+					
+					```
+					<form action="searchname.php" method="post">
+					  <input type="text" name="firstname" size="20"  />
+					  <input type="text" name="surname" size="8" maxlength="8" />
+					  <input type="submit" value="Search" />
+					</form>
+
+					```
+						
+					* To process a form, create the script named in the attribute of the action tag
+					* In PHP script, you can access input fields using the same names as in the html form
+
+					```
+					$_POST['surname']   or   $_REQUEST['firstname'] 
+					```
+
+				</textarea>
+				</section>
+
+					<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					## Date and Time
 					
@@ -733,6 +815,7 @@
 					```
 					echo 'Today is ' . date("Y/m/d") . '<br>';
 					```
+
 				</textarea>
 				</section>
 
@@ -754,6 +837,7 @@
 					```
 					require 'filename'
 					```
+
 				</textarea>
 				</section>
 
@@ -762,8 +846,7 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					
-					## PHP Exceptions
-					
+					## PHP Exceptions		
 					```
 					<?php 
 					  // create function with exception 
@@ -771,8 +854,7 @@
 					     if ($number>1) {
 						   throw new Exception("Value must be 1 or below");
 						 }
-					  }
-					  
+					  }		  
 					  // trigger exception in a 'try' block 
 					  try {
 					     checkNum(2);
@@ -784,12 +866,30 @@
 					  }
 					?>
 					```
+
 				</textarea>
 				</section>
 
 
 
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## PHP vs NodeJS
 
+						* Both can serve as a server-side framework 
+						* Both have some pros and cons
+						* Choose the one that can serve your project requirements better						
+		
+| PHP | NodeJS |		
+| --- | ----------- |
+| Mixing code with content, coding speed | Separating view from logic, Single Stack |
+| Deep code base | Modern features & Richness |
+| When no client-side programming is required| Thinner service calls (AJAX instead of PHP requests) |
+| Integrating with SQL database functionalities| JSON & NoSQL databases |
+
+						
+					</textarea>
+				</section>
 				
 
 			

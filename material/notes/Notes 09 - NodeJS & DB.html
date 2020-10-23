@@ -28,7 +28,7 @@ Supplementary notes to complement the lecture material for web programming (F28W
 Relational databases (RDB) are based on relational model (RM).
 RM handles data as relations among strings, numbers and dates.
 SQL is widely supported Standard Query Language for RDBs.
-MySQL is popular RDB server suppor ting call level interface for SQL.
+MySQL is popular RDB server supporting call level interface for SQL.
 MySQL on mysql-ser ver-1 (anubis) can be remotely queried by clients
 
 ```
@@ -221,7 +221,7 @@ Web app can be run (and killed) remotely on linux06.
 
 # Node .js and MySQL
 
-To suppor t the adding of books augment sqlquer y.js with
+To support the adding of books augment sqlquer y.js with
 ```
 app.get(’/add’, function (req, res) {
 var title = req.query.title.trim();
@@ -243,7 +243,7 @@ res.end(head + "<p>" + results.affectedRows +
 
 Exercise this Add functionality with for m on online page.
 
-To suppor t the deletion of books augment sqlquer y.js with
+To support the deletion of books augment sqlquer y.js with
 ```
 app.get(’/delete’, function (req, res) {
 var title = req.query.title.trim();
@@ -290,10 +290,10 @@ JSON is built on 7 types of value including 2 types of structure
 - array ordered sequence of comma separated values between [ and ]
 - object unordered bag of string/value pairs between { and }
 
-JSON objects and values are cut down versions of JavaScr ipt ones
+JSON objects and values are cut down versions of JavaScript ones
 - objects can only have proper ties with double quoted names
   cannot have proper ties with function values
-- values str ings, numbers, true, false, null, array, JSON object
+- values strings, numbers, true, false, null, array, JSON object
 
 Strings can contain
 - any unicode character except " or \ or control character
@@ -307,7 +307,7 @@ Examples of objects and arrays
 
 JavaScript like many other programming languages has API for JSON.
 
-JSON.parse() extracts JavaScr ipt objects from JSON syntax data.
+JSON.parse() extracts JavaScript objects from JSON syntax data.
 ```
 var txt = ’{ \"bible\" : 2, \"whisky bottle\" : 3}’;
 var obj = JSON.parse(txt);

@@ -149,7 +149,7 @@
 						<textarea data-template>
 						## Revision Question
 						
-						What would be in each line of the following PHP?
+						What would be in $foo at each line of the following PHP?
 						
 						```
 						$foo = "0";                  // $foo is ??
@@ -172,8 +172,8 @@
 						$foo = "0";                  // $foo is a string("0")
 						$foo += 2;                   // $foo is an integer(2)
 						$foo = $foo + 1.3;           // $foo is now a float(3.3)
-						$foo = 5 + "10 little bits"; // $foo is integer(15)
-						$foo = 5 + "20 little bits"; // $foo is integer(25)
+						$foo = 5 + "10 little bits"; // $foo is integer(15) + a warning
+						$foo = 5 + "20 little bits"; // $foo is integer(25) + a warning 
 						?>
 						```
 						
@@ -546,7 +546,7 @@ The Select statement will retrieve all the rows from the friends table an put in
 					$version = $db->querySingle('SELECT SQLITE_VERSION()');
 					echo $version . "<br>";
 
-					$v = $db->exec("CREATE TABLE IF NOT EXISTS tbl(id INTEGER, name TEXT)");
+					$v = $db->exec("CREATE TABLE IF NOT EXISTS tbl(id INTEGER PRIMARY KEY, name TEXT)");
 					echo "v: " . $v . "<br>";
 
 					$db->exec("INSERT INTO tbl(name) VALUES ('Tom')");

@@ -64,7 +64,6 @@
 						* Ajax methods and properties
 						* **Examples**
 						* Questions and Discussion
-						
 					</textarea>
 				</section>
 
@@ -109,7 +108,6 @@
 
 						* JSON objects are used to **transfer data** between the server and the client 
 						* JSON is a **simple**, common representation of data
-						
 					</textarea>
 				</section>
 				
@@ -135,7 +133,7 @@
 						* Booleans 
 						* Objects 
 						* Arrays
-						* null
+						* null, true, false
 						
 					</textarea>
 				</section>
@@ -147,12 +145,14 @@
 					<textarea data-template>
 						## JSON **Objects**
 						
-						* Objects are unordered containers of key/value pairs 
+						* Objects are *unordered* containers of key/value pairs 
 						* Objects are wrapped in **{ }**
 						* Comma **,** seperates key/value pairs 
 						* Colon **:** seperates keys and values 
 						* Keys are strings 
-						* Values are JSON values - struct, record, hashtable, object 
+						* Values are from JSON data types
+						* Also refered to as (in other languagaes) :
+							- struct, record, hashtable, associative array, ... 
 						
 						
 					</textarea>
@@ -174,22 +174,20 @@
 								  "framerate": 24 }
 						}
 						```
+
 					</textarea>
 				</section>
 				
-				
-				
-
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## JSON **Array**
 						
-						* Arrays are ordered sequences of values 
+						* Arrays are *ordered* sequences of values 
+						* Vales can be of different types
 						* Arrays are wrapped in **[]**
 						* Comma **,** seperate values 
-						* Implementation can start at index 0 or 1
-						
+						* Implementation can start at index 0 or 1						
 						
 					</textarea>
 				</section>
@@ -201,47 +199,16 @@
 						
 						
 						```
-						var test = {
-						  "vals": [ "Bob", "Tom", 22 ]
-						  };
-						```
-						
-					</textarea>
-				</section>
-
-				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Examples
-						
-						Key-value pairs
-						```
-						var test = {
-						  "fname": "Bob",
-						  "lname": "Tom",
-						  "age":   22
-						  };
-						```
-						
-						Accessing the JSON objects:
-						```
-						document.writelin("FName: " + test.fname);
-						document.writelin("LName: " + test.lname);
-						document.writelin("Age  : " + test.age  );
-						```
-					</textarea>
-				</section>
-
-				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Examples
-						Object with one member
-						```
 						{
-						   "course": "6.69"
+						  "vals": [ "Bob", "Tom", 22 ]
 						}
 						```
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Examples
 						
 						Object with two member
 						```
@@ -259,12 +226,37 @@
 						Object with an array as a value 
 						```
 						{
-						"course": "abc",
-						"times":  ["2", "3", "4"]
+							"course": "abc",
+							"times":  ["2", "3", "4"]
 						}
 						```
 					</textarea>
 				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Examples
+						
+						Key-value pairs
+						```
+						var test = {
+						  "fname": "Bob",
+						  "lname": "Tom",
+						  "age":   22
+						  };
+						```
+						
+						Accessing the JSON objects:
+						```
+						document.writeln("FName: " + test.fname);
+						document.writeln("LName: " + test.lname);
+						document.writeln("Age  : " + test.age  );
+						```
+
+					</textarea>
+				</section>
+
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -299,7 +291,8 @@
 				
 				<section data-background="images/wsb-13.png" data-background-size="contain">
 				</section>
-				<section data-background="images/wsb-14.png" data-background-size="contain">
+				
+				<section data-background="images/wsb-14.png" data-background-size="contain" data-markdown style="text-align: left;">
 				</section>
 				
 				
@@ -313,6 +306,7 @@
 					
 					```JSON.parse() ```
 					* Takes a **JSON string** and parses it to a Javascript object
+
 					</textarea>
 				</section>
 				
@@ -363,14 +357,30 @@
 				</section>
 
 
-				<section>
+				<section >
 				<h2>Example (JSON Formatter)</h2>
-				<iframe data-src="https://jsonformatter.org"  width="90%" height="600px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				<iframe data-src="https://jsonformatter.org"  width="90%" height="400px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 				
 				Validator (Syntax Checker)/Compact View
+
 				</section>
 
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## JSON vs XML 
+					Both have been used to communicate data
 					
+					* JSON is valid JavaScript; better with Javascript/Web than XML 
+					<br><br>
+					* JSON less verbose and light weight
+					* XML can be used as a more general purpose markup
+					<br><br>
+					* XML usually specialized XML vocabulary is used
+					* JSON is much more universal in this regard					
+					
+					</textarea>
+				</section>
+
 				<section data-markdown>
 					<textarea data-template>
 						## AJAX
@@ -390,9 +400,7 @@
 						* AJAX stands for **Asynchronous JavaScript And XML**	
 					</textarea>
 				</section>
-				
-				
-				
+								
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## AJAX
@@ -400,23 +408,43 @@
 						* Technique for creating **interactive web pages**
 						* Javascript and **XMLHttpRequest** to interchange and manipulate data with web server 
 						* **Asynchronous** communication (i.e., no freezing up)
+
 					</textarea>
 				</section>
-				
-				
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Ajax request  
+
+						XMLHttpRequest is used to create and send HTTP requests
+					
+						1. Create XMLHttpRequest:
+							```
+							let xhr = new XMLHttpRequest()
+							```
+						2. configure the request 
+							```
+							xhr.open(method, URL, [async, user, password])
+							```
+						3. connect to server and send the request
+							```
+							xhr.send([body])
+							```
+						4. Listen to events for response  **load , error , progress**
+
+					</textarea>
+				</section>	
 								
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## POST and GET in Ajax
-
 						* GET places arguments in **query string** (POST doesn't)
 						* GET call in Ajax has **size limitation** on the amount of data that can be passed 
-						
 					</textarea>
 				</section>
-				
 							
 								
+
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## POST and GET in Ajax
@@ -429,40 +457,70 @@
 						
 					</textarea>
 				</section>	
-				
-				
 							
 								
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Ajax Methods (1)
 						
-						* abort() : Aborts request 
-						* **getAllResponseHeaders()**: Returns string with all header information 
-						* **getResponseHeader("headerLabel")**: Returns the text of a specified header 
-						* **setRequestHeader("label", "value")**: Sets the value of the HTTP request header 
-						
-					</textarea>
-				</section>	
-								
-							
-								
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Ajax Methods (2)
-						
-						* **open**("method", "URL"[,asynchFlat[, "userName"[, "password"]]]): Initializes a request.
-						   - Method to be sued from Javascript code
-						   - Initialize request from native code, use openRequest() instead 
+						* **open**("method", "URL"[,async[, "userName"[, "password"]]]): 
+							- Initializes a request.
 						  
-						* **send**(content): Sends the request.
+						* **send**([body]): Connect to server and Sends the request.
 							- If the request is asynchronous(which is default), this method return as soon as the request is sent
 						   
-							- If the () request is synchronous, this method doesn't return unilt hte response has arrived
+							- If the request is synchronous, this method doesn't return unilt the response has arrived
 						
 					</textarea>
 				</section>	
 
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Ajax Callbacks 
+						
+						* **onload**  
+						```
+						xhr.onload = function() { ...
+						```
+						* **onerror**
+						```
+						xhr.onerror = function() {
+						  alert("Request failed");
+						};						```
+
+						* **onprogress**
+						```
+						xhr.onprogress = function(event) {
+						```
+
+						* addEventListener(event, Callback) 	
+						   event : "load", "error", ...
+
+					</textarea>
+				</section>	
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Ajax Response 
+						
+						Receive the result in the following xhr properties:
+
+						* **status**  - HTTP status code: 200, 404, 403, ...
+						* **statusText** - HTTP status message: OK, Not Found, Forbidden, ...
+						* **response / responseText / responseXML ...** - the response body
+						```
+						xhr.onload = function() {
+							if (xhr.status != 200) {
+								alert(`Error ${xhr.status}: ${xhr.statusText}`); 
+							} else { 
+								alert(xhr.response);
+							}
+						};
+						```
+						* **responseType** - enumerated string value: arrayBuffer, json, document, text 
+					
+					</textarea>
+				</section>	
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -471,25 +529,56 @@
 						<!DOCTYPE html> 
 						<head><title>Ajax Test</title> 
 						<script type="text/javascript"> 
-							var xmlHttp = new XMLHttpRequest();
-							xmlHttp.open("GET", "hello.txt", true);
-							xmlHttp.addEventListener("load", ajaxCallback, false); 
-							xmlHttp.send(null); 
+							var xhr = new XMLHttpRequest();
+							xhr.open("GET", "hello.txt", true);
+							xhr.onload = ajaxCallback; 
+							xhr.send(); 
 							function ajaxCallback(event){ 
 							  alert( "Your file contains the text: " + event.target.responseText );
 							} 
 						</script>
 						</head> 
 						<body></body></html>
-						```
-						
+						```					
 						Note hello.txt could be a .php file that produces dynamic content/information
 					</textarea>
 				</section>	
 
-
-				
-				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Ajax Other Methods (1)
+						
+						* **setRequestHeader("label", "value")**: Sets the value of the HTTP request header 
+						* **getAllResponseHeaders()**: Returns string with all header information 
+						* **getResponseHeader("headerLabel")**: Returns the text of a specified header 
+						
+					</textarea>
+				</section>	
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Ajax Other Methods/properties (2) 
+						
+						* **abort()** : Aborts request 
+						* **onreadystatechange**  - property contains the event handler when the readyState attribute changes
+						```
+						xhr = new XMLHttpRequest();
+						xhr.onreadystatechange = function() {
+							if (xhr.readyState == 4 && xhr.status == 200)
+								alert(xhr.responseText);
+						}
+						xhr.open("GET","hello.txt",true);
+						xhr.send();
+						```
+						
+						* **timeout**  -  (in ms)
+						```
+						xhr.timeout = 10000;
+						xhr.ontimeout = function ....
+						```
+						
+					</textarea>
+				</section>	
 
 				
 				<section data-markdown style="text-align: left;">
@@ -509,6 +598,12 @@
 						  ```
 						  responseData = responseText.parseJSON();
 						  ```
+			
+						or
+						
+						  ```
+						  responseData = JSON.parse(responseText);
+						  ```
 						
 					</textarea>
 				</section>
@@ -520,9 +615,10 @@
 						Is safer to use **eval** with XMLHttpRequest?
 						
 						* JSON data comes from the same server that vended the page
-						* An eval of the data is no less secure than the original html 
-						* If in double, use **string.parseJSON** instead of eval 
 						
+						* An eval of the data is no less secure than the original html 
+						
+						* If in doubt, use **string.parseJSON** or **JSON.parse** instead of eval 
 					</textarea>
 				</section>
 				
@@ -544,7 +640,7 @@
 
 						```
 						  $emailaddresses = getDataFromDataSource(
-						  "SELECT COUNT(*) AS emailaddressCount from adresboek
+						  "SELECT COUNT(*) AS emailaddressCount from adressbook
 						  where emailaddress = '" . $_REQUEST["emailaddress"] ."'");
 
 						  $emailaddressesForJSON = array(); 

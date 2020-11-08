@@ -157,7 +157,7 @@
 						## XML Declaration
 					
 						```
-						<?xml version = "1.0"  encoding = "UTF-8"??>
+						<?xml version = "1.0"  encoding = "UTF-8"?>
 						<contact-info>
 							<address>
 								<house-no>25</house-no>
@@ -210,9 +210,9 @@
 						* A way to avoid element name conflicts
 							- specially when mixing XMLs 
 
-						* Namespace identified by URI(Uniform Resource Identifiers)
+						* Namespace identified by URI (Uniform Resource Identifiers)
 						```
-						<f28wp:contact xmlns:cont = "www.f28wp.com/files">
+						<f28wp:contact xmlns:f28wp = "www.f28wp.com/files">
 							<f28wp:address>
 								<f28wp:house-no>25</f28wp:house-no>
 								<f28wp:street>Queen Street</f28wp:street>
@@ -236,14 +236,11 @@
 						## XML DTDs
 
 						* DTD (Document Type Declaration) - a way to describe XML language precisely 
-
-						* can be used to validate an XML document
-						
+						* Can be used to validate an XML document						
 						* Contains:
 							- Declarations for elements and attributes
 							- how elements are grouped or nested
 							- restrictions on the type or format of elements/attributes
-
 						* DTD can be in the document or in a separate file
 						```
 						<!DOCTYPE root-element SYSTEM "file-name">
@@ -273,7 +270,7 @@
 						* in the XML file
 						```
 						<contact xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-						xsi:noNamespaceSchemaLocation="f29wp.xsd">
+						xsi:noNamespaceSchemaLocation="f28wp.xsd">
 						```
 						* Schema
 						```
@@ -526,7 +523,7 @@
 					<textarea data-template>
 					## Subscription
 					
-					* RSS allows internet uses to **subscribe** to RSS feeds ([details])(https://en.wikipedia.org/wiki/RSS)
+					* RSS allows internet users to **subscribe** to RSS feeds ([details])(https://en.wikipedia.org/wiki/RSS)
 					* RSS Feeds will be read by an RSS Feed reader
 						- available as standalone apps or browser extension
 						- add Channels or Channel Groups

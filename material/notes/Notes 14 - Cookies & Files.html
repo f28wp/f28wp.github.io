@@ -25,22 +25,22 @@ Supplementary notes to complement the lecture material for web programming (F28W
 
 # Web Storage
 
-Web storage is key/value JavaScr ipt API on web browsers to
+Web storage is key/value JavaScript API on web browsers to
 - store user data locally on host running browser
-- put it in silos correlated with web server domain or igins
+- put it in silos correlated with web server domain origins
 
 Only web pages from domain D can access D’s silo via web storage.
 - localStorage stores data persistently for each web server
-- sessionStoragestores data sessionally per server per browser instance
+- sessionStorage stores data sessionally per server per browser instance
 
-These two associative arrays suppor t the functions
+These two associative arrays support the functions
 - clear() remove all key/value pairs
 - getItem(key) get value of key
 - key(i) get ith element of array of keys
 - removeItem(key) delete key and its value
 - setItem(key, value) set key to value
 
-These for ms of web storage can be exercised by the for m
+These forms of web storage can be exercised by the form
 ```
 <body onload="displayWebStore()">
 <h3>Web Storage</h3>
@@ -63,32 +63,32 @@ Web storage stores data sessionally or persistently.
 Session data in browser’s volatile memory is lost when it dies.
 
 
-JavaScript file storage.js suppor ts web storage use
+JavaScript file storage.js supports web storage use
 ```
 function displayWebStore() {
-db = localStorage;
-if ( window.location.href.indexOf("?session") != -1 )
-db = sessionStorage;
-if ( typeof(db) == "undefined" ) {
-alert("no web storage available");
-return;
-}
-var s = "";
-for (var i=0; i<db.length; i++) {
-var key = db.key(i);
-s += key + " = " + db.getItem(key) + "<br/>";
-}
-document.getElementById("WSData").innerHTML = s;
+	db = localStorage;
+	if ( window.location.href.indexOf("?session") != -1 )
+		db = sessionStorage;
+	if ( typeof(db) == "undefined" ) {
+		alert("no web storage available");
+		return;
+	}
+	var s = "";
+	for (var i=0; i<db.length; i++) {
+		var key = db.key(i);
+		s += key + " = " + db.getItem(key) + "<br/>";
+	}
+	document.getElementById("WSData").innerHTML = s;
 }
 function updateWebStore() {
-var key = document.getElementById("key").value;
-if ( key != "" )
-db[key] = document.getElementById("val").value;
-displayWebStore();
+	var key = document.getElementById("key").value;
+	if ( key != "" )
+		db[key] = document.getElementById("val").value;
+	displayWebStore();
 }
 function clearWebStore() {
-db.clear();
-displayWebStore();
+	db.clear();
+	displayWebStore();
 }
 ```
 
@@ -96,7 +96,7 @@ Web storage is sessional here if "?session" in URL otherwise it’s not.
 
 Example defines 3 functions for origin web server of web page
 - displayWebStore() display keys and values in web storage
-- updateWebStore() updates web storage with key/value from for m
+- updateWebStore() updates web storage with key/value from form
 - clearWebStore() removes key/value pairs from web storage
 
 Web storage avoids
@@ -114,7 +114,7 @@ Cookies contain
 - path
 - duration
 
-Web ser vers ask web clients to store cookies.
+Web servers ask web clients to store cookies.
 
 Compliant web clients supply name and value of cookie
 - within that duration
@@ -125,13 +125,13 @@ Domain, path, duration are optional. Defaults apply if missing.
 Cookies let web server applications connect HTTP requests together.
 
 Cookies
-- beat HTTP’s statelessness by stor ing data on client
+- beat HTTP’s statelessness by storing data on client
 - are passed in Set-Cookie reply and Cookie request headers
 - are stored in user’s filespace or in browser’s volatile memory
 
 Cookies can be manipulated by
 - meta directive in HTML
-- JavaScr ipt in web page
+- JavaScript in web page
 - web server programs - CGI, servlets, JSP, Node.js etc.
 
 
@@ -141,7 +141,7 @@ Cookies can be manipulated by
 
 There used to be 2 cookie standards - Netscape’s and RFC 2965.
 
-Combined refor med standard RFC 6265 now gover ns cookie usage.
+Combined reformed standard RFC 6265 now governs cookie usage.
 
 Form of major fields to set a cookie with Max-age is:
 
@@ -158,13 +158,13 @@ Optional attributes, which may occur once in any order, are:
 - Path defaults to path of document creating cookie
 - Secure cookie is only to be sent on secure channel (HTTPS)
 
-Max-age tr umps Expires header if both are present.
+Max-age trumps Expires header if both are present.
 
 RFC 6265 example request with Max-age would be
 ```
 Set-Cookie: Customer="WILE E COYOTE"; Path=/acme;
 Max-age=31536000; Domain=dod.gov
-``
+```
 
 It specifies cookie should last for one year in seconds.
 Form of request to set cookie with Expires date-time is
@@ -190,10 +190,10 @@ Session cookies last only as long as client’s session
 - aren’t stored in cookie file(s) on client
 
 Saving cookie with exactly same Path, Domain and Name values
-- overwr ites existing one
-- deletes it if expir y date is past
+- overwrites existing one
+- deletes it if expiry date is past
 
-Path matching is done by str ing compar ison
+Path matching is done by string comparison
 - path "/ban" matches "/ban/bomb.html" and "/banana.html"
 - most general path is "/"
 - default path is URL path of associated document
@@ -207,40 +207,40 @@ Browsers often allow users to control whether to
 
 Cookie controls
 - Mozilla Edit, Preferences, Privacy and Security, Cookies
-- Explorer Tools, Inter net Options, Privacy, Advanced...
+- Explorer Tools, Internet Options, Privacy, Advanced...
 
 
 
 
 # RFC 6265 Cookie Dialogue
-Wile E Coyote fills in Ar ms Inc login for m and sends to server:
+Wile E Coyote fills in Arms Inc login form and sends to server:
 ```
 POST /login HTTP/1.1
 ...
 ```
 
-Server replies to him with arms purchase for m
+Server replies to him with arms purchase form
 ```
 HTTP/1.1 200 OK
 Set-Cookie: Customer="Wile E Coyote"; Path=/
 ...
 ```
 
-He submits for m asking to buy rocket launcher and sends:
+He submits form asking to buy rocket launcher and sends:
 ```
 POST /arms/buy HTTP/1.1
 Cookie: Customer="Wile E Coyote"; Path=/
 ...
 ```
 
-Server replies to him with arms shipping for m and sends:
+Server replies to him with arms shipping form and sends:
 ```
 HTTP/1.1 200 OK
 Set-Cookie: Part_Number="rocket launcher"; Path=/arms
 ...
 ```
 
-He submits for m asking for USAF air freight and sends:
+He submits form asking for USAF air freight and sends:
 ```
 POST /arms/shipping/freight HTTP/1.1
 Cookie: Part_Number="rocket launcher";
@@ -279,15 +279,20 @@ It is removed with a
 <meta http-equiv="Set-Cookie" content="name=; Max-age=-1">
 ```
 
-Cookies are set in JavaScr ipt in following manner:
+Cookies are set in JavaScript in following manner:
 ```
 document.cookie = "name=value; Expires=...; Path=...; Domain=...";
-Consider the Javascr ipt function cookie.js
+```
+Consider the Javascript function cookie.js
+```
 function Cookie(name, value, days) {
-d=new Date();
-if ( days < 0 ) { d.setTime(0); }
-else { d.setTime(d.getTime() + days * 24*60*60*1000); }
-return name+"=\""+value+"\"; Expires=\""+d.toUTCString()+\";
+	d=new Date();
+	if ( days < 0 ) { 
+		d.setTime(0); 
+	} else { 
+		d.setTime(d.getTime() + days * 24*60*60*1000); 
+	}
+	return name+"=\""+value+"\"; Expires=\""+d.toUTCString()+\";
 }
 ```
 
@@ -298,9 +303,10 @@ It can be invoked to set a cookie for a year by
 <script src="cookie.js"></script>
 <script>
 function go() {
-c=Cookie("Skill", "basic", 365) + "; Domain=hw.ac.uk; Path=/";
-document.cookie = c;
-document.writeln("Cookie set: " + c); }
+	c = Cookie("Skill", "basic", 365) + "; Domain=hw.ac.uk; Path=/";
+	document.cookie = c;
+	document.writeln("Cookie set: " + c); 
+}
 </script>
 </body>
 ```
@@ -311,9 +317,10 @@ Same cookie can be deleted by giving it a date in the past:
 <script src="cookie.js"></script>
 <script>
 function go() {
-c=Cookie("Skill", "anything", -1) + "; Domain=hw.ac.uk; Path=/";
-document.cookie = c;
-document.writeln("Cookie set: " + c); }
+	c = Cookie("Skill", "anything", -1) + "; Domain=hw.ac.uk; Path=/";
+	document.cookie = c;
+	document.writeln("Cookie set: " + c); 
+}
 </script>
 </body>
 ```
@@ -321,25 +328,25 @@ document.writeln("Cookie set: " + c); }
 
 # Handling Cookies in JavaScript
 
-Useful JavaScr ipt in cookiefunctions.js for handling cookies:
+Useful JavaScript in cookiefunctions.js for handling cookies:
 ```
 function getCookieNames() {
-if ( document.cookie == "" ) return new Array();
-var c = document.cookie.split(";");
-var names = new Array(c.length);
-for (var i=0; i<c.length; i++)
-names[i] = c[i].substr(0, c[i].indexOf("="));
-return names;
+	if ( document.cookie == "" ) return new Array();
+	var c = document.cookie.split(";");
+	var names = new Array(c.length);
+	for (var i=0; i<c.length; i++)
+		names[i] = c[i].substr(0, c[i].indexOf("="));
+	return names;
 }
 function getCookieValue(name) {
-var cs = document.cookie.split(";");
-for (var k=0; k<cs.length; k++) {
-Nam = cs[k].substr(0, cs[k].indexOf("="));
-Val = cs[k].substr(cs[k].indexOf("=") + 1);
-if ( Nam == name )
-return unescape(Val);
-}
-return null;
+	var cs = document.cookie.split(";");
+	for (var k=0; k<cs.length; k++) {
+		Nam = cs[k].substr(0, cs[k].indexOf("="));
+		Val = cs[k].substr(cs[k].indexOf("=") + 1);
+		if ( Nam == name )
+			return unescape(Val);
+	}
+	return null;
 }
 ```
 
@@ -355,11 +362,11 @@ All cookies delivered with a page can be listed by listcookies.html
 <script type="text/javascript">
 var arr = getCookieNames();
 for (var j=0; j<arr.length; j++) {
-var val = getCookieValue(arr[j]);
-if ( val != null ) {
-document.writeln(arr[j] + " = " + unescape(val));
-document.writeln("<br>");
-}
+	var val = getCookieValue(arr[j]);
+	if ( val != null ) {
+		document.writeln(arr[j] + " = " + unescape(val));
+		document.writeln("<br>");
+	}
 }
 </script>
 </body>
@@ -398,20 +405,18 @@ var tail = ["<form action=’" + url + "’>",
 "</form>", "</body>", "</html>"];
 var eol = "\n";
 app.get("/cookie", function (req, res) {
-var s = "";
-for (var i in head) s += head[i] + eol;
-if ( req.query.name != undefined && req.query.name != "" &&
-req.query.value != undefined ) {
-if ( isNaN(req.query.age) ) req.query.age = 0;
-setCookie(req.query.name, req.query.value,
-{maxAge: req.query.age, res: res});
-}
-s += "<p>" + eol;
-for (var i in req.cookies)
-s +=i+"="+ req.cookies[i] + "<br>" + eol;
-s += "</p>" + eol;
-for (var i in tail) s += tail[i] + eol;
-res.send(s); // send web page
+	var s = "";
+	for (var i in head) s += head[i] + eol;
+	if ( req.query.name != undefined && req.query.name != "" && req.query.value != undefined ) {
+		if ( isNaN(req.query.age) ) req.query.age = 0;
+		setCookie(req.query.name, req.query.value, {maxAge: req.query.age, res: res});
+	}
+	s += "<p>" + eol;
+	for (var i in req.cookies)
+		s += i + "=" + req.cookies[i] + "<br>" + eol;
+	s += "</p>" + eol;
+	for (var i in tail) s += tail[i] + eol;
+	res.send(s); // send web page
 });
 var svr = http.createServer(app);
 svr.on(’error’, function(err) { console.log(’Server: ’ + err); });
@@ -422,32 +427,32 @@ svr.listen(8080, function() {console.log("Node: linux11 port 8080");});
 
 # Cookies, Web Storage and EU Law
 In 2012 UK implemented clause 66 of EU directive 2009/136/EC to
-- require apt consent for storage or access to infor mation
-- where it is stored on a user’s ter minal equipment
+- require apt consent for storage or access to information
+- where it is stored on a user’s terminal equipment
 
-Change was motivated by concer ns about
+Change was motivated by concerns about
 - online tracking of individuals and use of spyware
 - on their devices without their knowledge and agreement
 
 Directive applies to use of cookies and use of HTML 5 Web Storage.
-Apt consent should be explicit and pr ior if possible and be
-> a freely given specific and infor med indication of a data
+Apt consent should be explicit and prior if possible and be
+> a freely given specific and informed indication of a data
 subject’s wishes by which he signifies his agreement to
 personal data relating to him being processed
 
-i.e. it must be specific, infor med and express user’s wishes.
+i.e. it must be specific, informed and express user’s wishes.
 
 Consent isn’t needed where personal data storage on user computer
 
 (a) is solely to enable communication over electronic network
 
-(b) is str ictly necessar y to provide an infor mation society service requested by user.
+(b) is strictly necessary to provide an information society service requested by user.
 
-So infor med specific consent isn’t (supposed to be) needed for
+So informed specific consent isn’t (supposed to be) needed for
 - a shopping cart
 - security requirement like authentication to protect user’s privacy
 
-It is needed for adver tising, analysing page usage, customisation.
+It is needed for advertising, analysing page usage, customisation.
 UK Information Commissioner supplies guidance on compliance.
 
 
@@ -461,7 +466,7 @@ UK Information Commissioner supplies guidance on compliance.
 
 
 # Key Points
-- Web storage is a key/value JavaScr ipt API supported by web
+- Web storage is a key/value JavaScript API supported by web
   browsers to store and retrieve user data. It is put in storage silos
   correlated with web server domain origins so only their HTML
   pages can manipulate it via the API. Session storage stores the

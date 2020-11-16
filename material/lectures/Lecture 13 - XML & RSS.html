@@ -136,7 +136,247 @@
 					</section>
 				</section>
 				
+				<section data-markdown data-transition="slide" data-background-transition="zoom">
+					<textarea data-template>
+						## XML 
+						
+						* XML - eXtensible Markup Language
+							- derived from Standard Generalized Markup Language (SGML)
+						
+						* XML designed to store and carry the data
+						* XML does not perform any computation or algorithms
+						* XML is extensible − allows creation of self-descriptive tags
+						* XML has no predefined tags
+						* XML was developed by W3C as a public standard
+
+					</textarea>
+				</section>
+
+				<section data-markdown data-transition="slide" data-background-transition="zoom">
+					<textarea data-template>
+						## XML Declaration
+					
+						```
+						<?xml version = "1.0"  encoding = "UTF-8"?>
+						<contact-info>
+							<address>
+								<house-no>25</house-no>
+								<street>Queen Street</street>
+								<postcode>Ehxxx</postcode>
+							</address>
+							<phone-no>07572222</phone-no>
+						</contact-info>
+						```
+					</textarea>
+				</section>
+
+				<section data-markdown data-transition="slide" data-background-transition="zoom">
+					<textarea data-template>
+						## XML Document structure
+						
+						* Document Prolog Section - optional
+							- XML declaration
+							- Document type declaration
+
+						* A correct XML document shold have only one root element 
+
+						* XML document contains two types of whitespaces
+							- Significant - within the element text contetnt
+							- Insignificant - in the element tag e.g between attributes
+
+					</textarea>
+				</section>
+
+				<section data-markdown data-transition="slide" data-background-transition="zoom">
+					<textarea data-template>
+						## XML CDATA section
+
+						* CDATA (Character Data)
+							- blocks of text that are not parsed by the parser
+							- may contain markup characters (<, >, and &)
+						```
+						<![CDATA[
+						   characters with markup
+						]]>
+						```
+
+					</textarea>
+				</section>
+
+				<section data-markdown data-transition="slide" data-background-transition="zoom">
+					<textarea data-template>
+						## XML Namespace
+						
+						* A way to avoid element name conflicts
+							- specially when mixing XMLs 
+
+						* Namespace identified by URI (Uniform Resource Identifiers)
+						```
+						<f28wp:contact xmlns:f28wp = "www.f28wp.com/files">
+							<f28wp:address>
+								<f28wp:house-no>25</f28wp:house-no>
+								<f28wp:street>Queen Street</f28wp:street>
+							</f28wp:address>
+							<f28wp:phone>07572222</f28wp:phone>
+						<f28wp:contact>
+						```
+						* default namespace for an element -> prefixes not required
+						```
+						<contact xmlns = "www.f28wp.com/files">
+							<address>
+								<house-no>25</f28wp:house-no>
+						```
+
+					</textarea>
+				</section>
+
+
+				<section data-markdown data-transition="slide" data-background-transition="zoom">
+					<textarea data-template>
+						## XML DTDs
+
+						* DTD (Document Type Declaration) - a way to describe XML language precisely 
+						* Can be used to validate an XML document						
+						* Contains:
+							- Declarations for elements and attributes
+							- how elements are grouped or nested
+							- restrictions on the type or format of elements/attributes
+						* DTD can be in the document or in a separate file
+						```
+						<!DOCTYPE root-element SYSTEM "file-name">
+						```
+
+					</textarea>
+				</section>
+
+
+				<section data-markdown data-transition="slide" data-background-transition="zoom">
+					<textarea data-template>
+						## XML Schema - XSD
+						* Does the same function as DTD
+						
+						* Written in XML (DTDs are drived from SGML)
+						* XML schema gives more options and flexibility 
+							- Allow support for namespaces 
+							- Define number and order of child elements
+							- XML schemas are extensible 
+
+					</textarea>
+				</section>
 				
+				<section data-markdown data-transition="slide" data-background-transition="zoom">
+					<textarea data-template>
+						## XML Schema example
+						* in the XML file
+						```
+						<contact xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+						xsi:noNamespaceSchemaLocation="f28wp.xsd">
+						```
+						* Schema
+						```
+						<?xml version = "1.0" encoding = "UTF-8"?>
+						<xs:schema xmlns:xs = "http://www.w3.org/2001/XMLSchema">
+						  <xs:element name = "person">
+						    <xs:complexType>
+						      <xs:sequence>
+						        <xs:element name="name" type="xs:string">
+						        <xs:element name="email" type="xs:string" maxOccur="unbound">		
+						      </xs:sequence>
+						      <xs:attribute name="age" type="xs:string" use="required"/>
+						    </xs:complexType>
+						  </xs:element>
+						</xs:schema>
+						```						
+					</textarea>
+				</section>
+
+				
+				<section data-markdown data-transition="slide" data-background-transition="zoom">
+					<textarea data-template>
+						## XML DOM
+						
+						* XML documents have a hierarchy of informational units called nodes
+						
+						* The hirarchical structure referred to as XML Tree
+
+						* XML Document Object Model (DOM) is a way of describing those nodes and the hirarchical relationships between them.
+
+						* XML DOM, provides API allowing to navigate, add, edit, move, or remove nodes
+					</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## XML vs JSON
+						
+						XML
+						```
+						<employee>
+						  <firstName>Bob</firstName>
+						  <emNo>123</emNo>
+						</employee>
+						```
+						JSON 
+						```
+						var employee = {
+						  "firstName": Bob 
+						  "emNo": 123
+						}
+					
+						```
+						
+					</textarea>
+				</section>
+				
+				<section>
+					<h1>XML or JSON?</h1>
+				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## XML over JSON
+						
+						<img src="images/wsb-11.png" style="border:0pt;">
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					## **XML over JSON**
+					
+					* XML is **supported** by many more desktop applications than JSON
+					* Easy to take XML and apply XSLT to make XHTML or other representations
+					* XML is more generic and extensible
+					* can use XML Schema to validate XML document
+
+				</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## JSON over XML
+						
+						<img src="images/wsb-12.png" style="border:0pt;">
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## JSON over XML
+
+						* JSON requires less tags than XML
+						* JSON is **transportation-independent**, you can just bypass the XMLHttpRequest object for getting your data
+						* You can get JSON data from anywhere, not just your own domain (using JSONP)
+						* JSON is a **valid JavaScript**; better with Javascript/Web than XML
+						* JSON is **easier to read** than XML						
+
+					</textarea>
+				</section>
+
+
 				<section>
 					<section data-markdown data-transition="slide" data-background="#75534c" data-background-transition="zoom">
 						<textarea data-template>
@@ -248,18 +488,22 @@
 				<section data-markdown style="text-align: center;">
 					<textarea data-template>
 					# RSS
+
 					</textarea>
 				</section>
 				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## RSS - Really Simple Syndication 
-					* An RSS file is a small **text** file that provides a concise summary of the content of a web page 
-					* The RSS file is revised every time the web page is updated 
+					## RSS - **R**eally **S**imple **S**yndication 
+					* An RSS file (feed) is a small **text** file that provides updates of a web page 
+					* The RSS file is revised on a regular basis  
 					* RSS is used for **information** dissemination - requires very little bandwidth 
-					* **RSS written in XML** (eXtensible Markup Language)
-					</textarea>
+					* RSS Feeds can be created manually or automatically by a software.
+					* RSS Feed might be registered with an RSS Feed Directory
+					( many directories available on the web)
+
+					</textarea> 
 				</section>
 
 				<section data-markdown style="text-align: left;">
@@ -278,7 +522,10 @@
 					<textarea data-template>
 					## Subscription
 					
-					* RSS allows internet uses to **subscribe** to RSS feeds ([details])(https://en.wikipedia.org/wiki/RSS)
+					* RSS allows internet users to **subscribe** to RSS feeds ([details])(https://en.wikipedia.org/wiki/RSS)
+					* RSS Feeds will be read by an RSS Feed reader
+						- available as standalone apps or browser extension
+						- add Channels or Channel Groups
 					</textarea>
 				</section>
 				
@@ -288,26 +535,15 @@
 					<textarea data-template>
 					## RSS Essentials
 					
-					* **Essential** elements of an RSS file are:
+					* **Essential** elements of the items in an RSS file are:
 					  - Title 
 					  - Link (hyperlink)
 					  - Description
-					* RSS enables use to create information sources
+					* RSS enables users to create information sources
 					* Users **subscribe** to an RSS **feed**
 					</textarea>
 				</section>
 				
-				
-				<section data-background-iframe="https://archive.nytimes.com/www.nytimes.com/services/xml/rss/index.html" data-background-interactive>
-						<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
-							<h2 style="color:white">
-								Example RSS Feed</h2>
-							<p>Click on RSS Feed to see the XML</p>
-							<p>Foratting when viewed in browser - why?</p>
-							
-						</div>
-					</section>
-				</section>
 				
 				
 				<section data-markdown style="text-align: left;">
@@ -328,6 +564,16 @@
 					
 					* Examine an RSS feed and identify XML tags
 					</textarea>
+				</section>
+				
+				<section data-background-iframe="https://archive.nytimes.com/www.nytimes.com/services/xml/rss/index.html" data-background-interactive>
+						<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
+							<h2 style="color:white">
+								Example RSS Feed</h2>
+							<p>Click on RSS Feed to see the XML</p>
+							<p>Formatting when viewed in browser - why?</p>
+						</div>
+					</section>
 				</section>
 				
 				
@@ -377,7 +623,6 @@
 					* Stay updated on someone's **schedule**
 					* Get cinema schedule updates 
 					* Read your favourite comics 
-					* What other people are surfing 
 					* Automatically backup your weblog **posts**
 					* Get software updates 
 					* Get the latest bittorrent files
@@ -387,83 +632,7 @@
 					</textarea>
 				</section>
 
-
-
-				
-				
-				
 			
-			
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## XML vs JSON
-						
-						XML
-						```
-						<employee>
-						  <firstName>Bob</firstName>
-						  <emNo>123</emNo>
-						</employee>
-						```
-						JSON 
-						```
-						var employee = {
-						  "firstName": Bob 
-						  "emNo": 123
-						}
-					
-						```
-						
-					</textarea>
-				</section>
-				
-				<section>
-					<h1>XML or JSON?</h1>
-				</section>
-				
-				<section data-markdown style="text-align: center;">
-					<textarea data-template>
-						## XML over JSON
-						
-						<img src="images/wsb-11.png" style="border:0pt;">
-					</textarea>
-				</section>
-				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-					
-					## **XML over JSON**
-					
-					* Easy to take XML and apply XSLT to make XHTML
-					* XML is **supported** by many more desktop applications than JSON
-					* JSON can be put in the XML on the way back to the client – the benefit of both! It’s called XJAX (stands for X-domain JavaScript And XML).
-					* Simply, AJAX includes XML in it and not JSON.
-				</textarea>
-				</section>
-				
-				
-				<section data-markdown style="text-align: center;">
-					<textarea data-template>
-						## JSON over XML
-						
-						<img src="images/wsb-12.png" style="border:0pt;">
-					</textarea>
-				</section>
-				
-				<section data-markdown style="text-align: center;">
-					<textarea data-template>
-						## JSON over XML
-
-						* JSON requires less tags than XML
-						* JSON is **transportation-independent**, you can just bypass the XMLHttpRequest object for getting your data
-						* **JavaScript** is not just data – put **methods** and all sorts of goodies in JSON format
-						* You can get JSON data from anywhere, not just your own domain (standard)
-						* JSON is **easier to read** than XML						
-
-					</textarea>
-				</section>
-				
-				
 
 				<!--
 				<section data-markdown style="text-align: left;">

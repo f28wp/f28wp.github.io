@@ -46,7 +46,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h2>Hybrid Apps and Mobile (Framework7, Bootstrap, React, AngularJS)</h2>
+					<h2>Frameworks, Hybrid Apps and Mobile</h2>
 					<h4>F28WP Web Programming</h4>
 					<p>
 						<small>2020-2021</small>
@@ -58,8 +58,9 @@
 					<textarea data-template>
 						## Overview
 
+						* Web application frameworks
 						* What do we mean by **Hybrid Apps** and Mobile web applications?
-						* **Examples** (Framework7, Bootstrap, React, AngularJS)
+						* **Examples** (Framework7, Bootstrap, React, Angular)
 						* Questions and Discussion
 						
 					</textarea>
@@ -75,11 +76,12 @@
 						## What is the difference between a **Library**, **Tookit** and a **Framework**?
 						
 						Can you give an example of each?
-						
 					</textarea>
 				</section>
 				
-				<section data-background="images/apps-frame1.png" data-background-size="contain">
+				<section data-markdown data-background="images/apps-frame1.png" data-background-size="contain">
+					<textarea data-template>
+					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: center;">
@@ -89,17 +91,110 @@
 						
 					</textarea>
 				</section>
+
 				
 				
-				<section data-background="images/apps-frame2.png" data-background-size="contain">
+				<section data-markdown  data-background="images/apps-frame2.png" data-background-size="contain">
+					<textarea data-template>
+					</textarea>
 				</section>
 
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						
+						## Server-side web frameworks 
+						
+						* Make it easier to write, maintain and scale web applications
+						
+						* Provide tools and libraries that simplify common web development tasks:
+							- Routing URLs, interacting with databases, user authorization, formatting output, security
+						
+						* Examples: Laravel (PHP), Django (Python), ASP.Net (C#, VB), Express (Node.js/JavaScript), Ruby on Rails (Ruby), J2EE-JSF & Spring Boot (Java), ...
 
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						
+						## Server-side Frameworks Facilities
+						* **mapping URL** patterns to handler functions and Routing
+						* Database layer **ORM** (Object Relational Mapper)
+						* Rendering the output
+							- **Templating** system - helps to generate output by
+								using placeholders for data, supporting expressions and simple operations like iterating
+							- Might provide a set of **reusable UI components** & widgets
+							- Generating HTML & other formats like JSON and XML
+
+						* **Security** Support - e.g. sanitising all user input
+
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						
+						## Client-Side Frameworks
+						
+						* Facilitate development of interactive & responsive web pages			
+							
+						* Povide a better developer experience
+
+						* Allow to write user interfaces more declaratively  
+							– dealing with the DOM interactions behind the scenes
+
+						* Examples: *Angular* - 2016 by google, *React(Dome/Native)* 2013 by Facebook,  *Vue* 2014 
+						
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						
+						## Client-Side Framwworks
+						
+						* Provide abstract **UI components** 
+							- maintainable & reusable 
+							
+						* Provide **tooling** that improves the development experience
+							- facilitate testing, correctness, and consitency thoughout the appication
+
+						* Client-side **routing**
+
+						* Frameworks have to run their own code
+							- Larger application and computationally more expensive
+
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						
+						## Client-Side routing
+						
+						* **Single Page Apps**, or SPAs
+							- Load a single HTML shell, and continually update it without navigating to new addresses
+							- New pseudo-webpage is usually called a **view**
+						* Routing functionality is required in a complex SPA with multiple views
+							- When handled by client application is called **client-side routing** 
+						* Frameworks have tools to help with client-side routing
+
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						
+						## Hybrid Web Applications
+						
+					</textarea>
+				</section>
 			
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Question
 
+						* What are hybrid web applications?
 						* Why are hybrid web applications **important**?
 						* What are the benefits of hybrid apps?
 						* What are the **challenges** of hybrid web solutions?
@@ -118,11 +213,11 @@
 						## Hybrid Mobile Apps
 						* Hybrid apps are just like other apps 
 						* Developed using **web technologies** (e.g., HTML, CSS, Javascript)
-						* **Website** rendered in the apps view component
+						* **Webpage** rendered in the apps view component not a browser
 						* **Cross platform** (distributed across multiple devices)
 				
 						<img src="./images/mobile.png" style="border:0pt;margin-left: auto; margin-right:auto;display: block;">
-						
+
 					</textarea>
 				</section>
 				
@@ -134,10 +229,15 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Hybrid App **Framework**
-						
-						* Gives access to **mobile components** (e.g., GPS, Camera, Contacts)
-						* Pre-made components (buttons, scroll-lists)
-						
+
+						* Hybrid apps use an object to display web content (iOS **WKWebView** or Android **WebView**)
+
+						* This code is embedded into a **native container** using a solution like Apache Cordova
+
+						* Gives access to **device components** (e.g., GPS, Camera, Contacts) using plugins 
+
+						* Pre-made components (buttons, scroll-lists, ...)
+
 					</textarea>
 				</section>
 				
@@ -147,26 +247,60 @@
 					</textarea>
 				</section>
 				
-				<section data-background="images/apps-3.png" data-background-size="contain">
+				<section data-markdown  data-background="images/apps-3.png" data-background-size="contain">
+					<textarea data-template>
+					</textarea>
 				</section>
-				
+<!--				
 				<section data-background="images/apps-4.png" data-background-size="contain">
+				</section>
+-->
+
+				<section data-markdown  style="text-align: left;">
+
+					<textarea data-template>
+						## Progressive Web Apps
+						
+						* Web apps built using common web technologies (HTML, CSS, JS, ...) 
+						* Standalone (no browser), work on **multiple platforms**
+						* Do not require a container
+						* Close the gap to native applications and create **similar user experiences**
+						* No requirement to install via digital distribution systems (e.g. AppStore, Google Play)
+
+					</textarea>
+				</section>
+
+
+				<section data-markdown  style="text-align: left;">
+
+					<textarea data-template>
+						## Framework7
+						
+						https://framework7.io
+						* Framework to develop mobile Web, **PWA**, or **Hybrid** apps
+						* Focused on iOS & Android
+						* Free and open source
+						* In addition it provides: 
+						<br/>- Comrehensive **UI components**
+						<br/>- **Routing**/Navigation
+						<br/>- Device **resource access** utilities 
+						<br/>- ...
+
+					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						### Examples Mobile Web & Hybrid App Frameworks
 						
-						* http://phonegap.com/
+						* https://web.dev/progressive-web-apps/
+						* https://capacitorjs.com/
 						* http://www.sencha.com/
 						* http://jquerymobile.com/
 						* http://www.appcelerator.com/
 						* http://mulberry.toura.com/
 						* http://www.kendoui.com/
 						* http://www.winktoolkit.org/
-						* http://www.sproutcore.com/
-						* http://joapp.com
-						
 						
 						Many many others are available
 						
@@ -193,17 +327,6 @@
 				</section>
 				-->
 				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Model View Controller (MVC) 
-						
-						* How to manage a web-application?
-					</textarea>
-				</section>
-				
-				<section data-background="images/apps-7.png" data-background-size="contain">
-				</section>
-				
 				<!--
 				<section data-background="images/apps-8.png" data-background-size="contain">
 				</section>
@@ -222,12 +345,26 @@
 						Getting started (framework7.io)
 						
 						* 1. Goto https://framework7.io/templates/
-						* 2. Download template 
-						* 3. Grant permissions to files (accessed in the browser)
-						* 4. Run 'npm install' to the new directory (with dependencies)
-						* 5. Load your new app in the web browser 
-						* 6. Edit your new app using Framework7 documentation
+						* 2. *npm install* a template (e.g. framework7-cli)
+						* 3. creat an app
+						```
+						framework7 create [--ui]
+						```
+						* 4. Edit your new app using Framework7 documentation
+						* 5. Build you app for the desired platform
+
 					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Model View Controller (MVC) 
+						
+						* How to manage a web-application?
+					</textarea>
+				</section>
+				
+				<section data-background="images/apps-7.png" data-background-size="contain">
 				</section>
 				
 
@@ -278,9 +415,9 @@
 					<textarea data-template>
 						## Summary
 
+						* Common frameworks, libraries and tools
 						* Understand Basics of Hybrid Apps and Mobile Solutions
 						* Why **web technologies** are important for **cross-platform** apps
-						* Common frameworks, libraries and tools
 						
 					</textarea>
 				</section>

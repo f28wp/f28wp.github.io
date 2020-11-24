@@ -230,35 +230,39 @@
 				-->
 
 
-				<section data-background="images/wsb-4.png" data-background-size="contain">
-				</section>
-				
-				<!--
+				<section data-markdown data-background="images/wsb-4.png" data-background-size="contain">
+					<textarea data-template>
+
+					</textarea>
+				</section>				
+
+<!--
 				<section data-background="images/wsb-3.png" data-background-size="contain">
 				</section>
-				-->
-				
+-->				
+
+
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Web Services 
 						
 						* Allows **different** applications to communicate 
 						* Standard **data-exchange format**
-						  
+						* Many Web Applications provide a web service access to their resources
+						* Can enrich web apps by resources offered by web services
+
 					</textarea>
 				</section>
-				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Web services 
 						
-						* Many types of users 
+						* Many types of applications and users 
 						* Many types of devices 
 						
 						* Challenges of data syncing 
 						* More users == more business 
-						
 						  
 					</textarea>
 				</section>
@@ -341,10 +345,10 @@
 						## SOAP
 						
 						* SOAP stands for **Simple Object Access Protocol**
-						* SOAP is a **standard** for web-services access **protocol**
+						* SOAP is a **standard** for web-services **access protocol**
 						
-						
-						
+						* Can use different protocols to transport a SOAP message
+						  - HTTP, FTP, BEEP, ...
 						
 					</textarea>
 				</section>
@@ -384,21 +388,43 @@
 				<section data-markdown style="text-align: center;">
 					<textarea data-template>
 					# What is REST?
-						
+					**RE**presentational **S**tate **T**ransfer
 					</textarea>
 				</section>
-				
-				
+
+<!--				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## REST 
-						
 						
 						* REST is **not** a protocol, it's an **architectural approach**
 						* Can be used with legacy XML or modern **JSON** transfer formats 
 						* Guidlines: **HTTP methods** (URI design)
 						  - Developed in parallel with HTTP/1.1
 						  - Each unique URL represents an object
+						  
+					</textarea>
+				</section>
+-->				
+
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## REST 
+						
+						* Is an **architectural approach** for distributed systems
+
+						* Have 6 guiding constraints including:
+						  - **Client-Server**, **stateless**, **Uniform Interface**, ...
+						
+						* Information abstract as **resource** identified by a URI
+						  - document, image, a service, a collection of other resources,...
+						  - different **representations** possible: XML, JSON, PDF, JPEG, ...
+
+						* Another concept is **resource methods** to perform transition
+						  - a popular choice is HTTP GET/PUT/POST/DELETE
+
+
 						  
 					</textarea>
 				</section>
@@ -409,11 +435,11 @@
 						
 						
 						<img src="./images/rest1.png" width="80%" style="border:0pt">
-						  
+<!--						  
 						**REpresentational State Transfer (REST)**
+-->
 					</textarea>
 				</section>
-				
 				
 				
 				<section data-markdown style="text-align: left;">
@@ -426,12 +452,10 @@
 						* Human readable result 
 						* **Lightweight**
 						* **Easy** to build (no toolkits required)
-						
-						
 					</textarea>
 				</section>
 				
-				
+<!--				
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
@@ -446,23 +470,7 @@
 						
 					</textarea>
 				</section>
-				
-				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## REST **or** SOAP 
-						
-						* REST exposes **resources** that represent data, while 
-						SOAP exposes **operations** that represent logic 
-						* REST emphasises **simple p2p** communication over **HTTP**,
-						while SOAP emphasises loosly coupled distributed message 
-						* REST supports **multiple data formates**, while SOAP encodes 
-						everything in XML with data attachments 
-						* REST emphasises **stateless communication** while SOAP 
-						supports stateless and stateful operations 
-						
-					</textarea>
-				</section>
+-->				
 				
 				
 				
@@ -484,28 +492,6 @@
 						* use **HTTP** protocol methods for operations 
 						* For example, **HTTP methods** (post,get,put,delete) to manage **operations**
 						
-					</textarea>
-				</section>
-				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Principles 
-						
-						* REST **isn't protocol specific**
-						* Technologies like SOAP use HTTP as a transport 
-						* **HTTP** is a **rich** application **protocol**
-						* RESTful web services try to **leverage the full power of HTTP**
-					</textarea>
-				</section>
-				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-						## Key Principles of REST
-						
-						* Everything is a **resource**
-						* Every resource is identified by a **unique identifier**
-						* Uses a simple and uniform interface 
-						* **Stateless**
 					</textarea>
 				</section>
 				
@@ -543,24 +529,67 @@
 				</section>
 				<section data-background="images/ws-9.png" data-background-size="contain">
 				</section>
+-->	
 				<section data-background="images/ws-10.png" data-background-size="contain">
 				</section>
 				<section data-background="images/ws-11.png" data-background-size="contain">
 				</section>
+<!--
 				<section data-background="images/ws-12.png" data-background-size="contain">
 				</section>
+-->
 				<section data-background="images/ws-13.png" data-background-size="contain">
 				</section>
 				<section data-background="images/ws-14.png" data-background-size="contain">
 				</section>
 				<section data-background="images/ws-15.png" data-background-size="contain">
 				</section>
+<!--
 				<section data-background="images/ws-16.png" data-background-size="contain">
 				</section>
 				-->
+
+<!--				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Principles 
+						
+						* REST **isn't protocol specific**
+						* Technologies like SOAP use HTTP as a transport 
+						* **HTTP** is a **rich** application **protocol**
+						* RESTful web services try to **leverage the full power of HTTP**
+					</textarea>
+				</section>
+-->				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Key Principles of REST
+						
+						* Everything is a **resource**
+						* Every resource is identified by a **unique identifier**
+						* Uses a simple and uniform interface 
+						* **Stateless**
+					</textarea>
+				</section>
 				
-
-
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## REST **or** SOAP Web Service
+						
+						* REST exposes **resources** that represent data, while 
+						SOAP exposes **operations** that represent logic 
+						* REST emphasises **simple p2p** communication, while SOAP 
+						emphasises **loosly coupled** distributed message 
+						* REST supports **multiple data formates**, while SOAP encodes 
+						everything in XML with data attachments 
+						* REST emphasises **stateless communication** while SOAP 
+						supports stateless and stateful operations 
+						* REST is **lightweight** compared to SOAP
+						* REST depends on other security approaches (e.g., oAuth)
+						
+					</textarea>
+				</section>
+				
 				
 				
 				<section data-markdown style="text-align: left;">

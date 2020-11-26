@@ -92,6 +92,7 @@
 						
 						<a href="https://mashable.com/article/supreme-court-reject-dominos-inaccessible-website/">details</a>
 					</div>
+					
 				</section>
 					
 				<!--
@@ -113,8 +114,10 @@
 					<textarea data-template>
 						## Accessibility/Validation Tests
 						
-						**What should you be looking at?**
+						Web accessibility means that websites are designed so that people with disabilities can use them
 						
+						**What should you be looking at?**
+
 					</textarea>
 				</section>
 				
@@ -122,15 +125,17 @@
 					<textarea data-template>
 						## Accessibility/Validation Tests
 						
-						* Font Size (readablity)
+						* Page title
+						* Headings & Font Size (readablity), contrast
 						* Colours 
-						* Broken Links
-						* Alt (visual tags)
-						* Compatibility
-						* Usability
-						* Flashing Images
-						* ..
+						* Keyboard access and visual focus
+						* Alt text (visual tags)
+						* Moving, Flashing, or Blinking Content
+						* Page structure - how it works when linearized
+						* ...
 						
+						Incorporate accessibility from the **beginning of projects**
+
 					</textarea>
 				</section>
 
@@ -139,14 +144,13 @@
 						## Accessibility/Validation Tools
 
 						**Any way of doing this automatically?**
-						
+
 					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Accessibility/Validation Tools
-						(Automation)
 						
 						Various online tools/solutions available
 						
@@ -155,14 +159,17 @@
 						* [SortSite](https://www.powermapper.com/products/sortsite/checks/accessibility-checks/)
 						* [Pa11y](https://pa11y.org/)
 						* ...
+						* **WCAG** Web Content Accessibility Guidelines 
+							- internationally recognized W3C standard for web accessibility
+							- supported by most tools
 						
 					</textarea>
 				</section>
 				
-				<section data-background="images/adaptiveui.jpg" data-background-size="contain">
-				
-				<h1>Adaptive UI and UX</h1>
-				
+				<section data-markdown data-background="images/adaptiveui.jpg" data-background-size="contain">
+					<textarea data-template>
+						<h1>Adaptive UI and UX</h1>
+					</textarea>
 				</section>
 				
 				<section data-markdown style="text-align: left;">
@@ -173,14 +180,39 @@
 						* How would you implement an adaptive UI/UX?
 						* What could go wrong?  
 						* What do you need to consider?
-						* How to check/validate website accessibility?
-						
 					</textarea>
 				</section>
 				
 				<section data-background="images/adaptive.jpg" data-background-size="contain">
 				</section>
-				
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Responsive Web Design (RWD)
+
+						* The goal is to provide a continuous user experience across a variety of **screen sizes**
+
+						* Create a **unified layout & HTML** structure that works across multiple devices
+						
+						* **2 to 3 layouts** are created 
+							- broadly similar elements and style (e.g. using *@media* queries)
+						
+					</textarea>
+				</section>
+	
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## RWD Issues 
+
+						* The set of possible screen sizes on mobile and tablet devices is highly fragmented
+
+						* Same device can be used in portrait or landscape
+
+						* Does it make sense to have one fluid layout for ALL mobile/tablet devices? 
+						
+					</textarea>
+				</section>
+<!--
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Adaptive UI and UX
@@ -188,16 +220,19 @@
 						**What is an Adaptive Layout?**
 					</textarea>
 				</section>
-				
+-->				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## What is an Adaptive Layout?
+						## Adaptive Web Design (AWD)
 						
 						* Dynamically adapts the UI to varying screen sizes
-						* Coupled with CSS (Grid Layout/Auto Placement)
+						* **6 to 7 layouts** are created 
+							- can be quite **different** in terms of elements, spacing, and flow
 						* Layout configured to fit **content**
 						* Customizable (Specific Users)
 						* Coupled with dynamic content
+						* Development requires **more work** but less complicatd
+
 					</textarea>
 				</section>
 				
@@ -205,7 +240,7 @@
 					<textarea data-template>
 						## Why Adaptive Layouts?
 						
-						* Support a wide range of screen 
+						* Support a wide range of screens 
 						* Automatic handling of **changing** content/screens
 						* Improve **visualization** (communicate information)
 						* **Usability**
@@ -214,7 +249,6 @@
 						  - Design heuristics and human psychology
 						* Improve **user experience**
 						* Allow personalization
-						
 					</textarea>
 				</section>
 				
@@ -242,7 +276,7 @@
 						* Process of **measuring**, **collecting**, **analyzing** and **reporting** on **internet data**
 						* Understand user patterns 
 						  - For example, navigation trends
-						
+
 					</textarea>
 				</section>
 				
@@ -265,7 +299,6 @@
 						  - **Identify** any issues or problems
 						* **Improve** customer service
 						* Improve customer/user retention
-						
 					</textarea>
 				</section>
 				
@@ -284,10 +317,15 @@
 						Things like ...
 						
 						* How people **arrive** at the website
+							- *Organic traffic*, *Direct traffic*, *Unique visitors*, ... 
 						* How they **navigate** and use the website
+							- *Click Path*, *Bounce rate*, ...
 						* How they **find** information on the website 
-						* How long they spend on the website 
+						* How long they **spend** on the website 
+							- *Average Page View Duration*, ...
 						* How they **interact** with the website 
+							- *Clicks*, *Conversion rate*, ...
+
 					</textarea>
 				</section>
 				
@@ -301,6 +339,7 @@
 					<div id="right" style="width:70%;">
 						<img src="./images/heatmap.png" width="200%" style="border:0pt;">
 					</div>
+					
 				</section>
 				
 				
@@ -312,6 +351,7 @@
 						<br>
 						
 						<br>Google Analytics 
+						<br>Adobe Analytics
 						<br>Hotjar
 						<br>Clicky
 						<br>Bitly
@@ -320,24 +360,12 @@
 					<div id="right">
 					<img src="./images/webmouse.png" width="100%" style="border:0pt;">
 					
+
 					</div>
+
+				</section>
+				
 						
-					</textarea>
-				</section>
-				
-				
-				
-				<!--
-				<section data-background="images/heatmap.png" data-background-size="contain" style="text-align: left;">
-				Example, Heatmap 
-				<br><br>
-				<br><br>
-
-				Collects data on clicks, scroll, and attention pattern of your website visitors in realtime
-
-				</section>
-				-->
-				
 				<section data-background="images/webrobot.jpg"> 
 				<div id="white">
 				<h1>Web Robots</h1>
@@ -350,7 +378,7 @@
 						
 						* Who is real on the web?
 						* How to detect **real** users?
-						  - Capture
+						  - Captcha
 						* Why block (or allow) automated systems?
 						
 					</textarea>
@@ -360,12 +388,15 @@
 					<textarea data-template>
 						## Web Robots
 						
-						* Scripts or programs which **automatically** search/crawl the web 
-						  - (web spiders, web robots, ..)
+						* Scripts or programs which **automatically** run a task on the Internet (typically are repeatative) 
+
+						  - aka  Internet bot, or bot
+
+						* Extensively used as web crawler (aka spider)
+
 						* Example
-						  - Search engines, attackers, ..
-						
-						
+						  - Search engines, attackers, ...
+
 					</textarea>
 				</section>
 				
@@ -373,21 +404,21 @@
 					<textarea data-template>
 						## Web Robots (**Good** and **Bad**)
 						
-						* Allow search engine robots (looking for robot.txt, site updates)
+						* Allow search engine robots (looking for *robot.txt*, site updates)
 						* **Validate** users
-						  - User patterns, Verify(Capture), ..
+						  - User behaviour patterns, Verify(Captcha), ..
 						  - For example, taking surveys or login pages, ..
+						  - reCAPTCHA is a free service from Google to Tell bots and humans apart
 						
 						<br><br>
 						<img src="./images/captcha.png" style="text-align:center; border:0pt;">
-					
+
 					</textarea>
 				</section>
 				
 				
 				<section data-background="images/business.jpg" data-background-size="contain">
 				</section>
-				
 				
 				
 				<section data-markdown style="text-align: left;">
@@ -482,6 +513,18 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
+					## Specific Tests
+					
+					Checklists should be **specific**
+					
+					* For example, what tests validate the pages "usability":  **colours**, **fonts**, **links**, **page borders**, ...
+
+					</textarea>
+				</section>
+				
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
 					## Example, **launch checklist**
 
 					* Errors/warning (logged)
@@ -494,33 +537,15 @@
 					* Check all URLs
 					* Robots.txt files (Google/Bing/Yahoo)
 					* Test social media integration
-					* SSL
+					* SSL Certificate
 					* Keep out spam/trolling
 					* Take care of **legal** stuff (disclaimers/accessibility/copyright)
-					...
+					* ...
 
 					</textarea>
 				</section>
 				
 				
-				<section data-markdown style="text-align: left;">
-					<textarea data-template>
-					## Specific Tests
-					
-					Checklists should be **specific**
-					
-					* For example, what tests validate the pages "usability":  **colours**, **fonts**, **links**, **page borders**, ...
-
-					</textarea>
-				</section>
-				
-				
-				
-				
-				
-				
-				
-
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## Summary

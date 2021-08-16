@@ -24,10 +24,10 @@
 In this lab, you’ll further develop your understanding of Ajax and JSON.
 
 
-# 1.1 Ajax - load() Example
+# 1.1 AJAX - load() Example
 
 
-Implement the following sample, with a local client script (i.e., index.html, and on your server, e.g., macs folder (e.g., public_html folder on your university computer, which is accessible from www2.macs.hw.ac.uk/~username/)
+Implement the following sample, with a local client script (i.e., index.html) - which will retrieve the contents of a web page and display it on the screen.
 
 Client side (index.html)
 
@@ -40,56 +40,39 @@ Client side (index.html)
         <script src='http://code.jquery.com/jquery.js'></script>
         <script>
          $(document).ready(function(){
-             setInterval(initTimer, 1000);
+		     // when ready, grab the html 
+             getContents();
          });
-         function initTimer(){
+         function getContents(){
              $.ajax({
-                 url: 'mytimer.php',
+                 url: 'https://f28wp.github.io/material/tasks/Task%2008%20-%20AJAX%20&%20JSON.html',
                  success: function(data) {
                     console.log(data);
-                     data = data.split(':');
-                     $('#hrs').html(data[0]);
-                     $('#mins').html(data[1]);
-                     $('#secs').html(data[2]);
+                     $('#data').html( data );
                  }
              });
          }
         </script>
     </head>
     <body>
-        <span id='hrs'>0</span>:<span id='mins'>0</span>:<span id='secs'>0</span>
+        <span id='data'></span>
     </body>
 </html>
-
 ```
+
+
  
 
-Server side (mytimer.php)
-```
-<?php 
-
-header('Content-Type: text/event-stream');
-header('Cache-Control: no-cache');
-
-echo date('h:i:s A');
-?>
-
-```
- 
-
-When you run the following script.  You should see the content on the page updated (i.e., span section with the information retrieved from mytimer.php).
+When you run the following script.  You should see the content of the html (i.e., span section with the information retrieved).
 
 
-Try and add extra information, also animations (e.g., move objects around the screen and change the screen background colour dynamically on the fly based on the information received from the php script).
+Try and add extra information, also animations (e.g., move objects around the screen and change the screen background colour dynamically on the fly based on the information received).
 
 
 
-# 1.1 Server/Client Data Exchange Example (AJAX long-polling)
+# 1.1 Server/Client Data Exchange Example 
 
-Using a simple php script, you’ll update send/receive data between the client-server which is distributed to other connected clients (timing information, tracking identification).
-
-Below shows a simple screenshot of the example (downloadable source code below).
-Remember, the data.txt file needs write permission. Ideally once you’ve got it working, you’ll move over to a database.
+Using a simple script, you can send data via AJAX as well (e.g., either using GET or POST) for updating sending/receiving data between the client-server (used for timing information, tracking identification and so on).
 
 
  
@@ -100,13 +83,10 @@ Remember, the data.txt file needs write permission. Ideally once you’ve got it
   * Unique ID is generated on the client (i.e., better for the server to manage this – also a complex unique ID)
   * Security flaws (e.g., DOS, validation of data, request to join, ..)
   * File data system (e.g., versus a database or shared memory) – improve delays/data read-write thrashing
-  * All done in a single php script (e.g., split this up, so read/write, as there is no need to save data if you’re only retrieving/accessing latest data)
+  * All done in a single script (e.g., split this up, so read/write, as there is no need to save data if you’re only retrieving/accessing latest data)
 
 
-Download Source code (client.js, index.html, server.php):
-```
-http://f28wp.github.io/material/labs/ajax-php-json-demo/ajax-php-json-demo.zip
-```
+
 
 
 

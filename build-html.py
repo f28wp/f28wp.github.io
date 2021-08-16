@@ -179,7 +179,7 @@ for i in range(0,25):
 		str += "<td><a href='%s'>Task</td>" % tmp[1]
 
 
-	tmp = finddir( 'Quiz %02d -' % (i) )
+	tmp = finddir( 'Quiz %02d -' % (no) )
 	if tmp == 0:
 		str += "<td> - </td>" 
 	else:

@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Web Programming: Data, Cookies and Files </title>
+
+		<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico" />
+		<meta name="description" content="Web Programming creating beautiful interactive and engaging web pages - using client server side technologies - Cookies and Files ">
+		<meta name="author" content="Ben Kenwright">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="./css/reset.css">
+		<link rel="stylesheet" href="./css/reveal.css">
+		<link rel="stylesheet" href="./css/theme/white.css" id="theme">
+		
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="./lib/css/monokai.css">
+		
+		<link rel="stylesheet" href="./css/reveal-override.css"/>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? './css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Cookies and Files</h2>
+					<h4>F28WP Web Programming</h4>
+					<p>
+						<small>2020-2021</small>
+					</p>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Overview
+
+						* How to store **data** locally on client?
+						* How web browser **cookies** work?
+						* How to manage files and data locally?
+						* **Examples**
+						* Questions and discussion
+						
+					</textarea>
+				</section>
+				
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						Which of the following is correct to write “Hello World” on the web page?
+ 
+						* A. System.out.println("Hello World"); 
+						* B. print("Hello World");
+						* C. document.write("Hello World"); 
+						* D. response.write("Hello World");
+				
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: **C.** document.write(“Hello World”) 
+
+						</textarea>
+					</section>
+				</section>
+				
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What does RSS stand for?
+ 
+						* A. Runtime System Syntax
+						* B. Raw Standard Storage
+						* C. Real Syntax Standard
+						* D. Really Simple Syndication 
+				
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#90533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: **D.** Really Simple Syndication (RSS) 
+
+						</textarea>
+					</section>
+				</section>
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#30397c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						Javascript is an object oriented language?
+				
+						* True 
+						* False
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#30397c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: **True**
+
+						Details [Link](https://en.wikipedia.org/wiki/JavaScript)
+						
+						JavaScript is heavily object-based. Objects are associative arrays, augmented with prototypes (see below). Object property names are associative array keys: obj.x = 10 and obj["x"] = 10 are equivalent, the dot notation being merely syntactic sugar. Properties and their values can be added, changed, or deleted at run-time. The properties of an object can also be enumerated via a for...in loop.
+						
+						</textarea>
+					</section>
+				</section>
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#90232c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						How to append a value to an array of Javascript?
+						
+						* A)  ```arr[arr.length] = value;```
+						* B)  ```arr[arr.length+1] = new Arrays();```
+						* C)  ```arr[arr.length-1] = value;```
+						* D)  ```arr[arr.length*1] = value;```
+				
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#90232c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: **A)** ```arr[arr.length] = value;```
+
+						</textarea>
+					</section>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Whats and Whys of Client Data
+
+						* **Why** would you want the **client** to store information?
+						* What **type** of information is stored by the client?
+						* What are the **legal** aspects?
+						* What **limitations** would there be (e.g., size)?
+ 
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## Web Storage
+
+						<img src="./images/webstorage.jpg" style="border:0pt;">
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## What is Web Storage?
+
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## What is Web Storage?
+						
+						* Web storage is a means by which web applications can store data **locally** within the user's **browser**
+						
+						* Before HTML5 and **Web Storage** application data had to be stored in **cookies**
+						  - Not just cookies
+						
+					</textarea>
+				</section>
+				
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Web Storage
+
+						* **JavaScript** API
+						* Web storage is **key/value** on **web browsers**
+						  - stores user data locally on host running browser put it in silos correlated with web server **domain origins**
+						* Only web pages from domain D can access D’s silo via web storage
+						  - **localStorage** stores **data persistently** for each web server 
+						  - **sessionStorage** stores data **sessionally** per server per browser instance
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## **Why** Web Storage?
+						
+					</textarea>
+				</section>	
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## **Why** Web Storage?
+
+						* Web storage is more **secure**
+						* Large amounts of data can be stored locally
+						* Doesn't hinder website **performance**
+						* Web storage avoids
+						  - size limits of cookies
+						  - security issues of cookie traffic with web server
+						
+					</textarea>
+				</section>		
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Web Storage **Functions**
+
+						Support the following functions
+						* **clear()** remove all key/value pairs
+						* **getItem(key)** get value of key
+						* **key(i)** get ith element of array of keys
+						* **removeItem(key)** delete key and its value
+						* **setItem(key, value)** set key to value
+					</textarea>
+				</section>				
+	
+	
+				<!--
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example Web Storage Form
+						
+						```
+						<body onload="displayWebStore()">
+						<h3>Web Storage</h3>
+						<div id="WSData" style="margin-left: 1em"></div>
+						
+						<form action=""> 
+							Key   <input id="key" value=""/>
+							Value <input id="val" value=""/>
+							
+							<input type="button" value="update" onclick="updateWebStore()"> <br>
+							<input type="button" value="clear store" onclick="clearWebStore()"> <br>
+							<input type="reset" value="reset form"> <br>
+						</form>
+						
+						<script type="text/javascript" src="storage.js"></script>
+						</body>
+						```
+					</textarea>
+				</section>
+				-->
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Web Storage
+
+						* Web storage stores data **sessionally** or **persistently**
+						* Session data stored in browser’s **volatile memory** and is lost when browser closes
+
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+					## How do we know if Web Storage is supported?
+					
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Is Web Storage Supported?
+					
+					```
+					if (window.localStorage) {
+					  // Browser supports localStorage
+					  // Good to go
+					} else {
+					  // No localStorage support
+					}
+					```
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Example (local Storage)
+					
+					```
+					<form>
+					  <label>Name: <input type="text" id="sName"></label>
+					  <button type="button" onclick="savewb()">Save Name</button>
+					  <button type="button" onclick="accesswb()">Get Name</button>
+					</form>
+					```
+					
+					```
+					<script>
+					if (localStorage) { // Check if the localStorage object exists
+					  function savewb() { // Store data
+						var txt = document.getElementById('sName').value;
+						localStorage.setItem("name", txt);
+						alert("Your name is saved.");
+					  }
+
+					  function accesswb() { // Retrieve data
+						alert("Hi, " + localStorage.getItem("name"));
+					  }  
+					} else {
+					  alert("Sorry, your browser does not support local storage.");
+					}
+					</script>
+					```
+				</textarea>
+				</section>
+
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/6j8wyhkL/5/embedded/html,js,result/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example (Session Storage)
+						
+						* **Sessional**
+
+						* Example defines **3 functions** to use session storage
+						  - **savewb()** updates web storage with key/value 
+						  - **acesswb()** display keys and values in web storage
+						  - **clearwb()** removes key/value pairs from web storage
+						
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example (session Storage)
+						
+						```
+						<form>
+						  <label>String Key:   <input type="text" id="sKey"></label>
+						  <label>String Value: <input type="text" id="sValue"></label>
+						  <button type="button" onclick="savewb()"  >Save  </button>
+						  <button type="button" onclick="accesswb()">Get   </button>
+						  <button type="button" onclick="clearwb()" >Clear </button>
+						</form>
+						```
+
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example (session Storage)
+					
+						
+						```
+						function savewb() {
+							if ( typeof(sessionStorage) == "undefined" ) {
+								alert("no session web storage available");
+								return;
+							}
+							var key = document.getElementById("sKey").value;
+							if ( key != "" )
+							    sessionStorage[key] = document.getElementById("sValue").value;
+						}
+						```
+						
+						```
+						function accesswb() {
+							var s = "";
+							for (var i=0; i<sessionStorage.length; i++) {
+								var key = sessionStorage.key(i);
+								s += key + " = " + sessionStorage.getItem(key) + "\n";
+							}
+							alert( s );
+						}
+						```
+						
+						```
+						function clearwb() {
+							sessionStorage.clear();
+						}
+						```
+
+					</textarea>
+				</section>
+				
+				
+				<section>
+				<h2>Example</h2>
+				<iframe data-src="https://jsfiddle.net/f28wp/t4cz5wbm/8/embedded/html,js,result/"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
+				</section>
+
+
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## Cookies 
+
+						<img src="./images/webcookies.png" style="border:0pt;">
+
+					</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: center;">
+					<textarea data-template>
+						## What are Browser Cookies?
+
+					</textarea>
+				</section>
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Browser Cookies 
+
+						* Cookies are **small** packets of data stored in file space of web users
+						* Cookies attributes:
+						  - **name**
+						  - **value**
+						  - domain
+						  - path
+						  - duration
+
+						* Webservers ask web clients to store cookies
+
+					</textarea>
+				</section>
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Cookies 
+
+						* Cookies
+						  - avoid HTTP’s statelessness by storing **data on client**
+						  - are passed in **Set-Cookie** response and **Cookie** request headers
+						  - are stored in user’s filespace or in browser’s volatile memory
+						* Cookies can be **manipulated** by 
+						  - meta directive in HTML
+						  - **JavaScript** in web page
+						  - web server programs (e.g., CGI, servlets, JSP, Node.js)
+					</textarea>
+				</section>
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Cookie Standards  
+
+						* There used to be **2 cookie standards** - Netscape’s and RFC 2965.
+						* Combined reformed standard **RFC 6265** now governing cookie form
+						  - Cookie standards [(Details)](https://en.wikipedia.org/wiki/HTTP_cookie)
+						
+					</textarea>
+				</section>
+				
+				<!--
+				* Form of major fields to set a cookie with Max-age is:
+
+						```
+						
+						Set-Cookie: name=value [; Path=path] [; Domain=domain]
+						[; Max-age=seconds] [; Secure] [; HttpOnly]
+
+						```
+				-->
+
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					Optional **attributes**, which may occur once in any order, are:
+					
+					* **Domain** 		domain of validity - defaults to server’s hostname
+					* **Expires** 		date time when cookie expires
+					* **HttpOnly** 	    cookie is only to be sent over HTTP
+					* **Max-age** 		how many seconds from now onwards to keep cookie
+					* **Path** 		    defaults to path of document creating cookie
+					* **Secure** 		cookie is only to be sent on secure channel (HTTPS)
+
+					Max-age higher priority than Expires if both are present
+					</textarea>
+				</section>
+
+
+					<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Cookie Syntax
+
+					* In server response header:
+					
+					```
+					Set-Cookie: name=value [; Expires=date] 
+									[; Domain=domain]
+									[; Path=path] 
+									[; Secure] 
+									[; HttpOnly]
+
+					```
+
+					* Date time must use 4 digit year required by RFC 1123 section 5.2.14.
+					
+					</textarea>
+				</section>
+				
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Example 
+					
+					
+					```
+					Set-Cookie: Customer="BOB"; 
+					            Path=/acme;
+					            Max-age=31536000; Domain=dod.gov
+
+					```
+					
+					* RFC 6265 example request with Max-age set (in seconds)
+					* It specifies cookie should last for **one year in seconds**.					
+				
+				</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Cookie **Properties**
+					
+					* **Session** cookies last **only** as long as client’s **session**
+					  - have **no Max-age** or Expires setting
+					  - aren’t stored in cookie file(s) on client
+					  - usually stored in browser’s volatile memory
+					* Saving cookie with exactly same Path, Domain and Name values
+					  - **overwrites existing** one
+					  - deletes it if expiry date is past
+					
+					</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Cookie Control
+					
+					* **Path matching** is done by string comparison
+					  - path "/ban" matches "/ban/bomb.html" and "/banana.html"
+					  - most general path is "/"
+					  - default path is URL path of associated document
+					* **Browsers** often allow users to **control** whether to
+					  - accept all cookies
+					  - accept only cookies from web server’s domain
+					  - do not accept or send cookies
+					  - warn and let user control acceptance of cookies
+					  - limit maximum lifetime of cookies
+					</textarea>
+				</section>
+
+			
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Cookie **controls**
+	
+					* **Browser** preferences
+					* Mozilla:	Edit, Options > Privacy and Security > Cookies
+					* Edge:  **Settings > Site persmissions > Cookies and site data**, ...
+					</textarea>
+				</section>
+				
+				
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Handling Cookies in Web Pages (**Header**)
+					
+					* Cookie can be set by adding directive to **header of HTML page**
+					```
+					<meta http-equiv="Set-Cookie" content="name=Harry; Max-age=86400">
+					```
+					
+					* It requests browser to act as if it had received the HTTP header
+					```
+					Set-Cookie: name=Harry; Max-age=86400
+					```
+				
+					* It is removed with a
+					```
+					<meta http-equiv="Set-Cookie" content="name=; Max-age=-1">
+					```
+					</textarea>
+				</section>				
+				
+				
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					## Handling Cookies in Web Pages (**Javascript**)
+
+					* Cookies are set in JavaScript in following manner:
+					
+					```
+					document.cookie = "name=value; Expires=...; Path=...; Domain=...";
+					```
+
+					Consider the Javascript (**helper**) function
+
+					```
+					function Cookie(name, value, days) {
+						d=new Date();
+						if ( days < 0 ) { 
+							d.setTime(0); 
+						}
+						else { 
+							d.setTime(d.getTime() + days * 24*60*60*1000); 
+						}
+						return name + '=\"" + value + "\"; Expires=\"" + d.toUTCString() + "\"";
+					}
+					```
+					</textarea>
+				</section>			
+				
+				
+				
+				
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					* **Set** a cookie for a year using
+					```
+					<body onload="go()">
+					<script>
+					function go() {
+						c = Cookie("Skill", "basic", 365) + "; Domain=hw.ac.uk; Path=/";
+						document.cookie = c;
+						document.writeln("Cookie set: " + c); }
+					</script>
+					</body>
+					```
+					
+					* Same cookie can be **deleted** by giving it a date in the **past**:
+					```
+					<body onload="go()">
+					<script>
+					function go() {
+						c = Cookie("Skill", "anything", -1) + "; Domain=hw.ac.uk; Path=/";
+						document.cookie = c;
+						document.writeln("Cookie set: " + c); }
+					</script>
+					</body>
+					```
+					</textarea>
+				</section>			
+								
+				
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					## Example Handling Cookies in JavaScript
+					
+					Can write useful JavaScript functions for handling cookies: 
+
+					* **getCookieNames()** returns array of cookie names.
+					* **getCookieValue(name)** takes a string argument and returns its cookie value
+
+					</textarea>
+				</section>					
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					## Example 
+					
+					```
+					function getCookieNames() {
+						if ( document.cookie == "" ) return new Array();
+						var c = document.cookie.split(";");
+						var names = new Array(c.length);
+						for (var i=0; i<c.length; i++)
+							names[i] = c[i].substr(0, c[i].indexOf("="));
+						return names;
+					}
+					```
+					
+					```
+					function getCookieValue(name) {
+						var cs = document.cookie.split(";");
+						for (var k=0; k<cs.length; k++) {
+							Nam = cs[k].substr(0, cs[k].indexOf("="));
+							Val = cs[k].substr(cs[k].indexOf("=") + 1);
+							if ( Nam == name )
+								return unescape(Val);
+						}
+						return null;
+					}
+					```
+
+					</textarea>
+				</section>	
+
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Example
+					
+					List all cookies
+					
+					```
+					<html>
+					<body>
+					<script type="text/javascript">
+					var arr = getCookieNames();
+					for (var j=0; j<arr.length; j++) {
+						var val = getCookieValue(arr[j]);
+						if ( val != null ) {
+							document.writeln(arr[j] + " = " + unescape(val));
+							document.writeln("<br>");
+						}
+					}
+					</script>
+					</body>
+					</html>
+					```
+					</textarea>
+				</section>
+
+
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					## Handling Cookies with **Node.js**
+					
+					* Module **cookie-parser** uses **req.cookies** to get cookie details
+					  - **require('set-cookie')**
+					* Module set-cookie lets setCookie() set a cookie’s name, value etc
+					* Install both modules in addition to the **Express** module
+
+
+					</textarea>
+				</section>
+
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Example Node.js
+					
+					* Script updates and reports on stored data				
+
+					</textarea>
+				</section>
+
+
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					```
+					var express = require('express');
+					var cookieParser = require('cookie-parser');
+					var setCookie = require('set-cookie');
+					var http = require('http');
+					var app = express();
+					app.use(cookieParser());
+					var head = ["<!DOCTYPE html>", "<html>", "<head>",
+					             "<title>Cookies</title>", "</head>", "<body>"];
+					var url = "http://localhost:8080/";
+					var tail = ["<form action=’" + url + "’>",
+								"<p>", "Key <input name=’name’ value=’’>", "</p>",
+								"<p>", "Value <input name=’value’ value=’’>", "</p>",
+								"<p>", "Age <input name=’age’ value=’’>", "</p>",
+								"<p>", "<input type=’submit’/>", "</p>",
+								"</form>", "</body>", "</html>"];
+					var eol = "\n";
+					```
+					```
+					app.get("/cookie", function (req, res) {
+						var s = "";
+						for (var i in head) s += head[i] + eol;
+						if ( req.query.name != undefined && req.query.name != "" &&
+									req.query.value != undefined ) {
+							if ( isNaN(req.query.age) ) req.query.age = 0;
+							setCookie(req.query.name, req.query.value,
+							{maxAge: req.query.age, res: res});
+						}
+						s += "<p>" + eol;
+						for (var i in req.cookies)
+							s += i + "=" + req.cookies[i] + "<br>" + eol;
+						s += "</p>" + eol;					
+						for (var i in tail) s += tail[i] + eol;
+						res.send(s); // send web page
+					});					
+					var svr = http.createServer(app);
+					svr.on(’error’, function(err) { console.log(’Server: ’ + err); });
+					svr.listen(8080, function() {console.log("Node: port 8080");});
+					```				
+
+					</textarea>
+				</section>
+
+
+								
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Cookies, Web Storage and EU **Law**
+					
+					* In 2012 UK implemented clause 66 of EU directive 2009/136/EC
+					  - requires consent for storage or access to information
+					  - where it is stored on a user’s equipment
+					* Change was motivated by concerns about
+					  - **online tracking** of individuals and use of spyware
+					  - on their devices **without their knowledge** and agreement
+					* Directive **applies** to use of **cookies** and use of **HTML5 Web Storage**
+			
+					</textarea>
+				</section>
+								
+												
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## **Explit** Consent 
+					
+					* Consent should be **explicit** and **prior** if possible
+					  - **freely given** specific and informed indication of a data subject’s wishes by which he signifies his agreement to personal data relating to him being processed 
+					* i.e. it must be specific, informed and express user’s wishes
+
+					* Consent isn’t needed where personal data storage on user computer
+					  - (a) is solely to enable communication over electronic network
+					  - (b) is strictly necessary to provide an information society service requested by user
+			
+					</textarea>
+				</section>
+				
+				
+												
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Limitations
+					
+					* Informed **consent** is **not** (supposed to be) needed for
+					  - a shopping cart
+					  - security requirement like authentication to protect user’s privacy
+					* Needed for **advertising**, **analysing** page usage, **customisation**
+					* UK Information Commissioner supplies guidance on compliance
+
+			
+					</textarea>
+				</section>
+				
+				
+
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Summary
+
+						* Understand Client **Data Management**
+						* **Web Storage** and **Cookies**
+						* Web storage key/value Javascript API 
+						* Cookies name and value 
+						* Syntax and examples
+						* UK **law** and **regulations**
+						
+					</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## To do this week ...
+						
+						* Read over the lectures
+						* Review the revision questions
+						* Work through tutorial practicals
+						* Experiment (get into good habits)
+						* Read Web Storage (2nd ed)
+						  - https://www.w3.org/TR/webstorage/
+						* W3C Recommendation 19 April 2016
+						* Read HTTP State Management Mechanism
+						  - RFC 6265, A. Barth, April 2011
+
+					</textarea>
+				</section>
+				
+
+
+			</div>
+
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="images/webhome.png" width="8%"></a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </div>
+</div>
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 3px; left: 50px; margin-left: 0px; z-index: 20; text-align: left;">
+		<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="images/webprint.png" width="7.5%"></a>
+    </div>
+</div>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148326645-1');
+</script>
+
+	</body>
+</html>

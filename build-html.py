@@ -12,13 +12,6 @@ Example:
 """
 
 
-# list of videos that correlate with the lectures - play through the commentary (sit and watch)
-videos = { "Introduction"                 : "https://www.youtube.com/embed/V5jkHVk1fXE?start=5&autoplay=1", 
-           "Internet and Web"             : "https://www.youtube.com/embed/8CBhwckd9eo?start=5&autoplay=1",
-		   "Fundamentals of HTML and CSS" : "https://www.youtube.com/embed/bFhOCKI4eUI?start=5&autoplay=1",
-		   "Productive Web Programming"   : "https://www.youtube.com/embed/9V2e_V1hl_c?start=5&autoplay=1"
-		 }
-		 
 
 
 import os
@@ -126,36 +119,41 @@ F28WP - <a href='http://www.macs.hw.ac.uk/students/cs/courses/f28wp-web-programm
 <td>Topic   		</td>
 <td>Lecture 		</td>
 <td>        		</td>
-<td>Video 			</td>
-<td>        		</td>
 <td>Notes   		</td>
-<td>Labs    		</td>
-<td>Quiz    		</td>
+<td>Tasks       </td>
+<td>Quizzes    		</td>
 <td>Crossword 		</td>
-<td>Demos    	    </td>
 </tr>
 """;
 
-week = 1
+week  = 1
+no    = 0
 for i in range(0,25):
-	
-	s = 'Lecture %02d' % (i)
+	s = 'Lecture %02d' % (no)
 	val = finddir( s, 'html' )
 	if val == 0:
+		no = no + 1
 		continue
 	
 	str += '<tr>'
 	topic = val[0].split('.')
 	topic = topic[0].split(' -')[1]
 	topic = topic.strip()
-
-	if ( (i+1) % 2 == 0 or i==1) and i>0:
+	
+	if ( (no+1) % 2 == 0 or no==1) and no>0:
 		str += "<td>%2d</td>" % (week)
 		week+=1
 	else:
 		str += "<td> &nbsp; </td>"
+		
+	if week == 7:
+		str += '                         <td colspan="8">-</td></tr>\n'
+		str += '<tr><td colspan="1"></td><td colspan="8">-</td></tr>\n'
+		continue
 	
-	str += "<td>%2d</td>" % (i)
+	
+	
+	str += "<td>%2d</td>" % (no)
 	
 
 	str += "<td>%s</td>"  % (topic)
@@ -164,35 +162,21 @@ for i in range(0,25):
 	else:
 		str += "<td><a href='%s'>Slides</td>" % (val[1]) # , findNum(val[1], '</section>') )
 	
-	
-	str += '<td>      &nbsp;  		</td>';
-		
-	#tmp = finddir( 'Lecture %02d' % (i), 'pdf' )
-	#if tmp == 0:
-	#	str += "<td>   </td>" 
-	#else:
-	#	str += "<td><a href='%s'> pdf </td>" % tmp[1]
-		
-	tmp = topic in videos; # 'Lecture %02d' % (i), 'pdf' )
-	if tmp == 0:
-		str += "<td> - </td>" 
-	else:
-		str += "<td><a href='%s'> Video </td>" % videos[ topic ]
-	
+
 	str += '<td>      &nbsp;  		</td>';
 	
-	tmp = finddir( 'Notes %02d' % (i), 'html' )
+	tmp = finddir( 'Notes %02d' % (no), 'html' )
 	if tmp == 0:
 		str += "<td> - </td>" 
 	else:
 		str += "<td><a href='%s'>Notes</td>" % tmp[1]
 	
 	
-	tmp = finddir( 'Lab %02d' % (i), 'html' )
+	tmp = finddir( 'Task %02d' % (no), 'html' )
 	if tmp == 0:
 		str += "<td> - </td>" 
 	else:
-		str += "<td><a href='%s'>Lab</td>" % tmp[1]
+		str += "<td><a href='%s'>Task</td>" % tmp[1]
 
 
 	tmp = finddir( 'Quiz %02d -' % (i) )
@@ -204,24 +188,15 @@ for i in range(0,25):
 		else:
 			str += "<td><a href='%s'>Revision</td>" % tmp[1]
 			
-	tmp = finddir( 'Crossword %02d' % (i), 'html' )
+	tmp = finddir( 'Crossword %02d' % (no), 'html' )
 	if tmp == 0:
 		str += "<td> - </td>" 
 	else:
 		str += "<td><a href='%s'>Crossword</td>" % tmp[1]
 
 		
-	tmp = finddir( 'Game %02d' % (i), 'html' )
-	if tmp == 0:
-		tmp = finddir( 'App %02d' % (i), 'html' )
-		if tmp == 0:
-			str += "<td> - </td>" 
-		else:
-			str += "<td><a href='%s'>App</td>" % tmp[1]
-	else:
-		str += "<td><a href='%s'>Game</td>" % tmp[1]
-		
 	str += '</tr>\n'
+	no = no + 1
 	
 	#if 'Review' in topic:
 	#	str += '<tr><td> &nbsp; </td></tr>'
@@ -233,10 +208,7 @@ str += '<br>'
 str += "Assessment:<br>"
 str += "Exam 50% <br>"
 # str += "Courseworks 50%<br>"
-str += "Coursework (50%%) (<a href='%s'>Document Details</a>) &nbsp;" % ( finddir( 'cw01.pdf')[1] )
-str += "(<a href='%s'>Support Sides</a>) &nbsp;" % ( finddir( 'Coursework.html')[1] )
-str += "(<a href='%s'>Checksheet</a>)" % ( finddir( 'cw01-checklist.pdf')[1] )
-str += "<!-- (<a href='%s'>Demonstration Sheet</a>) --> " % ( finddir( 'sheet.pdf')[1] )
+str += "Coursework (50%) (Composed of Labs/Class Tests - see VLE for details)"
 str += "<br>"
 
 
@@ -246,19 +218,6 @@ str += "<br>"
 str += "</td></tr></table>"
 
 
-str += """
-<br>
-
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'UA-148326645-1');
-</script>
-"""
 
 
 print( str )

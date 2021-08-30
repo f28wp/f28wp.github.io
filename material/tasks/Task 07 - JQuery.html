@@ -24,9 +24,11 @@ In this lab, you’ll further develop your understanding of jQuery. The purpose 
 # 1.1 jQuery - load() Example
 
 
-Implement the following sample, with a local client script (i.e., index.html, and on your server, e.g., macs folder (e.g., public_html folder on your university computer, which is accessible from www2.macs.hw.ac.uk/~username/)
+Implement the following sample, with a client script (i.e., index.html).  Then using jQuery you can grab the contents from another website (e.g., this may be the html, json, txt file or even a binary), which you process and update to the main page.
 
-Client side (index.html)
+In the saimple example below, it grabs the contents and puts it in the place holder 'div' with the id (divContent).
+
+Client side (**index.html**)
 ```
 <!DOCTYPE html> 
 <html> 
@@ -35,7 +37,7 @@ Client side (index.html)
         <script> 
             $(document).ready(function(){ 
                 $("button").click(function(){ 
-                    $("#divContent").load("send.php"); 
+                    $("#divContent").load("https://api.github.com/repositories/2126244/commits?per_page=1"); 
                 }); 
             }); 
         </script> 
@@ -59,24 +61,9 @@ Client side (index.html)
 
 ```
  
+In the example above, if you type the html into a file and run it, you should see the 'json' file data from the repository on GitHub.  Try changing the URL to another website. 
 
-Server side (send.php)
-```
-<?php
-  $t=time(); 
-  echo($t . "<br>");
-  echo(date("Y-m-d",$t));
-?>
-
-```
- 
-
-When you run the following script.  You should see the content on the page updated (i.e., div section called divContent, replace the Default Content with the information retrieved from send.php).
-
-Try modifying the code to have a Javascript timer keep updating the time information in real-time (i.e., keeps retrieving the information from send.php and updating the text on screen).
-
-Pass arguments to the php script to have it return different information (e.g., send.php?val=2;).  In the php script check if the value is set and echo different information.
-
+> Note when accessing the data/website information, some websites will block access as the domain is different (security).
 
 
 

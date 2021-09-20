@@ -80,6 +80,59 @@ Close with some questions and discussions
 					</textarea>
 				</section>
 				
+				
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20339c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						
+						Is the following HTML correctly formatted?
+						
+						```html
+						<b><font face="arial narrow"><i>
+						I am bold, italicized, arial narrow text :) 
+						</i></b></font>
+						```
+<aside class='notes'>
+</aside>
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20339c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						NO - The HTML tags are improperly **nested**.
+                        
+						Incorrect
+						```html 
+						<b><font face="arial narrow"><i>
+						I am bold, italicized, arial narrow text :) 
+						</i></b></font>
+						```
+						
+						Correct
+						```html 
+						<font face="arial narrow"><b><i>
+						I am bold, italicized, arial narrow text :) 
+						</i></b></font>
+						```
+<aside class='notes'>
+</aside>
+						</textarea>
+					</section>
+				</section>	
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## What do we mean by Productive Web Programming?

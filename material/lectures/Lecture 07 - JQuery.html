@@ -307,7 +307,7 @@
 					<textarea data-template>
 						## Question
 						
-						How can you be sure your (Javascript/jQuery) code/library is **ready** to run?
+						How can you be sure your (JavaScript/jQuery) code/library is **ready** to run?
 <aside class='notes'>
 </aside>
 					</textarea>
@@ -321,7 +321,7 @@
 						Wrap all your jQuery code within the document **ready function**
 						
 						```
-						$(document).ready(function()){
+						$(document).ready(function() {
 							// insert juicy jQuery code here ...
 						});
 						```
@@ -379,7 +379,7 @@
 						var el = $("<div/>");
 						```
 						
-						* Create HTML elements on the fly
+						* Create HTML elements on-the-fly (dynamically)
 <aside class='notes'>
 </aside>
 					</textarea>
@@ -423,12 +423,14 @@
 						
 						## Magic **$()** function 
 						
-						```
+						```js
 						$("div").hide();
-						$("div",$("p")).hide();
+						$("div, p").hide();
 						```
 						
 						* Select document elements 
+						
+						See [link](https://api.jquery.com/multiple-selector/) for details
 <aside class='notes'>
 </aside>
 					</textarea>
@@ -683,13 +685,13 @@
 						
 						* $("#foo")
 						```
-						<id="foo">
+						<p id="foo"> ..
 						```
 						<div style="width:600pt !important;"></div>
 						
 						* $(".foo")
 						```
-						<class="foo">
+						<p class="foo"> ..
 						```
 						<div style="width:600pt !important;"></div>
 						
@@ -970,8 +972,7 @@
 		
 <div class="hidden-mobile">
     <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20;">
-        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="images/webhome.png" width="8%"></a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        <a href="https://f28wp.github.io"><img src="images/webhome.png" width="8%"></a>
     </div>
 </div>
 

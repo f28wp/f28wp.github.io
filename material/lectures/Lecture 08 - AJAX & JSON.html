@@ -691,53 +691,39 @@
 						
 						* JSON data comes from the same server that vended the page
 						
-						* An eval of the data is no less secure than the original html 
+						* An `eval` of the data is no less secure than the original html 
 						
 						* If in doubt, use **string.parseJSON** or **JSON.parse** instead of eval 
 					</textarea>
 				</section>
 				
 	
-				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Example JSON Server-Side (PHP)
+						## Example JSON 
 						
-						```
-						<?php 
-						  function getDataFromDataSource($query) { 
-							mysql_connect("127.0.0.1", "root", "root");
-							mysql_select_db("criademo");
-							$result = mysql_query($query); 
-							return $result; 
-						  } 
-						```
+						```html
+<div id="demo"></div>
+
+<script>
+function getDoc() {
+  const xhttp = new XMLHttpRequest();
+  xhttp.onload = function() {
+    document.getElementById("demo").innerHTML =
+    this.responseText;
+  }
+  xhttp.open("GET",  "https://f28wp.github.io/index.html");
+  xhttp.send();
+}
+</script>
+<button type="button" onclick="getDoc()">Get Content</button>
 
 						```
-						  $emailaddresses = getDataFromDataSource(
-						  "SELECT COUNT(*) AS emailaddressCount from adressbook
-						  where emailaddress = '" . $_REQUEST["emailaddress"] ."'");
-
-						  $emailaddressesForJSON = array(); 
-						  while( $row = mysql_fetch_array($emailaddresses)) {
-							array_push($emailaddressesForJSON, $row); 
-						  } 
-						```
 						
-						```
-						  $jsonText = json_encode( $emailaddressesForJSON ); 
-						  echo $jsonText; 
-						?>
-						```
-						
-						* Notice **json_encode** (data is retrieved and returned in JSON format)
+						* Notice in this example grabs 'raw' html (could be json, txt or other data type)
 					</textarea>
 				</section>
-
-
-
-
-
+	
 
 
 				<section data-markdown style="text-align: left;">

@@ -7,7 +7,7 @@
 		<title>Web Programming: AJAX and JSON </title>
 
 		<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico" />
-		<meta name="description" content="Web Programming creating beautiful interactive and engaging web pages - using client server side technologies - Ajax and JSON ">
+		<meta name="description" content="Web Programming creating beautiful interactive and engaging web pages - using client server side technologies - AJAX and JSON ">
 		<meta name="author" content="Ben Kenwright">
 
 		<meta name="apple-mobile-web-app-capable" content="yes">
@@ -46,7 +46,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h2>Ajax and JSON</h2>
+					<h2>AJAX and JSON</h2>
 					<h4>F28WP Web Programming</h4>
 					<p>
 						<small>2020-2021</small>
@@ -58,21 +58,64 @@
 					<textarea data-template>
 						## Overview
 
-						* What is **Ajax** and **JSON?**
-						* How do we use Ajax?
+						* What is **AJAX** and **JSON?**
+						* How do we use AJAX?
 						* **Syntax** and formatting
-						* Ajax methods and properties
+						* AJAX methods and properties
 						* **Examples**
 						* Questions and Discussion
 					</textarea>
 				</section>
 
+<!-- ------------------------------------------------------------ -->
+
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+
+						What is the result?
+						
+						```
+						(true + true) > 1 + false
+						```
+						
+						* A. true
+						* B. false 
+						* C. TypeError
+						* D. NaN
+<aside class='notes'>
+</aside>
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: **A.** true 
+						
+						<br>
+						
+						----
+						(true + true) = 2,
+						1 + false = 1
+<aside class='notes'>
+</aside>
+						</textarea>
+					</section>
+				</section>
+				
+<!-- ------------------------------------------------------------ -->
+
+				
+				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## JSON
 
-						* **JSON = Javascript Object Notation**
-						* JSON is a subsect of Javascript (ECMA-262)
+						* **JSON = JavaScript Object Notation**
+						* JSON is a subsection of JavaScript (ECMA-262)
 						* Language **independent**
 						* Text-base (**human** readable)
 						* Light-weight
@@ -89,7 +132,7 @@
 						* JSON is not a markup language 
 						  - **JSON is not XML**
 						* JSON is not a general serilzation format 
-						  - No recrusive /recurring structures 
+						  - No recursive /recurring structures 
 						  - No invisible structures 
 						  - No function 
 					</textarea>
@@ -147,11 +190,11 @@
 						
 						* Objects are *unordered* containers of key/value pairs 
 						* Objects are wrapped in **{ }**
-						* Comma **,** seperates key/value pairs 
-						* Colon **:** seperates keys and values 
+						* Comma **,** separates key/value pairs 
+						* Colon **:** separates keys and values 
 						* Keys are strings 
 						* Values are from JSON data types
-						* Also refered to as (in other languagaes) :
+						* Also refereed to as (in other languages) :
 							- struct, record, hashtable, associative array, ... 
 						
 						
@@ -186,7 +229,7 @@
 						* Arrays are *ordered* sequences of values 
 						* Vales can be of different types
 						* Arrays are wrapped in **[]**
-						* Comma **,** seperate values 
+						* Comma **,** separate values 
 						* Implementation can start at index 0 or 1						
 						
 					</textarea>
@@ -299,13 +342,13 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 					
-					## Javascript and JSON
+					## JavaScript and JSON
 					
 					```JSON.stringify()```
 					* Takes a Javascript object and produces a **JSON string** from it 
 					
 					```JSON.parse() ```
-					* Takes a **JSON string** and parses it to a Javascript object
+					* Takes a **JSON string** and parses it to a JavaScript object
 
 					</textarea>
 				</section>
@@ -370,7 +413,7 @@
 					## JSON vs XML 
 					Both have been used to communicate data
 					
-					* JSON is valid JavaScript; better with Javascript/Web than XML 
+					* JSON is valid JavaScript; better with JavaScript/Web than XML 
 					<br><br>
 					* JSON less verbose and light weight
 					* XML can be used as a more general purpose markup
@@ -406,15 +449,47 @@
 						## AJAX
 
 						* Technique for creating **interactive web pages**
-						* Javascript and **XMLHttpRequest** to interchange and manipulate data with web server 
+						* JavaScript and **XMLHttpRequest** to interchange and manipulate data with web server 
 						* **Asynchronous** communication (i.e., no freezing up)
 
 					</textarea>
 				</section>
 
+<!-- ------------------------------------------------------------ -->
+
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+
+						AJAX stands for?
+						
+						* A. Abstract JavaScript Asynchronous XML
+						* B. Abstract JavaScript Adverse XML 
+						* C. Asynchronous JavaScript Archive XML
+						* D. Asynchronous JavaScript And XML
+<aside class='notes'>
+</aside>
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						Answer: **D.** Asynchronous JavaScript And XML 
+
+<aside class='notes'>
+</aside>
+						</textarea>
+					</section>
+				</section>
+
+<!-- ------------------------------------------------------------ -->
+				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Ajax request  
+						## AJAX request  
 
 						XMLHttpRequest is used to create and send HTTP requests
 					
@@ -437,9 +512,9 @@
 								
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## POST and GET in Ajax
+						## POST and GET in AJAX
 						* GET places arguments in **query string** (POST doesn't)
-						* GET call in Ajax has **size limitation** on the amount of data that can be passed 
+						* GET call in AJAX has **size limitation** on the amount of data that can be passed 
 					</textarea>
 				</section>
 							
@@ -447,7 +522,7 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## POST and GET in Ajax
+						## POST and GET in AJAX
 
 						General Principle
 						
@@ -461,7 +536,7 @@
 								
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Ajax Methods (1)
+						## AJAX Methods 
 						
 						* **open**("method", "URL"[,async[, "userName"[, "password"]]]): 
 							- Initializes a request.
@@ -476,7 +551,7 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Ajax Callbacks 
+						## AJAX Callbacks 
 						
 						* **onload**  
 						```
@@ -501,7 +576,7 @@
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Ajax Response 
+						## AJAX Response 
 						
 						Receive the result in the following xhr properties:
 
@@ -527,7 +602,7 @@
 						## Example 
 						```
 						<!DOCTYPE html> 
-						<head><title>Ajax Test</title> 
+						<head><title>AJAX Test</title> 
 						<script type="text/javascript"> 
 							var xhr = new XMLHttpRequest();
 							xhr.open("GET", "hello.txt", true);
@@ -540,13 +615,13 @@
 						</head> 
 						<body></body></html>
 						```					
-						Note hello.txt could be a .php file that produces dynamic content/information
+						Note hello.txt could be changed to '.php' script (e.g., hello.php) instead that produces **dynamic content/information**
 					</textarea>
 				</section>	
 
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Ajax Other Methods (1)
+						## AJAX Other Methods
 						
 						* **setRequestHeader("label", "value")**: Sets the value of the HTTP request header 
 						* **getAllResponseHeaders()**: Returns string with all header information 
@@ -557,7 +632,7 @@
 								
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Ajax Other Methods/properties (2) 
+						## AJAX Other Methods/properties 
 						
 						* **abort()** : Aborts request 
 						* **onreadystatechange**  - property contains the event handler when the readyState attribute changes
@@ -583,7 +658,7 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## JSON in Ajax 
+						## JSON in AJAX 
 			
 						* XMLHttpRequest
 						  - Obtain responseText
@@ -669,10 +744,10 @@
 					<textarea data-template>
 						## Summary
 
-						* Understand **Ajax** and **JSON**
+						* Understand **AJAX** and **JSON**
 						* Formatting and Syntax 
 						* Read/write JSON **structure**
-						* Benefits of Ajax
+						* Benefits of AJAX
 						* Examples
 						
 						

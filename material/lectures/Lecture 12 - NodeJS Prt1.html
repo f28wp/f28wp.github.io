@@ -69,126 +69,131 @@
 					</textarea>
 				</section>
 				
+				
 				<section>
-					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+					<section data-markdown data-transition="slide" data-background="#b0533c" data-background-transition="zoom">
 						<textarea data-template>
 						## Revision Question
-						Fix the bug
+						In localStorage object data ________
+						
+						* A) is deleted after the browser has been closed
+						* B) is not deleted after the browser has been closed
+						* C) can be seen but can not edited
+						* D) can be seen as well as edited
 
-						```
-						function getMessageText() {
-						  return $('message').text;
-						}
-
-						document.body.innerHTML = '<div id="message">The message</div>';
-						console.log(getMessageText());
-						```
-<aside class='notes'>
-</aside>
 						</textarea>
 					</section>
 					
-					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+					<section data-markdown data-transition="slide" data-background="#b0533c" data-background-transition="zoom">
 						<textarea data-template>
 						## Answer
 						
-						```
-						function getMessageText() {
-						  return $('#message').text();
-						}
-
-						document.body.innerHTML = '<div id="message">The message</div>';
-						console.log(getMessageText());
-						```
-<aside class='notes'>
-</aside>
-						</textarea>
-					</section>
-				</section>
-				
-				
-				<section>
-					<section data-markdown data-transition="slide" data-background="#80533c" data-background-transition="zoom">
-						<textarea data-template>
-						## Revision Question
-						What's the output for the following?
-
-						```
-						function abc(){
-						  return 1;
-						}
-						function abc(){
-						  return 2;
-						}
-						alert( abc() );
-						```
-						
-						* A. 1
-						* B. 2
-						* C. Error redefinition of function 
-<aside class='notes'>
-</aside>
-						</textarea>
-					</section>
-					
-					<section data-markdown data-transition="slide" data-background="#80533c" data-background-transition="zoom">
-						<textarea data-template>
-						## Answer
-						
-						* Answer: **B. 2**
-<aside class='notes'>
-</aside>
-						</textarea>
-					</section>
-				</section>
-				
-				
-								
-				<section>
-					<section data-markdown data-transition="slide" data-background="#10533c" data-background-transition="zoom">
-						<textarea data-template>
-						## Revision Question
-						What's the output for the following?
-
-						```
-						function foo(a, b, a)
-						{
-							b = a + b;
-							return b;
-						}
-						alert( foo(1,2,3) );
-						```
-						
-						* A. 1
-						* B. 6
-						* C. 3
-						* D. 5
-						* E. Error undefined
-<aside class='notes'>
-</aside>
-						</textarea>
-					</section>
-					
-					<section data-markdown data-transition="slide" data-background="#10533c" data-background-transition="zoom">
-						<textarea data-template>
-						## Answer
-						
-						* Answer: **D. 5**
+						* Answer **B)** is not deleted after the browser has been closed
 						
 						---
 						
-						Note you can enable `strict mode' to catch this issue.
+						Explanation: Data with no expiration date is stored by localStorage object. Here the data is not deleted if we close the browser. We can have data at the next day or week or year. 
 						
-						**"use strict";** at the top of the script.
+						```
+						localStorage(“firstname”,”Tanya”); 
+						alert( localStorage.getItem(“firstname”) );
+						```
 						
-						* Uncaught SyntaxError: Duplicate parameter name not allowed in this context
-
-						[Link for Details](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
-<aside class='notes'>
-</aside>
 						</textarea>
 					</section>
 				</section>
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What is the web storage limit of character storage for chrome 30.0 in localStorage?
+						
+						* A) unlimited
+						* B) none
+						* C) 1021 k
+						* D) 4.98 M
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* Answer **D)** 4.98 M
+						
+						---
+						
+						For chrome 18.0 it is unlimited i.e. can store any number of characters, 
+						for chrome 19.77 it is 1021 k, for chrome 22.0 it is 2.49 M, 
+						for chrome 24.0, 25.0, 27.0 it is 2.49 M, 
+						for chrome 28.0, 30.0, 31.0 and 31.1 it is 4.98 M.
+						
+						
+						</textarea>
+					</section>
+				</section>
+
+
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20239c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						For Web Storage clearing all the localStorage settings which function should be called?
+						
+						* A) localStorage.remove(key)
+						* B) localStorage.clear()
+						* C) localStorage.remove()
+						* D) localStorage.clearAll()
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20239c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* Answer **B)** localStorage.clear()
+						
+						---
+						Note same can be applied with sessionStorage also the syntax will be sessionStorage.clear().
+						
+						</textarea>
+					</section>
+				</section>
+				
+
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						Which of the following returns the number of value pairs in local Web Storage?
+						
+						
+						* A) localStorage.key(n)
+						* B) localStorage.length
+						* C) localStorage.setItem(key,value)
+						* D) localStorage.clear()
+
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* Answer **B)** localStorage.length
+						
+						--- 
+						
+						localStorage.length returns number of value pairs that are currently present in the list, storage.key(n) returns name of nth key from the list
+						
+						</textarea>
+					</section>
+				</section>
+
+
 				
 				
 				
@@ -198,7 +203,7 @@
 					<textarea data-template>
 						## Node.js
 
-						* Node.js is an open source server environment
+						* Node.js is an open source server-side environment
 						* Node.js allows you to run **JavaScript** on the server
 						
 						<img src="./images/nodejs.png" style="border: 0px">
@@ -249,6 +254,9 @@
 						
 						* Note you can download and install Node.js
 						* Run Node.js from the command prompt to test examples/exercises
+						* Node.js comes bundled with a **REPL** (**R**ead **E**val **P**rint **L**oop)
+							- an interactive environment like Windows cmd or Linux terminal
+						* REPL is very useful in experimenting with Node.js
 						
 						```
 						\>node
@@ -291,7 +299,6 @@
 		
 				<section>
 				<h2>Example</h2>
-
 				<iframe data-src="https://repl.it/@f28wp/nodeexample?lite=true"  width="80%" height="500px" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:3px solid #666; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 				
 				<div style="position: absolute; width: 40%; right: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.5), 0 5px 25px rgba(0,0,0,0.2); background-color: rgba(0, 0, 0, 0.9); color: #fff; padding: 20px; font-size: 20px; text-align: left;">
@@ -299,8 +306,8 @@
 								Example</h2>
 							<p>Type: console.log('test');</p>
 							<p>Select: Run</p>
-							
 				</div>
+				<a href="https://repl.it/languages/nodejs">repl</a>										
 <aside class='notes'>
 </aside>
 				</section>
@@ -313,7 +320,8 @@
 						## Node.js HTTP Module
 						
 						* HTTP handler index.js serves single web page on port 8080
-						* createServer() registers callback that’s run by request event
+						* Use the **require** directive to load a module 
+						* ```createServer()``` registers callback that’s run by request event
 
 						```
 						var http = require("http");
@@ -386,6 +394,10 @@
 						## **Why** use Node.js?
 						
 						* Provides an **easy** way to build **scalable** network programs
+						* Node is **open source**
+						* Node provides a **rich library** of various JavaScript modules 
+							- simplifies the development of web applications
+
 <aside class='notes'>
 </aside>
 					</textarea>

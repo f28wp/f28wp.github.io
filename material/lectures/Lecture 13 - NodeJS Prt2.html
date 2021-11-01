@@ -252,7 +252,7 @@ to produce static contetnt
 					<textarea data-template>
 						## Example - A Static Web Server
 						
-						```
+						```javascript
 						var http = require('http');
 						var fs = require('fs');
 						var path = require('path');
@@ -275,7 +275,8 @@ to produce static contetnt
 								'.jpg': 'image/jpg',
 								 ...   // other types ommited
 							};
-
+						```
+						```
 							var contentType = mimeTypes[extname] || 'application/octet-stream';
 
 							fs.readFile(filePath, function(error, content) {
@@ -338,7 +339,7 @@ to produce static contetnt
 						let http = require('http');
 						let events = require('events')
 						let emitter = new events.EventEmitter()
-						http.createServer(function testServer(request, response) {
+						http.createServer(function(request, response) {
 								response.writeHead(200, {'Content-Type': 'text/plain'});
 								response.end('Hello World\n');
 								emitter.emit('request_served');
@@ -583,8 +584,8 @@ note:
 						## Express - Middleware
 						
 						* **Middleware functions** are used to modify request and response objects
-						* Several middleware functions ar usually **chained** in a web app
-							-	each modifying the req/res object for their own purpose
+						* Several middleware functions are usually **chained** in a web app
+							-	each modifying the req/res objects for their own purpose
 						```javascript
 						app.use([path], function(req, res, next) {
 							. . . // perform required modifications on req/rep 

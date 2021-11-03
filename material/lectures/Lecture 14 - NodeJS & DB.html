@@ -298,12 +298,13 @@
 					<textarea data-template>
 						## MySQL with NodeJS
 
-						* 1. Connection 
-						* 2. Query Database (Check Status)
-						* 3. Create Database (In Code)
-						* 4. Update Database
-						  - Create Table 
-						  - Access Database Data
+						* Connect to Database 
+						* Query Database (Check Status)
+						* Create Database (In Code)
+						* Update Database
+						  - Create/Delete/Change Table 
+						  - Insert/Remove/Update Data
+						* Access Database Data (query)
 <aside class='notes'>
 </aside>
 					</textarea>
@@ -343,6 +344,9 @@
 						con.connect(function(err) {
 						  if (err) throw err;
 						  console.log("Connected!");
+						  
+						  var sql = " ... your SQL query ... " 
+						  
 						  con.query(sql, function (err, result) {
 							if (err) throw err;
 							console.log("Result: " + result);

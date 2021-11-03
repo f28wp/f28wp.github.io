@@ -475,7 +475,7 @@ to produce static contetnt
 						* A template is a text file to create page layout and placeholders for data values
 						* A **templating engines** will render the template 
 							- This helps to avoid tedious details to create HTML pages
-						* There are several tempalting languages/engines availabe to use with Epress
+						* There are several tempalting languages/engines availabe to use with Express
 							- **Pug**, Mustache, EJS, etc
 						
 <aside class='notes'>
@@ -518,6 +518,7 @@ note:
 						* Element **attributes** are defined in parentheses after the element
 						* Text after a tag followed by the **equals sign**, is treated as a JavaScript expression
 						* Can insert data within plain text by using  **#{}**
+						* Allows Conditional and Itartion 
 						
 <aside class='notes'>
 </aside>
@@ -643,16 +644,17 @@ for tasks like parsing request bodies, adding response headers, etc.
 					
 					## Handling Cookies with **Node.js**
 					
-					* Module **cookie-parser** uses **req.cookies** to get cookie details
-					  - **require('set-cookie')**
-					* Module set-cookie lets setCookie() set a cookie’s name, value etc
-					* Install both modules in addition to the **Express** module
+					* Module **cookie-parser** 
+					* Need to install this module in addition to the **Express** module
 
 					```javascript
 						var cookieParser = require('cookie-parser');
 						app.use(cookieParser())
 					```
-					* It parses Cookie header and populate **req.cookies** with an object keyed by cookie names
+					* It parses Cookie header and populate **request.cookies** with an object keyed by cookie names
+					* use **request.cookies** to get cookie details
+					* To add a new cookie use **response.cookie**(name, value, attributes)
+					* To remove cookie use **response.cLearCookie**(name)
 
 
 					</textarea>
@@ -743,8 +745,8 @@ for tasks like parsing request bodies, adding response headers, etc.
 						* Socket.IO is built on top of the **WebSockets** API (Client side) and Node.js
 							- browser support is required (availabe on most modern browsers)
 						* It has two parts:
-							- a client-side library that runs in the browser
 							- a server-side library for node.js 
+							- a client-side library that runs in the browser
 						
 <aside class='notes'>
 </aside>

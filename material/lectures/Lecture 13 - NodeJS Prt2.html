@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Web Programming: Node.js Prt2 </title>
+
+		<link rel="shortcut icon" type="image/x-icon" href="./images/favicon.ico" />
+		<meta name="description" content="Web Programming creating beautiful interactive and engaging web pages - using client server side technologies - Node.js ">
+		<meta name="author" content="Ben Kenwright">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<link rel="stylesheet" href="./css/reset.css">
+		<link rel="stylesheet" href="./css/reveal.css">
+		<link rel="stylesheet" href="./css/theme/white.css" id="theme">
+		
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="./lib/css/monokai.css">
+		
+		<link rel="stylesheet" href="./css/reveal-override.css"/>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? './css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h2>Node.js Prt 2</h2>
+					<h4>F28WP Web Programming</h4>
+					<p>
+						<small>2021-2022</small>
+					</p>
+<aside class='notes'>
+</aside>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						## Overview
+						
+						* Details/Examples using NodeJS
+						* Web framework for Node.js
+						* Example of socket.io package
+						* Questions and discussion
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						Fix the bug
+
+						```
+						function getMessageText() {
+						  return $('message').text;
+						}
+
+						document.body.innerHTML = '<div id="message">The message</div>';
+						console.log(getMessageText());
+						```
+<aside class='notes'>
+</aside>
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#20533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						```
+						function getMessageText() {
+						  return $('#message').text();
+						}
+
+						document.body.innerHTML = '<div id="message">The message</div>';
+						console.log(getMessageText());
+						```
+<aside class='notes'>
+</aside>
+						</textarea>
+					</section>
+				</section>
+				
+				
+				<section>
+					<section data-markdown data-transition="slide" data-background="#80533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What's the output for the following?
+
+						```
+						function abc(){
+						  return 1;
+						}
+						function abc(){
+						  return 2;
+						}
+						alert( abc() );
+						```
+						
+						* A. 1
+						* B. 2
+						* C. Error redefinition of function 
+<aside class='notes'>
+</aside>
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#80533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* Answer: **B. 2**
+<aside class='notes'>
+</aside>
+						</textarea>
+					</section>
+				</section>
+				
+				
+								
+				<section>
+					<section data-markdown data-transition="slide" data-background="#10533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Revision Question
+						What's the output for the following?
+
+						```
+						function foo(a, b, a)
+						{
+							b = a + b;
+							return b;
+						}
+						alert( foo(1,2,3) );
+						```
+						
+						* A. 1
+						* B. 6
+						* C. 3
+						* D. 5
+						* E. Error undefined
+<aside class='notes'>
+</aside>
+						</textarea>
+					</section>
+					
+					<section data-markdown data-transition="slide" data-background="#10533c" data-background-transition="zoom">
+						<textarea data-template>
+						## Answer
+						
+						* Answer: **D. 5**
+						
+						---
+						
+						Note you can enable `strict mode' to catch this issue.
+						
+						**"use strict";** at the top of the script.
+						
+						* Uncaught SyntaxError: Duplicate parameter name not allowed in this context
+
+						[Link for Details](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)
+<aside class='notes'>
+</aside>
+						</textarea>
+					</section>
+				</section>
+				
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## fs module 
+
+						* Node.js **file system** module contains useful file I/O functions
+							- Includes methods for **reading**, **writing**, **creating**, **deleting**, etc *files* and *directories* 
+							- wrapping standard OS functions
+						* Example: reading a file and adding its content to the response:
+						```
+						let fs = require("fs");
+						fs.readFile('./page1.txt', function (err, content) {
+						    if (err) {
+								console.error(err);
+								response.writeHead(500);
+								response.end('Error accessing content, error: '+error.code+'\n');
+						    }
+						    response.writeHead(200, { 'Content-Type': 'text/css' });
+						    response.end(content, 'utf-8');
+						});
+
+						```
+						
+						
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## path module
+
+						* **path** module is used to handle and transform files paths
+							- request path: part of url after IP address and port number
+						```html
+							url: http://localhost:8083/image1.jpg        path: /image1.jpg
+						```
+						* Contains functions to parse and manipulate paths
+							- **extname** returns the extension of the path (e.g  **.jpg**)
+							- **dirname** returns the directory name of a path (e.g  **/**)
+							- . . .
+						```
+						http.createServer(function (req, res) {
+						 ...
+							let filePath = '.' + req.url;
+							if (filePath == './') {
+								filePath = './index.html';
+							}
+							let extname = String(path.extname(filePath)).toLowerCase();
+						```
+	
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example - A Static Web Server
+						
+						```javascript
+						var http = require('http');
+						var fs = require('fs');
+						var path = require('path');
+
+						http.createServer(function (request, response) {
+							console.log('request ', request.url);
+
+							var filePath = '.' + request.url;
+							if (filePath == './') {
+								filePath = './index.html';
+							}
+
+							var extname = String(path.extname(filePath)).toLowerCase();
+							var mimeTypes = {
+								'.html': 'text/html',
+								'.js': 'text/javascript',
+								'.css': 'text/css',
+								'.json': 'application/json',
+								'.png': 'image/png',
+								'.jpg': 'image/jpg',
+								 ...   // other types ommited
+							};
+						```
+						```
+							var contentType = mimeTypes[extname] || 'application/octet-stream';
+
+							fs.readFile(filePath, function(error, content) {
+								if (error) {
+									if(error.code == 'ENOENT') {
+										fs.readFile('./404.html', function(error, content) {
+											response.writeHead(404, { 'Content-Type': 'text/html' });
+											response.end(content, 'utf-8');
+										});
+									}
+									else {
+										response.writeHead(500);
+										response.end('Sorry, check with the site admin for error: '+error.code+' ..\n');
+									}
+								}
+								else {
+									response.writeHead(200, { 'Content-Type': contentType });
+									response.end(content, 'utf-8');
+								}
+							});
+
+						}).listen(8125);
+						console.log('Server running at http://127.0.0.1:8125/');
+						
+						```
+						mozilla.org
+						
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Event 
+
+						* Node.js is based on **event-driven** programming paradigm
+						* Events are **emitted** and added to an event queue 
+						* The application listens to events in a loop
+							- takes events out of the event queue and dispatchs to **listeners**
+						* Works on observer pattern
+						
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## event module 
+
+						* The *events* module contains and **EventEmitter** class
+						* EventEmitter has methods to **emit** events and manipulate listeners
+							- **addListener**, **removeListener**, **setMaxListener**, ...
+							- are used to bind events and event-listeners
+						
+						* Example - emitting an event on completion of each request
+						```
+						let http = require('http');
+						let events = require('events')
+						let emitter = new events.EventEmitter()
+						http.createServer(function(request, response) {
+								response.writeHead(200, {'Content-Type': 'text/plain'});
+								response.end('Hello World\n');
+								emitter.emit('request_served');
+						}).listen(8081);
+						console.log('Server running on 8081');
+						let totalRequests = 0
+						requestServedHandler = function() {
+							totalRequests++;
+							console.log("Request served, total requests: " +  totalRequests);
+						}
+						emitter.addListener('request_served', requestServedHandler);
+						```
+						
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Express 
+						
+						* One of the most popular **web frameworks** for Node
+						* Provides facilities for:
+							- Handling Http requests with different **verbs** (Get, Post, etc)
+							- **Routing**  - handling different URL paths and web app navigation
+							- Generating responses using **template** and view rendering engines 
+							- Adding request processing **middleware**
+							- **Scaffolding** tools to quikly create a new web application 
+							- ...
+						
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+					
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Express - Http server
+						
+						*  Example : Basic "Hello Express" http server 
+						```
+						const express = require('express');
+						const app = express();
+						const port = 8082;
+						app.get('/', function(req, res) {
+							res.send("Hello Express!");
+						});
+						// Starting the server, callback can be omitted
+						app.listen(port, function() { 
+							console.log("Server is started on port" + port)
+						});
+						```
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Route handling example part 1
+						
+						* Requests stating with "/help" are served by another module
+						```
+						let express = require('express');
+						let app = express();
+						let help_server = require('./help_pages.js')
+						const port = 8082;
+						app.get('/', function(req, res) {   
+							res.send("Welcome to Hello Express");
+						});
+						app.use('/help', help_server);
+						app.get('*', function(req, res) {  
+							res.send("Page not found in Hello Express!");
+						});
+						app.listen(port, function() { 
+							console.log("Server is started on port " + port)
+						});
+						```
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Route handling example part 2 
+						
+						* Second module for serving requests starting with "/help"
+
+						```
+						let express = require('express');
+						let router = express.Router();
+						module.exports = router;
+						
+						router.get('/', function(req, res) {   
+							res.send("Hello Express help pages");
+						});
+						
+						router.get('/main', function(req, res) {
+							let options = {
+								root: 'E:/Node/hello_express',
+								headers: {
+								  'Content-Type': 'text/html'
+								}
+							}
+							res.sendFile("./index.html", options);
+						});
+						
+						router.get('/page1', function(req, res) {  
+							res.send("Hello Express  -  Help Page 1");
+						});
+						
+						router.get('/page2', function(req, res) {  
+							res.send("Hello Express  -  Help Page 2");
+						});
+						
+						router.get('*', function(req, res) {  
+							res.send("Help Page not found!");
+						});
+						```
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Express - View Rendering
+						
+						* **Templates** are used to create response pages
+						* A template is a text file to create page layout and placeholders for data values
+						* A **templating engines** will render the template 
+							- This helps to avoid tedious details to create HTML pages
+						* There are several tempalting languages/engines availabe to use with Express
+							- **Pug**, Mustache, EJS, etc
+						
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Pug templating engine
+						
+						*  To use pug you need to install it 
+						```
+						npm install pug
+						```
+						* The general rendering process of Pug:
+							- The required view is described in a **pug source file**
+							- the source code is then compiled and rendered to produce an HTML string
+							
+						* Use **pug.compile()** or **pug.render()** set of functions
+						
+<aside class='notes'>
+</aside>
+
+					</textarea>
+				</section>
+				
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Pug source file
+
+						* Pug file has the structure of a typical **HTML** file
+						* the **first word in a line** usually being an HTML element
+						* indentation being used to indicate **nested elements**
+							- e.g. the "body" element is inside an "html" element
+						* Element **attributes** are defined in parentheses after the element
+						* Text after a tag followed by the **equals sign**, is treated as a JavaScript expression
+						* Can insert data within plain text by using  **#{}**
+						* Allows Conditional and Itartion 
+						
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example: Pug source file 
+
+						* Simple **pug** file for the Hello Express app 
+						* Pug files are stored in a **.pug** file under the **/views** folder
+						```html
+						doctype html
+						html
+							head
+								title = appTitle
+							body
+								h1 Welcome to #{appTitle} Web App
+								p This a simple web app to to test Node.js #[strong Express] framework
+								
+								p Click for &nbsp;
+									a(href="./help/main") help
+									| &nbsp; with the app
+						```
+						
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Example: Rendering a pug template 
+
+						* The main page of the Hello Express app using a pug file
+						```javascript
+						let express = require('express');
+						let app = express();
+						let help_server = require('./help_pages.js')
+						const port = 8082;
+						app.set('view engine', 'pug');
+						app.get('/', function(req, res) {   
+						//	res.send("Welcome to Hello Express");
+							res.render('./main_page', {appTitle: 'Hello Express'});
+						});
+						app.use('/help', help_server);
+						app.get('*', function(req, res) {  
+							res.send("Page not found in Hello Express!");
+						});
+						// app.listen(8082);
+						app.listen(port, function() { 
+							console.log("Server is started on port " + port)
+						});
+						```
+						
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Express - Middleware
+						
+						* **Middleware functions** are used to modify request and response objects
+						* Several middleware functions are usually **chained** in a web app
+							-	each modifying the req/res objects for their own purpose
+						```javascript
+						app.use([path], function(req, res, next) {
+							. . . // perform required modifications on req/rep 
+						    next();    // pass to the next middleware
+						});
+						``` 
+						* Some common third-party middleware :
+							- **body-parser**, **cookie-parser**, **sesson-parser**
+						
+<aside class='notes'>
+</aside>
+
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Middleware Example 
+						
+						```javascript
+						var express = require('express');
+						var app = express();
+
+						//First middleware before response is sent
+						app.use(function(req, res, next){
+							console.log("Request received at " + Date.now());
+							next();
+						});
+
+						//Route handler
+						app.get('/', function(req, res, next){
+						   res.send("Welcome to Hellow Express");
+						   next();
+						});
+
+						app.use('/', function(req, res){
+							console.log('Rsponse is being sent.');
+						});
+
+						app.listen(8082);
+						```  
+						
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+
+
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					## Handling Cookies with **Node.js**
+					
+					* Module **cookie-parser** 
+					* Need to install this module in addition to the **Express** module
+
+					```javascript
+						var cookieParser = require('cookie-parser');
+						app.use(cookieParser())
+					```
+					* It parses Cookie header and populate **request.cookies** with an object keyed by cookie names
+					* use **request.cookies** to get cookie details
+					* To add a new cookie use **response.cookie**(name, value, attributes)
+					* To remove cookie use **response.cLearCookie**(name)
+
+
+					</textarea>
+				</section>
+
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## Example Node.js
+					
+					* Script updates and reports on stored data
+
+					</textarea>
+				</section>
+
+
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					
+					```javascript
+					var express = require('express');
+					var cookieParser = require('cookie-parser');
+					var http = require('http');
+					var app = express();
+					app.use(cookieParser());
+					var head = ["<!DOCTYPE html>", "<html>", "<head>",
+								 "<title>Cookies</title>", "</head>", "<body>"];
+					var url = "http://localhost:8082/cookie";
+					var tail = [`<form action=${url}>`,
+								'<p>', 'Key <input name="name" value="">', '</p>',
+								'<p>', 'Value <input name="value" value="">', '</p>',
+								'<p>', 'Age <input name="age" value="">', '</p>',
+								'<p>', '<input type="submit"/>', 
+								'</form>', '</body>', '</html>'];
+					var eol = '\n';
+					```
+					```javascript
+					app.get('/', function (req, res) {
+						res.send("Welcome to Cookie Test app!");
+					});
+					app.get('/cookie', function (req, res) {
+						var s = '';
+						for (var i in head) s += head[i] + eol;
+						if ( req.query.name != undefined && req.query.name != '' &&
+								req.query.value != undefined ) {
+							if ( isNaN(req.query.age) ) 
+								req.query.age = 0;
+							res.cookie(req.query.name, req.query.value, {maxAge: req.query.age});		
+						}
+						s += '<p>' + eol;
+						for (var i in req.cookies)
+							s += i + '=' + req.cookies[i] + '<br>' + eol;
+						s += '</p>' + eol;					
+						for (var i in tail) s += tail[i] + eol;
+						res.send(s); // send web page
+					});					
+					app.listen(8082, function() {console.log("Cookie test started on port 8082");});
+					```				
+					</textarea>
+				</section>
+	
+<!--
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Express - Scaffolding
+						
+						* Scaffolding allows us to easily create a skeleton for a web application
+						* A scaffolding tool sets up:
+							- folder strudture for web app 
+							- some popular files for the web app such as: main.js, index.js, config.js, etc
+						* Allows us to directly get started with building the application 
+						
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+
+-->
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Scoket.io
+						
+						* Socket.IO enables *real-time* ***bidirectional*** *event-based* web applications, some examples:
+							- Instant messengers, Collaboration Applications, Online Gaming, etc.
+						* Socket.IO is built on top of the **WebSockets** API (Client side) and Node.js
+							- browser support is required (availabe on most modern browsers)
+						* It has two parts:
+							- a server-side library for node.js 
+							- a client-side library that runs in the browser
+						
+<aside class='notes'>
+</aside>
+
+					</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## socket.io example
+
+						* Example 
+						  - Realtime NodeJS Collaborative Drawing Demo 
+						  - https://codesandbox.io/s/rwk72n5v4m?from-embed
+						
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Summary
+
+						* Example of **fs**, **path**, and **event** packages in Node.js
+						* **Express** framework for web application development
+							- Routing
+							- Page Rendering
+							- Middleware
+						* Example of **socket.io**
+						
+						
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+
+
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+					## To do this week ...
+
+					* Read over the lectures <br>
+					* Review the revision questions <br>
+					* Work through tutorial practicals <br>
+					* **Experiment** (get into good habits) <br>
+					* Read Node.js Tutorial
+					http://www.tutorialspoint.com/nodejs/
+					* Browse **Node.js Website**
+					https://nodejs.org/
+					* Test out examples on **CodeSandbox.io**
+					* Socket.io https://socket.io/
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+				
+
+			</div>
+
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				center: true,
+				hash: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/tts/tts_min_reveal.js', async: false}
+				]
+			});
+
+		</script>
+
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20;">
+        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="images/webhome.png" width="8%"></a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+    </div>
+</div>
+
+<div class="hidden-mobile">
+    <div style="display: block; position: absolute; bottom: 3px; left: 50px; margin-left: 0px; z-index: 20; text-align: left;">
+		<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="images/webprint.png" width="7.5%"></a>
+    </div>
+</div>
+
+<div style="display: block; position: absolute; bottom: 3px; left: 95px; margin-left: 0px; z-index: 20; text-align: left;">
+	<a onclick="tts.ToggleSpeech();"><img src="./images/webtalk.png" width="7.5%"></a>
+</div>
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-148326645-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-148326645-1');
+</script>
+
+	</body>
+</html>

@@ -217,7 +217,7 @@
 
 						* Node.js can be used in **database** applications
 						* Node supports the majority of popular databases
-						  - MongoDB, **MySQL**, NoSQL, ..
+						  - MongoDB, **MySQL**, SQLite, NoSQL, ..
 <aside class='notes'>
 </aside>
 					</textarea>
@@ -298,12 +298,13 @@
 					<textarea data-template>
 						## MySQL with NodeJS
 
-						* 1. Connection 
-						* 2. Query Database (Check Status)
-						* 3. Create Database (In Code)
-						* 4. Update Database
-						  - Create Table 
-						  - Access Database Data
+						* Connect to Database 
+						* Query Database (Check Status)
+						* Create Database (In Code)
+						* Update Database
+						  - Create/Delete/Change Table 
+						  - Insert/Remove/Update Data
+						* Access Database Data (query)
 <aside class='notes'>
 </aside>
 					</textarea>
@@ -343,6 +344,9 @@
 						con.connect(function(err) {
 						  if (err) throw err;
 						  console.log("Connected!");
+						  
+						  var sql = " ... your SQL query ... " 
+						  
 						  con.query(sql, function (err, result) {
 							if (err) throw err;
 							console.log("Result: " + result);
@@ -470,7 +474,6 @@
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
 						## SQLFiddle - Online SQL Sandbox
-
 						
 						* Easily test out your database commands
 						* Examples and snippets
@@ -504,6 +507,12 @@
 						```
 <aside class='notes'>
 </aside>
+
+note:
+- createConnection: creates one connection and it lasts until you close it (or closed by the mysql server)
+- createPool: you request a connection from a pool, you will receive a connection that is not currently being used, or a new connection. 
+If you're already at the connection limit, it will wait until a connection is available before it continues. These pooled connections do not need to be manually closed.
+
 					</textarea>
 				</section>
 				

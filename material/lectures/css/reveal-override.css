@@ -42,6 +42,9 @@ body {
 	position:fixed !important;
 }
 
+.progress {
+	position:fixed !important;
+}
 
 html.dimbg .slide-background {
 	opacity: 0.2 !important;

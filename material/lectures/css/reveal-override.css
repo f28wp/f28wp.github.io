@@ -13,10 +13,15 @@ body:after {
     display: inline-block;
 }
 
+html {
+	width: 100vw;
+    height: 100vh;
+}
+
 body {
     content: "";
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background: url("../images/back.png");
 	background-position: right 0% bottom 45%;
 	background-repeat: no-repeat;
@@ -25,11 +30,12 @@ body {
     right: 0px;
     position: absolute;
     display: inline-block;
+	overflow: hidden;
 }
 
 .reveal{
-	width: 100%;
-	height: 100%;
+    width: 100vw;
+    height: 100vh;
 }
 
 

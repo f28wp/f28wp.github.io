@@ -4,7 +4,7 @@ let style = document.createElement('style');
 document.head.appendChild( style );
 style.textContent = `
 .slider {
-    position: absolute;
+    position: fixed;
     overflow: hidden;
     z-index:  10000;
 
@@ -14,17 +14,17 @@ style.textContent = `
 /* --------------------------- */
 
 .slider.bottom {
-    top: 100%;
+    top: 100vh;
     left: 0px;
     transition: top 1s;
-    height: 100%;
-    width:  100%;
+    height: 100vh;
+    width:  100vw;
     background: blue;
     color: cyan;
 }
 
 .slider.bottom.in {
-    top: 0%;
+    top: 0vh;
 }
 /* ------------------------------ */
 

@@ -35,6 +35,10 @@ body {
 	
 }
 
+.controls {
+    position:fixed !important;
+}
+
 .reveal{
     width: 100vw !important;
     height: 100vh !important;
@@ -44,6 +48,10 @@ body {
 
 .progress {
 	position:fixed !important;
+}
+
+.progress:after {
+    position:fixed !important;
 }
 
 html.dimbg .slide-background {

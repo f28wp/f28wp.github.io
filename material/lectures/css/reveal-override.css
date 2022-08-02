@@ -14,14 +14,16 @@ body:after {
 }
 
 html {
-	width: 100vw;
-    height: 100vh;
+    width: 100vw !important;
+    height: 100vh !important;
+	overflow: hidden !important;
 }
 
 body {
     content: "";
-    width: 100vw;
-    height: 100vh;
+    width: 100vw !important;
+    height: 100vh !important;
+	overflow: hidden !important;
     background: url("../images/back.png");
 	background-position: right 0% bottom 45%;
 	background-repeat: no-repeat;
@@ -30,12 +32,13 @@ body {
     right: 0px;
     position: absolute;
     display: inline-block;
-	overflow: hidden;
+	
 }
 
 .reveal{
-    width: 100vw;
-    height: 100vh;
+    width: 100vw !important;
+    height: 100vh !important;
+	overflow: hidden !important;
 }
 
 

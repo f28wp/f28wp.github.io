@@ -802,6 +802,8 @@
 
 		</div>
 
+<!--bottom-->
+
 		<script src="js/reveal.js"></script>
 
 		<script>
@@ -812,6 +814,8 @@
 				progress: true,
 				center: true,
 				hash: true,
+				
+				controlsTutorial: true,
 
 				transition: 'slide', // none/fade/slide/convex/concave/zoom
 
@@ -828,25 +832,58 @@
 			});
 
 		</script>
+		
+		
+<script src='plugin/codepanel/codepanel.js'></script>
+<script>
+setupcodepanel(0, 'https://jsitor.com/'); 
+setupcodepanel(1, 'https://liveweave.com/');
+setupcodepanel(2, 'https://webmakerapp.com/app/');
+setupcodepanel(3, 'https://onecompiler.com/nodejs/');
+setupcodepanel(4, 'https://codesandbox.io/');
+setupcodepanel(5, 'https://glitch.com');
 
+</script>
 
-<div class="hidden-mobile">
-    <div style="display: block; position: absolute; bottom: 5px; left: 5px; margin-left: 0px; z-index: 20;">
-        <a href="https://f28wp.github.io" class="twitter-follow-button" data-show-count="false"><img src="images/webhome.png" width="8%"></a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    </div>
+	
+<div style="display: block; position: fixed; bottom: 6px; left: 6px; margin-left: 0px; z-index: 200000;">
+	<a href="https://f28wp.github.io"><img src="images/webhome.png?id=2" height="30px"></a>
 </div>
 
-<div class="hidden-mobile">
-    <div style="display: block; position: absolute; bottom: 3px; left: 50px; margin-left: 0px; z-index: 20; text-align: left;">
-		<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="images/webprint.png" width="7.5%"></a>
-    </div>
-</div>
+<div style="display: block; position: fixed; bottom: 5px; left: 50px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="images/webprint.png" height="30px"></a>
+</div>	
 
+<!--
 <div style="display: block; position: absolute; bottom: 3px; left: 95px; margin-left: 0px; z-index: 20; text-align: left;">
 	<a onclick="tts.ToggleSpeech();"><img src="./images/webtalk.png" width="7.5%"></a>
 </div>
+-->
 
+<div style="display: block; position: fixed; bottom: 5px; left: 95px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href='javascript:void(0)' onclick="togglecodepanel(0);"><img src="./images/webcode.png" height="30px"></a>
+</div>
+
+<div style="display: block; position: fixed; bottom: 5px; left: 140px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href='javascript:void(0)' onclick="togglecodepanel(1);"><img src="./images/webcode1.png" height="30px"></a>
+</div>
+
+<div style="display: block; position: fixed; bottom: 5px; left: 185px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href='javascript:void(0)' onclick="togglecodepanel(2);"><img src="./images/webcode2.png" height="30px"></a>
+</div>
+
+<div style="display: block; position: fixed; bottom: 5px; left: 227px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href='javascript:void(0)' onclick="togglecodepanel(3);"><img src="./images/webcode3.png" height="30px"></a>
+</div>
+
+<div style="display: block; position: absolute; bottom: 5px; left: 270px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href='javascript:void(0)' onclick="togglecodepanel(4);"><img src="./images/webcode4.png" height="30px"></a>
+</div>
+
+
+<div style="display: block; position: fixed; bottom: 5px; left: 315px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href='javascript:void(0)' onclick="togglecodepanel(5);"><img src="./images/webcode1.png" height="30px"></a>
+</div>
 
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -857,7 +894,7 @@
   gtag('js', new Date());
 
   gtag('config', 'UA-148326645-1');
-</script>
+</script>	
 
 	</body>
 </html>

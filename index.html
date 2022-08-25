@@ -4,6 +4,144 @@
 <link rel="shortcut icon" type="image/x-icon" href="./material/lectures/images/favicon.ico" />
 <title>Web Programming Course (F28WP)</title>
 
+<style>
+#particles-js {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  position:absolute;
+  z-index:-1000;
+  opacity: 0.5;
+}
+</style>
+<div id="particles-js"></div>
+
+<br>
+<br>
+<br>
+
+<table align="center"><tr><td>
+
+F28WP - <a href='http://www.macs.hw.ac.uk/students/cs/courses/f28wp-web-programming/'>Web Programming</a>
+	
+<br>
+<br>
+
+<table>
+<thead id="headtoc">
+<tr>
+<td>Wk      		</td>
+<td>No      		</td>
+<td>Topic   		</td>
+<td>        		</td>
+<td>Lecture 		</td>
+<td>        		</td>
+<td>Notes   		</td>
+<td>Tasks           </td>
+<td>Quizzes    		</td>
+<td>Crosswords    	</td>
+</tr>
+</thead>
+<tbody id="bodytoc">
+</tbody>
+</table>
+
+<br>
+<p>
+Assessment:<br>Exam 50% <br>Coursework (50%) 
+</p>
+
+</td></tr></table>
+
+
+
+
+<script>
+// Wk	No	Topic	[GAP]	Lecture	 [GAP]	Notes	Tasks	Quizzes	Crossword
+/*
+// files/folders follow naming convention
+material/
+  lectures/      // Lecture 00 - 
+  notes/         // Notes 00 -
+  labs/          // Task 00 - 
+  quizzes/       // Quiz 00 - 
+  crosswords/	 // Crossword 00 - 
+*/
+
+
+// l:lecture, n:notes, q:quiz, t:labs(tasks), c:crosswords, e:extra-links
+	
+let toc = [
+  { wk: '1',  no: '00', name: 'Introduction'                                                        ,  l:true, n: true , t:false, q: true,  c:true    }, 
+  {           no: '01', name: 'Internet and Web'                                                    ,  l:true, n: true , t:true,  q: true,  c:true    },
+  {           no: '02', name: 'Fundamentals of HTML and CSS'                                        ,  l:true, n: true , t:true,  q: true,  c:true    },
+  { wk: '2',  no: '03', name: 'Productive Web Programming'                                          ,  l:true, n: true , t:true,  q: true,  c:true    },
+  {           no: '04', name: 'JavaScript Prt 1 (Basics)'                                           ,  l:true, n: true , t:true,  q: true,  c:true    },
+  { wk: '3',  no: '05', name: 'JavaScript Prt 2'                                                    ,  l:true, n: true , t:true,  q: true,  c:false   },
+  {           no: '06', name: 'JavaScript & DOM'                                                    ,  l:true, n: true , t:false, q: true,  c:false   },
+  { wk: '4',  no: '07', name: 'JQuery'                                                              ,  l:true, n: true , t:true,  q: true,  c:false   },
+  {           no: '08', name: 'AJAX & JSON'  				                                        ,  l:true, n: true , t:true,  q: true,  c:false   },
+  { wk: '5',  no: '09', name: 'XML & RSS'  				                                            ,  l:true, n: false, t:false, q: false, c:false   },
+  {		      no: '09', name: 'Revision'  				                                            ,  l:true, n: false, t:false, q: false, c:false   },
+  { wk: '6',  no: '-',  name: 'Reading Week (No Lectures)'                                                                                            },
+  { wk: '7',  no: '06', name: 'Data, Cookies & Files'                                               ,  l:true, n: true,  t:false, q: false, c:false   },
+  {	    	  no: '06', name: 'NodeJS Prt1'                                                         ,  l:true, n: true,  t:true,  q: true,  c:false   },
+  { wk: '8',  no: '07', name: 'NodeJS Prt2'                                                         ,  l:true, n: true,  t:false, q: false, c:false   },
+  {		      no: '07', name: 'NodeJS & DB'                                                         ,  l:true, n: true,  t:false, q: true,  c:false   },
+  { wk: '9',  no: '08', name: 'Security (Encryption, Safety, Passwords,'                            ,  l:true, n: true,  t:true,  q: true,  c:false   },
+  {           no: '08', name: 'Hybrid Apps and Mobile (Framework7, Bootstrap, React, AngularJS)	'   ,  l:true, n: false, t:false, q: false, c:false   },
+  { wk: '10', no: '09', name: 'Web Services (SOAP, REST)'                                           ,  l:true, n: true,  t:false, q: true,  c:false   },
+  {	    	  no: '09', name: 'Design (Web-Analytics, Adaptive UI and UX, Web Robots, Business,	'   ,  l:true, n: true,  t:false, q: false, c:false   },
+  { wk: '11', no: '10', name: 'Review & Support Lecture'                                            ,  l:true, n: false, t:false, q: false, c:false   },
+  {           no: '10', name: 'Review & Support Lecture'                                            ,  l:true, n: false, t:false, q: false, c:false   },
+];
+
+	// Slides	 	Notes	Labs	Revision	Crossword
+
+let bodytoc = document.getElementById('bodytoc');
+for (let i=0; i<toc.length; i++)
+{
+	// Insert a row at the end of table
+	var newRow = bodytoc.insertRow();
+	
+	if ( toc[i].wk ) newRow.insertCell().innerHTML = toc[i].wk;
+	else             newRow.insertCell().innerHTML = ''; // week
+	
+	newRow.insertCell().innerHTML = toc[i].no;
+	newRow.insertCell().innerHTML = toc[i].name;
+	
+	newRow.insertCell().innerHTML = ' '; // gap
+	
+	if ( toc[i].l ) newRow.insertCell().innerHTML = `<a href='./material/lectures/Lecture ${toc[i].no} - ${toc[i].name}.html'>Slides</a>`;
+	else            newRow.insertCell().innerHTML = '-';
+	
+	newRow.insertCell().innerHTML = ' '; // gap
+	
+	if ( toc[i].n ) newRow.insertCell().innerHTML = `<a href='./material/notes/Notes ${toc[i].no} - ${toc[i].name}.html'>Notes</a>`;
+	else            newRow.insertCell().innerHTML = '-';
+	
+	if ( toc[i].t ) newRow.insertCell().innerHTML = `<a href='./material/labs/Lab ${toc[i].no} - ${toc[i].name}.html'>Labs</a>`;
+	else            newRow.insertCell().innerHTML = '-';
+	
+	if ( toc[i].q ) newRow.insertCell().innerHTML = `<a href='./material/quizzes/Quiz ${toc[i].no} - ${toc[i].name}.html'>Quiz</a>`;
+	else            newRow.insertCell().innerHTML = '-';
+	
+	if ( toc[i].c ) newRow.insertCell().innerHTML = `<a href='./material/crosswords/Crossword ${toc[i].no} - ${toc[i].name}.html'>Crossword</a>`;
+	else            newRow.insertCell().innerHTML = '-';
+	
+}
+
+</script>
+
+
+<script src="./scripts/particles.js"></script>
+<script src="./scripts/appHome.js"></script>
+
+
+
+
+<!--
 <br>
 <table align="center"><tr><td>
 
@@ -47,3 +185,8 @@ F28WP - <a href='http://www.macs.hw.ac.uk/students/cs/courses/f28wp-web-programm
 <tr><td>11</td><td>19</td><td>Review & Support Lecture</td><td><a href='.\material\lectures\Lecture 19 - Review & Support Lecture.html'>Slides</td><td>      &nbsp;  		</td><td> - </td><td> - </td><td> - </td><td> - </td></tr>
 <tr><td> &nbsp; </td><td>20</td><td>Review & Support Lecture</td><td><a href='.\material\lectures\Lecture 20 - Review & Support Lecture.html'>Slides</td><td>      &nbsp;  		</td><td> - </td><td> - </td><td> - </td><td> - </td></tr>
 </table><br>Assessment:<br>Exam 50% <br>Coursework (50%) (Composed of Labs/Class Tests - see VLE for details)<br></td></tr></table>
+
+-->
+
+
+

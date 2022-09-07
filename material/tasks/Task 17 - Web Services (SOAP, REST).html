@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Web Programming F28WP</title>
+  <link rel="stylesheet" href="./md2html/theme.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+
+</head>
+<body>
+  <div id="content">
+
+# Lab - XML & RSS
+
+# Introduction
+In this lab, you’ll further develop your understanding of Web Service Protocols.
+
+# Pexels API
+This will give you an opportutnity to develop a web-based image search engine.
+
+
+## About Pexels API
+The Pexels API enables programmatic access to the full Pexels content library, including photos, videos. All content is available free of charge, and you are welcome to use Pexels content for anything you'd like, as long as it is within pexels Guidelines.
+
+Pexels API URL:
+* [https://www.pexels.com/api/documentation/](https://www.pexels.com/api/documentation/)
+
+
+The **Pexels API is a RESTful JSON API**, and you can interact with it from **any language or framework with a HTTP library**. Alternately, Pexels maintains some official Client Libraries you can use.
+
+
+## Minimum Working Code Example 
+
+Register with the Pexels library, they should provide you with an **apikey** (32 digit long hex number).  Then you can try out the below example - which uses a JavaScript program that will run in a web browser to **fetch(..)** a list of images for the word **people**.
+
+```
+/*
+  Accessing the pexels image library using the API
+
+  You should regsiter with the website, who'll give you a key, similar to the one below, which you can use to access/search for images
+*/
+
+const apikey="enter-your-key-herexxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+
+fetch("https://api.pexels.com/v1/search?query=people",{
+  headers: {
+    Authorization: apikey
+  }
+})
+.then(resp => {
+   return resp.json()
+})
+.then(data => {
+   console.log(data)
+});
+console.log('ready..');
+```
+
+The implementation simply outputs the returned data to the console window, but it provides a wealth of data, such as, the URL for images, resolutions, and so on.
+
+## Usable Resource 
+Take the return data and dynamically create elements for the page, such as, 'img' element and set the 'src' content to the ones return from the Pexel API (i.e., so the searched images are displayed on screen).
+
+
+
+# Further Work
+
+Continue to develop the example by adding additional features, e.g., 
+
+* Add search button (builds a new search string and calls the API function, instead of 'people' search for other words).
+* Image caching
+* Resolution data
+* File formats 
+
+
+
+
+  </div>
+  
+  <br><br>
+  
+  <script>
+    elem = document.getElementById('content')
+    converter = new showdown.Converter();
+    elem.innerHTML = converter.makeHtml(elem.innerHTML)
+    
+	hljs.initHighlightingOnLoad();
+  </script>
+<!--
+  <script src="https://yihui.name/js/math-code.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  -->
+  
+<div id="myhome" style="z-index: auto; display: block; position: fixed; bottom: 5px; left: 5px;">
+    <a href="https://f28wp.github.io" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+</div>
+
+
+
+</body>
+</html>

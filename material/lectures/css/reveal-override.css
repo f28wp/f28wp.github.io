@@ -39,12 +39,14 @@ body {
     position:fixed !important;
 }
 
+
 .reveal{
     width: 100vw !important;
     height: 100vh !important;
 	overflow: hidden !important;
-	position:fixed !important;
+/*	position:fixed !important; */
 }
+
 
 .progress {
 	position:fixed !important;

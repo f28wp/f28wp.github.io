@@ -14,7 +14,9 @@
 </head>
 <body>
   <div id="content">
-
+  </div>
+  
+<textarea id='tcontent' style='display:none;'>
 # Lab - XML & RSS
 
 # Introduction
@@ -54,7 +56,7 @@ console.log( text.substring(0, 100 ) );
 If your code worked correctly, you should see this in your output console:
 
 ```
-["<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<rss xmlns:media=\"http://search.yahoo.com/mr"]
+<xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<rss xmlns:media=\"http://search.yahoo.com/mr" ...
 ```
 
 Notice, we did a 'substring', this was to limit the output to 100 letters, spam fill the output window - just to check we're receiving the RSS XML content.
@@ -137,17 +139,15 @@ The above example provides a simple minimal working example to get you started. 
 * Load in multiple RSS feeds and put the information on a single web page 
 * Load other information (e.g., images and dates)
 * Enhance the visual display (e.g., tiles, colors, font sizes, ...)
+</textarea>
 
 
-
-  </div>
-  
   <br><br>
   
   <script>
-    elem = document.getElementById('content')
+	let cont = document.getElementById('tcontent').value;
     converter = new showdown.Converter();
-    elem.innerHTML = converter.makeHtml(elem.innerHTML)
+    document.getElementById('content').innerHTML = converter.makeHtml(cont)
     
 	hljs.initHighlightingOnLoad();
   </script>

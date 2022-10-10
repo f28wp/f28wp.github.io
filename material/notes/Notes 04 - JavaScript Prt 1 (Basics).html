@@ -56,11 +56,11 @@ Latest version is ECMAScript 9 released in June 2018.
 # JavaScript Syntax
 
 JavaScript suppor ts 6 primitive types
-- undefined sole value possessed by unassigned var iables
+- undefined sole value possessed by unassigned variables
 - null sole value denoting intentional lack of a value
 - Boolean type having value of tr ue or false
 - Number type of double precision 64 bit IEEE for mat number
-- Str ing sequence of 16 bit UTF-16 characters
+- String sequence of 16 bit UTF-16 characters
 - Symbol ES 6+ - symbols have unique values and no literal syntax
 
 Objects are members of the type Object that have
@@ -70,15 +70,15 @@ Objects are members of the type Object that have
 
 Variables are case-sensitive identifiers that
 - start with alphabetic letter, underscore or dollar sign
-- contain only alphanumer ics, dollar signs and underscore
+- contain only alphanumerics, dollar signs and underscore
 - have no type - type belongs to their value
 
-Keyword var declares var iables with scope of function they’re in.
+Keyword var declares variables with scope of function they're in.
 
 In ES 6+ let and const declare block-scoped variables.
 
-- let variables can’t be redeclared in scope. var variables can.
-- const variables can index loops but can’t be reassigned values.
+- let variables can't be redeclared in scope. var variables can.
+- const variables can index loops but can't be reassigned values.
 
 ```
 var i, number_of_hits = 0, done = true, fruit = "yoghurt";
@@ -95,7 +95,7 @@ JavaScript statement ends in ";". Newline forces their interpolation.
 
 JavaScript statements are composed of
 - comments single start with "//", multiline inside "/*" and "*/"
-- expressions compounds of values, var iables and operators
+- expressions compounds of values, variables and operators
 - keywords reser ved words like "function", "var", "new" etc.
 - operators see below
 - values pr imitive values and objects
@@ -117,7 +117,7 @@ JavaScript has a few special identifiers including
 - NaN Not a Number - special IEEE for mat value
 - Infinity positive infinity number value
 
-JavaScript has built-in objects incl. Array, Date, Math, Regexp, Str ing
+JavaScript has built-in objects incl. Array, Date, Math, Regexp, String
 
 Its engines may have built-ins for GUI, IO, OS - Navigator, Window
 
@@ -183,7 +183,7 @@ Nashorn is standalone JavaScript engine (ES5) released in Java 1.8
 - based on the Da Vinci Machine
 - implementing JSR-223 using new code base
 
-Nashor n engine is launched with "jjs" or "jrunscr ipt" command.
+Nashorn engine is launched with "jjs" or "jrunscr ipt" command.
 
 ```
 unix% java -v
@@ -196,13 +196,13 @@ Trump says "Make America great again!"
 jjs> quit()
 `
 
-Java 1.6+ supports scripting and in 1.8 defaults to nashor n
+Java 1.6+ supports scripting and in 1.8 defaults to nashorn
 `
 unix% jrunscript
 nashorn>
 `
 
-Nashor n suppor ts some useful built-in functions
+Nashorn suppor ts some useful built-in functions
 
 - exit() causes script process to terminate
 - load() loads and runs a script from path, URL or script object
@@ -254,13 +254,13 @@ Anonymous functions are defined inline and may be
 
 Examples would be
 ```
-jjs> anon = function() { print(’I am anonymous’); }
+jjs> anon = function() { print('I am anonymous'); }
 jjs> anon()
 I am anonymous
 jjs> invoke = function(fn, arg) { print(fn(arg)); }
 jjs> invoke(function(i){ return i + 1; }, 5)
 6
-jjs> (function(s) { print(’Sue says’, s); })("Paul lies")
+jjs> (function(s) { print('Sue says', s); })("Paul lies")
 Sue says Paul lies
 ```
 
@@ -278,9 +278,9 @@ Methods and properties for handling strings include
 - indexOf(S) retur ns index of S in string
 - lastIndexOf(S) retur ns last index of S in string
 - length proper ty stor ing length of string
-- split(S) retur ns array of substr ings separated by S
-- substring(M) retur ns substr ing from index to end
-- substring(M, N) retur ns substr ing between given indices
+- split(S) retur ns array of substrings separated by S
+- substring(M) retur ns substring from index to end
+- substring(M, N) retur ns substring between given indices
 - toLowerCase() maps all letters to lower case
 - toUpperCase() maps all letters to upper case
 - trim() removes whitespace from both ends of string
@@ -452,7 +452,7 @@ vehicle = new car("lamborghini", "gallardo", 2013);
 ```
 
 
-Object’s properties can be listed by getProps.js
+Object's properties can be listed by getProps.js
 ```
 function getProps(obj) {
 var props = [];
@@ -556,11 +556,11 @@ unix% node
 
 # Nashorn and Java
 
-Nashor n suppor ts Java APIs via their fully qualified names through
+Nashorn suppor ts Java APIs via their fully qualified names through
 - calls to static Java methods of standard classes
 - creation of Java objects and then calls on their instance methods
 
-Current wor king director y can be got from Java System property
+Current working directory can be got from Java System property
 ```
 jjs> java.lang.System.getProperty("user.dir")
 /home/msc/bozo
@@ -608,24 +608,16 @@ root:x:0:0:root:/root:/bin/bash
 # Things To Do
 
 - Try Out REPL JavaScript Engine
-- Browse Nashor n JavaScript Tutor ial
-  https://winterbe.com/posts/2014/04/05/java8-nashor n-tutorial/
+- Browse Nashorn JavaScript Tutorial
+  **https://winterbe.com/posts/2014/04/05/java8-nashorn-tutorial/**
 - Browse ECMAScript® 2018 Language Specification
-  http://www.ecma-international.org/ecma-262/9.0/
+  **http://www.ecma-international.org/ecma-262/9.0/**
 - Try Quiz
 
 # Key Points
-- JavaScript is a weakly typed, object-based (prototypes)
-  language, standardised as ECMAScript. It was developed in
-  1995 for web client programming. It is nowadays also used for
-  I/O bound standalone purposes especially web services.
-- JavaScript has a C-like syntax, is multi-threaded, supports
-  arrays, functions, objects and typical procedural control
-  str uctures. Its primitive types are booleans, numbers, str ings,
-  symbols, null and undefined. Ever ything else is an object.
-- While JavaScript was designed to be interpreted, modern
-  JavaScript engines like Nashor n and V8 support just-in-time
-  compilation as well.
+- JavaScript is a weakly typed, object-based (prototypes) language, standardised as ECMAScript. It was developed in 1995 for web client programming. It is nowadays also used for I/O bound standalone purposes especially web services.
+- JavaScript has a C-like syntax, is multi-threaded, supports arrays, functions, objects and typical procedural control structures. Its primitive types are booleans, numbers, strings, symbols, null and undefined. Ever ything else is an object.
+- While JavaScript was designed to be interpreted, modern JavaScript engines like Nashorn and V8 support just-in-time compilation as well.
 
 
 

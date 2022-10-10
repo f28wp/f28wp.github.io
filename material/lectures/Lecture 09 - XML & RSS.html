@@ -140,7 +140,7 @@
 					<textarea data-template>
 						## XML 
 						
-						* XML - eXtensible Markup Language
+						* XML - **eXtensible Markup Language**
 							- derived from Standard Generalized Markup Language (SGML)
 						
 						* XML designed to store and carry the data
@@ -178,11 +178,11 @@
 							- XML declaration
 							- Document type declaration
 
-						* A correct XML document shold have only one root element 
+						* A correct XML document shold have **only one root element** 
 
 						* XML document contains two types of whitespaces
 							- Significant - within the element text contetnt
-							- Insignificant - in the element tag e.g between attributes
+							- Insignificant - in the element tag e.g., between attributes
 
 					</textarea>
 				</section>
@@ -191,8 +191,8 @@
 					<textarea data-template>
 						## XML CDATA section
 
-						* CDATA (Character Data)
-							- blocks of text that are not parsed by the parser
+						* **CDATA** (Character Data)
+							- blocks of text that are **not parsed** by the parser
 							- may contain markup characters (<, >, and &)
 						```
 						<![CDATA[
@@ -210,7 +210,7 @@
 						* A way to avoid element name conflicts
 							- specially when mixing XMLs 
 
-						* Namespace identified by URI (Uniform Resource Identifiers)
+						* Uniform Resource Identifier (URI) identifies **Namespaces** in XML
 						```
 						<f28wp:contact xmlns:f28wp = "www.f28wp.com/files">
 							<f28wp:address>
@@ -220,11 +220,11 @@
 							<f28wp:phone>07572222</f28wp:phone>
 						<f28wp:contact>
 						```
-						* default namespace for an element -> prefixes not required
+						* Default namespace for an element -> prefixes not required
 						```
 						<contact xmlns = "www.f28wp.com/files">
 							<address>
-								<house-no>25</f28wp:house-no>
+								<house-no>25</house-no>
 						```
 
 					</textarea>
@@ -235,12 +235,12 @@
 					<textarea data-template>
 						## XML DTDs
 
-						* DTD (Document Type Declaration) - a way to describe XML language precisely 
+						* **DTD (Document Type Declaration)** - a way to describe XML language precisely 
 						* Can be used to validate an XML document						
 						* Contains:
-							- Declarations for elements and attributes
-							- how elements are grouped or nested
-							- restrictions on the type or format of elements/attributes
+							- **Declarations** for elements and attributes
+							- How elements are **grouped or nested**
+							- **Restrictions** on the type or format of elements/attributes
 						* DTD can be in the document or in a separate file
 						```
 						<!DOCTYPE root-element SYSTEM "file-name">
@@ -252,22 +252,22 @@
 
 				<section data-markdown data-transition="slide" data-background-transition="zoom">
 					<textarea data-template>
-						## XML Schema - XSD
+						## **XML Schema** - XSD
 						* Does the same function as DTD
 						
 						* Written in XML (DTDs are drived from SGML)
-						* XML schema gives more options and flexibility 
+						* XML schema gives **more options and flexibility** 
 							- Allow support for namespaces 
 							- Define number and order of child elements
-							- XML schemas are extensible 
+							- XML **schemas are extensible** 
 
 					</textarea>
 				</section>
 				
 				<section data-markdown data-transition="slide" data-background-transition="zoom">
 					<textarea data-template>
-						## XML Schema example
-						* in the XML file
+						## XML Schema **Example**
+						* In the XML file
 						```
 						<contact xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 						xsi:noNamespaceSchemaLocation="f28wp.xsd">
@@ -293,13 +293,13 @@
 				
 				<section data-markdown data-transition="slide" data-background-transition="zoom">
 					<textarea data-template>
-						## XML DOM
+						## XML **DOM**
 						
-						* XML documents have a hierarchy of informational units called nodes
+						* XML documents have a hierarchy of informational units called **nodes**
 						
-						* The hirarchical structure referred to as XML Tree
+						* The hierarchical structure referred to as XML Tree
 
-						* XML Document Object Model (DOM) is a way of describing those nodes and the hirarchical relationships between them.
+						* XML **Document Object Model (DOM)** is a way of describing those nodes and the hierarchical relationships between them
 
 						* XML DOM, provides API allowing to navigate, add, edit, move, or remove nodes
 					</textarea>
@@ -349,7 +349,7 @@
 					* XML is **supported** by many more desktop applications than JSON
 					* Easy to take XML and apply XSLT to make XHTML or other representations
 					* XML is more generic and extensible
-					* can use XML Schema to validate XML document
+					* Can use **XML Schema** to validate XML document
 
 				</textarea>
 				</section>
@@ -370,7 +370,7 @@
 						* JSON requires less tags than XML
 						* JSON is **transportation-independent**, you can just bypass the XMLHttpRequest object for getting your data
 						* You can get JSON data from anywhere, not just your own domain (using JSONP)
-						* JSON is a **valid JavaScript**; better with Javascript/Web than XML
+						* JSON is a **valid JavaScript**; better with JavaScript/Web than XML
 						* JSON is **easier to read** than XML						
 
 					</textarea>
@@ -415,8 +415,8 @@
 						
 						* a) code data 
 						* b) create data 
-						* c) character data 
-						* d) unparsed character data 
+						* c) parsed character data
+						* d) unparsed character data (not parsed)
 
 						</textarea>
 					</section>
@@ -425,7 +425,7 @@
 						<textarea data-template>
 						## Answer
 						
-						Answer: **d)** unparsed character data 
+						Answer: **d)** unparsed character data (not parsed)
 
 						</textarea>
 					</section>

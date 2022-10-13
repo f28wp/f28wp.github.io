@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Web Programming F28WP</title>
+  <link rel="stylesheet" href="./md2html/theme.css">
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/1.7.2/showdown.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.4.0/languages/go.min.js"></script>
+
+</head>
+<body>
+  <div id="content">
+  </div>
+  
+<textarea id='tcontent' style='display:none;'>
+# Lab - Revision
+
+# Introduction
+In this lab, you'll further develop your understanding of jQuery features, JSON and the DOM.
+
+Learning goals
+* Explore the jQuery API/documentation 
+* The code is only 'partially' provided - requires you to do a small amount of research to get the final solution to work 
+* Add additional error checking into the implementation (e.g., saving/opening json file is the correct file for this program - signature or verification id)
+
+
+# Editor
+The aim of this lab is to develop a simple editor that will let you open/save files in a json file format.
+
+Using only JavaScript and jQuery, you'll create the editor (e.g., create elements on screen and setup callbacks for events, such as, button presses).
+
+
+## Load jQuery library and add a textarea
+'''
+<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
+<script>
+var $div = $('<textarea>Enter text</textarea>').appendTo('body');
+$div.attr('id', 'ta0');
+</script>
+'''
+
+> Add extra code to check if jQuery is ready (see lecture slides)
+> Add extra code for styling (css information)
+
+'''
+<script>
+var $loadbutton = $('<button>Load</button>').appendTo('body');
+var $savebutton = $('<button>Save</button>').appendTo('body');
+var $textarea   = $('<textarea>Enter Text</textarea>').appendTo('body');
+</script>
+'''
+
+Add event so when a button is clicked we call a function.
+'''
+$savebutton.click(function() {
+  console.log( "Handler for .click() called." );
+});
+'''
+
+
+
+Add some code that dynamically create a link and lets the you download the file contents.
+Call this code when the button is clicked (i.e., save button is pressed).
+
+'''
+let  json = JSON.stringify('test text content' );
+let blob = new Blob([json], {type: "octet/stream"});
+let url = window.URL.createObjectURL(blob);
+let a = document.createElement("a");
+a.href = url;
+a.download = 'afile.json';
+a.click();
+window.URL.revokeObjectURL(url);
+'''
+
+> Modify the code so that instead of the 'test text content' written to the file, use the contents of the textarea.
+
+
+Research the next part, add an event function for the 'load' button, which would then create an 'input' and ask for a file (json file).  You then load the file, parse the JSON and display the contents in the textarea.
+
+
+
+
+# Further Work
+
+Continue to develop the editor to support additional features
+
+* Word count information at the bottom of the page 
+* Extend the json file format to include extra details, such as, date/author information 
+* Add word processing features 
+* Explore the jQuery UI to create an improved interface
+* Popup dialogues that provide extra information (e.g., when opening a new file, warning about information loss)
+
+</textarea>
+
+
+  <br><br>
+  
+  <script>
+	let cont = document.getElementById('tcontent').value;
+    converter = new showdown.Converter();
+    document.getElementById('content').innerHTML = converter.makeHtml(cont)
+    
+	hljs.initHighlightingOnLoad();
+  </script>
+<!--
+  <script src="https://yihui.name/js/math-code.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+  -->
+  
+<div id="myhome" style="z-index: auto; display: block; position: fixed; bottom: 5px; left: 5px;">
+    <a href="https://f28wp.github.io" data-show-count="false"><img src="../lectures/images/webhome.png" width="8%"></a>
+</div>
+
+
+
+</body>
+</html>

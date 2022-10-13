@@ -24,7 +24,7 @@ In this lab, you'll further develop your understanding of jQuery features, JSON 
 
 Learning goals
 * Explore the jQuery API/documentation 
-* The code is only 'partially' provided - requires you to do a small amount of research to get the final solution to work 
+* The example code is only 'partially' provided - requires you to do a small amount of research to get the final solution to work 
 * Add additional error checking into the implementation (e.g., saving/opening json file is the correct file for this program - signature or verification id)
 
 
@@ -35,38 +35,40 @@ Using only JavaScript and jQuery, you'll create the editor (e.g., create element
 
 
 ## Load jQuery library and add a textarea
-'''
+```
 <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
 <script>
-var $div = $('<textarea>Enter text</textarea>').appendTo('body');
+var $div = $(document.createElement('textarea')).appendTo('body');
 $div.attr('id', 'ta0');
 </script>
-'''
+```
 
-> Add extra code to check if jQuery is ready (see lecture slides)
-> Add extra code for styling (css information)
+**Task** Add extra code to check if jQuery is ready (see lecture slides)
 
-'''
+**Task** Add extra code for styling (css information)
+
+```
 <script>
 var $loadbutton = $('<button>Load</button>').appendTo('body');
 var $savebutton = $('<button>Save</button>').appendTo('body');
-var $textarea   = $('<textarea>Enter Text</textarea>').appendTo('body');
+var $textarea   = $(document.createElement('textarea')).appendTo('body');
+$textarea.val( 'enter text' );
 </script>
-'''
+```
 
-Add event so when a button is clicked we call a function.
-'''
+**Task** Add event so when a button is clicked we call a function.
+```
 $savebutton.click(function() {
   console.log( "Handler for .click() called." );
 });
-'''
+```
 
 
 
-Add some code that dynamically create a link and lets the you download the file contents.
+**Task** Add some code that dynamically create a link and lets the you download the file contents.
 Call this code when the button is clicked (i.e., save button is pressed).
 
-'''
+```
 let  json = JSON.stringify('test text content' );
 let blob = new Blob([json], {type: "octet/stream"});
 let url = window.URL.createObjectURL(blob);
@@ -75,12 +77,12 @@ a.href = url;
 a.download = 'afile.json';
 a.click();
 window.URL.revokeObjectURL(url);
-'''
+```
 
-> Modify the code so that instead of the 'test text content' written to the file, use the contents of the textarea.
+**Task** Modify the code so that instead of the 'test text content' written to the file, use the contents of the textarea.**
 
 
-Research the next part, add an event function for the 'load' button, which would then create an 'input' and ask for a file (json file).  You then load the file, parse the JSON and display the contents in the textarea.
+**Task** Research the next part, add an event function for the 'load' button, which would then create an 'input' and ask for a file (json file).  You then load the file, parse the JSON and display the contents in the textarea.
 
 
 

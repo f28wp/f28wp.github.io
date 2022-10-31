@@ -59,9 +59,9 @@
 					<textarea data-template>
 						## Overview
 						
-						* Details/Examples using NodeJS
-						* Web framework for Node.js
-						* Example of socket.io package
+						* Details/Examples using **NodeJS**
+						* Web framework for NodeJS
+						* **Packages** (e.g., socket.io)
 						* Questions and discussion
 <aside class='notes'>
 </aside>
@@ -194,11 +194,11 @@
 					<textarea data-template>
 						## fs module 
 
-						* Node.js **file system** module contains useful file I/O functions
-							- Includes methods for **reading**, **writing**, **creating**, **deleting**, etc *files* and *directories* 
+						* NodeJS **file system** module contains useful file I/O functions
+							- Includes methods for **reading**, **writing**, **creating** and **deleting** - *files* and *directories* 
 							- wrapping standard OS functions
 						* Example: reading a file and adding its content to the response:
-						```
+```
 						let fs = require("fs");
 						fs.readFile('./page1.txt', function (err, content) {
 						    if (err) {
@@ -209,10 +209,8 @@
 						    response.writeHead(200, { 'Content-Type': 'text/css' });
 						    response.end(content, 'utf-8');
 						});
+```
 
-						```
-						
-						
 <aside class='notes'>
 </aside>
 					</textarea>
@@ -247,20 +245,18 @@
 				</section>
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Example - A Static Web Server
+						### Example - A Static Web Server (files)
 						
 						```javascript
 						var http = require('http');
-						var fs = require('fs');
+						var fs   = require('fs');
 						var path = require('path');
 
 						http.createServer(function (request, response) {
 							console.log('request ', request.url);
 
 							var filePath = '.' + request.url;
-							if (filePath == './') {
-								filePath = './index.html';
-							}
+							if (filePath == './') { filePath = './index.html'; }
 
 							var extname = String(path.extname(filePath)).toLowerCase();
 							var mimeTypes = {
@@ -272,8 +268,7 @@
 								'.jpg': 'image/jpg',
 								 ...   // other types ommited
 							};
-						```
-						```
+
 							var contentType = mimeTypes[extname] || 'application/octet-stream';
 
 							fs.readFile(filePath, function(error, content) {
@@ -296,10 +291,10 @@
 							});
 
 						}).listen(8125);
-						console.log('Server running at http://127.0.0.1:8125/');
+						console.log('Server running...');
 						
 						```
-						mozilla.org
+						<small>ENOENT means that npm fails to open a file or directory that's required for executing the command</small>
 						
 <aside class='notes'>
 </aside>
@@ -311,8 +306,8 @@
 					<textarea data-template>
 						## Event 
 
-						* Node.js is based on **event-driven** programming paradigm
-						* Events are **emitted** and added to an event queue 
+						* **NodeJS** is based on **event-driven** programming paradigm
+						* Events are **emitted** and added to an event **queue**
 						* The application listens to events in a loop
 							- takes events out of the event queue and dispatchs to **listeners**
 						* Works on observer pattern
@@ -324,17 +319,27 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## event module 
+						## Event Module 
 
 						* The *events* module contains and **EventEmitter** class
 						* EventEmitter has methods to **emit** events and manipulate listeners
 							- **addListener**, **removeListener**, **setMaxListener**, ...
 							- are used to bind events and event-listeners
-						
+												
+<aside class='notes'>
+</aside>
+					</textarea>
+				</section>
+				
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						### Event Module **Example** 
+
 						* Example - emitting an event on completion of each request
+						
 						```
-						let http = require('http');
-						let events = require('events')
+						let http    = require('http');
+						let events  = require('events')
 						let emitter = new events.EventEmitter()
 						http.createServer(function(request, response) {
 								response.writeHead(200, {'Content-Type': 'text/plain'});
@@ -342,6 +347,8 @@
 								emitter.emit('request_served');
 						}).listen(8081);
 						console.log('Server running on 8081');
+						```
+						```
 						let totalRequests = 0
 						requestServedHandler = function() {
 							totalRequests++;
@@ -360,7 +367,7 @@
 					<textarea data-template>
 						## Express 
 						
-						* One of the most popular **web frameworks** for Node
+						* One of the most popular **web frameworks** for NodeJS
 						* Provides facilities for:
 							- Handling Http requests with different **verbs** (Get, Post, etc)
 							- **Routing**  - handling different URL paths and web app navigation
@@ -379,6 +386,7 @@
 						## Express - Http server
 						
 						*  Example : Basic "Hello Express" http server 
+
 						```
 						const express = require('express');
 						const app = express();
@@ -391,6 +399,7 @@
 							console.log("Server is started on port" + port)
 						});
 						```
+<small>Note the `app.get('/', )`
 <aside class='notes'>
 </aside>
 					</textarea>
@@ -400,7 +409,8 @@
 					<textarea data-template>
 						## Route handling example part 1
 						
-						* Requests stating with "/help" are served by another module
+						* Requests starting with **"/help"** are served by **another module**
+						
 						```
 						let express = require('express');
 						let app = express();
@@ -424,18 +434,16 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## Route handling example part 2 
+						### Route handling example part 2 
 						
-						* Second module for serving requests starting with "/help"
+						* **Second module** for serving requests starting with "/help"
 
 						```
 						let express = require('express');
 						let router = express.Router();
 						module.exports = router;
 						
-						router.get('/', function(req, res) {   
-							res.send("Hello Express help pages");
-						});
+						router.get('/', function(req, res) { res.send("Hello Express help pages"); });
 						
 						router.get('/main', function(req, res) {
 							let options = {
@@ -446,18 +454,13 @@
 							}
 							res.sendFile("./index.html", options);
 						});
+						```
+						```
+						router.get('/page1', function(req, res) { res.send("Hello Express  -  Help Page 1"); });
 						
-						router.get('/page1', function(req, res) {  
-							res.send("Hello Express  -  Help Page 1");
-						});
+						router.get('/page2', function(req, res) { res.send("Hello Express  -  Help Page 2"); });
 						
-						router.get('/page2', function(req, res) {  
-							res.send("Hello Express  -  Help Page 2");
-						});
-						
-						router.get('*', function(req, res) {  
-							res.send("Help Page not found!");
-						});
+						router.get('*', function(req, res) {  res.send("Help Page not found!"); });
 						```
 <aside class='notes'>
 </aside>
@@ -506,13 +509,13 @@
 						## Pug source file
 
 						* Pug file has the structure of a typical **HTML** file
-						* the **first word in a line** usually being an HTML element
-						* indentation being used to indicate **nested elements**
-							- e.g. the "body" element is inside an "html" element
+							- the **first word in a line** usually being an HTML element
+							- indentation being used to indicate **nested elements**
+								- e.g. the "body" element is inside an "html" element
 						* Element **attributes** are defined in parentheses after the element
 						* Text after a tag followed by the **equals sign**, is treated as a JavaScript expression
 						* Can insert data within plain text by using  **#{}**
-						* Allows Conditional and Itartion 
+						* Allows Conditional and Itertion 
 						
 <aside class='notes'>
 </aside>
@@ -525,6 +528,7 @@
 
 						* Simple **pug** file for the Hello Express app 
 						* Pug files are stored in a **.pug** file under the **/views** folder
+						
 						```html
 						doctype html
 						html
@@ -548,13 +552,14 @@
 					<textarea data-template>
 						## Example: Rendering a pug template 
 
-						* The main page of the Hello Express app using a pug file
+						* The main page of the Hello **Express app** using a **pug file**
+						
 						```javascript
 						let express = require('express');
 						let app = express();
 						let help_server = require('./help_pages.js')
 						const port = 8082;
-						app.set('view engine', 'pug');
+						app.set('view engine', 'pug'); // <-- *** view engine set pug
 						app.get('/', function(req, res) {   
 						//	res.send("Welcome to Hello Express");
 							res.render('./main_page', {appTitle: 'Hello Express'});
@@ -612,7 +617,7 @@
 
 						//Route handler
 						app.get('/', function(req, res, next){
-						   res.send("Welcome to Hellow Express");
+						   res.send("Welcome to Hello Express");
 						   next();
 						});
 
@@ -655,9 +660,10 @@
 				
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-					## Example Node.js
+					## Example NodeJS
 					
-					* Script updates and reports on stored data
+					* Script updates and reports on **storing data** (client)
+						* e.g., cookies
 
 					</textarea>
 				</section>
@@ -764,7 +770,7 @@
 					<textarea data-template>
 						## Summary
 
-						* Example of **fs**, **path**, and **event** packages in Node.js
+						* Example of **fs**, **path**, and **event** packages in NodeJS
 						* **Express** framework for web application development
 							- Routing
 							- Page Rendering

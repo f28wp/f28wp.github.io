@@ -1,0 +1,514 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <script>
+	window.history.replaceState = function(){ };
+  </script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/theme/serif.min.css" id="theme">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/theme/white.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/highlight/zenburn.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/highlight/monokai.min.css">
+  
+<!--
+  <link rel="stylesheet" href="https://layout.xbdev.net/var/images/pdf.css">
+-->
+  <style>
+  b, strong {
+     color: red;
+  }
+  h1,h2,h3,h4,h5 {
+     color:unset!important;
+  }
+  .hljs {
+     font-size:105%;
+  }
+  </style>
+
+</head>
+<body>
+    <div class="reveal">
+      <div style='position:absolute;left:10px;top:10px;font-size:8pt;color:transparent;'>https://layout.xbdev.net</div>
+      <div class="slides" style='border:0;'>
+		<!--
+        <section data-background-color="rgb(70, 70, 255)"><h2>Welcome</h2></section>
+		<section style="height:720px; background-color:rgb(70, 70, 255);"><h2>How are you?</h2></section>
+		-->
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#3553bc"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+# **TypeScript** 
+## Web Programming
+
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#f9dc24"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+## Overview
+
+<div style='float:left;width:50%;'>
+
+* What is **Typescript**?
+* Installation
+* Syntax and Features
+* Examples
+* Summary
+
+</div>
+<div style='float:right;width:50%;'>
+<img src='https://www.freecodecamp.org/news/content/images/2020/08/1_9XMpTyccrky0eW5Wz6DoWQ.png'>
+</div>
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#3553bc"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+## What is TypeScript?
+
+<div style='float:left;width:50%;'>
+
+<img src='https://serokell.io/files/0u/0ufu1q21.js-ts.jpg'>
+
+</div>
+<div style='float:right;width:50%;'>
+
+* TypeScript lets you write Javascript the way you really want to.
+* TypeScript is a typed superset of Javascript 
+* TypeScript compiles to plain Javascript.
+* Any browser. Any host. Any OS. Open Source.
+
+</div>
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#f9dc24"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+## How to Install
+
+via **npm** (NodeJS package manager)
+
+```
+1. npm install -g typescript
+2. npm view typescript version
+npm http GET https://registry.npmjs.org/typescript
+npm http 304 https://registry.npmjs.org/typescript
+0.8.1-1
+```
+
+> Note you can install TypeScript in Visual Studio as plugin
+> Visual Code IDE from https://code.visualstudio.com (free, open source and multi-platform)
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#3553bc"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+## TypeScript's Main Feature
+
+> **Static Type Checking**
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#f9dc24"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+## Effects of Static Type Checking
+
+* Allows IDEs to perform **live error checking**
+* Exposes auto-completion and code hinting
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#3553bc"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+## Other Features
+
+* Supports Object Orientated Programming
+* Compile to a specific ECMAScript Version
+* Integration with Gulp/Grunt
+* and much more ...
+
+> **https://www.typescriptlang.org/docs/index.html**
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#f9dc24"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+## Example
+
+* Variable is a container to hold data and is done by **var** keyword or **let** keyword
+* If we 'skip' keyword to declare a variable we get and error message
+
+```
+var a = 3;
+var b = 3;
+c = a + b; //<-- Error
+```
+
+> **Error: [ts] Cannot find name 'c'**
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#3553bc"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+
+## Types
+
+* Classification of data which tells **compiler** the data type (e.g., example: number, string)
+* Typescript is a **strongly** typed language
+* Javascript is a **weakly** typed language
+* Typescript **build-in** types:
+  1. Number
+  2. String
+  3. Boolean
+  4. Array
+  5. Enum
+  6. Void & Any
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#f9dc24"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+## Syntax
+
+```
+var [identifier]:type = value; // variable
+var [identifier]:[] = []; // array
+var [identifier]:Array<type> = []; // array
+```
+
+### Example
+
+```
+var num:number[]=[1,2,3];
+num.push(0);
+```
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#3553bc"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+## Example
+
+> Number type can be any set of any numbers
+```
+var a:number;
+a = 10;
+a = 1.4;
+a = Math.random();
+```
+
+> String type can be any string (any sequence of Unicode characters)
+```
+var a:string;
+a = "Hello";
+```
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#f9dc24"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+## Any and Void
+
+```
+let num:any = 6;
+num = null;
+num = true;
+num = "s";
+```
+
+```
+function warn(): void {
+  alert("Hello");
+}
+```
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#3553bc"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+
+## Functions
+
+```
+function GetVal( a:number, b:string ) : number {
+  var num:number = a + 2;
+  console.log( b );
+  return num;
+}
+var res = GetVal( 2, "Test" );
+console.log( res );
+```
+
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#f9dc24"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+## Optional Parameters
+
+> Optional parameters use question mark (?)
+
+```
+function GetName( name?:string ){
+  if ( name ){ console.log( 'hi:'+name );     }
+  else       { console.log( 'who is this?' ); }
+}
+
+GetName();
+```
+
+</textarea>
+</section>
+        
+<section data-markdown 
+         data-transition="fade" 
+		 data-background-image=''
+         data-background="" 
+		 data-background-color="#3553bc"
+         data-background-size="cover"
+		 style=""
+         data-background-transition="slide">
+<textarea data-template>
+     
+	
+
+
+## Summary
+
+* Introduction Typescript
+* Add Extra Checking
+* Review Typescript Documentation
+  * https://www.typescriptlang.org/docs/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</textarea>
+</section>
+        
+      </div>
+    </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/highlight/highlight.min.js"></script>
+
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/math/math.min.js"></script>
+<!--
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/math/katex.min.js"></script>
+-->
+
+    <script>
+    window.addEventListener('load', function() {
+      console.log('setting up reveal');
+	  //window.history.pushState(null, null, '?print-pdf');
+
+      Reveal.initialize( { width: 1240,
+  						   height: 720,
+  						   minScale: 0.1,
+  						   maxScale: 2.0,
+						   controls: true,
+						   progress: true,
+						   center: true,
+						   hash: true,
+                           transition: 'fade', // none/fade/slide/convex/concave/zoom
+						   controlsTutorial: true,
+                           plugins: [ RevealMarkdown, RevealHighlight, RevealMath.KaTeX  ]
+                         } );
+    });
+    </script>
+</body>
+</html>
+	

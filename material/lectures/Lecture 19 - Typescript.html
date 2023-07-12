@@ -6,12 +6,25 @@
 	window.history.replaceState = function(){ };
   </script>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/reveal.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/theme/serif.min.css" id="theme">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/theme/white.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/highlight/zenburn.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.4.0/plugin/highlight/monokai.min.css">
-  
+
+		<link rel="stylesheet" href="./css/reset.css">
+		<link rel="stylesheet" href="./css/reveal.css">
+		<link rel="stylesheet" href="./css/theme/white.css" id="theme">
+		
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="./lib/css/monokai.css">
+		
+		<link rel="stylesheet" href="./css/reveal-override.css"/>
+  		
+	<link rel="stylesheet" href="./css/theme/white.css" id="theme">
+
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="./lib/css/monokai.css">
+
+	<link rel="stylesheet" href="./css/reveal-override.css"/>
+		
 <!--
   <link rel="stylesheet" href="https://layout.xbdev.net/var/images/pdf.css">
 -->
@@ -27,34 +40,24 @@
   }
   </style>
 
+
 </head>
 <body>
     <div class="reveal">
-      <div style='position:absolute;left:10px;top:10px;font-size:8pt;color:transparent;'>https://layout.xbdev.net</div>
       <div class="slides" style='border:0;'>
 		<!--
         <section data-background-color="rgb(70, 70, 255)"><h2>Welcome</h2></section>
 		<section style="height:720px; background-color:rgb(70, 70, 255);"><h2>How are you?</h2></section>
 		-->
-        
-<section data-markdown 
-         data-transition="fade" 
-		 data-background-image=''
-         data-background="" 
-		 data-background-color="#3553bc"
-         data-background-size="cover"
-		 style=""
-         data-background-transition="slide">
-<textarea data-template>
-     
-	
+		
+	<section>
+		<h2>TypeScript</h2>
+		<h4>F28WP Web Programming</h4>
+		<p>
+		<small>2020-2023</small>
+		</p>
+	</section>
 
-# **TypeScript** 
-## Web Programming
-
-
-</textarea>
-</section>
         
 <section data-markdown 
          data-transition="fade" 
@@ -253,6 +256,8 @@ c = a + b; //<-- Error
 
 ## Types
 
+<div style='font-size:90%;'>
+
 * Classification of data which tells **compiler** the data type (e.g., example: number, string)
 * Typescript is a **strongly** typed language
 * Javascript is a **weakly** typed language
@@ -263,6 +268,8 @@ c = a + b; //<-- Error
   4. Array
   5. Enum
   6. Void & Any
+
+</div>
 
 </textarea>
 </section>
@@ -509,6 +516,61 @@ GetName();
                          } );
     });
     </script>
+	
+	
+
+		
+<script src='plugin/codepanel/codepanel.js'></script>
+<script>
+setupcodepanel(0, 'https://jsitor.com/'); 
+setupcodepanel(1, 'https://liveweave.com/');
+setupcodepanel(2, 'https://webmakerapp.com/app/');
+setupcodepanel(3, 'https://onecompiler.com/nodejs/');
+setupcodepanel(4, 'https://codesandbox.io/');
+setupcodepanel(5, 'https://glitch.com');
+
+</script>
+
+	
+<div style="display: block; position: fixed; bottom: 6px; left: 6px; margin-left: 0px; z-index: 200000;">
+	<a href="https://f28wp.github.io"><img src="images/webhome.png?id=2" height="25px"></a>
+</div>
+
+<div style="display: block; position: fixed; bottom: 5px; left: 45px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href="?print-pdf" onclick="window.open(this.href, 'print window', 'width=1000,height=550').print(); return false"><img src="images/webprint.png" height="25px"></a>
+</div>	
+
+<!--
+<div style="display: block; position: absolute; bottom: 3px; left: 95px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a onclick="tts.ToggleSpeech();"><img src="./images/webtalk.png" height="25px"></a>
+</div>
+-->
+
+<div style="display: block; position: fixed; bottom: 5px; left: 80px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href='javascript:void(0)' onclick="togglecodepanel(0);"><img src="./images/webcode.png" height="25px"></a>
+</div>
+
+<div style="display: block; position: fixed; bottom: 5px; left: 115px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href='javascript:void(0)' onclick="togglecodepanel(1);"><img src="./images/webcode1.png" height="25px"></a>
+</div>
+
+<div style="display: block; position: fixed; bottom: 5px; left: 145px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href='javascript:void(0)' onclick="togglecodepanel(2);"><img src="./images/webcode2.png" height="25px"></a>
+</div>
+
+<div style="display: block; position: fixed; bottom: 5px; left: 175px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href='javascript:void(0)' onclick="togglecodepanel(3);"><img src="./images/webcode3.png" height="25px"></a>
+</div>
+
+<div style="display: block; position: fixed; bottom: 5px; left: 218px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href='javascript:void(0)' onclick="togglecodepanel(4);"><img src="./images/webcode4.png" height="25px"></a>
+</div>
+
+
+<div style="display: block; position: fixed; bottom: 5px; left: 245px; margin-left: 0px; z-index: 200000; text-align: left;">
+	<a href='javascript:void(0)' onclick="togglecodepanel(5);"><img src="./images/webcode5.png" height="25px"></a>
+</div>
+	
 </body>
 </html>
 	

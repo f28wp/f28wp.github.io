@@ -76,6 +76,31 @@ console.log('ready');
 > Warning - 'document.body.style' might not be available depending on the location of the script/load order of the browser.  Might need to check if the page has loaded first before accessing body or styles.
 
 
+<div style='background-color:yellow;white-space:pre-wrap; '>
+<b>Example test standard/non-standard attributes (square brackets vs get/set Attribute)
+```
+  // Example script to check (standard/non-standard)
+  script.draggable = true; // works
+  console.log('script draggable:', script.getAttribute('draggable') ); // works
+
+  script['blocking'] = 'none'; // works
+  console.log('script blocking:', script.getAttribute('blocking')); // works
+
+  script['data-message'] = 'test'; // non-standard so doesn't work
+  console.log('script message:', script.getAttribute('data-message'));
+
+
+  /*
+  // If you want to list all of the attributes available
+  for (k in script )
+  {
+    console.log( k );
+  }
+  */
+```
+</div>
+
+
 For example:
   -	Customize the example to provide extra information 
   -	Putting your example on your GitHub page

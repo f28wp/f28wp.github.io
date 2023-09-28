@@ -13,7 +13,7 @@
 
 </head>
 <body>
-  <div id="content">
+  <textarea id="content" style='display:none;'>
 
 # Lab - Javascript Prt 2
 
@@ -31,6 +31,27 @@ For example, the **cookiebanner** project, provides a simple way to add a popup 
 
 Type the example 'html' into a file and test out the program.
 
+
+<div style='background-color:yellow;white-space:pre-wrap; '>Read documentation on 'HTMLElement: dataset property'
+https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset
+
+<b>Non-standard attributes</b>
+From Javascript: The Definitive Guide, it clarifies things. It notes that HTMLElement objects of a HTML doc define JS properties that correspond to all standard HTML attributes.
+
+Non-standard attributes require the use of 'setAttribute' (depend on the browser if it recognised non-standard).
+
+Example:
+```
+node.className = 'test'; // works
+node.frameborder = '0'; // doesn't work - non standard attribute
+node['data-message']= '0'; // doesn't work - non standard attribute
+node.setAttribute('data-message', 'Test'); // works
+```
+</div>
+
+<b>cookiebanner js uses non-standard attributes for setting additional 'data' parameters</b>
+
+
 ```
 document.body.style.height = '200pt';
 
@@ -38,7 +59,7 @@ var script = document.createElement('script');
 script.type = 'text/javascript';
 script.src = 'https://cdnjs.cloudflare.com/ajax/libs/cookie-banner/1.2.2/cookiebanner.min.js';
 script.id = 'cookiebanner';
-script['data-height']   = '20px';
+script['data-height']   = '20px'; // non-standard attribute (may need to use 'setAttribute(..)'
 script['data-position'] = 'top';
 script['data-message']  = 'We use cookies!';
 document.head.appendChild(script); 
@@ -51,6 +72,8 @@ script.onload = function()
 }
 console.log('ready');
 ```
+
+> Warning - 'document.body.style' might not be available depending on the location of the script/load order of the browser.  Might need to check if the page has loaded first before accessing body or styles.
 
 
 For example:
@@ -75,14 +98,18 @@ Visit the CDNJS website and explore some of the projects, try and implement them
 
 
 
-  </div>
+</textarea>
+<div id='out'>
+</div>
   
   <br><br>
   
   <script>
-    elem = document.getElementById('content')
+    let md = document.getElementById('content').value;
+    	
     converter = new showdown.Converter();
-    elem.innerHTML = converter.makeHtml(elem.innerHTML)
+    let elem = document.getElementById('out');
+	elem.innerHTML = converter.makeHtml(md)
     
 	hljs.initHighlightingOnLoad();
   </script>

@@ -724,6 +724,31 @@ function getDoc() {
 					</textarea>
 				</section>
 	
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## Fetch
+
+						* **Fetch** is an interface for making AJAX calls in JavaScript ([Link](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)). 
+						* Calling fetch returns a promise, with a Response object.
+						
+						Example 
+```
+const url = 'https://api.github.com/users/f28wp/repos';
+
+fetch(url)
+  .then(response => response.json())
+  .then(repos => {
+	const reposList = repos.map(repo => repo.name);
+	console.log(reposList);
+  })
+.catch(err => console.log(err))
+```
+						
+						
+						
+					</textarea>
+				</section>
+				
 
 
 				<section data-markdown style="text-align: left;">

@@ -734,22 +734,22 @@
 					<textarea data-template>
 						## With jQuery and the [RSS2JSON](https://rss2json.com/#rss_url=https%3A%2F%2Fwww.theguardian.com%2Finternational%2Frss)
 
-						```
-						$.ajax({
-						  url      : ' https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.theguardian.com%2Finternational%2Frss',
-						  dataType : 'json',
-						  success  : function (data) {
-							if (data.responseData.feed && data.responseData.feed.entries) {
-							  $.each(data.responseData.feed.entries, function (i, e) {
-								console.log("------------------------");
-								console.log("title      : " + e.title);
-								console.log("author     : " + e.author);
-								console.log("description: " + e.description);
-							  });
-							}
-						  }
-						});
-						```
+```
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $.ajax({
+    url : ' https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.theguardian.com%2Finternational%2Frss',
+    dataType : 'json',
+    success : function (data) {
+      console.log( data.feed );
+      $.each(data.feed, function (i, e) {  console.log("title : " + e);  }); // each
+    }// success
+  }); // ajax
+}); // ready
+</script>
+
+```
 						
 						Also build url using: `encodeURIComponent(FEED_URL)`
 						

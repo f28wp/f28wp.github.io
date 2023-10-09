@@ -715,13 +715,28 @@
 					</textarea>
 				</section>
 				
+
 				<section data-markdown style="text-align: left;">
 					<textarea data-template>
-						## With jQuery and the Google **AJAX** Feed API
+						## RSS (XML) to JSON
+
+						* Seamlessly convert RSS feeds to JSON objects (online tools)
+						  * Examples
+						  * [apyhub](https://apyhub.com/utility/converter-rss-json)
+						  * [toptal](https://www.toptal.com/developers/feed2json/)
+						  * [rss2json](https://rss2json.com/#rss_url=https%3A%2F%2Fwww.theguardian.com%2Finternational%2Frss)
+						
+					</textarea>
+				</section>	
+				
+			
+				<section data-markdown style="text-align: left;">
+					<textarea data-template>
+						## With jQuery and the [RSS2JSON](https://rss2json.com/#rss_url=https%3A%2F%2Fwww.theguardian.com%2Finternational%2Frss)
 
 						```
 						$.ajax({
-						  url      : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(FEED_URL),
+						  url      : ' https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fwww.theguardian.com%2Finternational%2Frss',
 						  dataType : 'json',
 						  success  : function (data) {
 							if (data.responseData.feed && data.responseData.feed.entries) {
@@ -735,6 +750,8 @@
 						  }
 						});
 						```
+						
+						Also build url using: `encodeURIComponent(FEED_URL)`
 						
 					</textarea>
 				</section>	
